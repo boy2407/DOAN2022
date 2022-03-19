@@ -273,7 +273,7 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-
+            ///test push 
             saveData();
 
             _tongtien = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())
