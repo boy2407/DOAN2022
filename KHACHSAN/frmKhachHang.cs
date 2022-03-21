@@ -38,6 +38,14 @@ namespace KHACHSAN
           
 
         }
+
+        public bool IsVaildCCCD(string cccd)
+        {
+            int length = cccd.Length;
+            if (length != 9 || length !=12)
+                return false;
+            return true;
+        }
         public bool IsValidEmail(string email)
         {
 
@@ -109,6 +117,13 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if(!IsVaildCCCD(txtCCCD.Text))
+            {
+                MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCCCD.Focus();
+                return;
+            }
+           
             if (!IsValidEmail(txtEmail.Text))
             {
                 MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -119,6 +134,7 @@ namespace KHACHSAN
             if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
             {
                 MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDienThoai.Focus();
                 return;
             }
             if (_them)
@@ -205,6 +221,19 @@ namespace KHACHSAN
         }
 
         private void txtDienThoai_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {

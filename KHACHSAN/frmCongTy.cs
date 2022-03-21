@@ -78,8 +78,10 @@ namespace KHACHSAN
             gvDanhSach.OptionsBehavior.Editable = false;
         }
 
-        private void btnThem_Click(object sender, EventArgs e)
-        {   if(_right==1)
+        private void btnThem_Click(object sender, EventArgs e)           
+        {   
+
+            if(_right==1)
             {
                 MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 return;

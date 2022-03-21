@@ -289,6 +289,7 @@ namespace KHACHSAN
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(243, 22);
             this.txtCCCD.TabIndex = 1;
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // label2
             // 

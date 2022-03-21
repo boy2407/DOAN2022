@@ -261,12 +261,13 @@ namespace KHACHSAN
                             frm.ShowDialog();
                             break;
                         }
-                    case "BOOKING":
+                    case "LOAIPHONG":
                         {
-                            frmBooking frm = new frmBooking();
+                            frmLoaiPhong frm = new frmLoaiPhong();
                             frm.ShowDialog();
                             break;
                         }
+
 
                 }
 

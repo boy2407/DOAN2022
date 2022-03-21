@@ -177,7 +177,7 @@ namespace KHACHSAN
                 dvi.DISABLED = chkDisabled.Checked;
                 _donvi.update(dvi);
             }
-            loadData();
+            loadDviByCty();
             _them = false;
             _enabled(false);
             txtMa.Enabled = false;

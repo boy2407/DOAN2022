@@ -18,7 +18,10 @@ namespace BusinessLayer
         {
             return db.tb_LoaiPhong.ToList();
         }
-       
+       public tb_LoaiPhong getItem(int idlp)
+        {
+            return db.tb_LoaiPhong.FirstOrDefault(x=>x.IDLOAIPHONG==idlp);
+        }
         public void add(tb_LoaiPhong lp)
         {
             try
@@ -64,6 +67,10 @@ namespace BusinessLayer
 
                 throw new Exception("Có lỗi xảy ra trong quá trình xữ lý dữ liệu" + ex.Message);
             }
+        }
+        public int getId()
+        {
+            return db.tb_LoaiPhong.Max(x => x.IDLOAIPHONG);
         }
     }
 }

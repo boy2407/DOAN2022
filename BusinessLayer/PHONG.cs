@@ -122,6 +122,16 @@ namespace BusinessLayer
         {
             return db.tb_Phong.Where(x => x.IDTANG == idphong).ToList();
         }
+        public bool checkloaiphong(int idlp)
+        {
+            var lp = db.tb_Phong.FirstOrDefault(x => x.IDLOAIPHONG == idlp);
+            if (lp!=null)
+            {
+              return true;
+            }    
+                   
+            return false;
+        }
         public void add(tb_Phong p)
         {
             try

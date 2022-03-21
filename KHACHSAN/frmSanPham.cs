@@ -28,7 +28,8 @@ namespace KHACHSAN
             LoadData();
             _enabled(false);
             showHideControl(true);
-            txtDonGia.Text = string.Format("{0:#.##0.00}", 12,34);
+     
+            
         }
 
         void showHideControl(bool t)
@@ -137,23 +138,31 @@ namespace KHACHSAN
 
         private void txtDonGia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsControl(e.KeyChar)&&!char.IsDigit(e.KeyChar)&&(e.KeyChar!='.'))
+            //if(!char.IsControl(e.KeyChar)&&!char.IsDigit(e.KeyChar)&&(e.KeyChar!='.'))
+            //{
+            //    e.Handled = true;
+            //} 
+            //// only allow one decimal point
+            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            //{
+            //    e.Handled = true;
+            //}
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
-            } 
-            // only allow one decimal point
+            }
+
+           // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
             }
-           
+
         }
 
        
 
-        private void txtDonGia_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
+        
+        
     }
 }
