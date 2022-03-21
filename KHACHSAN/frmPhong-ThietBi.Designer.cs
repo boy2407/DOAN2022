@@ -41,9 +41,7 @@ namespace KHACHSAN
             this.IDTANG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TENTANG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.txtMa = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtTen = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSach)).BeginInit();
@@ -166,9 +164,7 @@ namespace KHACHSAN
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.txtMa);
             this.groupControl1.Controls.Add(this.label6);
-            this.groupControl1.Controls.Add(this.txtTen);
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 250);
@@ -176,13 +172,6 @@ namespace KHACHSAN
             this.groupControl1.Size = new System.Drawing.Size(677, 206);
             this.groupControl1.TabIndex = 5;
             this.groupControl1.Text = "Thông Tin";
-            // 
-            // txtMa
-            // 
-            this.txtMa.Location = new System.Drawing.Point(82, 44);
-            this.txtMa.Name = "txtMa";
-            this.txtMa.Size = new System.Drawing.Size(166, 21);
-            this.txtMa.TabIndex = 2;
             // 
             // label6
             // 
@@ -193,14 +182,6 @@ namespace KHACHSAN
             this.label6.Size = new System.Drawing.Size(51, 14);
             this.label6.TabIndex = 11;
             this.label6.Text = "ID Tầng";
-            // 
-            // txtTen
-            // 
-            this.txtTen.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTen.Location = new System.Drawing.Point(82, 71);
-            this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(166, 22);
-            this.txtTen.TabIndex = 3;
             // 
             // label1
             // 
@@ -248,9 +229,7 @@ namespace KHACHSAN
         private DevExpress.XtraGrid.Columns.GridColumn IDTANG;
         private DevExpress.XtraGrid.Columns.GridColumn TENTANG;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private System.Windows.Forms.TextBox txtMa;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.Label label1;
     }
 }
