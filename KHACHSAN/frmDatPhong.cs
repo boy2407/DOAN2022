@@ -43,15 +43,17 @@ namespace KHACHSAN
          public int _idDP = 0;
         int _rowDatPhong = 0;
         List<OBJ_DPSP> lstDPSP;
+        List<OBJ_DSPD> lstDP;
         //SYS_PARAM _param;
         string _madvi;
         string _macty;
         Double _tongtien = 0;
+        
         int count = 0;
         private void frmDatPhong_Load(object sender, EventArgs e)
         {
-            
-             _khachhang = new KHACHHANG();
+           
+            _khachhang = new KHACHHANG();
             _sanpham = new SANPHAM();
             _datphong = new DATPHONG();
             _datphong_ct = new DATPHONG_CT();
@@ -103,7 +105,27 @@ namespace KHACHSAN
             }
 
         }
-       public void loadKH()
+        void loadDP()
+        {
+            //gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='" + _idDP + "'");
+            _rowDatPhong = 0;
+            gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG,D.SONGAYO,D.THANHTIEN from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='" + _idDP + "'");
+            _rowDatPhong = gvDatPhong.RowCount;
+       
+        }
+        //void loadDSPD()
+        //{
+        //    gcDatPhong.DataSource = _datphong_ct.getAllByDatPhong_DSPD(_idDP);
+        //    lstDP = _datphong_ct.getAllByDatPhong_DSPD(_idDP);
+        //    gvPhong.ExpandAllGroups();
+        //}
+        void loadSPDV()
+        {
+            gcSPDV.DataSource = _datphong_sp.getAllByDatPhong(_idDP);
+            lstDPSP = _datphong_sp.getAllByDatPhong(_idDP);
+        }
+
+        public void loadKH()
         {
             _khachhang = new KHACHHANG();
             cboKhachHang.DataSource = _khachhang.getAll();
@@ -118,10 +140,9 @@ namespace KHACHSAN
         
         void loadPhong()
         {
-            DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");    
-            gcPhong.DataSource = table;          
+            DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");
+            gcPhong.DataSource = table;
             gvPhong.ExpandAllGroups();
-          
         }
         void showHideControl(bool t)
         {
@@ -181,7 +202,8 @@ namespace KHACHSAN
             gvDanhSach.OptionsBehavior.Editable = false;
         }
         void loadDanhSach()
-        {
+        {   
+            
             gcDanhSach.DataSource = _datphong.GetAllTheoDoan(dtTuNgay.Value, dtDenNgay.Value.AddDays(1), _macty, _madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
             _datphong = new DATPHONG();
@@ -811,6 +833,7 @@ namespace KHACHSAN
             lstDPSP = lst;
             loadDPSP();
         }
+        
         private void gvSPDV_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
            
@@ -981,19 +1004,7 @@ namespace KHACHSAN
                 gvSPDV.DeleteSelectedRows();
             }    
         }
-        void loadDP()
-        {
-            _rowDatPhong = 0;
-            //gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='"+_idDP+"'");
-            gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG,D.SONGAYO,D.THANHTIEN from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='"+_idDP+"'");
-            _rowDatPhong = gvDatPhong.RowCount;
-        }
-        void loadSPDV()
-        {
-            gcSPDV.DataSource = _datphong_sp.getAllByDatPhong(_idDP);
-            lstDPSP = _datphong_sp.getAllByDatPhong(_idDP);
-        }
-
+       
         private void dtTuNgay_ValueChanged(object sender, EventArgs e)
         {
             if (dtTuNgay.Value > dtDenNgay.Value)
@@ -1059,6 +1070,7 @@ namespace KHACHSAN
                 txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
                 loadDP();
                 loadSPDV();
+                
                 TabControl.SelectedTabPage = PageChiTiet;
             }
          

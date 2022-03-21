@@ -139,5 +139,30 @@ namespace BusinessLayer
             }
             return listDPCT;
         }
+        public List<OBJ_DSPD> getAllByDatPhong_DSPD(int _iddp)
+        {
+            PHONG p = new PHONG();
+            TANG t = new TANG();
+            var listget = db.tb_DatPhong_CT.Where(x => x.IDDP == _iddp);
+            List<OBJ_DSPD> listDPCT = new List<OBJ_DSPD>();
+            OBJ_DSPD DPCT;
+            foreach (var item in listget)
+            {
+                DPCT = new OBJ_DSPD();
+                DPCT.IDDP = item.IDDP;
+                DPCT.IDDPCT = item.IDDPCT;
+                tb_Phong phong = p.getItem(item.IDPHONG);
+                DPCT.TENPHONG = phong.TENPHONG;
+                tb_Tang tang = t.getItem(phong.IDTANG);
+                DPCT.TENTANG = tang.TENTANG;
+                DPCT.IDPHONG = item.IDPHONG;              
+                DPCT.THANHTIEN = item.THANHTIEN;
+                DPCT.SONGAYO = item.SONGAYO;
+                DPCT.DONGIA = item.DONGIA;
+                listDPCT.Add(DPCT);
+            }
+            return listDPCT;
+        }
+       
     }
 }

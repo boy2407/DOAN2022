@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
 using DataLayer;
+using System.Text.RegularExpressions;
+
 namespace KHACHSAN
 {
     public partial class frmDonVi : DevExpress.XtraEditors.XtraForm
@@ -37,7 +39,23 @@ namespace KHACHSAN
            cboCty.SelectedIndexChanged += CboCty_SelectedIndexChanged;
 
         }
+        public bool IsValidEmail(string email)
+        {
 
+            if (string.IsNullOrEmpty(email))
+                return true;
+            string sMailPattern = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            return Regex.IsMatch(email.Trim(), sMailPattern);
+
+        }
+        public bool IsValidVietNamPhoneNumber(string phoneNum)
+        {
+
+            if (string.IsNullOrEmpty(phoneNum))
+                return true;
+            string sMailPattern = @"^((09(\d){8})|(086(\d){7})|(088(\d){7})|(089(\d){7})|(01(\d){9}))$";
+            return Regex.IsMatch(phoneNum.Trim(), sMailPattern);
+        }
         private void CboCty_SelectedIndexChanged(object sender, EventArgs e)
         {
            loadDviByCty();
@@ -120,6 +138,18 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return;
+            }
+
+            if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
+            {
+                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_them == true)
             {
                 
@@ -200,6 +230,17 @@ namespace KHACHSAN
             }
         }
 
-       
+        private void txtDienThoai_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

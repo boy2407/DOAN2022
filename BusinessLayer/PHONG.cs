@@ -35,7 +35,8 @@ namespace BusinessLayer
         }
         public List<OBJ_PHONG> getPhongTrong()
         {
-            var lst = db.tb_Phong.Where(x => x.TRANGTHAI == false).ToList();
+           var lst = db.tb_Phong.Where(x => x.TRANGTHAI == false).ToList();
+         
             List<OBJ_PHONG> listpt = new List<OBJ_PHONG>();
             OBJ_PHONG pt;
             foreach(var item in lst)
@@ -207,6 +208,34 @@ namespace BusinessLayer
                 return true;
             else
                 return false;
+        }
+        public List<tb_Phong> getAllPhongTrong_DSPD()
+        {
+            PHONG p = new PHONG();
+            TANG t = new TANG();
+
+            List<tb_Phong> listget = db.tb_Phong.Where(x=>x.TRANGTHAI==false).ToList();          
+            List<OBJ_DSPD> listDPCT = new List<OBJ_DSPD>();
+            OBJ_DSPD DPCT;
+
+            foreach (var item in listget)
+            {
+                DPCT = new OBJ_DSPD();
+                DPCT.IDDP = 0;
+                DPCT.IDDPCT = 0;
+                tb_Phong phong = p.getItem(item.IDPHONG);
+                DPCT.TENPHONG = phong.TENPHONG;
+                tb_Tang tang = t.getItem(phong.IDTANG);
+                DPCT.TENTANG = tang.TENTANG;
+                DPCT.IDPHONG = item.IDPHONG;
+                var gia = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == phong.IDLOAIPHONG);
+                DPCT.DONGIA = gia.DONGIA;
+                DPCT.THANHTIEN = 0;
+                DPCT.SONGAYO = 0;
+
+                listDPCT.Add(DPCT);
+            }
+            return listget;
         }
     }
 }

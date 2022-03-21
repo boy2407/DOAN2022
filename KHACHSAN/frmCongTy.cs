@@ -34,6 +34,7 @@ namespace KHACHSAN
         CONGTY _congty;
         bool _them;
         string _macty;
+        bool _dinhdang_emal;
         private void frmCongTy_Load(object sender, EventArgs e)
         {
             _congty = new CONGTY();
@@ -122,6 +123,18 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if(!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return;
+            }
+           
+            if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
+            {
+                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }    
             if(_them==true)
             {
                 bool var = _congty.checkUserExist(txtMa.Text);
@@ -250,17 +263,37 @@ namespace KHACHSAN
 
         private void txtEmail_Leave(object sender, EventArgs e)
         {
-            Regex mRegxExpression;
-            if (txtEmail.Text.Trim() != string.Empty)
-            {
-                mRegxExpression = new Regex(@"^([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$");
+            //Regex mRegxExpression;
+            //if (txtEmail.Text.Trim() != string.Empty)
+            //{
+            //    mRegxExpression = new Regex(@"^([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$");
 
-                if (!mRegxExpression.IsMatch(txtEmail.Text.Trim()))
-                {
-                    MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtEmail.Focus();
-                }
-            }
+            //    if (!mRegxExpression.IsMatch(txtEmail.Text.Trim()))
+            //    {
+            //        MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        txtEmail.Focus();
+            //    }
+            //    _dinhdang_emal = false;
+            //    return;
+            //}
+            //_dinhdang_emal = true;
+        }
+        public bool IsValidEmail(string email)
+        {
+
+            if (string.IsNullOrEmpty(email))
+                return true;
+            string sMailPattern = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            return Regex.IsMatch(email.Trim(), sMailPattern);
+
+        }
+        public bool IsValidVietNamPhoneNumber(string phoneNum)
+        {
+           
+            if (string.IsNullOrEmpty(phoneNum))
+                return true;
+            string sMailPattern = @"^((09(\d){8})|(086(\d){7})|(088(\d){7})|(089(\d){7})|(01(\d){9}))$";
+            return Regex.IsMatch(phoneNum.Trim(), sMailPattern);
         }
     }
 }

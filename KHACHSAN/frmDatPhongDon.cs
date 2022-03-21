@@ -65,7 +65,9 @@ namespace KHACHSAN
             objMain.gControl.Gallery.Groups.Clear();
             objMain.showRoom();
             txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-
+            btnSua.Visible = true;
+            btnLuu.Visible = false;
+            _enabled(false);
         }
 
         private void btnIn_Click(object sender, EventArgs e)
@@ -106,10 +108,12 @@ namespace KHACHSAN
                     cboTrangThai.SelectedValue = true;
                     objMain.gControl.Gallery.Groups.Clear();
                     objMain.showRoom();
-                }    
-              
+                }
 
-               
+                _enabled(false);
+                btnSua.Visible = false;
+                btnLuu.Visible = false;
+
             }    
           
         }
@@ -242,7 +246,7 @@ namespace KHACHSAN
             _phong = new PHONG();
             lstDPSP = new List<OBJ_DPSP>();
             _sanpham = new SANPHAM();
-            
+            btnSua.Visible = false;
             _phonghientai = _phong.getItemFull(_idPhong);
             string dongia = _phonghientai.DONGIA.Value.ToString("N0");
             lblPhong.Text = _phonghientai.TENPHONG+" - Đơn giá: "+ dongia + "VNĐ";
@@ -426,9 +430,25 @@ namespace KHACHSAN
             gvSPDV.UpdateCurrentRow();
         }
 
-      
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            btnLuu.Visible = true;
+            btnSua.Visible = false;
+            _enabled(true);
+        }
+        void _enabled(bool t)
+        {
+            searchKH.Enabled = t;
+            btnAddNew.Enabled = t;
+            dtNgayDat.Enabled = t;
+            dtNgayTra.Enabled = t;
+            cboTrangThai.Enabled = t;
 
-        
+            spSoNguoi.Enabled = t;
+            txtGhiChu.Enabled = t;           
+            gcSPDV.Enabled = t;
+            gcSanPham.Enabled = t;
+        }
     }
 
 

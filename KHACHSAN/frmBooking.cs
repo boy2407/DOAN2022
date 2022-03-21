@@ -85,12 +85,14 @@ namespace KHACHSAN
         }
         void loadphongByNgayDat(DateTime time)
         {
-     
-            
-            List<V_PHONGBYNGAY> lstPhongByNgay = _vphongbyngay.getlistPhongKhongTrungDateTime(time);
-            gcPhong.DataSource = lstPhongByNgay;
-            gcDatPhong.DataSource = _vphongbyngay.getlistItem(0);
-            gvPhong.ExpandAllGroups();
+
+
+            //List<V_PHONGBYNGAY> lstPhongByNgay = _vphongbyngay.getlistPhongKhongTrungDateTime(time);
+            //gcPhong.DataSource = lstPhongByNgay;
+            //gcDatPhong.DataSource = _vphongbyngay.getlistItem(0);
+            //gvPhong.ExpandAllGroups();
+
+            gcPhong.DataSource = _phong.getAllPhongTrong_DSPD();
         }
         void loadPhong()
         {
@@ -98,6 +100,7 @@ namespace KHACHSAN
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone();
             gvPhong.ExpandAllGroups();
+
 
         }
         void showHideControl(bool t)

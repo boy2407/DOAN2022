@@ -570,6 +570,7 @@ namespace KHACHSAN
             // IDPHONG
             // 
             this.IDPHONG.Caption = "ID";
+            this.IDPHONG.FieldName = "IDPHONG";
             this.IDPHONG.Name = "IDPHONG";
             // 
             // TENPHONG
@@ -587,6 +588,7 @@ namespace KHACHSAN
             // 
             // IDTANG
             // 
+            this.IDTANG.FieldName = "IDTANG";
             this.IDTANG.Name = "IDTANG";
             // 
             // TENTANG

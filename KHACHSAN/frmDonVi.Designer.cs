@@ -289,7 +289,6 @@ namespace KHACHSAN
             this.cboCty.Name = "cboCty";
             this.cboCty.Size = new System.Drawing.Size(321, 21);
             this.cboCty.TabIndex = 14;
-           
             // 
             // txtMa
             // 
@@ -373,6 +372,7 @@ namespace KHACHSAN
             this.txtDienThoai.Name = "txtDienThoai";
             this.txtDienThoai.Size = new System.Drawing.Size(170, 22);
             this.txtDienThoai.TabIndex = 6;
+            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             // 
             // label3
             // 

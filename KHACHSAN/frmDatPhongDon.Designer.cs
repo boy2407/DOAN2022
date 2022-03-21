@@ -41,6 +41,8 @@ namespace KHACHSAN
             this.label8 = new System.Windows.Forms.Label();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.gcSPDV = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gvSPDV = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.spIDSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.spTENPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,8 +76,7 @@ namespace KHACHSAN
             this.IDSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TENSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DONGIA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSua = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -84,6 +85,7 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPDV)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPDV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -94,7 +96,6 @@ namespace KHACHSAN
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcSanPham)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSanPham)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -102,6 +103,7 @@ namespace KHACHSAN
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnLuu,
+            this.btnSua,
             this.btnIn,
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -216,6 +218,20 @@ namespace KHACHSAN
             this.gcSPDV.UseDisabledStatePainter = false;
             this.gcSPDV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPDV});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xóaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(95, 26);
+            // 
+            // xóaToolStripMenuItem
+            // 
+            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
+            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.xóaToolStripMenuItem.Text = "Xóa";
+            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
             // 
             // gvSPDV
             // 
@@ -589,19 +605,15 @@ namespace KHACHSAN
             this.DONGIA.VisibleIndex = 1;
             this.DONGIA.Width = 100;
             // 
-            // contextMenuStrip1
+            // btnSua
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xóaToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(95, 26);
-            // 
-            // xóaToolStripMenuItem
-            // 
-            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
-            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
-            this.xóaToolStripMenuItem.Text = "Xóa";
-            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
+            this.btnSua.Image = global::KHACHSAN.Properties.Resources.Apps_menu_editor_icon;
+            this.btnSua.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(37, 38);
+            this.btnSua.Text = "Sửa";
+            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // frmDatPhongDon
             // 
@@ -623,6 +635,7 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcSPDV)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvSPDV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -634,7 +647,6 @@ namespace KHACHSAN
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcSanPham)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSanPham)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -687,5 +699,6 @@ namespace KHACHSAN
         private DevExpress.XtraGrid.Columns.GridColumn HOTEN;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem xóaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnSua;
     }
 }
