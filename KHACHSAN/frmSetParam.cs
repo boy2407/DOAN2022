@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer;
 using BusinessLayer;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace KHACHSAN
 {
     public partial class frmSetParam : DevExpress.XtraEditors.XtraForm
@@ -55,6 +58,10 @@ namespace KHACHSAN
             SYS_PARAM _sysparam = new SYS_PARAM(macty,madvi);
             _sysparam.SaveFile();
             MessageBox.Show("Xác nhận đơn vị sử dụng thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            BinaryFormatter bf = new BinaryFormatter();
+
+            MessageBox.Show(_sysparam.macty + _sysparam.madvi);        
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

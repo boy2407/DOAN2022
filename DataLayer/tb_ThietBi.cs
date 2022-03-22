@@ -14,8 +14,19 @@ namespace DataLayer
     
     public partial class tb_ThietBi
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_ThietBi()
+        {
+            this.tb_Phong_ThietBi = new HashSet<tb_Phong_ThietBi>();
+        }
+    
         public int IDTB { get; set; }
         public string TENTB { get; set; }
         public Nullable<double> DONGIA { get; set; }
+        public Nullable<int> TONGSLN { get; set; }
+        public Nullable<int> TONGSLX { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Phong_ThietBi> tb_Phong_ThietBi { get; set; }
     }
 }

@@ -361,7 +361,7 @@ namespace KHACHSAN
                 return;
             }
             
-                _v = new VIEW_DATPHONG_DATPHONG_CT_PHONG();
+               _v = new VIEW_DATPHONG_DATPHONG_CT_PHONG();
             v_DATPHONG_DATPHONG_CT_PHONG v= _v.getItemByIdPhong_Iddp(int.Parse(item.Value.ToString()));
           
             if (v!=null)

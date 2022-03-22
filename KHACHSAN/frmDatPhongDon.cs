@@ -274,7 +274,7 @@ namespace KHACHSAN
                 var dp = _datphong.GetItem(_idDP);
                 searchKH.EditValue = dp.IDKH;
                 dtNgayDat.Value = dp.NGAYDAT.Value;
-                dtNgayTra.Value = DateTime.Now.AddDays(1);
+                dtNgayTra.Value = dp.NGAYTRA.Value;
                 cboTrangThai.SelectedValue = dp.STATUS;
                 spSoNguoi.Text = dp.SONGUOIO.ToString();
                 txtGhiChu.Text = dp.GHICHU.ToString();

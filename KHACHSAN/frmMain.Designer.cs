@@ -138,11 +138,11 @@ namespace KHACHSAN
             // 
             // navMain
             // 
-            this.navMain.Appearance.Item.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.navMain.Appearance.Item.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navMain.Appearance.Item.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.navMain.Appearance.Item.Options.UseFont = true;
             this.navMain.Appearance.Item.Options.UseForeColor = true;
-            this.navMain.Appearance.ItemHotTracked.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.navMain.Appearance.ItemHotTracked.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navMain.Appearance.ItemHotTracked.Options.UseFont = true;
             this.navMain.Appearance.ItemPressed.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navMain.Appearance.ItemPressed.ForeColor = System.Drawing.Color.Gray;

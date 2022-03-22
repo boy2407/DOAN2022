@@ -38,9 +38,18 @@ namespace KHACHSAN
             this.btnThoat = new System.Windows.Forms.ToolStripButton();
             this.gcDanhSach = new DevExpress.XtraGrid.GridControl();
             this.gvDanhSach = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.IDTANG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TENTANG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.IDPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TENPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.IDTB = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TENTHIETBI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SOLUONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.cboThietBi = new System.Windows.Forms.ComboBox();
+            this.searchPhong = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.srTENPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.spSoLuong = new DevExpress.XtraEditors.SpinEdit();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
@@ -48,6 +57,9 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.gvDanhSach)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPhong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spSoLuong.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -62,7 +74,7 @@ namespace KHACHSAN
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(677, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(392, 41);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -74,6 +86,7 @@ namespace KHACHSAN
             this.btnThem.Size = new System.Drawing.Size(51, 38);
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
@@ -83,6 +96,7 @@ namespace KHACHSAN
             this.btnSua.Size = new System.Drawing.Size(37, 38);
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -92,6 +106,7 @@ namespace KHACHSAN
             this.btnXoa.Size = new System.Drawing.Size(37, 38);
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnLuu
             // 
@@ -101,6 +116,7 @@ namespace KHACHSAN
             this.btnLuu.Size = new System.Drawing.Size(36, 38);
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnBoQua
             // 
@@ -110,6 +126,7 @@ namespace KHACHSAN
             this.btnBoQua.Size = new System.Drawing.Size(58, 38);
             this.btnBoQua.Text = "Bỏ qua";
             this.btnBoQua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnBoQua.Click += new System.EventHandler(this.btnBoQua_Click);
             // 
             // btnThoat
             // 
@@ -119,6 +136,7 @@ namespace KHACHSAN
             this.btnThoat.Size = new System.Drawing.Size(51, 38);
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // gcDanhSach
             // 
@@ -126,7 +144,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 41);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(677, 209);
+            this.gcDanhSach.Size = new System.Drawing.Size(392, 209);
             this.gcDanhSach.TabIndex = 4;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
@@ -134,75 +152,173 @@ namespace KHACHSAN
             // gvDanhSach
             // 
             this.gvDanhSach.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.IDTANG,
-            this.TENTANG});
+            this.IDPHONG,
+            this.TENPHONG,
+            this.IDTB,
+            this.TENTHIETBI,
+            this.SOLUONG});
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
             this.gvDanhSach.OptionsView.ShowGroupPanel = false;
             // 
-            // IDTANG
+            // IDPHONG
             // 
-            this.IDTANG.Caption = "ID";
-            this.IDTANG.FieldName = "IDTANG";
-            this.IDTANG.MaxWidth = 80;
-            this.IDTANG.MinWidth = 60;
-            this.IDTANG.Name = "IDTANG";
-            this.IDTANG.Visible = true;
-            this.IDTANG.VisibleIndex = 0;
-            this.IDTANG.Width = 60;
+            this.IDPHONG.Caption = "ID";
+            this.IDPHONG.FieldName = "IDPHONG";
+            this.IDPHONG.MaxWidth = 30;
+            this.IDPHONG.Name = "IDPHONG";
+            this.IDPHONG.Width = 30;
             // 
-            // TENTANG
+            // TENPHONG
             // 
-            this.TENTANG.Caption = "TÊN TẦNG";
-            this.TENTANG.FieldName = "TENTANG";
-            this.TENTANG.MaxWidth = 180;
-            this.TENTANG.MinWidth = 60;
-            this.TENTANG.Name = "TENTANG";
-            this.TENTANG.Visible = true;
-            this.TENTANG.VisibleIndex = 1;
-            this.TENTANG.Width = 80;
+            this.TENPHONG.Caption = "TÊN PHÒNG";
+            this.TENPHONG.FieldName = "TENPHONG";
+            this.TENPHONG.MaxWidth = 120;
+            this.TENPHONG.MinWidth = 60;
+            this.TENPHONG.Name = "TENPHONG";
+            this.TENPHONG.Visible = true;
+            this.TENPHONG.VisibleIndex = 0;
+            this.TENPHONG.Width = 96;
+            // 
+            // IDTB
+            // 
+            this.IDTB.FieldName = "IDTB";
+            this.IDTB.MaxWidth = 30;
+            this.IDTB.Name = "IDTB";
+            this.IDTB.Width = 30;
+            // 
+            // TENTHIETBI
+            // 
+            this.TENTHIETBI.Caption = "TÊN THIẾT BỊ";
+            this.TENTHIETBI.FieldName = "TENTB";
+            this.TENTHIETBI.MaxWidth = 120;
+            this.TENTHIETBI.MinWidth = 80;
+            this.TENTHIETBI.Name = "TENTHIETBI";
+            this.TENTHIETBI.Visible = true;
+            this.TENTHIETBI.VisibleIndex = 1;
+            this.TENTHIETBI.Width = 91;
+            // 
+            // SOLUONG
+            // 
+            this.SOLUONG.Caption = "SỐ LƯỢNG";
+            this.SOLUONG.FieldName = "SOLUONG";
+            this.SOLUONG.MaxWidth = 80;
+            this.SOLUONG.MinWidth = 60;
+            this.SOLUONG.Name = "SOLUONG";
+            this.SOLUONG.Visible = true;
+            this.SOLUONG.VisibleIndex = 2;
+            this.SOLUONG.Width = 80;
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.cboThietBi);
+            this.groupControl1.Controls.Add(this.searchPhong);
+            this.groupControl1.Controls.Add(this.label2);
+            this.groupControl1.Controls.Add(this.spSoLuong);
             this.groupControl1.Controls.Add(this.label6);
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 250);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(677, 206);
+            this.groupControl1.Size = new System.Drawing.Size(392, 165);
             this.groupControl1.TabIndex = 5;
             this.groupControl1.Text = "Thông Tin";
+            // 
+            // cboThietBi
+            // 
+            this.cboThietBi.FormattingEnabled = true;
+            this.cboThietBi.Location = new System.Drawing.Point(128, 74);
+            this.cboThietBi.Name = "cboThietBi";
+            this.cboThietBi.Size = new System.Drawing.Size(192, 21);
+            this.cboThietBi.TabIndex = 19;
+            // 
+            // searchPhong
+            // 
+            this.searchPhong.Location = new System.Drawing.Point(128, 38);
+            this.searchPhong.Name = "searchPhong";
+            this.searchPhong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.searchPhong.Properties.PopupView = this.searchLookUpEdit1View;
+            this.searchPhong.Size = new System.Drawing.Size(191, 20);
+            this.searchPhong.TabIndex = 18;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.srTENPHONG});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // srTENPHONG
+            // 
+            this.srTENPHONG.Caption = "TÊN PHÒNG";
+            this.srTENPHONG.FieldName = "TENPHONG";
+            this.srTENPHONG.Name = "srTENPHONG";
+            this.srTENPHONG.Visible = true;
+            this.srTENPHONG.VisibleIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(61, 112);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 14);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Số lượng";
+            // 
+            // spSoLuong
+            // 
+            this.spSoLuong.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spSoLuong.Location = new System.Drawing.Point(127, 110);
+            this.spSoLuong.Name = "spSoLuong";
+            this.spSoLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spSoLuong.Properties.Mask.EditMask = "n0";
+            this.spSoLuong.Size = new System.Drawing.Size(192, 20);
+            this.spSoLuong.TabIndex = 3;
+            this.spSoLuong.EditValueChanged += new System.EventHandler(this.spSoLuong_EditValueChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(10, 47);
+            this.label6.Location = new System.Drawing.Point(53, 45);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 14);
+            this.label6.Size = new System.Drawing.Size(68, 14);
             this.label6.TabIndex = 11;
-            this.label6.Text = "ID Tầng";
+            this.label6.Text = "Tên Phòng";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 74);
+            this.label1.Location = new System.Drawing.Point(61, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 14);
+            this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Tầng";
+            this.label1.Text = "Thiết bị";
             // 
             // frmPhong_ThietBi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 456);
+            this.ClientSize = new System.Drawing.Size(392, 415);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gcDanhSach);
             this.Controls.Add(this.toolStrip1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPhong_ThietBi";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phòng - Thiết Bị";
+            this.Load += new System.EventHandler(this.frmPhong_ThietBi_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSach)).EndInit();
@@ -210,6 +326,9 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPhong.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spSoLuong.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,10 +345,19 @@ namespace KHACHSAN
         private System.Windows.Forms.ToolStripButton btnThoat;
         private DevExpress.XtraGrid.GridControl gcDanhSach;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDanhSach;
-        private DevExpress.XtraGrid.Columns.GridColumn IDTANG;
-        private DevExpress.XtraGrid.Columns.GridColumn TENTANG;
+        private DevExpress.XtraGrid.Columns.GridColumn IDPHONG;
+        private DevExpress.XtraGrid.Columns.GridColumn TENPHONG;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.SpinEdit spSoLuong;
+        private DevExpress.XtraGrid.Columns.GridColumn IDTB;
+        private DevExpress.XtraGrid.Columns.GridColumn TENTHIETBI;
+        private DevExpress.XtraGrid.Columns.GridColumn SOLUONG;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchPhong;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn srTENPHONG;
+        private System.Windows.Forms.ComboBox cboThietBi;
     }
 }

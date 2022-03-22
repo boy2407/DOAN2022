@@ -45,6 +45,7 @@ namespace KHACHSAN
             this.txtUserNam.Name = "txtUserNam";
             this.txtUserNam.Size = new System.Drawing.Size(213, 21);
             this.txtUserNam.TabIndex = 1;
+            this.txtUserNam.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
             // 
             // txtPass
             // 
@@ -53,7 +54,6 @@ namespace KHACHSAN
             this.txtPass.Size = new System.Drawing.Size(213, 21);
             this.txtPass.TabIndex = 2;
             this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
-         
             // 
             // btnLogin
             // 
@@ -129,6 +129,7 @@ namespace KHACHSAN
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Nhập";
             this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

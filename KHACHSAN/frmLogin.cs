@@ -24,24 +24,27 @@ namespace KHACHSAN
         }
         SYS_PARAM _sysparam;
         SYS_USER _sysUser;
-         
+        BinaryFormatter bf;
+        FileStream fs;
         private void frmLogin_Load(object sender, EventArgs e)
         {
             _sysUser = new SYS_USER();
-
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = File.Open("sysparam.ini", FileMode.Open, FileAccess.Read);
-            _sysparam = (SYS_PARAM)bf.Deserialize(fs);
-            fs.Close();
+             bf = new BinaryFormatter();
+            fs = File.Open("sysparam.ini", FileMode.Open, FileAccess.Read);
+            _sysparam = bf.Deserialize(fs) as SYS_PARAM;
+            if (_sysparam.macty == null || _sysparam.madvi == null)
+                  return;               
             Friend._macty = _sysparam.macty;
             Friend._madvi = _sysparam.madvi;
             this.Text = _sysparam.macty + " - " + _sysparam.madvi;
+            fs.Close();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-           
-            if(txtUserNam.Text.Trim()=="")
+            if (_sysparam.macty == null || _sysparam.madvi == null)
+                return;
+            if (txtUserNam.Text.Trim()=="")
             {
                 MessageBox.Show("Tên Đăng nhập không để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -77,11 +80,17 @@ namespace KHACHSAN
 
         private void txtPass_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
+           
+            if (e.KeyCode==Keys.Enter)
             {
                 if (txtUserNam.Text.Trim() == "")
                 {
                     MessageBox.Show("Tên Đăng nhập không để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (txtPass.Text.Trim() == "")
+                {
+                    MessageBox.Show("Mật khẩu không để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 bool us = _sysUser.checkUserExist(_sysparam.macty, _sysparam.madvi, txtUserNam.Text);
@@ -101,11 +110,13 @@ namespace KHACHSAN
                 }
                 else
                 {
-                    MessageBox.Show("Sai mật khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sai mật khẩu vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }    
            
         }
+
+      
     }
 }

@@ -21,6 +21,12 @@ namespace BusinessLayer
         {
             return db.tb_ThietBi.FirstOrDefault(x => x.IDTB == idtb);
         }
+        public int  UsebleQuantily( int idtb)
+        {         
+           var tb = db.tb_ThietBi.FirstOrDefault(x => x.IDTB == idtb);
+           int res = (int)(tb.TONGSLN - tb.TONGSLX);
+            return res;
+        }
         public void add(tb_ThietBi tb)
         {
             try
