@@ -110,11 +110,74 @@ namespace KHACHSAN
         {
             if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                _khachhang.delete(int.Parse(_idkh));
+                tb_KhachHang kh = _khachhang.getItem(int.Parse(_idkh));
+                kh.DISABLED = true;
+                _khachhang.update(kh);
             }
             loadData();
         }
+        void savedata()
+        {
+            if (!IsVaildCCCD(txtCCCD.Text))
+            {
+                MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCCCD.Focus();
+                return;
+            }
 
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return;
+            }
+
+            if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
+            {
+                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDienThoai.Focus();
+                return;
+            }
+            if (_them)
+            {
+                if (_khachhang.checkCCCD(txtCCCD.Text))
+                {
+                    MessageBox.Show("CCCD/CMND đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }
+                tb_KhachHang _kh = new tb_KhachHang();
+                _kh.CCCD = txtCCCD.Text;
+                _kh.DIACHI = txtDiaChi.Text;
+                _kh.DIENTHOAI = txtDienThoai.Text;
+                _kh.EMAIL = txtEmail.Text;
+                _kh.HOTEN = txtTen.Text;
+                _kh.GIOITINH = chkGioiTinh.Checked;
+                _khachhang.add(_kh);
+            }
+            else
+            {
+                if (_khachhang.checkCCCD(txtCCCD.Text))
+                {
+                    MessageBox.Show("CCCD/CMND đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }
+                tb_KhachHang _kh = _khachhang.getItem(int.Parse(_idkh));
+                _kh.CCCD = txtCCCD.Text;
+                _kh.DIACHI = txtDiaChi.Text;
+                _kh.DIENTHOAI = txtDienThoai.Text;
+                _kh.EMAIL = txtEmail.Text;
+                _kh.HOTEN = txtTen.Text;
+                _kh.GIOITINH = chkGioiTinh.Checked;
+                _khachhang.update(_kh);
+
+            }
+            loadData();
+            showHideControl(true);
+            _enabled(false);
+            _them = false;
+        }    
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if(!IsVaildCCCD(txtCCCD.Text))
@@ -139,7 +202,13 @@ namespace KHACHSAN
             }
             if (_them)
             {
-                tb_KhachHang _kh = new tb_KhachHang();
+                if(_khachhang.checkCCCD(txtCCCD.Text))
+                {
+                    MessageBox.Show("CCCD/CMND đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }    
+                tb_KhachHang _kh = new tb_KhachHang();              
                 _kh.CCCD = txtCCCD.Text;
                 _kh.DIACHI = txtDiaChi.Text;
                 _kh.DIENTHOAI = txtDienThoai.Text;
@@ -150,6 +219,12 @@ namespace KHACHSAN
             }    
             else
             {
+                if (_khachhang.checkCCCD(txtCCCD.Text))
+                {
+                    MessageBox.Show("CCCD/CMND đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }
                 tb_KhachHang _kh = _khachhang.getItem(int.Parse(_idkh));
                 _kh.CCCD = txtCCCD.Text;
                 _kh.DIACHI = txtDiaChi.Text;
@@ -170,7 +245,6 @@ namespace KHACHSAN
             gcDanhSach.DataSource = _khachhang.getAll();              
             gvDanhSach.OptionsBehavior.Editable = false;
         }
-
 
         private void btnBoQua_Click(object sender, EventArgs e)
         {
@@ -220,30 +294,14 @@ namespace KHACHSAN
             }    
         }
 
-        private void txtDienThoai_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
-        }
+    
 
-        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtDiaChi_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if((Keys)e.KeyChar==Keys.Enter)
             {
-                e.Handled = true;
-            }
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+                savedata();
+            }    
         }
     }
 }

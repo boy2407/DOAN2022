@@ -117,10 +117,122 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="schedulerDataStorage1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="dxGoogleCalendarSync1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>195, 17</value>
-  </metadata>
+  <data name="btnRecurrence.AccessibleName" xml:space="preserve">
+    <value>再帰</value>
+  </data>
+  <data name="lblSubject.AccessibleName" xml:space="preserve">
+    <value>件名</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnRecurrence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
+  </data>
+  <data name="btnRecurrence.Text" xml:space="preserve">
+    <value>定期的な予定(&amp;R)</value>
+  </data>
+  <data name="lblShowTimeAs.Text" xml:space="preserve">
+    <value>時間の表示方法(&amp;W):</value>
+  </data>
+  <data name="lblStartTime.AccessibleName" xml:space="preserve">
+    <value>開始時刻</value>
+  </data>
+  <data name="btnOk.AccessibleName" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="lblResource.AccessibleName" xml:space="preserve">
+    <value>リソース</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="btnCancel.AccessibleName" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="tbSubject.Properties.AccessibleName" xml:space="preserve">
+    <value>件名</value>
+  </data>
+  <data name="edtEndTime.Properties.AccessibleName" xml:space="preserve">
+    <value>終了時刻</value>
+  </data>
+  <data name="edtEndDate.Properties.AccessibleName" xml:space="preserve">
+    <value>終了日</value>
+  </data>
+  <data name="lblSubject.Text" xml:space="preserve">
+    <value>件名(&amp;S):</value>
+  </data>
+  <data name="btnDelete.AccessibleName" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="edtResource.Properties.AccessibleName" xml:space="preserve">
+    <value>リソース</value>
+  </data>
+  <data name="cbReminder.Properties.AccessibleName" xml:space="preserve">
+    <value>アラーム</value>
+  </data>
+  <data name="lblLabel.Text" xml:space="preserve">
+    <value>ラベル(&amp;B):</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>削除 (&amp;D)</value>
+  </data>
+  <data name="edtLabel.Properties.AccessibleName" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="edtShowTimeAs.Properties.AccessibleName" xml:space="preserve">
+    <value>時刻の表示方法</value>
+  </data>
+  <data name="tbLocation.Properties.AccessibleName" xml:space="preserve">
+    <value>場所</value>
+  </data>
+  <data name="chkAllDay.Properties.AccessibleName" xml:space="preserve">
+    <value>終日イベント</value>
+  </data>
+  <data name="btnOk.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="lblShowTimeAs.AccessibleName" xml:space="preserve">
+    <value>時刻の表示方法</value>
+  </data>
+  <data name="lblEndTime.AccessibleName" xml:space="preserve">
+    <value>終了時刻</value>
+  </data>
+  <data name="tbDescription.Properties.AccessibleName" xml:space="preserve">
+    <value>メッセージ</value>
+  </data>
+  <data name="edtStartTime.Properties.AccessibleName" xml:space="preserve">
+    <value>開始時刻</value>
+  </data>
+  <data name="chkReminder.Properties.Caption" xml:space="preserve">
+    <value>アラーム(&amp;R)</value>
+  </data>
+  <data name="lblLocation.AccessibleName" xml:space="preserve">
+    <value>場所</value>
+  </data>
+  <data name="lblEndTime.Text" xml:space="preserve">
+    <value>終了時刻(&amp;E):</value>
+  </data>
+  <data name="edtShowTimeAs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 140</value>
+  </data>
+  <data name="lblLabel.AccessibleName" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="lblLocation.Text" xml:space="preserve">
+    <value>場所(&amp;L):</value>
+  </data>
+  <data name="lblResource.Text" xml:space="preserve">
+    <value>リソース:</value>
+  </data>
+  <data name="lblStartTime.Text" xml:space="preserve">
+    <value>開始時刻(&amp;T):</value>
+  </data>
+  <data name="edtStartDate.Properties.AccessibleName" xml:space="preserve">
+    <value>開始日:</value>
+  </data>
+  <data name="edtShowTimeAs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 20</value>
+  </data>
+  <data name="chkAllDay.Properties.Caption" xml:space="preserve">
+    <value>終日イベント(&amp;A)</value>
+  </data>
 </root>

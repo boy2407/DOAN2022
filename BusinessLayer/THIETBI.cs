@@ -17,6 +17,54 @@ namespace BusinessLayer
         {
             return db.tb_ThietBi.ToList();
         }
+        /// <summary>
+        /// true IN
+        /// false OUT
+        /// </summary>
+        /// <param name="idphong"></param>
+        /// <param name="bl"></param>
+        /// <returns></returns>
+        public List<tb_ThietBi> getALLInOrOut_Room(int idphong,bool bl)
+        {
+            List<tb_ThietBi> lstTB = new List<tb_ThietBi>();
+            var lst = db.tb_Phong_ThietBi.Where(x => x.IDPHONG == idphong).ToList();
+            var lsttb = db.tb_ThietBi.ToList();
+            if (bl)
+            {
+               
+                foreach (var item in lsttb)
+                {
+                    foreach (var it in lst)
+                    {
+                        if (item.IDTB != it.IDTB)
+                        {
+                            lstTB.Add(item);
+                        }
+                    }
+
+                }
+                return lstTB;
+            }    
+            else
+            {
+              
+                foreach (var item in lsttb)
+                {
+                    foreach (var it in lst)
+                    {
+                        if (item.IDTB != it.IDTB )
+                        {
+                            lstTB.Add(item);
+
+                        }    
+                    }
+                   
+                }
+                return lstTB;
+            }    
+           
+            
+        }
         public tb_ThietBi getItem(int idtb)
         {
             return db.tb_ThietBi.FirstOrDefault(x => x.IDTB == idtb);
@@ -45,6 +93,8 @@ namespace BusinessLayer
             tb_ThietBi _tb = db.tb_ThietBi.FirstOrDefault(x => x.IDTB == tb.IDTB);
             _tb.TENTB = tb.TENTB;
             _tb.DONGIA = tb.DONGIA;
+            _tb.TONGSLX = tb.TONGSLX;
+            _tb.TONGSLN = tb.TONGSLN;
             try
             {
              

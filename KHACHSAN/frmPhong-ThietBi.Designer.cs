@@ -148,6 +148,7 @@ namespace KHACHSAN
             this.gcDanhSach.TabIndex = 4;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
+            this.gcDanhSach.Click += new System.EventHandler(this.gcDanhSach_Click);
             // 
             // gvDanhSach
             // 
@@ -160,6 +161,7 @@ namespace KHACHSAN
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
             this.gvDanhSach.OptionsView.ShowGroupPanel = false;
+            this.gvDanhSach.Click += new System.EventHandler(this.gvDanhSach_Click);
             // 
             // IDPHONG
             // 
@@ -234,6 +236,7 @@ namespace KHACHSAN
             // 
             // searchPhong
             // 
+            this.searchPhong.EditValue = "";
             this.searchPhong.Location = new System.Drawing.Point(128, 38);
             this.searchPhong.Name = "searchPhong";
             this.searchPhong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -283,7 +286,7 @@ namespace KHACHSAN
             this.spSoLuong.Properties.Mask.EditMask = "n0";
             this.spSoLuong.Size = new System.Drawing.Size(192, 20);
             this.spSoLuong.TabIndex = 3;
-            this.spSoLuong.EditValueChanged += new System.EventHandler(this.spSoLuong_EditValueChanged);
+            this.spSoLuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.spSoLuong_KeyPress);
             // 
             // label6
             // 

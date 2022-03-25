@@ -12,15 +12,13 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_CongTy
+    public partial class Resource
     {
-        public string MACTY { get; set; }
-        public int id { get; set; }
-        public string TENCTY { get; set; }
-        public string DIENTHOAI { get; set; }
-        public string FAX { get; set; }
-        public string EMAIL { get; set; }
-        public string DIACHI { get; set; }
-        public Nullable<bool> DISABLED { get; set; }
+        public int UniqueID { get; set; }
+        public int ResourceID { get; set; }
+        public string ResourceName { get; set; }
+        public Nullable<int> Color { get; set; }
+        public byte[] Image { get; set; }
+        public string CustomField1 { get; set; }
     }
 }

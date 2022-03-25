@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using DevExpress.XtraScheduler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,15 +29,13 @@ namespace WindowsFormsApp1
         }
         void loadphongByNgayDat(DateTime time)
         {
-            _vphongbyngay = new VIEW_PHONGBYNGAY();
-            gridControl1.DataSource = _vphongbyngay.getlistPhongKhongTrungDateTime(time);
-            gridView1.ExpandAllGroups();
+          
         }
 
         private void dtNgayDat_Leave(object sender, EventArgs e)
         {
             
-            loadphongByNgayDat(dtNgayDat.Value);
+          
         }
     }
 }

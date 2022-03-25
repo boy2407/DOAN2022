@@ -45,6 +45,7 @@ namespace KHACHSAN
             this.CCCD = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EMAIL = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DISABLED = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.chkGioiTinh = new System.Windows.Forms.CheckBox();
             this.txtCCCD = new System.Windows.Forms.TextBox();
@@ -160,9 +161,11 @@ namespace KHACHSAN
             this.GIOITINH,
             this.CCCD,
             this.EMAIL,
-            this.DIACHI});
+            this.DIACHI,
+            this.DISABLED});
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
+            this.gvDanhSach.OptionsView.ShowGroupPanel = false;
             this.gvDanhSach.Click += new System.EventHandler(this.gvDanhSach_Click);
             this.gvDanhSach.DoubleClick += new System.EventHandler(this.gvDanhSach_DoubleClick);
             // 
@@ -185,7 +188,7 @@ namespace KHACHSAN
             this.HOTEN.MinWidth = 100;
             this.HOTEN.Name = "HOTEN";
             this.HOTEN.Visible = true;
-            this.HOTEN.VisibleIndex = 0;
+            this.HOTEN.VisibleIndex = 1;
             this.HOTEN.Width = 180;
             // 
             // DIENTHOAI
@@ -198,7 +201,7 @@ namespace KHACHSAN
             this.DIENTHOAI.MinWidth = 80;
             this.DIENTHOAI.Name = "DIENTHOAI";
             this.DIENTHOAI.Visible = true;
-            this.DIENTHOAI.VisibleIndex = 4;
+            this.DIENTHOAI.VisibleIndex = 5;
             this.DIENTHOAI.Width = 100;
             // 
             // GIOITINH
@@ -210,8 +213,8 @@ namespace KHACHSAN
             this.GIOITINH.MaxWidth = 80;
             this.GIOITINH.Name = "GIOITINH";
             this.GIOITINH.Visible = true;
-            this.GIOITINH.VisibleIndex = 3;
-            this.GIOITINH.Width = 50;
+            this.GIOITINH.VisibleIndex = 4;
+            this.GIOITINH.Width = 80;
             // 
             // CCCD
             // 
@@ -223,7 +226,7 @@ namespace KHACHSAN
             this.CCCD.MinWidth = 80;
             this.CCCD.Name = "CCCD";
             this.CCCD.Visible = true;
-            this.CCCD.VisibleIndex = 1;
+            this.CCCD.VisibleIndex = 2;
             this.CCCD.Width = 100;
             // 
             // EMAIL
@@ -236,8 +239,8 @@ namespace KHACHSAN
             this.EMAIL.MinWidth = 120;
             this.EMAIL.Name = "EMAIL";
             this.EMAIL.Visible = true;
-            this.EMAIL.VisibleIndex = 5;
-            this.EMAIL.Width = 120;
+            this.EMAIL.VisibleIndex = 6;
+            this.EMAIL.Width = 200;
             // 
             // DIACHI
             // 
@@ -249,8 +252,17 @@ namespace KHACHSAN
             this.DIACHI.MinWidth = 120;
             this.DIACHI.Name = "DIACHI";
             this.DIACHI.Visible = true;
-            this.DIACHI.VisibleIndex = 2;
+            this.DIACHI.VisibleIndex = 3;
             this.DIACHI.Width = 250;
+            // 
+            // DISABLED
+            // 
+            this.DISABLED.FieldName = "DISABLED";
+            this.DISABLED.MaxWidth = 30;
+            this.DISABLED.Name = "DISABLED";
+            this.DISABLED.Visible = true;
+            this.DISABLED.VisibleIndex = 0;
+            this.DISABLED.Width = 20;
             // 
             // groupControl1
             // 
@@ -289,7 +301,7 @@ namespace KHACHSAN
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(243, 22);
             this.txtCCCD.TabIndex = 1;
-            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label2
             // 
@@ -308,6 +320,7 @@ namespace KHACHSAN
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(638, 22);
             this.txtDiaChi.TabIndex = 6;
+            this.txtDiaChi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label5
             // 
@@ -326,6 +339,7 @@ namespace KHACHSAN
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(243, 22);
             this.txtEmail.TabIndex = 5;
+            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label4
             // 
@@ -344,7 +358,7 @@ namespace KHACHSAN
             this.txtDienThoai.Name = "txtDienThoai";
             this.txtDienThoai.Size = new System.Drawing.Size(243, 22);
             this.txtDienThoai.TabIndex = 4;
-            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
+            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label3
             // 
@@ -363,6 +377,7 @@ namespace KHACHSAN
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(243, 22);
             this.txtTen.TabIndex = 2;
+            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label1
             // 
@@ -427,5 +442,6 @@ namespace KHACHSAN
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraGrid.Columns.GridColumn GIOITINH;
         private System.Windows.Forms.CheckBox chkGioiTinh;
+        private DevExpress.XtraGrid.Columns.GridColumn DISABLED;
     }
 }

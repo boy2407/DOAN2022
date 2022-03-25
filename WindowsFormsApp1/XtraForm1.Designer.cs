@@ -29,116 +29,63 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.dtNgayTra = new System.Windows.Forms.DateTimePicker();
-            this.dtNgayDat = new System.Windows.Forms.DateTimePicker();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.TEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TANG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIUONG = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
+            DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
+            DevExpress.XtraScheduler.TimeRuler timeRuler3 = new DevExpress.XtraScheduler.TimeRuler();
+            this.schedulerControl1 = new DevExpress.XtraScheduler.SchedulerControl();
+            this.schedulerDataStorage1 = new DevExpress.XtraScheduler.SchedulerDataStorage(this.components);
+            this.dxGoogleCalendarSync1 = new DevExpress.XtraScheduler.GoogleCalendar.DXGoogleCalendarSync(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.schedulerControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schedulerDataStorage1)).BeginInit();
             this.SuspendLayout();
             // 
-            // dtNgayTra
+            // schedulerControl1
             // 
-            this.dtNgayTra.CustomFormat = "dd/MM/yyyy";
-            this.dtNgayTra.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayTra.Location = new System.Drawing.Point(502, 101);
-            this.dtNgayTra.Name = "dtNgayTra";
-            this.dtNgayTra.Size = new System.Drawing.Size(201, 21);
-            this.dtNgayTra.TabIndex = 10;
+            this.schedulerControl1.DataStorage = this.schedulerDataStorage1;
+            this.schedulerControl1.Location = new System.Drawing.Point(101, 39);
+            this.schedulerControl1.Name = "schedulerControl1";
+            this.schedulerControl1.Size = new System.Drawing.Size(949, 547);
+            this.schedulerControl1.Start = new System.DateTime(2022, 3, 24, 0, 0, 0, 0);
+            this.schedulerControl1.TabIndex = 0;
+            this.schedulerControl1.Text = "schedulerControl1";
+            this.schedulerControl1.Views.DayView.TimeRulers.Add(timeRuler1);
+            this.schedulerControl1.Views.FullWeekView.Enabled = true;
+            this.schedulerControl1.Views.FullWeekView.TimeRulers.Add(timeRuler2);
+            this.schedulerControl1.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
             // 
-            // dtNgayDat
+            // schedulerDataStorage1
             // 
-            this.dtNgayDat.CustomFormat = "dd/MM/yyyy";
-            this.dtNgayDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayDat.Location = new System.Drawing.Point(502, 34);
-            this.dtNgayDat.Name = "dtNgayDat";
-            this.dtNgayDat.Size = new System.Drawing.Size(201, 21);
-            this.dtNgayDat.TabIndex = 9;
-            this.dtNgayDat.Leave += new System.EventHandler(this.dtNgayDat_Leave);
             // 
-            // gridControl1
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(441, 598);
-            this.gridControl1.TabIndex = 11;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
             // 
-            // gridView1
+            this.schedulerDataStorage1.AppointmentDependencies.AutoReload = false;
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.TEN,
-            this.TANG,
-            this.GIA,
-            this.GIUONG});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
+            // dxGoogleCalendarSync1
             // 
-            // TEN
-            // 
-            this.TEN.Caption = "gridColumn1";
-            this.TEN.FieldName = "TENPHONG";
-            this.TEN.Name = "TEN";
-            this.TEN.Visible = true;
-            this.TEN.VisibleIndex = 0;
-            // 
-            // TANG
-            // 
-            this.TANG.Caption = "gridColumn2";
-            this.TANG.FieldName = "TENTANG";
-            this.TANG.Name = "TANG";
-            this.TANG.Visible = true;
-            this.TANG.VisibleIndex = 1;
-            // 
-            // GIA
-            // 
-            this.GIA.Caption = "gridColumn3";
-            this.GIA.FieldName = "DONGIA";
-            this.GIA.Name = "GIA";
-            this.GIA.Visible = true;
-            this.GIA.VisibleIndex = 2;
-            // 
-            // GIUONG
-            // 
-            this.GIUONG.Caption = "gridColumn4";
-            this.GIUONG.FieldName = "SOGIUONG";
-            this.GIUONG.Name = "GIUONG";
-            this.GIUONG.Visible = true;
-            this.GIUONG.VisibleIndex = 3;
+            this.dxGoogleCalendarSync1.CalendarId = null;
+            this.dxGoogleCalendarSync1.CalendarService = null;
+            this.dxGoogleCalendarSync1.Storage = null;
             // 
             // XtraForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 598);
-            this.Controls.Add(this.gridControl1);
-            this.Controls.Add(this.dtNgayTra);
-            this.Controls.Add(this.dtNgayDat);
+            this.ClientSize = new System.Drawing.Size(1090, 598);
+            this.Controls.Add(this.schedulerControl1);
             this.Name = "XtraForm1";
             this.Text = "XtraForm1";
             this.Load += new System.EventHandler(this.XtraForm1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schedulerControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schedulerDataStorage1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dtNgayTra;
-        private System.Windows.Forms.DateTimePicker dtNgayDat;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn TEN;
-        private DevExpress.XtraGrid.Columns.GridColumn TANG;
-        private DevExpress.XtraGrid.Columns.GridColumn GIA;
-        private DevExpress.XtraGrid.Columns.GridColumn GIUONG;
+        private DevExpress.XtraScheduler.SchedulerControl schedulerControl1;
+        private DevExpress.XtraScheduler.SchedulerDataStorage schedulerDataStorage1;
+        private DevExpress.XtraScheduler.GoogleCalendar.DXGoogleCalendarSync dxGoogleCalendarSync1;
     }
 }

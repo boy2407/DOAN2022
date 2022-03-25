@@ -129,7 +129,7 @@ namespace KHACHSAN
                 tb_DatPhong dp = new tb_DatPhong();
                 tb_DatPhong_CT dpct;
                 tb_DatPhong_SP dpsp;
-
+                
                 dp.NGAYDAT = dtNgayDat.Value;
                 dp.NGAYTRA = dtNgayTra.Value;
                 dp.SONGUOIO = int.Parse(spSoNguoi.EditValue.ToString());
@@ -263,8 +263,7 @@ namespace KHACHSAN
             cboTrangThai.DisplayMember = "_display";
 
             spSoNguoi.Text = "1";
-            searchKH.EditValue = 1;
-
+           
             loadKH();
             loadSP();
             var dpct = _datphong_ct.getIDDPByPhong(_idPhong);
@@ -449,6 +448,8 @@ namespace KHACHSAN
             gcSPDV.Enabled = t;
             gcSanPham.Enabled = t;
         }
+
+        
     }
 
 

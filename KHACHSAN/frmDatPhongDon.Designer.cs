@@ -33,6 +33,7 @@ namespace KHACHSAN
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDatPhongDon));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnLuu = new System.Windows.Forms.ToolStripButton();
+            this.btnSua = new System.Windows.Forms.ToolStripButton();
             this.btnIn = new System.Windows.Forms.ToolStripButton();
             this.btnThoat = new System.Windows.Forms.ToolStripButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -76,7 +77,6 @@ namespace KHACHSAN
             this.IDSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TENSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DONGIA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnSua = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -121,6 +121,16 @@ namespace KHACHSAN
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
+            // 
+            // btnSua
+            // 
+            this.btnSua.Image = global::KHACHSAN.Properties.Resources.Apps_menu_editor_icon;
+            this.btnSua.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(37, 38);
+            this.btnSua.Text = "Sửa";
+            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnIn
             // 
@@ -363,7 +373,7 @@ namespace KHACHSAN
             // 
             // searchKH
             // 
-            this.searchKH.EditValue = "  ";
+            this.searchKH.EditValue = "";
             this.searchKH.Location = new System.Drawing.Point(87, 64);
             this.searchKH.Name = "searchKH";
             this.searchKH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -604,16 +614,6 @@ namespace KHACHSAN
             this.DONGIA.Visible = true;
             this.DONGIA.VisibleIndex = 1;
             this.DONGIA.Width = 100;
-            // 
-            // btnSua
-            // 
-            this.btnSua.Image = global::KHACHSAN.Properties.Resources.Apps_menu_editor_icon;
-            this.btnSua.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(37, 38);
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // frmDatPhongDon
             // 

@@ -57,6 +57,8 @@
     <Compile Include="DATPHONG_CT.cs" />
     <Compile Include="DATPHONG_SP.cs" />
     <Compile Include="DONVI.cs" />
+    <Compile Include="OBJ PHONG_THIETBI.cs" />
+    <Compile Include="PHONG THIETBI.cs" />
     <Compile Include="SYS_FUNC.cs" />
     <Compile Include="GIOITINH.cs" />
     <Compile Include="KHACHHANG.cs" />

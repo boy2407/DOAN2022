@@ -5,6 +5,38 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KHACHSAN.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+          </Key>
+          <Property Name="UniqueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="StartDate" Type="smalldatetime" />
+          <Property Name="EndDate" Type="smalldatetime" />
+          <Property Name="AllDay" Type="bit" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Label" Type="int" />
+          <Property Name="ResourceID" Type="int" />
+          <Property Name="ResourceIDs" Type="nvarchar(max)" />
+          <Property Name="ReminderInfo" Type="nvarchar(max)" />
+          <Property Name="RecurrenceInfo" Type="nvarchar(max)" />
+          <Property Name="TimeZoneId" Type="nvarchar(max)" />
+          <Property Name="CustomField1" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+          </Key>
+          <Property Name="UniqueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceID" Type="int" Nullable="false" />
+          <Property Name="ResourceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="int" />
+          <Property Name="Image" Type="image" />
+          <Property Name="CustomField1" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="tb_CongTy">
           <Key>
             <PropertyRef Name="MACTY" />
@@ -91,6 +123,7 @@
           <Property Name="DIENTHOAI" Type="nvarchar" MaxLength="20" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="500" />
+          <Property Name="DISABLED" Type="bit" />
         </EntityType>
         <EntityType Name="tb_LoaiPhong">
           <Key>
@@ -408,12 +441,9 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="REP_DOANHTHU_CONGTY_NGAY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="NGAYD" Type="datetime" Mode="In" />
-          <Parameter Name="NGAYC" Type="datetime" Mode="In" />
-          <Parameter Name="MACTY" Type="nvarchar" Mode="In" />
-        </Function>
         <EntityContainer Name="KHACHSANStoreContainer">
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DatPhong" EntityType="Self.tb_DatPhong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DatPhong_CT" EntityType="Self.tb_DatPhong_CT" Schema="dbo" store:Type="Tables" />
@@ -548,33 +578,19 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySet Name="tb_DatPhong_CT" EntityType="KHACHSAN.tb_DatPhong_CT" />
           <EntitySet Name="tb_DatPhong_SP" EntityType="KHACHSAN.tb_DatPhong_SP" />
           <EntitySet Name="tb_DonVi" EntityType="KHACHSAN.tb_DonVi" />
-          <EntitySet Name="tb_KhachHang" EntityType="KHACHSAN.tb_KhachHang" />
           <EntitySet Name="tb_LoaiPhong" EntityType="KHACHSAN.tb_LoaiPhong" />
           <EntitySet Name="tb_Param" EntityType="KHACHSAN.tb_Param" />
-          <EntitySet Name="tb_SanPham" EntityType="KHACHSAN.tb_SanPham" />
-          <EntitySet Name="tb_Tang" EntityType="KHACHSAN.tb_Tang" />
-          <EntitySet Name="v_DATPHONG_DATPHONG_CT_PHONG" EntityType="KHACHSAN.v_DATPHONG_DATPHONG_CT_PHONG" />
-          <EntitySet Name="V_FUNC_SYS_RIGHT" EntityType="KHACHSAN.V_FUNC_SYS_RIGHT" />
-          <EntitySet Name="V_PHONGBYNGAY" EntityType="KHACHSAN.V_PHONGBYNGAY" />
-          <EntitySet Name="V_REP_SYS_RIGHT_REP" EntityType="KHACHSAN.V_REP_SYS_RIGHT_REP" />
-          <EntitySet Name="V_USER_INGROUP" EntityType="KHACHSAN.V_USER_INGROUP" />
-          <EntitySet Name="V_USER_NOTIN_GROUP" EntityType="KHACHSAN.V_USER_NOTIN_GROUP" />
+          <EntitySet Name="tb_Phong" EntityType="KHACHSAN.tb_Phong" />
           <EntitySet Name="tb_Phong_ThietBi" EntityType="KHACHSAN.tb_Phong_ThietBi" />
+          <EntitySet Name="tb_SanPham" EntityType="KHACHSAN.tb_SanPham" />
           <EntitySet Name="tb_SYS_Func" EntityType="KHACHSAN.tb_SYS_Func" />
           <EntitySet Name="tb_SYS_GROUP" EntityType="KHACHSAN.tb_SYS_GROUP" />
           <EntitySet Name="tb_SYS_REPORT" EntityType="KHACHSAN.tb_SYS_REPORT" />
           <EntitySet Name="tb_SYS_RIGHT" EntityType="KHACHSAN.tb_SYS_RIGHT" />
           <EntitySet Name="tb_SYS_RIGHT_REP" EntityType="KHACHSAN.tb_SYS_RIGHT_REP" />
           <EntitySet Name="tb_SYS_USER" EntityType="KHACHSAN.tb_SYS_USER" />
-          <AssociationSet Name="fk_htk_func_code" Association="KHACHSAN.fk_htk_func_code">
-            <End Role="tb_SYS_Func" EntitySet="tb_SYS_Func" />
-            <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
-          </AssociationSet>
-          <AssociationSet Name="fk_htk_rep_code" Association="KHACHSAN.fk_htk_rep_code">
-            <End Role="tb_SYS_REPORT" EntitySet="tb_SYS_REPORT" />
-            <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
-          </AssociationSet>
-          <EntitySet Name="tb_Phong" EntityType="KHACHSAN.tb_Phong" />
+          <EntitySet Name="tb_Tang" EntityType="KHACHSAN.tb_Tang" />
+          <EntitySet Name="tb_ThietBi" EntityType="KHACHSAN.tb_ThietBi" />
           <AssociationSet Name="fk_tb_LoaiPhong" Association="KHACHSAN.fk_tb_LoaiPhong">
             <End Role="tb_LoaiPhong" EntitySet="tb_LoaiPhong" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
@@ -587,25 +603,41 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             <End Role="tb_Tang" EntitySet="tb_Tang" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
           </AssociationSet>
-          <EntitySet Name="tb_ThietBi" EntityType="KHACHSAN.tb_ThietBi" />
           <AssociationSet Name="fk_htk_ThietBi" Association="KHACHSAN.fk_htk_ThietBi">
             <End Role="tb_ThietBi" EntitySet="tb_ThietBi" />
             <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="fk_htk_func_code" Association="KHACHSAN.fk_htk_func_code">
+            <End Role="tb_SYS_Func" EntitySet="tb_SYS_Func" />
+            <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
+          </AssociationSet>
+          <AssociationSet Name="fk_htk_rep_code" Association="KHACHSAN.fk_htk_rep_code">
+            <End Role="tb_SYS_REPORT" EntitySet="tb_SYS_REPORT" />
+            <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
+          </AssociationSet>
+          <EntitySet Name="v_DATPHONG_DATPHONG_CT_PHONG" EntityType="KHACHSAN.v_DATPHONG_DATPHONG_CT_PHONG" />
+          <EntitySet Name="V_FUNC_SYS_RIGHT" EntityType="KHACHSAN.V_FUNC_SYS_RIGHT" />
+          <EntitySet Name="V_PHONGBYNGAY" EntityType="KHACHSAN.V_PHONGBYNGAY" />
+          <EntitySet Name="V_REP_SYS_RIGHT_REP" EntityType="KHACHSAN.V_REP_SYS_RIGHT_REP" />
+          <EntitySet Name="V_USER_INGROUP" EntityType="KHACHSAN.V_USER_INGROUP" />
+          <EntitySet Name="V_USER_NOTIN_GROUP" EntityType="KHACHSAN.V_USER_NOTIN_GROUP" />
+          <EntitySet Name="tb_KhachHang" EntityType="KHACHSAN.tb_KhachHang" />
+          <EntitySet Name="Appointments" EntityType="KHACHSAN.Appointment" />
+          <EntitySet Name="Resources" EntityType="KHACHSAN.Resource" />
+          </EntityContainer>
         <EntityType Name="tb_CongTy">
           <Key>
             <PropertyRef Name="MACTY" />
             <PropertyRef Name="id" />
           </Key>
           <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENCTY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DIENTHOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="tb_DatPhong">
           <Key>
@@ -668,18 +700,6 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
         </EntityType>
-        <EntityType Name="tb_KhachHang">
-          <Key>
-            <PropertyRef Name="IDKH" />
-          </Key>
-          <Property Name="IDKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HOTEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GIOITINH" Type="Boolean" />
-          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="DIENTHOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tb_LoaiPhong">
           <Key>
             <PropertyRef Name="IDLOAIPHONG" />
@@ -701,6 +721,30 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="TENCTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TENDVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tb_Phong">
+          <Key>
+            <PropertyRef Name="IDPHONG" />
+          </Key>
+          <Property Name="IDPHONG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENPHONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRANGTHAI" Type="Boolean" />
+          <Property Name="IDTANG" Type="Int32" Nullable="false" />
+          <Property Name="IDLOAIPHONG" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_LoaiPhong" Relationship="KHACHSAN.fk_tb_LoaiPhong" FromRole="tb_Phong" ToRole="tb_LoaiPhong" />
+          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="KHACHSAN.fk_htk_Phong" FromRole="tb_Phong" ToRole="tb_Phong_ThietBi" />
+          <NavigationProperty Name="tb_Tang" Relationship="KHACHSAN.fk_tb_Tang" FromRole="tb_Phong" ToRole="tb_Tang" />
+        </EntityType>
+        <EntityType Name="tb_Phong_ThietBi">
+          <Key>
+            <PropertyRef Name="IDPHONG" />
+            <PropertyRef Name="IDTB" />
+          </Key>
+          <Property Name="IDPHONG" Type="Int32" Nullable="false" />
+          <Property Name="IDTB" Type="Int32" Nullable="false" />
+          <Property Name="SOLUONG" Type="Int32" />
+          <NavigationProperty Name="tb_Phong" Relationship="KHACHSAN.fk_htk_Phong" FromRole="tb_Phong_ThietBi" ToRole="tb_Phong" />
+          <NavigationProperty Name="tb_ThietBi" Relationship="KHACHSAN.fk_htk_ThietBi" FromRole="tb_Phong_ThietBi" ToRole="tb_ThietBi" />
+        </EntityType>
         <EntityType Name="tb_SanPham">
           <Key>
             <PropertyRef Name="IDSP" />
@@ -708,6 +752,75 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DONGIA" Type="Double" />
+        </EntityType>
+        <EntityType Name="tb_SYS_Func">
+          <Key>
+            <PropertyRef Name="FUNC_CODE" />
+          </Key>
+          <Property Name="FUNC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SORT" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISGROUP" Type="Boolean" />
+          <Property Name="PARENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MENU" Type="Boolean" />
+          <Property Name="TIPS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_SYS_RIGHT" Relationship="KHACHSAN.fk_htk_func_code" FromRole="tb_SYS_Func" ToRole="tb_SYS_RIGHT" />
+        </EntityType>
+        <EntityType Name="tb_SYS_GROUP">
+          <Key>
+            <PropertyRef Name="GROUP" />
+            <PropertyRef Name="MENBER" />
+          </Key>
+          <Property Name="GROUP" Type="Int32" Nullable="false" />
+          <Property Name="MENBER" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_SYS_REPORT">
+          <Key>
+            <PropertyRef Name="REP_CODE" />
+          </Key>
+          <Property Name="REP_CODE" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VISIBLE" Type="Boolean" />
+          <Property Name="TUNGAY" Type="Boolean" />
+          <Property Name="THANGNAM" Type="Boolean" />
+          <Property Name="MACTY" Type="Boolean" />
+          <Property Name="MADVI" Type="Boolean" />
+          <NavigationProperty Name="tb_SYS_RIGHT_REP" Relationship="KHACHSAN.fk_htk_rep_code" FromRole="tb_SYS_REPORT" ToRole="tb_SYS_RIGHT_REP" />
+        </EntityType>
+        <EntityType Name="tb_SYS_RIGHT">
+          <Key>
+            <PropertyRef Name="FUNC_CODE" />
+            <PropertyRef Name="IDUSER" />
+          </Key>
+          <Property Name="FUNC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDUSER" Type="Int32" Nullable="false" />
+          <Property Name="USER_RIGHT" Type="Int32" />
+          <NavigationProperty Name="tb_SYS_Func" Relationship="KHACHSAN.fk_htk_func_code" FromRole="tb_SYS_RIGHT" ToRole="tb_SYS_Func" />
+        </EntityType>
+        <EntityType Name="tb_SYS_RIGHT_REP">
+          <Key>
+            <PropertyRef Name="REP_CODE" />
+            <PropertyRef Name="IDUSER" />
+          </Key>
+          <Property Name="REP_CODE" Type="Int32" Nullable="false" />
+          <Property Name="IDUSER" Type="Int32" Nullable="false" />
+          <Property Name="USER_RIGHT" Type="Boolean" />
+          <NavigationProperty Name="tb_SYS_REPORT" Relationship="KHACHSAN.fk_htk_rep_code" FromRole="tb_SYS_RIGHT_REP" ToRole="tb_SYS_REPORT" />
+        </EntityType>
+        <EntityType Name="tb_SYS_USER">
+          <Key>
+            <PropertyRef Name="IDUSER" />
+          </Key>
+          <Property Name="IDUSER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LAST_PWD_CHANGED" Type="DateTime" Precision="3" />
+          <Property Name="ISGROUP" Type="Boolean" />
+          <Property Name="DISABLED" Type="Boolean" />
         </EntityType>
         <EntityType Name="tb_Tang">
           <Key>
@@ -717,6 +830,101 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="TENTANG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tb_Phong" Relationship="KHACHSAN.fk_tb_Tang" FromRole="tb_Tang" ToRole="tb_Phong" />
         </EntityType>
+        <EntityType Name="tb_ThietBi">
+          <Key>
+            <PropertyRef Name="IDTB" />
+          </Key>
+          <Property Name="IDTB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENTB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DONGIA" Type="Double" />
+          <Property Name="TONGSLN" Type="Int32" />
+          <Property Name="TONGSLX" Type="Int32" />
+          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="KHACHSAN.fk_htk_ThietBi" FromRole="tb_ThietBi" ToRole="tb_Phong_ThietBi" />
+        </EntityType>
+        <Association Name="fk_tb_LoaiPhong">
+          <End Type="KHACHSAN.tb_LoaiPhong" Role="tb_LoaiPhong" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_LoaiPhong">
+              <PropertyRef Name="IDLOAIPHONG" />
+            </Principal>
+            <Dependent Role="tb_Phong">
+              <PropertyRef Name="IDLOAIPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_Phong">
+          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Phong">
+              <PropertyRef Name="IDPHONG" />
+            </Principal>
+            <Dependent Role="tb_Phong_ThietBi">
+              <PropertyRef Name="IDPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_Tang">
+          <End Type="KHACHSAN.tb_Tang" Role="tb_Tang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Tang">
+              <PropertyRef Name="IDTANG" />
+            </Principal>
+            <Dependent Role="tb_Phong">
+              <PropertyRef Name="IDTANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_ThietBi">
+          <End Type="KHACHSAN.tb_ThietBi" Role="tb_ThietBi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ThietBi">
+              <PropertyRef Name="IDTB" />
+            </Principal>
+            <Dependent Role="tb_Phong_ThietBi">
+              <PropertyRef Name="IDTB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_func_code">
+          <End Type="KHACHSAN.tb_SYS_Func" Role="tb_SYS_Func" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_SYS_RIGHT" Role="tb_SYS_RIGHT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_Func">
+              <PropertyRef Name="FUNC_CODE" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT">
+              <PropertyRef Name="FUNC_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_rep_code">
+          <End Type="KHACHSAN.tb_SYS_REPORT" Role="tb_SYS_REPORT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="KHACHSAN.tb_SYS_RIGHT_REP" Role="tb_SYS_RIGHT_REP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_REPORT">
+              <PropertyRef Name="REP_CODE" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT_REP">
+              <PropertyRef Name="REP_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="v_DATPHONG_DATPHONG_CT_PHONG">
           <Key>
             <PropertyRef Name="IDDPCT" />
@@ -808,211 +1016,67 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="ISGROUP" Type="Boolean" />
           <Property Name="DISABLED" Type="Boolean" />
         </EntityType>
-        <EntityType Name="tb_Phong_ThietBi">
+        <EntityType Name="tb_KhachHang">
           <Key>
-            <PropertyRef Name="IDPHONG" />
-            <PropertyRef Name="IDTB" />
+            <PropertyRef Name="IDKH" />
           </Key>
-          <Property Name="IDPHONG" Type="Int32" Nullable="false" />
-          <Property Name="IDTB" Type="Int32" Nullable="false" />
-          <Property Name="SOLUONG" Type="Int32" />
-          <NavigationProperty Name="tb_Phong" Relationship="KHACHSAN.fk_htk_Phong" FromRole="tb_Phong_ThietBi" ToRole="tb_Phong" />
-          <NavigationProperty Name="tb_ThietBi" Relationship="KHACHSAN.fk_htk_ThietBi" FromRole="tb_Phong_ThietBi" ToRole="tb_ThietBi" />
-        </EntityType>
-        <EntityType Name="tb_SYS_Func">
-          <Key>
-            <PropertyRef Name="FUNC_CODE" />
-          </Key>
-          <Property Name="FUNC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SORT" Type="Int32" Nullable="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ISGROUP" Type="Boolean" />
-          <Property Name="PARENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MENU" Type="Boolean" />
-          <Property Name="TIPS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tb_SYS_RIGHT" Relationship="KHACHSAN.fk_htk_func_code" FromRole="tb_SYS_Func" ToRole="tb_SYS_RIGHT" />
-        </EntityType>
-        <EntityType Name="tb_SYS_GROUP">
-          <Key>
-            <PropertyRef Name="GROUP" />
-            <PropertyRef Name="MENBER" />
-          </Key>
-          <Property Name="GROUP" Type="Int32" Nullable="false" />
-          <Property Name="MENBER" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_SYS_REPORT">
-          <Key>
-            <PropertyRef Name="REP_CODE" />
-          </Key>
-          <Property Name="REP_CODE" Type="Int32" Nullable="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="REP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VISIBLE" Type="Boolean" />
-          <Property Name="TUNGAY" Type="Boolean" />
-          <Property Name="THANGNAM" Type="Boolean" />
-          <Property Name="MACTY" Type="Boolean" />
-          <Property Name="MADVI" Type="Boolean" />
-          <NavigationProperty Name="tb_SYS_RIGHT_REP" Relationship="KHACHSAN.fk_htk_rep_code" FromRole="tb_SYS_REPORT" ToRole="tb_SYS_RIGHT_REP" />
-        </EntityType>
-        <EntityType Name="tb_SYS_RIGHT">
-          <Key>
-            <PropertyRef Name="FUNC_CODE" />
-            <PropertyRef Name="IDUSER" />
-          </Key>
-          <Property Name="FUNC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDUSER" Type="Int32" Nullable="false" />
-          <Property Name="USER_RIGHT" Type="Int32" />
-          <NavigationProperty Name="tb_SYS_Func" Relationship="KHACHSAN.fk_htk_func_code" FromRole="tb_SYS_RIGHT" ToRole="tb_SYS_Func" />
-        </EntityType>
-        <EntityType Name="tb_SYS_RIGHT_REP">
-          <Key>
-            <PropertyRef Name="REP_CODE" />
-            <PropertyRef Name="IDUSER" />
-          </Key>
-          <Property Name="REP_CODE" Type="Int32" Nullable="false" />
-          <Property Name="IDUSER" Type="Int32" Nullable="false" />
-          <Property Name="USER_RIGHT" Type="Boolean" />
-          <NavigationProperty Name="tb_SYS_REPORT" Relationship="KHACHSAN.fk_htk_rep_code" FromRole="tb_SYS_RIGHT_REP" ToRole="tb_SYS_REPORT" />
-        </EntityType>
-        <EntityType Name="tb_SYS_USER">
-          <Key>
-            <PropertyRef Name="IDUSER" />
-          </Key>
-          <Property Name="IDUSER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PASSWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="LAST_PWD_CHANGED" Type="DateTime" Precision="3" />
-          <Property Name="ISGROUP" Type="Boolean" />
+          <Property Name="IDKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HOTEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GIOITINH" Type="Boolean" />
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="DIENTHOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
         </EntityType>
-        <Association Name="fk_htk_func_code">
-          <End Type="KHACHSAN.tb_SYS_Func" Role="tb_SYS_Func" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_SYS_RIGHT" Role="tb_SYS_RIGHT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_SYS_Func">
-              <PropertyRef Name="FUNC_CODE" />
-            </Principal>
-            <Dependent Role="tb_SYS_RIGHT">
-              <PropertyRef Name="FUNC_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_htk_rep_code">
-          <End Type="KHACHSAN.tb_SYS_REPORT" Role="tb_SYS_REPORT" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_SYS_RIGHT_REP" Role="tb_SYS_RIGHT_REP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_SYS_REPORT">
-              <PropertyRef Name="REP_CODE" />
-            </Principal>
-            <Dependent Role="tb_SYS_RIGHT_REP">
-              <PropertyRef Name="REP_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tb_Phong">
+        <EntityType Name="Appointment">
           <Key>
-            <PropertyRef Name="IDPHONG" />
+            <PropertyRef Name="UniqueID" />
           </Key>
-          <Property Name="IDPHONG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TENPHONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TRANGTHAI" Type="Boolean" />
-          <Property Name="IDTANG" Type="Int32" Nullable="false" />
-          <Property Name="IDLOAIPHONG" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_LoaiPhong" Relationship="KHACHSAN.fk_tb_LoaiPhong" FromRole="tb_Phong" ToRole="tb_LoaiPhong" />
-          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="KHACHSAN.fk_htk_Phong" FromRole="tb_Phong" ToRole="tb_Phong_ThietBi" />
-          <NavigationProperty Name="tb_Tang" Relationship="KHACHSAN.fk_tb_Tang" FromRole="tb_Phong" ToRole="tb_Tang" />
+          <Property Name="UniqueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="AllDay" Type="Boolean" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Label" Type="Int32" />
+          <Property Name="ResourceID" Type="Int32" />
+          <Property Name="ResourceIDs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReminderInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecurrenceInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZoneId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomField1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="fk_tb_LoaiPhong">
-          <End Type="KHACHSAN.tb_LoaiPhong" Role="tb_LoaiPhong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_LoaiPhong">
-              <PropertyRef Name="IDLOAIPHONG" />
-            </Principal>
-            <Dependent Role="tb_Phong">
-              <PropertyRef Name="IDLOAIPHONG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_htk_Phong">
-          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Phong">
-              <PropertyRef Name="IDPHONG" />
-            </Principal>
-            <Dependent Role="tb_Phong_ThietBi">
-              <PropertyRef Name="IDPHONG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_Tang">
-          <End Type="KHACHSAN.tb_Tang" Role="tb_Tang" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_Phong" Role="tb_Phong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Tang">
-              <PropertyRef Name="IDTANG" />
-            </Principal>
-            <Dependent Role="tb_Phong">
-              <PropertyRef Name="IDTANG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tb_ThietBi">
+        <EntityType Name="Resource">
           <Key>
-            <PropertyRef Name="IDTB" />
+            <PropertyRef Name="UniqueID" />
           </Key>
-          <Property Name="IDTB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TENTB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DONGIA" Type="Double" />
-          <Property Name="TONGSLN" Type="Int32" />
-          <Property Name="TONGSLX" Type="Int32" />
-          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="KHACHSAN.fk_htk_ThietBi" FromRole="tb_ThietBi" ToRole="tb_Phong_ThietBi" />
+          <Property Name="UniqueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CustomField1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="fk_htk_ThietBi">
-          <End Type="KHACHSAN.tb_ThietBi" Role="tb_ThietBi" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="KHACHSAN.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_ThietBi">
-              <PropertyRef Name="IDTB" />
-            </Principal>
-            <Dependent Role="tb_Phong_ThietBi">
-              <PropertyRef Name="IDTB" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KHACHSANStoreContainer" CdmEntityContainer="Entities">
-          <FunctionImportMapping FunctionImportName="REP_DOANHTHU_CONGTY_NGAY" FunctionName="KHACHSAN.Store.REP_DOANHTHU_CONGTY_NGAY" />
           <EntitySetMapping Name="tb_CongTy">
             <EntityTypeMapping TypeName="KHACHSAN.tb_CongTy">
               <MappingFragment StoreEntitySet="tb_CongTy">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="DISABLED" ColumnName="DISABLED" />
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="FAX" ColumnName="FAX" />
                 <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
                 <ScalarProperty Name="TENCTY" ColumnName="TENCTY" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MACTY" ColumnName="MACTY" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1082,19 +1146,6 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_KhachHang">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_KhachHang">
-              <MappingFragment StoreEntitySet="tb_KhachHang">
-                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
-                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
-                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
-                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
-                <ScalarProperty Name="IDKH" ColumnName="IDKH" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_LoaiPhong">
             <EntityTypeMapping TypeName="KHACHSAN.tb_LoaiPhong">
               <MappingFragment StoreEntitySet="tb_LoaiPhong">
@@ -1116,6 +1167,26 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_Phong">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_Phong">
+              <MappingFragment StoreEntitySet="tb_Phong">
+                <ScalarProperty Name="IDLOAIPHONG" ColumnName="IDLOAIPHONG" />
+                <ScalarProperty Name="IDTANG" ColumnName="IDTANG" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+                <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
+                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Phong_ThietBi">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_Phong_ThietBi">
+              <MappingFragment StoreEntitySet="tb_Phong_ThietBi">
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="IDTB" ColumnName="IDTB" />
+                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_SanPham">
             <EntityTypeMapping TypeName="KHACHSAN.tb_SanPham">
               <MappingFragment StoreEntitySet="tb_SanPham">
@@ -1125,11 +1196,90 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_Func">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_Func">
+              <MappingFragment StoreEntitySet="tb_SYS_Func">
+                <ScalarProperty Name="TIPS" ColumnName="TIPS" />
+                <ScalarProperty Name="MENU" ColumnName="MENU" />
+                <ScalarProperty Name="PARENT" ColumnName="PARENT" />
+                <ScalarProperty Name="ISGROUP" ColumnName="ISGROUP" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="FUNC_CODE" ColumnName="FUNC_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_GROUP">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_GROUP">
+              <MappingFragment StoreEntitySet="tb_SYS_GROUP">
+                <ScalarProperty Name="MENBER" ColumnName="MENBER" />
+                <ScalarProperty Name="GROUP" ColumnName="GROUP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_REPORT">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_REPORT">
+              <MappingFragment StoreEntitySet="tb_SYS_REPORT">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="THANGNAM" ColumnName="THANGNAM" />
+                <ScalarProperty Name="TUNGAY" ColumnName="TUNGAY" />
+                <ScalarProperty Name="VISIBLE" ColumnName="VISIBLE" />
+                <ScalarProperty Name="REP_NAME" ColumnName="REP_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="REP_CODE" ColumnName="REP_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_RIGHT">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_RIGHT">
+              <MappingFragment StoreEntitySet="tb_SYS_RIGHT">
+                <ScalarProperty Name="USER_RIGHT" ColumnName="USER_RIGHT" />
+                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+                <ScalarProperty Name="FUNC_CODE" ColumnName="FUNC_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_RIGHT_REP">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_RIGHT_REP">
+              <MappingFragment StoreEntitySet="tb_SYS_RIGHT_REP">
+                <ScalarProperty Name="USER_RIGHT" ColumnName="USER_RIGHT" />
+                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+                <ScalarProperty Name="REP_CODE" ColumnName="REP_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SYS_USER">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_USER">
+              <MappingFragment StoreEntitySet="tb_SYS_USER">
+                <ScalarProperty Name="DISABLED" ColumnName="DISABLED" />
+                <ScalarProperty Name="ISGROUP" ColumnName="ISGROUP" />
+                <ScalarProperty Name="LAST_PWD_CHANGED" ColumnName="LAST_PWD_CHANGED" />
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="PASSWD" ColumnName="PASSWD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_Tang">
             <EntityTypeMapping TypeName="KHACHSAN.tb_Tang">
               <MappingFragment StoreEntitySet="tb_Tang">
                 <ScalarProperty Name="TENTANG" ColumnName="TENTANG" />
                 <ScalarProperty Name="IDTANG" ColumnName="IDTANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ThietBi">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_ThietBi">
+              <MappingFragment StoreEntitySet="tb_ThietBi">
+                <ScalarProperty Name="TONGSLX" ColumnName="TONGSLX" />
+                <ScalarProperty Name="TONGSLN" ColumnName="TONGSLN" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+                <ScalarProperty Name="TENTB" ColumnName="TENTB" />
+                <ScalarProperty Name="IDTB" ColumnName="IDTB" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1220,102 +1370,51 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_Phong_ThietBi">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_Phong_ThietBi">
-              <MappingFragment StoreEntitySet="tb_Phong_ThietBi">
-                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-                <ScalarProperty Name="IDTB" ColumnName="IDTB" />
-                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_Func">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_Func">
-              <MappingFragment StoreEntitySet="tb_SYS_Func">
-                <ScalarProperty Name="TIPS" ColumnName="TIPS" />
-                <ScalarProperty Name="MENU" ColumnName="MENU" />
-                <ScalarProperty Name="PARENT" ColumnName="PARENT" />
-                <ScalarProperty Name="ISGROUP" ColumnName="ISGROUP" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="FUNC_CODE" ColumnName="FUNC_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_GROUP">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_GROUP">
-              <MappingFragment StoreEntitySet="tb_SYS_GROUP">
-                <ScalarProperty Name="MENBER" ColumnName="MENBER" />
-                <ScalarProperty Name="GROUP" ColumnName="GROUP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_REPORT">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_REPORT">
-              <MappingFragment StoreEntitySet="tb_SYS_REPORT">
-                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
-                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
-                <ScalarProperty Name="THANGNAM" ColumnName="THANGNAM" />
-                <ScalarProperty Name="TUNGAY" ColumnName="TUNGAY" />
-                <ScalarProperty Name="VISIBLE" ColumnName="VISIBLE" />
-                <ScalarProperty Name="REP_NAME" ColumnName="REP_NAME" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="REP_CODE" ColumnName="REP_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_RIGHT">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_RIGHT">
-              <MappingFragment StoreEntitySet="tb_SYS_RIGHT">
-                <ScalarProperty Name="USER_RIGHT" ColumnName="USER_RIGHT" />
-                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
-                <ScalarProperty Name="FUNC_CODE" ColumnName="FUNC_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_RIGHT_REP">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_RIGHT_REP">
-              <MappingFragment StoreEntitySet="tb_SYS_RIGHT_REP">
-                <ScalarProperty Name="USER_RIGHT" ColumnName="USER_RIGHT" />
-                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
-                <ScalarProperty Name="REP_CODE" ColumnName="REP_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_SYS_USER">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_SYS_USER">
-              <MappingFragment StoreEntitySet="tb_SYS_USER">
+          <EntitySetMapping Name="tb_KhachHang">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_KhachHang">
+              <MappingFragment StoreEntitySet="tb_KhachHang">
                 <ScalarProperty Name="DISABLED" ColumnName="DISABLED" />
-                <ScalarProperty Name="ISGROUP" ColumnName="ISGROUP" />
-                <ScalarProperty Name="LAST_PWD_CHANGED" ColumnName="LAST_PWD_CHANGED" />
-                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
-                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
-                <ScalarProperty Name="PASSWD" ColumnName="PASSWD" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
-                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="IDKH" ColumnName="IDKH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_Phong">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_Phong">
-              <MappingFragment StoreEntitySet="tb_Phong">
-                <ScalarProperty Name="IDLOAIPHONG" ColumnName="IDLOAIPHONG" />
-                <ScalarProperty Name="IDTANG" ColumnName="IDTANG" />
-                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
-                <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
-                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="KHACHSAN.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="CustomField1" ColumnName="CustomField1" />
+                <ScalarProperty Name="TimeZoneId" ColumnName="TimeZoneId" />
+                <ScalarProperty Name="RecurrenceInfo" ColumnName="RecurrenceInfo" />
+                <ScalarProperty Name="ReminderInfo" ColumnName="ReminderInfo" />
+                <ScalarProperty Name="ResourceIDs" ColumnName="ResourceIDs" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="AllDay" ColumnName="AllDay" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_ThietBi">
-            <EntityTypeMapping TypeName="KHACHSAN.tb_ThietBi">
-              <MappingFragment StoreEntitySet="tb_ThietBi">
-                <ScalarProperty Name="TONGSLX" ColumnName="TONGSLX" />
-                <ScalarProperty Name="TONGSLN" ColumnName="TONGSLN" />
-                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
-                <ScalarProperty Name="TENTB" ColumnName="TENTB" />
-                <ScalarProperty Name="IDTB" ColumnName="IDTB" />
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="KHACHSAN.Resource">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="CustomField1" ColumnName="CustomField1" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

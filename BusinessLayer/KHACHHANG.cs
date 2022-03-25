@@ -18,6 +18,20 @@ namespace BusinessLayer
         {
             return db.tb_KhachHang.ToList();
         }
+        public bool checkCCCD(string cccd)
+        {
+            var lst = db.tb_KhachHang.ToList();
+            foreach(var i in lst)
+            {
+                if (i.CCCD == cccd)
+                    return true;
+            }
+            return false;
+        }
+        public List<tb_KhachHang> getAll(bool dis)
+        {
+            return db.tb_KhachHang.Where(x=>x.DISABLED==dis).ToList();
+        }
         public tb_KhachHang getItem(int idkh)
         {
             return db.tb_KhachHang.FirstOrDefault(x => x.IDKH == idkh);

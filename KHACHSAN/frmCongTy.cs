@@ -125,28 +125,33 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if(!IsValidEmail(txtEmail.Text))
+            savedata();
+        }
+
+        private void savedata()
+        {
+            if (!IsValidEmail(txtEmail.Text))
             {
                 MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtEmail.Focus();
                 return;
             }
-           
+
             if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
             {
-                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }    
-            if(_them==true)
+            }
+            if (_them == true)
             {
                 bool var = _congty.checkUserExist(txtMa.Text);
-                if(var)
+                if (var)
                 {
                     MessageBox.Show("Mã Công Ty đã tồn tại .Vui lòng kiểm tra lại", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtMa.SelectAll();
                     txtMa.Focus();
                     return;
-                }    
+                }
                 tb_CongTy cty = new tb_CongTy();
                 cty.MACTY = txtMa.Text;
                 cty.TENCTY = txtTen.Text;
@@ -156,7 +161,7 @@ namespace KHACHSAN
                 cty.DIENTHOAI = txtDienThoai.Text;
                 cty.DISABLED = chkDisabled.Checked;
                 _congty.add(cty);
-            }  
+            }
             else
             {
                 tb_CongTy cty = _congty.getItem(_macty);
@@ -261,6 +266,10 @@ namespace KHACHSAN
             {
                 e.Handled = true;
             }
+            if((Keys)e.KeyChar==Keys.Enter)
+            {
+                savedata();
+            }    
         }
 
         private void txtEmail_Leave(object sender, EventArgs e)
