@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using USERMANAGEMENT;
 
 namespace KHACHSAN
 {
@@ -208,7 +209,7 @@ namespace KHACHSAN
                 {
                     case "CONGTY":
                         {
-                            frmCongTy frm = new frmCongTy(_user,_uRight.USER_RIGHT.Value);
+                            frmCongTy frm = new frmCongTy(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
@@ -264,6 +265,18 @@ namespace KHACHSAN
                     case "LOAIPHONG":
                         {
                             frmLoaiPhong frm = new frmLoaiPhong();
+                            frm.ShowDialog();
+                            break;
+                        }
+                    case "BOOKING":
+                        {
+                            frmBooking frm = new frmBooking();
+                            frm.ShowDialog();
+                            break;
+                        }
+                    case "QUANTRI":
+                        {
+                            USERMANAGEMENT.frmMain frm = new USERMANAGEMENT.frmMain();
                             frm.ShowDialog();
                             break;
                         }

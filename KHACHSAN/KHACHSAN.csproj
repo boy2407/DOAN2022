@@ -200,6 +200,12 @@
     <Compile Include="frmThietBi.Designer.cs">
       <DependentUpon>frmThietBi.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOTELSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HOTELSDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="MyControls\frmShowDonVi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,7 +310,23 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
+    <None Include="HOTELSDataSet.xsc">
+      <DependentUpon>HOTELSDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="HOTELSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HOTELSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="HOTELSDataSet.xss">
+      <DependentUpon>HOTELSDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DataLayer.Appointment.datasource" />
+    <None Include="Properties\DataSources\DataLayer.Resource.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -323,6 +345,10 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{a91d66c2-cb24-4437-87c5-04d0ae0ffbc4}</Project>
       <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\USERMANAGEMENT\USERMANAGEMENT.csproj">
+      <Project>{dc3230de-5e04-4613-a1e0-3b1399c45ebd}</Project>
+      <Name>USERMANAGEMENT</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
