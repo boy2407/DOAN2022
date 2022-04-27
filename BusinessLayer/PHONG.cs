@@ -247,7 +247,7 @@ namespace BusinessLayer
         //    }
         //    return listDPCT;
         //}
-        public List<tb_Phong> getAll_Vacancies(DateTime checkin, DateTime checkout)
+        public List<OBJ_PHONG> getAll_Vacancies(DateTime checkin, DateTime checkout)
         {
           
             List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false).ToList();
@@ -296,8 +296,7 @@ namespace BusinessLayer
                 lstdpct.AddRange(ct);
             }
             var lstPhong = db.tb_Phong.ToList();
-            List<tb_Phong> temp = new List<tb_Phong>();
-            
+            List<tb_Phong> temp = new List<tb_Phong>();           
             foreach (var item in lstdpct)
             {
                 foreach (var p in lstPhong)
@@ -308,9 +307,24 @@ namespace BusinessLayer
                     }
                 }
             }
-
-            //return lstPhong.Except(temp).ToList();      
-            return temp;
+            lstPhong = lstPhong.Except(temp).ToList();
+            List<OBJ_PHONG> lstVacancies = new List<OBJ_PHONG>();
+            foreach (var item in lstPhong)
+            {
+                OBJ_PHONG p = new OBJ_PHONG();
+                p.IDPHONG = item.IDPHONG;
+                p.TENPHONG = item.TENPHONG;
+                p.IDTANG = item.IDTANG;
+                var tentang = db.tb_Tang.FirstOrDefault(x => x.IDTANG == item.IDTANG);
+                p.TENTANG = tentang.TENTANG;
+                p.IDLOAIPHONG = item.IDLOAIPHONG;
+                var loaiphong = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == item.IDLOAIPHONG);
+                p.TENLOAIPHONG = loaiphong.TENLOAIPHONG;
+                p.DONGIA = loaiphong.DONGIA;
+                p.TRANGTHAI = item.TRANGTHAI;
+                lstVacancies.Add(p);
+            }
+            return lstVacancies;
         }
       
     }
