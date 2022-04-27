@@ -49,6 +49,11 @@ namespace KHACHSAN
             }
 
         }
+         double checkforRoombyday(DateTime checkin, DateTime checkout)
+        {
+
+            return checkout.Subtract(checkin).Days / (365.25 / 12) ;
+        }
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if (searchKH.EditValue == null || searchKH.EditValue.ToString() == "")
@@ -57,8 +62,12 @@ namespace KHACHSAN
                 return;
             }
             saveData();
+            //_tongtien = (double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + 
+            //    _phong.getItemFull(_idPhong).DONGIA*(dtNgayTra.Value.Day- dtNgayDat.Value.Day));
+            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
             _tongtien = (double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + 
-                _phong.getItemFull(_idPhong).DONGIA*(dtNgayTra.Value.Day- dtNgayDat.Value.Day));
+                (_phong.getItemFull(_idPhong).DONGIA * s.Days));
+
             var dp = _datphong.GetItem(_idDP);
             dp.SOTIEN = _tongtien;
             _datphong.update(dp);
@@ -149,8 +158,10 @@ namespace KHACHSAN
                
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
-                     dpct.IDPHONG = _idPhong;
-                    dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
+                    dpct.IDPHONG = _idPhong;
+                //dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
+                TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                dpct.SONGAYO = s.Days;
                     dpct.DONGIA = _phonghientai.DONGIA;
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
@@ -209,8 +220,10 @@ namespace KHACHSAN
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = _idPhong;
-                    dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
-                    dpct.DONGIA = _phonghientai.DONGIA;
+                  TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                //dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
+                dpct.SONGAYO = s.Days;
+                     dpct.DONGIA = _phonghientai.DONGIA;
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
                     var _dpct = _datphong_ct.add(dpct);
@@ -328,6 +341,7 @@ namespace KHACHSAN
         }
         private void gvSanPham_DoubleClick(object sender, EventArgs e)
         {
+            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
             if (_idPhong == 0)
             {
                 MessageBox.Show("Vui lòng chọn phòng?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -340,6 +354,7 @@ namespace KHACHSAN
             }    
             if (gvSanPham.GetFocusedRowCellValue("IDSP") != null)
             {
+               
                 OBJ_DPSP sp = new OBJ_DPSP();
                 sp.IDSP = int.Parse(gvSanPham.GetFocusedRowCellValue("IDSP").ToString());
                 sp.TENSP = gvSanPham.GetFocusedRowCellValue("TENSP").ToString();
@@ -356,14 +371,15 @@ namespace KHACHSAN
                         item.SOLUONG = item.SOLUONG + 1;
                         item.THANHTIEN = item.SOLUONG * item.DONGIA;
                         loadDPSP();
-                        txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*(dtNgayTra.Value.Day- dtNgayDat.Value.Day))).ToString("N0");
+                        txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*s.Days)).ToString("N0");
                         return;
                     }
                 }
                 lstDPSP.Add(sp);
             }
             loadDPSP();
-            txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*(dtNgayTra.Value.Day-dtNgayDat.Value.Day))).ToString("N0");
+
+            txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*s.Days)).ToString("N0");
         }
 
         private  void XoaSPDV(int idsp)
@@ -407,9 +423,9 @@ namespace KHACHSAN
                     gvSPDV.SetRowCellValue(gvSPDV.FocusedRowHandle, "THANHTIEN", sl * gia);
                 }
                 gvSPDV.UpdateTotalSummary();///update lại sum 
-              
-               
-                    txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA * (dtNgayTra.Value.Day - dtNgayDat.Value.Day))).ToString("N0");
+
+                TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                    txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA *s.Days)).ToString("N0");
                 
 
             }

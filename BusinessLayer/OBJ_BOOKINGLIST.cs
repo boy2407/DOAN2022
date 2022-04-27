@@ -7,7 +7,7 @@ using BusinessLayer;
 using DataLayer;
 namespace BusinessLayer
 {
-   public class OBJ_DSPD
+   public class OBJ_BOOKINGLIST
     {
         public int? IDDP { get; set; }
         public string TENPHONG { get; set; }

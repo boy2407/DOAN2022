@@ -53,7 +53,7 @@ namespace KHACHSAN
         {
             loadUserControls();
         }
-
+        //Lấy giùm tui tài khoản có quyền thao tác
         void loadUserControls()
         {
             tb_SYS_REPORT rep = _sysReport.getItem(int.Parse(lstDanhSach.SelectedValue.ToString()));

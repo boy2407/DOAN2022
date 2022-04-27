@@ -43,7 +43,7 @@ namespace KHACHSAN
          public int _idDP = 0;
         int _rowDatPhong = 0;
         List<OBJ_DPSP> lstDPSP;
-        List<OBJ_DSPD> lstDP;
+        List<OBJ_BOOKINGLIST> lstDP;
         //SYS_PARAM _param;
         string _madvi;
         string _macty;
@@ -384,7 +384,8 @@ namespace KHACHSAN
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = int.Parse(gvDatPhong.GetRowCellValue(i,"IDPHONG").ToString());
-                    dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
+                    TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                    dpct.SONGAYO = s.Days;
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i,"DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
@@ -442,7 +443,8 @@ namespace KHACHSAN
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = int.Parse(gvDatPhong.GetRowCellValue(i, "IDPHONG").ToString());
-                    dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
+                    TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                    dpct.SONGAYO = s.Days;
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i, "DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;

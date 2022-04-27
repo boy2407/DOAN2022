@@ -277,7 +277,7 @@ namespace KHACHSAN
             this.splitContainerControl1.Panel2.Controls.Add(this.gcDanhSach);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1126, 834);
-            this.splitContainerControl1.SplitterPosition = 70;
+            this.splitContainerControl1.SplitterPosition = 59;
             this.splitContainerControl1.TabIndex = 0;
             // 
             // dtDenNgay
@@ -326,7 +326,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 0);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(1126, 754);
+            this.gcDanhSach.Size = new System.Drawing.Size(1126, 765);
             this.gcDanhSach.TabIndex = 0;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});

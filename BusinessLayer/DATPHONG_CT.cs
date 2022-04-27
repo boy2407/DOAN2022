@@ -139,16 +139,16 @@ namespace BusinessLayer
             }
             return listDPCT;
         }
-        public List<OBJ_DSPD> getAllByDatPhong_DSPD(int _iddp)
+        public List<OBJ_BOOKINGLIST> getAllByDatPhong_DSPD(int _iddp)
         {
             PHONG p = new PHONG();
             TANG t = new TANG();
             var listget = db.tb_DatPhong_CT.Where(x => x.IDDP == _iddp);
-            List<OBJ_DSPD> listDPCT = new List<OBJ_DSPD>();
-            OBJ_DSPD DPCT;
+            List<OBJ_BOOKINGLIST> listDPCT = new List<OBJ_BOOKINGLIST>();
+            OBJ_BOOKINGLIST DPCT;
             foreach (var item in listget)
             {
-                DPCT = new OBJ_DSPD();
+                DPCT = new OBJ_BOOKINGLIST();
                 DPCT.IDDP = item.IDDP;
                 DPCT.IDDPCT = item.IDDPCT;
                 tb_Phong phong = p.getItem(item.IDPHONG);

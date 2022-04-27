@@ -219,33 +219,85 @@ namespace BusinessLayer
             else
                 return false;
         }
-        public List<tb_Phong> getAllPhongTrong_DSPD()
+        //public List<OBJ_BOOKINGLIST> getAll_AnyVacancies()
+        //{
+        //    PHONG p = new PHONG();
+        //    TANG t = new TANG();
+
+        //    List<tb_Phong> listget = db.tb_Phong.Where(x=>x.TRANGTHAI==false).ToList();          
+        //    List<OBJ_BOOKINGLIST> listDPCT = new List<OBJ_BOOKINGLIST>();
+        //    OBJ_BOOKINGLIST DPCT;
+
+        //    foreach (var item in listget)
+        //    {
+        //        DPCT = new OBJ_BOOKINGLIST();
+        //        DPCT.IDDP = 0;
+        //        DPCT.IDDPCT = 0;
+        //        tb_Phong phong = p.getItem(item.IDPHONG);
+        //        DPCT.TENPHONG = phong.TENPHONG;
+        //        tb_Tang tang = t.getItem(phong.IDTANG);
+        //        DPCT.TENTANG = tang.TENTANG;
+        //        DPCT.IDPHONG = item.IDPHONG;
+        //        var gia = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == phong.IDLOAIPHONG);
+        //        DPCT.DONGIA = gia.DONGIA;
+        //        DPCT.THANHTIEN = 0;
+        //        DPCT.SONGAYO = 0;
+
+        //        listDPCT.Add(DPCT);
+        //    }
+        //    return listDPCT;
+        //}
+        public List<tb_Phong> getAll_AnyVacancies(DateTime checkin, DateTime checkout)
         {
-            PHONG p = new PHONG();
-            TANG t = new TANG();
-
-            List<tb_Phong> listget = db.tb_Phong.Where(x=>x.TRANGTHAI==false).ToList();          
-            List<OBJ_DSPD> listDPCT = new List<OBJ_DSPD>();
-            OBJ_DSPD DPCT;
-
-            foreach (var item in listget)
+          
+            List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false).ToList();
+            List<tb_DatPhong> lst = new List<tb_DatPhong>();
+            foreach (var item in lstdatphong)
             {
-                DPCT = new OBJ_DSPD();
-                DPCT.IDDP = 0;
-                DPCT.IDDPCT = 0;
-                tb_Phong phong = p.getItem(item.IDPHONG);
-                DPCT.TENPHONG = phong.TENPHONG;
-                tb_Tang tang = t.getItem(phong.IDTANG);
-                DPCT.TENTANG = tang.TENTANG;
-                DPCT.IDPHONG = item.IDPHONG;
-                var gia = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == phong.IDLOAIPHONG);
-                DPCT.DONGIA = gia.DONGIA;
-                DPCT.THANHTIEN = 0;
-                DPCT.SONGAYO = 0;
-
-                listDPCT.Add(DPCT);
+                if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                {
+                    lst.Add(item);
+                }
+                 if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                {
+                    lst.Add(item);
+                }
+                if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                {
+                    lst.Add(item);
+                }
+               if (checkin == item.NGAYDAT && checkout == item.NGAYTRA)
+                {
+                    lst.Add(item);
+                }
             }
-            return listget;
+            List<tb_DatPhong_CT> lstdpct = new List<tb_DatPhong_CT>();
+            foreach (var item in lstdatphong)
+            {
+                List<tb_DatPhong_CT> ct = new List<tb_DatPhong_CT>();
+                ct = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
+                lstdpct.AddRange(ct);
+            }
+            var lstPhong = db.tb_Phong.ToList();
+            List<tb_Phong> temp = new List<tb_Phong>();
+            
+            foreach (var item in lstdpct)
+            {
+                foreach (var p in lstPhong)
+                {
+                    if (item.IDPHONG == p.IDPHONG)
+                    {
+                        temp.Add(p);
+                    }
+                }
+            }
+          
+           
+            return lstPhong.Except(temp).ToList();
+
+          
+
         }
+      
     }
 }

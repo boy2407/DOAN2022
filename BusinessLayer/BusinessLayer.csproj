@@ -68,7 +68,7 @@
     <Compile Include="OBJ_DATPHONG.cs" />
     <Compile Include="OBJ_DATPHONGCHITIET.cs" />
     <Compile Include="OBJ_DPSP.cs" />
-    <Compile Include="OBJ_DSPD.cs" />
+    <Compile Include="OBJ_BOOKINGLIST.cs" />
     <Compile Include="OBJ_PHONG.cs" />
     <Compile Include="PHONG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
