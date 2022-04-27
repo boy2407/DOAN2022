@@ -77,8 +77,8 @@ namespace KHACHSAN
         void loadphong()
         {
             _phong = new PHONG();
-            gcPhong.DataSource = _phong.getAll_AnyVacancies(dtNgayDat.Value, dtNgayTra.Value);
-            MessageBox.Show("cps");
+            gcPhong.DataSource = _phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value);
+            MessageBox.Show("có load lai phòng");
         }    
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -159,6 +159,18 @@ namespace KHACHSAN
 
         private void dtNgayDat_Leave(object sender, EventArgs e)
         {
+            //if (dtNgayDat.Value > dtNgayTra.Value)
+            //{
+            //    MessageBox.Show("Ngày không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    dtNgayDat.Value = DateTime.Now;
+            //    dtNgayTra.Value = DateTime.Now.AddDays(1);
+            //    return;
+            //}
+            //loadphong();
+        }
+
+        private void dtNgayTra_Leave(object sender, EventArgs e)
+        {
             if (dtNgayDat.Value > dtNgayTra.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -169,21 +181,9 @@ namespace KHACHSAN
             loadphong();
         }
 
-        private void dtNgayTra_Leave(object sender, EventArgs e)
-        {
-        //    if (dtNgayDat.Value > dtNgayTra.Value)
-        //    {
-        //        MessageBox.Show("Ngày không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        dtNgayDat.Value = DateTime.Now;
-        //        dtNgayTra.Value = DateTime.Now.AddDays(1);
-        //        return;
-        //    }
-        //    loadphong();
-        }
-
         private void dtNgayDat_ValueChanged(object sender, EventArgs e)
         {
-            //if (dtNgayDat.Value > dtNgayTra.Value )
+            //if (dtNgayDat.Value > dtNgayTra.Value)
             //{
             //    MessageBox.Show("Ngày không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //    dtNgayDat.Value = DateTime.Now;
@@ -195,7 +195,7 @@ namespace KHACHSAN
 
         private void dtNgayTra_ValueChanged(object sender, EventArgs e)
         {
-            //if (dtNgayDat.Value > dtNgayTra.Value )
+            //if (dtNgayDat.Value > dtNgayTra.Value)
             //{
             //    MessageBox.Show("Ngày không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //    dtNgayDat.Value = DateTime.Now;
@@ -204,10 +204,7 @@ namespace KHACHSAN
             //}
             //loadphong();
         }
-
-     
-        
-
+           
         private void btnThoat_Click(object sender, EventArgs e)
         {
 

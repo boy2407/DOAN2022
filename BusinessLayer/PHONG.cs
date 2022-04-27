@@ -247,32 +247,49 @@ namespace BusinessLayer
         //    }
         //    return listDPCT;
         //}
-        public List<tb_Phong> getAll_AnyVacancies(DateTime checkin, DateTime checkout)
+        public List<tb_Phong> getAll_Vacancies(DateTime checkin, DateTime checkout)
         {
           
             List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false).ToList();
             List<tb_DatPhong> lst = new List<tb_DatPhong>();
             foreach (var item in lstdatphong)
             {
-                if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                //if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                //{
+                //    lst.Add(item);
+                //}
+                //else if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                //{
+                //    lst.Add(item);
+                //}
+                //else if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                //{
+                //    lst.Add(item);
+                //}
+                //else if (checkin == item.NGAYDAT && checkout == item.NGAYTRA)
+                //{
+                //    lst.Add(item);
+                //}
+                if (checkin < item.NGAYDAT && checkout > item.NGAYDAT)
                 {
                     lst.Add(item);
                 }
-                 if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout < item.NGAYTRA)
                 {
                     lst.Add(item);
                 }
-                if (checkin > item.NGAYDAT && checkin < item.NGAYTRA && checkout > item.NGAYDAT && checkout > item.NGAYTRA)
+                if (item.NGAYTRA > checkin && item.NGAYTRA < checkout)
                 {
                     lst.Add(item);
                 }
-               if (checkin == item.NGAYDAT && checkout == item.NGAYTRA)
+                else if (checkin == item.NGAYDAT && checkout == item.NGAYTRA)
                 {
                     lst.Add(item);
                 }
+
             }
             List<tb_DatPhong_CT> lstdpct = new List<tb_DatPhong_CT>();
-            foreach (var item in lstdatphong)
+            foreach (var item in lst)
             {
                 List<tb_DatPhong_CT> ct = new List<tb_DatPhong_CT>();
                 ct = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
@@ -291,12 +308,9 @@ namespace BusinessLayer
                     }
                 }
             }
-          
-           
-            return lstPhong.Except(temp).ToList();
 
-          
-
+            //return lstPhong.Except(temp).ToList();      
+            return temp;
         }
       
     }
