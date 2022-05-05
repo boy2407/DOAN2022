@@ -149,6 +149,7 @@ namespace KHACHSAN
             this.gcDanhSach.Name = "gcDanhSach";
             this.gcDanhSach.Size = new System.Drawing.Size(1034, 315);
             this.gcDanhSach.TabIndex = 2;
+            this.gcDanhSach.UseDisabledStatePainter = false;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
             // 

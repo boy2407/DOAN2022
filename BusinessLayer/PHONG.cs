@@ -58,17 +58,17 @@ namespace BusinessLayer
         public List<OBJ_PHONG> getPhongCheckOut(string macty, string madvi)
         {
             DATPHONG dp = new DATPHONG();
-
+            //lấy phòng thuộc đơn vị
             var lstdp = dp.GetAllCheckOut(macty, madvi);
             List<tb_DatPhong_CT> lstdpct = new List<tb_DatPhong_CT>();
+            // đưa về list phòng chi tiết
             foreach (var item in lstdp)
             {
                 var i = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
                 lstdpct.AddRange(i);
-            }
-
-        
+            }        
             List<tb_Phong> lstphong = new List<tb_Phong>();
+            // đưa về list phòng
             foreach(var item in lstdpct)
             {
                 var i = db.tb_Phong.FirstOrDefault(x => x.TRANGTHAI == true&&x.IDPHONG==item.IDPHONG);
@@ -79,6 +79,7 @@ namespace BusinessLayer
             foreach (var item in lstphong)
             {
                 pt = new OBJ_PHONG();
+
                 var dongia = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == item.IDLOAIPHONG);
                 pt.DONGIA = dongia.DONGIA;
                 pt.IDLOAIPHONG = item.IDLOAIPHONG;

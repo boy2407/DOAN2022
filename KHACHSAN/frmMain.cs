@@ -139,7 +139,8 @@ namespace KHACHSAN
                         navItem.ImageOptions.SmallImageIndex = 0;
                         navGroup.ItemLinks.Add(navItem);
                     }
-                    navMain.Groups[navGroup.Name].Expanded = false;
+                    navMain.Groups[navGroup.Name].Expanded = true
+                        ;
                 }
               
             }    

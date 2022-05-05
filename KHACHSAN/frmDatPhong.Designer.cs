@@ -250,7 +250,7 @@ namespace KHACHSAN
             this.TabControl.Location = new System.Drawing.Point(0, 41);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedTabPage = this.PageDanhSach;
-            this.TabControl.Size = new System.Drawing.Size(1128, 859);
+            this.TabControl.Size = new System.Drawing.Size(1128, 861);
             this.TabControl.TabIndex = 2;
             this.TabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.PageDanhSach,
@@ -500,7 +500,7 @@ namespace KHACHSAN
             // 
             this.PageChiTiet.Controls.Add(this.tableLayoutPanel1);
             this.PageChiTiet.Name = "PageChiTiet";
-            this.PageChiTiet.Size = new System.Drawing.Size(1126, 834);
+            this.PageChiTiet.Size = new System.Drawing.Size(1126, 836);
             this.PageChiTiet.Text = "Chi Tiết";
             // 
             // tableLayoutPanel1
@@ -517,7 +517,7 @@ namespace KHACHSAN
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 834);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 836);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -528,7 +528,7 @@ namespace KHACHSAN
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(275, 828);
+            this.groupControl1.Size = new System.Drawing.Size(275, 830);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "Danh Sách phòng trống";
             // 
@@ -539,7 +539,7 @@ namespace KHACHSAN
             this.gcPhong.Location = new System.Drawing.Point(2, 23);
             this.gcPhong.MainView = this.gvPhong;
             this.gcPhong.Name = "gcPhong";
-            this.gcPhong.Size = new System.Drawing.Size(271, 803);
+            this.gcPhong.Size = new System.Drawing.Size(271, 805);
             this.gcPhong.TabIndex = 0;
             this.gcPhong.UseDisabledStatePainter = false;
             this.gcPhong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -635,7 +635,7 @@ namespace KHACHSAN
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(847, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(276, 828);
+            this.groupControl2.Size = new System.Drawing.Size(276, 830);
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "Sản phẩm - Dịch vụ";
             // 
@@ -645,7 +645,7 @@ namespace KHACHSAN
             this.gcSanPham.Location = new System.Drawing.Point(2, 23);
             this.gcSanPham.MainView = this.gvSanPham;
             this.gcSanPham.Name = "gcSanPham";
-            this.gcSanPham.Size = new System.Drawing.Size(272, 803);
+            this.gcSanPham.Size = new System.Drawing.Size(272, 805);
             this.gcSanPham.TabIndex = 0;
             this.gcSanPham.UseDisabledStatePainter = false;
             this.gcSanPham.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -723,7 +723,7 @@ namespace KHACHSAN
             this.scc.Panel2.Controls.Add(this.groupControl4);
             this.scc.Panel2.Controls.Add(this.groupControl3);
             this.scc.Panel2.Text = "Panel2";
-            this.scc.Size = new System.Drawing.Size(557, 828);
+            this.scc.Size = new System.Drawing.Size(557, 830);
             this.scc.SplitterPosition = 136;
             this.scc.TabIndex = 3;
             // 
@@ -877,7 +877,7 @@ namespace KHACHSAN
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl5.Location = new System.Drawing.Point(0, 591);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(557, 91);
+            this.groupControl5.Size = new System.Drawing.Size(557, 93);
             this.groupControl5.TabIndex = 2;
             this.groupControl5.Text = "TỔNG THANH TOÁN";
             // 
@@ -1164,7 +1164,7 @@ namespace KHACHSAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1128, 900);
+            this.ClientSize = new System.Drawing.Size(1128, 902);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmDatPhong";

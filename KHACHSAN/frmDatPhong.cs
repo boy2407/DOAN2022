@@ -111,6 +111,7 @@ namespace KHACHSAN
             _rowDatPhong = 0;
             gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG,D.SONGAYO,D.THANHTIEN from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='" + _idDP + "'");
             _rowDatPhong = gvDatPhong.RowCount;
+
        
         }
         //void loadDSPD()
@@ -1123,9 +1124,9 @@ namespace KHACHSAN
             }    
             if(!_them)
             {  
-                if(DateTime.Now>_datphong.GetItem(_idDP).NGAYTRA)
+                if(DateTime.Now>=_datphong.GetItem(_idDP).NGAYTRA)
                 {
-                    if(MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn ngày hiện tại. Bạn có muốn tiếp tục","Cảnh Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
+                    if(MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn hoặc bằng ngày hiện tại. Bạn có muốn tiếp tục","Cảnh Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
                     {
                      
                         Friend.XuatReport("@IDDP", _idDP.ToString(), "PHIEU_DATPHONG", "Phiếu đặt phòng chi tiết");

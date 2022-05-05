@@ -85,7 +85,7 @@ namespace KHACHSAN
             {
                 if (DateTime.Now > _datphong.GetItem(_idDP).NGAYTRA)
                 {
-                    if (MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn ngày hiện tại. Bạn có muốn tiếp tục", "Cảnh Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn hoặc bằng ngày hiện tại. Bạn có muốn tiếp tục", "Cảnh Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                        
                         _datphong.updateStatus(_idDP);
