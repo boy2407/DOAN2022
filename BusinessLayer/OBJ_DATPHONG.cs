@@ -22,5 +22,6 @@ namespace BusinessLayer
         public bool? THEODOAN { get; set; }
         public string GHICHU { get; set; }
         public bool? DISABLED { get; set; }
+        public bool ?BOOKING { get; set; }
     }
 }

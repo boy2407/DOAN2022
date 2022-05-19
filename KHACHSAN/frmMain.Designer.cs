@@ -56,6 +56,7 @@ namespace KHACHSAN
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timerCheckIn = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -302,6 +303,11 @@ namespace KHACHSAN
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timerCheckIn
+            // 
+            this.timerCheckIn.Interval = 10;
+            this.timerCheckIn.Tick += new System.EventHandler(this.timerCheckIn_Tick);
+            // 
             // frmMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -362,6 +368,7 @@ namespace KHACHSAN
         private DevExpress.XtraBars.BarButtonItem btnChuyenPhong;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timerCheckIn;
     }
 }
 

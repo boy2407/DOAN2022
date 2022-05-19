@@ -92,10 +92,16 @@ namespace KHACHSAN
             dongketnoi();
             return datatbl;
         }
+
         public static DateTime GetFirstDayInMont(int year, int month)
         {
             return new DateTime(year, month, 1);
         }
+        public static DateTime GetLastDayInMont(int year, int month)
+        {
+            return new DateTime(year, month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+        }
+
         public static void XuatReport(string _bien,string _nhan,string _reportName, string _tieude)
         {
             if (_nhan != null)

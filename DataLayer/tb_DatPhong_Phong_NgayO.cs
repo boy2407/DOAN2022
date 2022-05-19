@@ -12,13 +12,11 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Resource
+    public partial class tb_DatPhong_Phong_NgayO
     {
-        public int UniqueID { get; set; }
-        public int ResourceID { get; set; }
-        public string ResourceName { get; set; }
-        public Nullable<int> Color { get; set; }
-        public byte[] Image { get; set; }
-        public string CustomField1 { get; set; }
+        public int ID { get; set; }
+        public int IDPHONG { get; set; }
+        public int IDDP { get; set; }
+        public Nullable<System.DateTime> NGAYO { get; set; }
     }
 }

@@ -36,35 +36,39 @@ namespace KHACHSAN
         DATPHONG_SP _datphong_sp;
         KHACHHANG _khachhang;
         SANPHAM _sanpham;
-        PHONG _phong;     
+        PHONG _phong;
+        TANG _tang;
+        LOAIPHONG _loaiphong;
         GridHitInfo downhitInfo = null;
+        SYS_DATPHONG_PHONG_NGAYO _dcn;
         int _idPhong=0;
         string _tenPhong;
          public int _idDP = 0;
         int _rowDatPhong = 0;
         List<OBJ_DPSP> lstDPSP;
-        List<OBJ_BOOKINGLIST> lstDP;
+        List<OBJ_DP_CT> lstDP_CT;
+        List<OBJ_DP_CT> lstDP_CT_temp;
         //SYS_PARAM _param;
         string _madvi;
         string _macty;
         Double _tongtien = 0;
-        
+      
         int count = 0;
-        private void frmDatPhong_Load(object sender, EventArgs e)
-        {
-           
+        private void frmDatPhong_Load(object sender,EventArgs e)
+        {           
             _khachhang = new KHACHHANG();
             _sanpham = new SANPHAM();
             _datphong = new DATPHONG();
             _datphong_ct = new DATPHONG_CT();
             _datphong_sp = new DATPHONG_SP();
+            _loaiphong = new LOAIPHONG();
             _phong = new PHONG();
+            _tang = new TANG();
+            _dcn = new SYS_DATPHONG_PHONG_NGAYO();
             lstDPSP = new List<OBJ_DPSP>();
-            
+            lstDP_CT = new List<OBJ_DP_CT>();
             dtTuNgay.Value = Friend.GetFirstDayInMont(DateTime.Now.Year, DateTime.Now.Month);
-            dtDenNgay.Value = DateTime.Now;
-            
-
+            dtDenNgay.Value = Friend.GetLastDayInMont(DateTime.Now.Year, DateTime.Now.Month);            
             cboTrangThai.DataSource = TRANGTHAI.getList();
             cboTrangThai.ValueMember = "_value";
             chkTheoDoan.Enabled = false;
@@ -72,9 +76,11 @@ namespace KHACHSAN
             cboTrangThai.DisplayMember = "_display";
             dtNgayDat.Value = DateTime.Now;
             dtNgayTra.Value = DateTime.Now.AddDays(1);
+            //dtNgayDat.Enabled = false;
             _macty = Friend._macty;
             _madvi = Friend._madvi;
-           // loadphongByNgayDat(dtNgayDat.Value);
+            
+   
             gvPhong.ExpandAllGroups();////sổ hết các phòng trong tầng trên gridview gvphong
             loadKH();
             loadSP();
@@ -95,31 +101,121 @@ namespace KHACHSAN
                 cboTrangThai.SelectedValue = dp.STATUS;
                 spSoNguoi.Text = dp.SONGUOIO.ToString();
                 txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-                loadDP();
+                loadDPCT_id();
                 loadSPDV();
                 _enabled(false);
                 _them = false;
                 showHideControl(true);
-                TabControl.SelectedTabPage = PageChiTiet;
-                
+                TabControl.SelectedTabPage = PageChiTiet;                 
             }
-
         }
+
+
+
+        //load lại list phòng theo _iddp
         void loadDP()
         {
             //gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='" + _idDP + "'");
             _rowDatPhong = 0;
             gcDatPhong.DataSource = Friend.laydulieu("select A.IDPHONG,A.TENPHONG,C.DONGIA,A.IDTANG,B.TENTANG,D.SONGAYO,D.THANHTIEN from tb_Phong A, tb_Tang B,tb_LoaiPhong C , tb_DatPhong_CT D where A.IDTANG = B.IDTANG and A.IDLOAIPHONG=C.IDLOAIPHONG and A.IDPHONG=D.IDPHONG and D.IDDP='" + _idDP + "'");
-            _rowDatPhong = gvDatPhong.RowCount;
-
-       
+            _rowDatPhong = gvDatPhong.RowCount;     
         }
-        //void loadDSPD()
-        //{
-        //    gcDatPhong.DataSource = _datphong_ct.getAllByDatPhong_DSPD(_idDP);
-        //    lstDP = _datphong_ct.getAllByDatPhong_DSPD(_idDP);
-        //    gvPhong.ExpandAllGroups();
-        //}
+        void loadDPCT_id()
+        {
+            gcDatPhong.DataSource = Friend.ConvertToDataTable(_datphong_ct.getAllDPCT(_idDP));
+            lstDP_CT = _datphong_ct.getAllDPCT(_idDP);            
+            gvPhong.ExpandAllGroups();
+        }
+        void add_LSTDP_CT()
+        {
+            if(lstDP_CT.Count>0)
+            {
+                foreach(var i in lstDP_CT)
+                {
+                    if(i.IDPHONG==_idPhong)
+                    {
+                        return;
+                    }    
+                }    
+            }    
+            OBJ_DP_CT p = new OBJ_DP_CT();
+            //p.IDPHONG = int.Parse(gvPhong.GetFocusedRowCellValue("IDPHONG").ToString());
+            tb_Phong phong = _phong.getItem(_idPhong);
+            p.IDPHONG = _idPhong;
+            p.TENPHONG = phong.TENPHONG;
+            p.IDTANG = phong.IDTANG;
+            tb_Tang tang = _tang.getItem(phong.IDTANG);
+            p.TENTANG = tang.TENTANG;
+            var donggia = _loaiphong.getItem(phong.IDLOAIPHONG);
+            p.DONGIA =donggia.DONGIA;
+            p.SONGUOI = (int)donggia.SONGUOI;
+            p.NGAY = DateTime.Now;
+            int t = int_Days();
+            p.SONGAYO = t;            
+            p.THANHTIEN = p.DONGIA * p.SONGAYO;
+            lstDP_CT.Add(p);
+            loadDPCT();
+            update_txtThanhTien();
+        }
+        void subtract_LSTDP_CT(int idphong)
+        {
+            foreach (var i in lstDP_CT)
+            {
+                if (i.IDPHONG == idphong)
+                {
+                    lstDP_CT.Remove(i);
+                    XoaSPDVBy_Idphong(idphong);
+                    //_phong.updateStatus(idphong, false);
+                    // _datphong_ct.delete(_idDP, idphong);
+                    loadDPCT();
+                    update_txtThanhTien();
+                    objMain.gControl.Gallery.Groups.Clear();
+                    objMain.showRoom();
+                    return;
+                }
+
+            }
+        }
+        int int_Days()
+        {
+                int temp = 0;
+                TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+                temp = (int)Math.Round(s.TotalDays);
+            return temp;
+        }
+        void update_songayo()
+        {
+            
+
+            foreach (var item in lstDP_CT)
+            {
+                int t = int_Days();
+                item.SONGAYO = t;     
+                item.THANHTIEN = item.DONGIA * item.SONGAYO;
+            }
+            loadDPCT();
+            
+        }
+        void loadDPCT()
+        {
+            List<OBJ_DP_CT> lst = new List<OBJ_DP_CT>();
+            foreach(var item in lstDP_CT)
+            {
+                lst.Add(item);
+            }
+            gcDatPhong.DataSource = Friend.ConvertToDataTable(lst);
+            //update_txtThanhTien();
+        }
+        void loadDPSP()
+        {
+            List<OBJ_DPSP> lsDP = new List<OBJ_DPSP>();
+            foreach (var item in lstDPSP)
+            {
+                lsDP.Add(item);
+            }
+            gcSPDV.DataSource = lsDP;
+            //update_txtThanhTien();
+        }
         void loadSPDV()
         {
             gcSPDV.DataSource = _datphong_sp.getAllByDatPhong(_idDP);
@@ -141,8 +237,15 @@ namespace KHACHSAN
         
         void loadPhong()
         {
-            DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");
+            //DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");
+            //gcPhong.DataSource = table;
+            //gvPhong.ExpandAllGroups();
+            _phong = new PHONG();
+            lstDP_CT = new List<OBJ_DP_CT>();
+            DataTable table = new DataTable();
+            table = Friend.ConvertToDataTable(_phong.PhongHienTai(dtNgayDat.Value, dtNgayTra.Value));
             gcPhong.DataSource = table;
+            gcDatPhong.DataSource = table.Clone();
             gvPhong.ExpandAllGroups();
         }
         void showHideControl(bool t)
@@ -159,7 +262,7 @@ namespace KHACHSAN
         {
             cboKhachHang.Enabled = t;
             btnAddNew.Enabled = t;
-            dtNgayDat.Enabled = t;
+           // dtNgayDat.Enabled = t;
             dtNgayTra.Enabled = t;           
             cboTrangThai.Enabled = t;
            
@@ -203,8 +306,7 @@ namespace KHACHSAN
             gvDanhSach.OptionsBehavior.Editable = false;
         }
         void loadDanhSach()
-        {   
-            
+        {               
             gcDanhSach.DataSource = _datphong.GetAllTheoDoan(dtTuNgay.Value, dtDenNgay.Value.AddDays(1), _macty, _madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
             _datphong = new DATPHONG();
@@ -215,7 +317,7 @@ namespace KHACHSAN
             _them = true;
             _idDP = 0;
             lstDPSP = new List<OBJ_DPSP>();
-           
+            lstDP_CT = new List<OBJ_DP_CT>();
             _reset();
             AddReset();   
             _enabled(true);
@@ -246,7 +348,7 @@ namespace KHACHSAN
                 cboTrangThai.SelectedValue = dp.STATUS;
                 spSoNguoi.Text = dp.SONGUOIO.ToString();
                 txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-                loadDP();
+                loadDPCT_id();
                 loadSPDV();
                 TabControl.SelectedTabPage = PageChiTiet;
             }   
@@ -296,38 +398,56 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (spSoNguoi.Value < 0)
+            {
+                MessageBox.Show("quá nhỏ");
+                spSoNguoi.EditValue = 0;
+                return;
+            }
+            if (gvDatPhong.RowCount > 0 && spSoNguoi.Value > int.Parse(gvDatPhong.Columns["SONGUOI"].SummaryItem.SummaryValue.ToString()))
+            {
+                MessageBox.Show("Vượt quá số người cho phép", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                spSoNguoi.EditValue = int.Parse(gvDatPhong.Columns["SONGUOI"].SummaryItem.SummaryValue.ToString());
+                return;
+            }
             ///test push 
             saveData();
-
-            _tongtien = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())
-                + _datphong_ct.SumByIddp(_idDP);
-            var dp_ = _datphong.GetItem(_idDP);
-            dp_.SOTIEN = _tongtien;
-          
-            _datphong.update(dp_);
-            objMain.gControl.Gallery.Groups.Clear();
-            objMain.showRoom();
-            LoadData();
-            loadDanhSach();
-            // loadphongByNgayDat(DateTime.Now);
-            loadPhong();
+            update_txtThanhTien();
             _them = false;
             _enabled(false);           
             showHideControl(true);
-            //tabcontrol.selectedtabpage = pagedanhsach;
-            
-            var dp = _datphong.GetItem(_idDP);
-            cboKhachHang.SelectedValue = dp.IDKH;
-            dtNgayDat.Value = dp.NGAYDAT.Value;
-            dtNgayTra.Value = dp.NGAYTRA.Value;
-            txtGhiChu.Text = dp.GHICHU.ToString();
-            cboTrangThai.SelectedValue = dp.STATUS;
-            spSoNguoi.Text = dp.SONGUOIO.ToString();
-            txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-            loadDP();
+            objMain.gControl.Gallery.Groups.Clear();
+            objMain.showRoom();
+            loadDanhSach();
+            loadDPCT_id();
             loadSPDV();
-            TabControl.SelectedTabPage = PageChiTiet;
+           // _tongtien = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())+
+            //    + _datphong_ct.SumByIddp(_idDP);
+            var dp_ = _datphong.GetItem(_idDP);
+            dp_.SOTIEN = double.Parse(txtThanhTien.Text);
 
+            //_datphong.update(dp_);
+            //objMain.gControl.Gallery.Groups.Clear();
+            //objMain.showRoom();
+            //LoadData();
+            //loadDanhSach();
+            //// loadphongByNgayDat(DateTime.Now);
+            //loadPhong();
+            //_them = false;
+            //_enabled(false);           
+            //showHideControl(true);
+            ////tabcontrol.selectedtabpage = pagedanhsach;           
+            //var dp = _datphong.GetItem(_idDP);
+            //cboKhachHang.SelectedValue = dp.IDKH;
+            //dtNgayDat.Value = dp.NGAYDAT.Value;
+            //dtNgayTra.Value = dp.NGAYTRA.Value;
+            //txtGhiChu.Text = dp.GHICHU.ToString();
+            //cboTrangThai.SelectedValue = dp.STATUS;
+            //spSoNguoi.Text = dp.SONGUOIO.ToString();
+            //txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
+            //loadDPCT_id();
+            //loadSPDV();
+            //TabControl.SelectedTabPage = PageChiTiet;
         }
         //Phòng trống trong tầng
         private void gvPhong_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
@@ -363,7 +483,7 @@ namespace KHACHSAN
                 tb_DatPhong dp = new tb_DatPhong();
                 tb_DatPhong_CT dpct;
                 tb_DatPhong_SP dpsp;
-
+                tb_DatPhong_Phong_NgayO dcn;
                 dp.NGAYDAT = dtNgayDat.Value;
                 dp.NGAYTRA = dtNgayTra.Value;
                 dp.SONGUOIO = int.Parse(spSoNguoi.EditValue.ToString());
@@ -377,20 +497,29 @@ namespace KHACHSAN
                 dp.CREATED_DATE = DateTime.Now;
                 dp.MACTY = _macty;
                 dp.MADVI = _madvi;
-
+                dp.BOOKING = false;
                 var _dp = _datphong.add(dp);
                 _idDP = _dp.IDDP;
                 for (int i = 0; i < gvDatPhong.RowCount; i++)
                 {
+                    
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = int.Parse(gvDatPhong.GetRowCellValue(i,"IDPHONG").ToString());
-                    TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-                    dpct.SONGAYO = s.Days;
+                    int t = int_Days();
+                    dpct.SONGAYO = t;
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i,"DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
-                    dpct.NGAY = DateTime.Now;
-                  var _dpct =  _datphong_ct.add(dpct);
+                    dpct.NGAY = DateTime.Now;                  
+                  var _dpct =  _datphong_ct.add(dpct);      
+                    for(int k =1; k<t+1;++k)
+                    {
+                        dcn = new tb_DatPhong_Phong_NgayO();
+                        dcn.IDDP = dpct.IDDPCT;
+                        dcn.IDPHONG = int.Parse(gvDatPhong.GetRowCellValue(i, "IDPHONG").ToString());
+                        dcn.NGAYO = dtNgayDat.Value.AddDays(k);
+                        _dcn.add(dcn);
+                    }
                     _phong.updateStatus(int.Parse(_dpct.IDPHONG.ToString()), true);
 
                     if (gvSPDV.RowCount > 0)
@@ -398,12 +527,10 @@ namespace KHACHSAN
                         for (int j = 0; j < gvSPDV.RowCount; j++)
                         {
                             if (_dpct.IDPHONG == int.Parse(gvSPDV.GetRowCellValue(j, "IDPHONG").ToString()))
-                            {
-                               
+                            {                              
                                 dpsp = new tb_DatPhong_SP();
                                 dpsp.IDDP = _dp.IDDP;
-                                dpsp.IDSP = int.Parse(gvSPDV.GetRowCellValue(j, "IDSP").ToString());
-                                
+                                dpsp.IDSP = int.Parse(gvSPDV.GetRowCellValue(j, "IDSP").ToString());                               
                                 dpsp.IDDPCT = _dpct.IDDPCT;
                                 dpsp.NGAY = _dpct.NGAY;
                                 dpsp.IDPHONG = int.Parse(gvSPDV.GetRowCellValue(j, "IDPHONG").ToString());
@@ -411,7 +538,6 @@ namespace KHACHSAN
                                 dpsp.DONGIA = Double.Parse(gvSPDV.GetRowCellValue(j, "DONGIA").ToString());
                                 dpsp.THANHTIEN = Double.Parse((dpsp.SOLUONG * dpsp.DONGIA).ToString());
                                 _datphong_sp.add(dpsp);
-
                             }                         
                         }
                     }
@@ -436,22 +562,29 @@ namespace KHACHSAN
                 dp.UPDATE_DATE = DateTime.Now;
                 var _dp = _datphong.update(dp);
 
+             //_phong.updateStatusBy_IDDP(_idDP,false);                  
+                foreach(var i in _datphong_ct.getAll(_idDP))
+                {
+                    _phong.updateStatus(i.IDPHONG, false);
+                }    
                 _datphong_ct.deleteAll(_idDP);
                 _datphong_sp.deleteAll(_idDP);
-
+                
                 for (int i = 0; i < gvDatPhong.RowCount; i++)
                 {
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = int.Parse(gvDatPhong.GetRowCellValue(i, "IDPHONG").ToString());
-                    TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-                    dpct.SONGAYO = s.Days;
+                    int t = int_Days();
+                    dpct.SONGAYO = t;
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i, "DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
                     
                    var _dpct = _datphong_ct.add(dpct);
-                    _phong.updateStatus(int.Parse(_dpct.IDPHONG.ToString()), true);
+                    
+                    _phong.updateStatus(dpct.IDPHONG,true);
+
                     if (gvSPDV.RowCount > 0)
                     {
                         for (int j = 0; j < gvSPDV.RowCount; j++)
@@ -481,16 +614,16 @@ namespace KHACHSAN
         private void btnBoQua_Click(object sender, EventArgs e)
         {
             _them = false;
+            lstDP_CT = lstDP_CT_temp;
             _GiamSoPhong = false;
             showHideControl(true);
             _enabled(false);
-            TabControl.SelectedTabPage = PageDanhSach;
-            _them = true;
+            TabControl.SelectedTabPage = PageDanhSach;         
             _idDP = 0;
+            lstDP_CT = new List<OBJ_DP_CT>();
             lstDPSP = new List<OBJ_DPSP>();
             loadPhong();
-            AddReset();
-        
+            AddReset();        
         }
          
 
@@ -583,18 +716,22 @@ namespace KHACHSAN
         //Sự Kiện Kéo Thả Giữa 2 Vùng GridView
         private void gcPhong_DragDrop(object sender, DragEventArgs e)
         {
+            
             GridControl grid = sender as GridControl; //hiển thị data vào dưới dạng lưới
             DataTable table = grid.DataSource as DataTable;
             DataRow row = e.Data.GetData(typeof(DataRow)) as DataRow;
+            _idPhong =(int) row["IDPHONG"];
             if (row != null && table != null && row.Table != table)
             {
                 table.ImportRow(row);
+                subtract_LSTDP_CT(_idPhong);
                 row.Delete();
             }
+           
         }
-
         private void gcPhong_DragOver(object sender, DragEventArgs e)
         {
+           
             if (e.Data.GetDataPresent(typeof(DataRow)))
             {
                 e.Effect = DragDropEffects.Move;
@@ -604,6 +741,35 @@ namespace KHACHSAN
                 e.Effect = DragDropEffects.None;
             }
         }
+        private void gcDatPhong_DragDrop(object sender, DragEventArgs e)
+        {
+            
+            GridControl grid = sender as GridControl; //hiển thị data vào dưới dạng lưới
+            DataTable table = grid.DataSource as DataTable;
+            DataRow row = e.Data.GetData(typeof(DataRow)) as DataRow;
+            _idPhong =(int)row["IDPHONG"];
+            if (row != null && table != null && row.Table != table)
+            {
+                table.ImportRow(row);
+                add_LSTDP_CT();
+                row.Delete();
+            }
+         
+        }
+        private void gcDatPhong_DragOver(object sender, DragEventArgs e)
+        {           
+            if (e.Data.GetDataPresent(typeof(DataRow)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+
+        }
+
+      
         //========================================================
         //Sựu Kiện Đánh Cột Thứ Tự
         bool STT(Int32 _width, GridView _view)///lấy độ rộng
@@ -734,7 +900,10 @@ namespace KHACHSAN
             }
         }
        
-       
+       void update_txtThanhTien()
+        {
+            txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())).ToString("N0");
+        }
         //======================================================
         //Thêm SPDV vào phòng
         private void gcSanPham_DoubleClick(object sender, EventArgs e)
@@ -766,46 +935,39 @@ namespace KHACHSAN
                         loadDPSP();
                         if(_them)
                         {
-                            txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue.ToString())).ToString("N0");
-                        }   
+
+                            //txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue.ToString())).ToString("N0");
+                           txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())).ToString("N0");
+                        }
                         else
                         {
-                            txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _datphong_ct.SumByIddp(_idDP)).ToString("N0");
-                        }    
+                            //txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _datphong_ct.SumByIddp(_idDP)).ToString("N0");
+                            txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())).ToString("N0");
+
+                        }
 
                         return;
                     }
                 }
                 lstDPSP.Add(sp);
-            }
-            
+            }            
             loadDPSP();
             //txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _datphong_ct.SumByIddp(_idDP)).ToString("N0");
             if (!_them)
             {
-                txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _datphong_ct.SumByIddp(_idDP)).ToString("N0");
+               // txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _datphong_ct.SumByIddp(_idDP)).ToString("N0");
+                txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())).ToString("N0");
             }
             else
             {
-                txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue.ToString())).ToString("N0");
+                txtThanhTien.Text = (double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + double.Parse(gvDatPhong.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())).ToString("N0");
             }
         }
         private void gcSanPham_Click(object sender, EventArgs e)
         {
             
            
-        }
-        void loadDPSP()
-        {
-           
-            List<OBJ_DPSP> lsDP = new List<OBJ_DPSP>();
-            foreach (var item in lstDPSP)
-            {
-                lsDP.Add(item);
-            }
-           
-            gcSPDV.DataSource = lsDP;
-        }
+        }      
         //khi thay đổi Ô số lượng thì Ô thành tiền thay đổi
         private void XoaSPDVBy_Idsp(int idsp)
         {
@@ -830,11 +992,12 @@ namespace KHACHSAN
                 {
                     if (item.IDPHONG != idphong)
                     {
-                    lst.Add(item);   
+                         lst.Add(item);   
                     }
                 }
             lstDPSP = lst;
             loadDPSP();
+            update_txtThanhTien();
         }
         
         private void gvSPDV_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -884,75 +1047,75 @@ namespace KHACHSAN
         }
         private void gvDatPhong_RowCountChanged(object sender, EventArgs e)
         {
-            if(count< gvDatPhong.RowCount)
-                 count = gvDatPhong.RowCount;
+            //if (count < gvDatPhong.RowCount)
+            //    count = gvDatPhong.RowCount;
 
-         
-            if (gvDatPhong.RowCount < _rowDatPhong && _them == false&& _GiamSoPhong==true)//xóa lúc mới sữa dữ liễu đã lưu
-            {
-                
-                if (MessageBox.Show("Cảnh Báo Dữ Liễu Sẻ Mất?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
 
-                    MessageBox.Show(_idPhong.ToString());
-                    _phong.updateStatus(_idPhong, false);
-                    _datphong_ct.delete(_idDP, _idPhong);
-                    _datphong_sp.deletAllByPhong(_idDP, _idPhong);
-                    XoaSPDVBy_Idphong(_idPhong);
-                    LoadData();
-                    loadDPSP();
-                    objMain.gControl.Gallery.Groups.Clear();
-                    objMain.showRoom();
-                    btnBoQua.Visible = false;
-                    _rowDatPhong = gvDatPhong.RowCount;
-                }
-                else
-                {
-                    loadDP();
-                }    
+            //if (gvDatPhong.RowCount < _rowDatPhong && _them == false && _GiamSoPhong == true)//xóa lúc mới sữa dữ liễu đã lưu
+            //{
 
-                
-            }
-            else if(_them == true && _GiamSoPhong == true)//xóa lúc mới thêm dữ liễu chưa lưu
-            {   
-               if (gvDatPhong.RowCount < count)       
-                {
-  
-                    XoaSPDVBy_Idphong(_idPhong);
-                    count = gvDatPhong.RowCount;
-                }             
-            }
+            //    if (MessageBox.Show("Cảnh Báo Dữ Liễu Sẻ Mất?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            //    {
 
-            _GiamSoPhong = false;
-            double t = 0;
-            if (gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue == null)
-            {
-                t = 0;
-            }
-            else
-            {
-                t = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString());
-            }
+            //        MessageBox.Show(_idPhong.ToString());
+            //        _phong.updateStatus(_idPhong, false);
+            //        _datphong_ct.delete(_idDP, _idPhong);
+            //        _datphong_sp.deletAllByPhong(_idDP, _idPhong);
+            //        XoaSPDVBy_Idphong(_idPhong);
+            //        LoadData();
+            //        loadDPSP();
+            //        objMain.gControl.Gallery.Groups.Clear();
+            //        objMain.showRoom();
+            //        btnBoQua.Visible = false;
+            //        _rowDatPhong = gvDatPhong.RowCount;
+            //    }
+            //    else
+            //    {
+            //        loadDPCT_id();
+            //    }
 
-            double tienphong = 0;
-            if (_them)
-            {
-                if (gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue == null)
-                {
-                    tienphong = 0;
-                }
-                else
-                {
-                    tienphong = double.Parse(gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue.ToString());
-                }    
 
-                txtThanhTien.Text = (tienphong + t).ToString("N0");
-            }    
-            else 
-            {
-                txtThanhTien.Text = (_datphong_ct.SumByIddp(_idDP) + t).ToString("N0");
-            }    
-           
+            //}
+            //else if (_them == true && _GiamSoPhong == true)//xóa lúc mới thêm dữ liễu chưa lưu
+            //{
+            //    if (gvDatPhong.RowCount < count)
+            //    {
+
+            //        XoaSPDVBy_Idphong(_idPhong);
+            //        count = gvDatPhong.RowCount;
+            //    }
+            //}
+
+            //_GiamSoPhong = false;
+            //double t = 0;
+            //if (gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue == null)
+            //{
+            //    t = 0;
+            //}
+            //else
+            //{
+            //    t = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString());
+            //}
+
+            //double tienphong = 0;
+            //if (_them)
+            //{
+            //    if (gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue == null)
+            //    {
+            //        tienphong = 0;
+            //    }
+            //    else
+            //    {
+            //        tienphong = double.Parse(gvDatPhong.Columns["DONGIA"].SummaryItem.SummaryValue.ToString());
+            //    }
+
+            //    txtThanhTien.Text = (tienphong + t).ToString("N0");
+            //}
+            //else
+            //{
+            //    txtThanhTien.Text = (_datphong_ct.SumByIddp(_idDP) + t).ToString("N0");
+            //}
+
 
         }
 
@@ -984,7 +1147,7 @@ namespace KHACHSAN
                 cboTrangThai.SelectedValue = dp.STATUS;
                 spSoNguoi.Text = dp.SONGUOIO.ToString();
                 txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-                loadDP();
+                loadDPCT_id();
                 loadSPDV();
             }    
         }
@@ -1062,6 +1225,8 @@ namespace KHACHSAN
            
             if (gvDanhSach.RowCount > 0)
             {
+                loadDPCT_id();
+                loadSPDV();
                 _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
                 var dp = _datphong.GetItem(_idDP);
                 cboKhachHang.SelectedValue = dp.IDKH;
@@ -1070,10 +1235,7 @@ namespace KHACHSAN
                 txtGhiChu.Text = dp.GHICHU.ToString();
                 cboTrangThai.SelectedValue = dp.STATUS;
                 spSoNguoi.Text = dp.SONGUOIO.ToString();
-                txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-                loadDP();
-                loadSPDV();
-                
+                txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");                           
                 TabControl.SelectedTabPage = PageChiTiet;
             }
          
@@ -1112,8 +1274,7 @@ namespace KHACHSAN
 
         private void btnIn_Click(object sender, EventArgs e)
         {   if(_idDP==0)
-            {
-                
+            {                
                 MessageBox.Show("Vui long chọn Hóa Đơn", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return;
             }    
@@ -1124,7 +1285,7 @@ namespace KHACHSAN
             }    
             if(!_them)
             {  
-                if(DateTime.Now>=_datphong.GetItem(_idDP).NGAYTRA)
+                if(DateTime.Now>_datphong.GetItem(_idDP).NGAYTRA)
                 {
                     if(MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn hoặc bằng ngày hiện tại. Bạn có muốn tiếp tục","Cảnh Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
                     {
@@ -1161,18 +1322,25 @@ namespace KHACHSAN
                     cboTrangThai.SelectedValue = true;
                     objMain.gControl.Gallery.Groups.Clear();
                     objMain.showRoom();
-                }    
-
-              
-               
-
+                }                                 
             }    
            
         }
 
         private void dtNgayDat_ValueChanged(object sender, EventArgs e)
+        {                      
+            update_songayo();
+            loadPhong();
+        }
+        private void dtNgayTra_ValueChanged(object sender, EventArgs e)
         {
-           // loadphongByNgayDat(dtNgayDat.Value);
+            if(dtNgayTra.Value<dtNgayDat.Value)
+            {
+                MessageBox.Show("Ngày trả Không hợp lợi vui lòng nhập lại ngày ","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtNgayTra.Value = dtNgayDat.Value.AddDays(1);
+            }    
+            update_songayo();
+            loadPhong();
         }
 
         private void gcDatPhong_TextChanged(object sender, EventArgs e)
@@ -1208,6 +1376,8 @@ namespace KHACHSAN
             }    
         }
 
+     
+
         private void gvDanhSach_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
             if(e.Column.Name=="DISABLED"&& bool.Parse(e.CellValue.ToString())==true)
@@ -1216,8 +1386,6 @@ namespace KHACHSAN
                 e.Graphics.DrawImage(img, e.Bounds.X, e.Bounds.Y);
                 e.Handled = true;
             }
-        }
-
-       
+        }       
     }
 }

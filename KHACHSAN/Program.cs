@@ -26,6 +26,8 @@ namespace KHACHSAN
             Application.EnableVisualStyles();
             // đặt phương thức Hiển thị Văn bản Tương thích
             Application.SetCompatibleTextRenderingDefault(false);
+
+
             if (File.Exists("connectdb.dba"))
             {
                 BinaryFormatter bf = new BinaryFormatter();  // tạo đối tượng chuyển đổi file
@@ -74,7 +76,7 @@ namespace KHACHSAN
                 Application.Run(new frmKetNoiDB());
             }
 
-            
+
         }
     }
 }

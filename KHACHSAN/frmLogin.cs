@@ -56,7 +56,8 @@ namespace KHACHSAN
                 return;
             }
             string pass = Encryptor.Encrypt(txtPass.Text, "qwert@123!poiuy", true);
-            tb_SYS_USER user = _sysUser.getItem(txtUserNam.Text, _sysparam.macty, _sysparam.madvi);
+            tb_SYS_USER user = _sysUser.getItem(txtUserNam.Text.Trim(), _sysparam.macty, _sysparam.madvi);
+
             if(user.PASSWD.Equals(pass))
             {
                 frmMain frm = new frmMain(user);
@@ -70,14 +71,10 @@ namespace KHACHSAN
                 return;
             }    
         }
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        
-
+        }      
         private void txtPass_KeyDown(object sender, KeyEventArgs e)
         {
            
@@ -106,7 +103,6 @@ namespace KHACHSAN
                     frmMain frm = new frmMain(user);
                     frm.ShowDialog();
                     this.Hide();
-
                 }
                 else
                 {

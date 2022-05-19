@@ -266,7 +266,7 @@ namespace KHACHSAN
 
             _macty = Friend._macty;
             _madvi = Friend._madvi;
-
+            dtNgayDat.Enabled = false;
             dtNgayDat.Value = DateTime.Now;
             dtNgayTra.Value = DateTime.Now.AddDays(1);
             txtThanhTien.Enabled = false;
@@ -274,7 +274,6 @@ namespace KHACHSAN
             cboTrangThai.DataSource = TRANGTHAI.getList();
             cboTrangThai.ValueMember = "_value";
             cboTrangThai.DisplayMember = "_display";
-
             spSoNguoi.Text = "1";
            
             loadKH();

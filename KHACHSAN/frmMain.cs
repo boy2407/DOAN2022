@@ -33,6 +33,8 @@ namespace KHACHSAN
         SYS_RIGHT _sysRight;
         VIEW_DATPHONG_DATPHONG_CT_PHONG _v;
         GalleryItem item = null;
+        DATPHONG _datphong;
+        NavBarItem _itemBK;
         bool them;
         //[Obsolete]
         private void frmMain_Load(object sender, EventArgs e)
@@ -42,13 +44,15 @@ namespace KHACHSAN
             _tang = new TANG();
             _func = new SYS_FUNC();
             _phong = new PHONG();
+            _datphong = new DATPHONG();
             leftMenu();
-            showRoom(); 
-           
+            showRoom();
+         
             this.navMain.Size = new System.Drawing.Size(321, 500);
             timer1.Enabled = true;
-
-            
+            _itemBK = GetNavItem();
+            timerCheckIn.Enabled = true;
+           
             gControl.Gallery.Appearance.ItemCaptionAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 10.25F);
             gControl.Gallery.Appearance.ItemCaptionAppearance.Hovered.Font = new System.Drawing.Font("Tahoma", 12, System.Drawing.FontStyle.Bold);
            
@@ -115,6 +119,40 @@ namespace KHACHSAN
             }
 
         }
+      public NavBarItem GetNavItem()
+        {           
+            var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
+            if (lst != null)
+            {
+                MessageBox.Show(lst.Count.ToString());
+                foreach (NavBarGroup navGroup in navMain.Groups)
+                {
+                    if (navGroup.Name == "DANHMUC")
+                    {
+                        foreach (NavBarItemLink i in navGroup.ItemLinks)
+                        {
+                            if (i.Item.Tag.ToString() == "BOOKING")
+                            {
+                                return i.Item;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        private void timerCheckIn_Tick(object sender, EventArgs e)
+        {
+            _datphong = new DATPHONG();           
+            var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
+            if (lst.Count<1)
+            {                       
+                _itemBK.Appearance.ForeColor = Color.Black;
+                return;
+            }
+            _itemBK.Appearance.ForeColor = Color.Red;
+            
+        }
 
         void leftMenu()
         {
@@ -139,8 +177,7 @@ namespace KHACHSAN
                         navItem.ImageOptions.SmallImageIndex = 0;
                         navGroup.ItemLinks.Add(navItem);
                     }
-                    navMain.Groups[navGroup.Name].Expanded = true
-                        ;
+                    navMain.Groups[navGroup.Name].Expanded = true;
                 }
               
             }    
@@ -202,7 +239,6 @@ namespace KHACHSAN
             if(_uRight.USER_RIGHT==0)
             {
                 MessageBox.Show("Không có quyền thao tác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             else
             {
@@ -278,6 +314,12 @@ namespace KHACHSAN
                     case "QUANTRI":
                         {
                             USERMANAGEMENT.frmMain frm = new USERMANAGEMENT.frmMain();
+                            frm.ShowDialog();
+                            break;
+                        }
+                    case "PHONGTRONGTUAN":
+                        {
+                            test frm = new test();
                             frm.ShowDialog();
                             break;
                         }
@@ -395,6 +437,6 @@ namespace KHACHSAN
            
         }
 
-        
+       
     }
 }

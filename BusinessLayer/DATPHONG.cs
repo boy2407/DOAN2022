@@ -31,7 +31,7 @@ namespace BusinessLayer
         }
         public List<OBJ_DATPHONG> GetAllTheoDoan(DateTime tungay, DateTime denngay, string macty, string madvi)
         {
-            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT >= tungay && x.NGAYTRA < denngay&&x.THEODOAN==true).ToList();
+            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT >= tungay && x.NGAYTRA < denngay&&x.THEODOAN==true&&x.BOOKING!=true).ToList();
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
             OBJ_DATPHONG dp;
             foreach (var item in listDP)
@@ -52,6 +52,35 @@ namespace BusinessLayer
                 dp.THEODOAN = item.THEODOAN;
                 dp.DISABLED = item.DISABLED;
                 dp.GHICHU = item.GHICHU;
+                dp.BOOKING = item.BOOKING;
+                lstDP.Add(dp);
+            }
+            return lstDP;
+        }
+        public List<OBJ_DATPHONG> GetAllBooking(DateTime tungay, DateTime denngay,bool booking, string macty, string madvi)
+        {
+            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT >= tungay && x.NGAYTRA < denngay&&x.BOOKING==booking&&x.STATUS==false&&x.NHAN==false).ToList();
+            List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
+            OBJ_DATPHONG dp;
+            foreach (var item in listDP)
+            {
+                dp = new OBJ_DATPHONG();
+                dp.IDDP = item.IDDP;
+                dp.IDKH = item.IDKH;
+                var kh = db.tb_KhachHang.FirstOrDefault(x => x.IDKH == item.IDKH);
+                dp.HOTEN = kh.HOTEN;
+                dp.NGAYDAT = item.NGAYDAT;
+                dp.NGAYTRA = item.NGAYTRA;
+                dp.UID = item.UID;
+                dp.MACTY = item.MACTY;
+                dp.MADVI = item.MADVI;
+                dp.SOTIEN = item.SOTIEN;
+                dp.SONGUOIO = item.SONGUOIO;
+                dp.STATUS = item.STATUS;
+                dp.THEODOAN = item.THEODOAN;
+                dp.DISABLED = item.DISABLED;
+                dp.GHICHU = item.GHICHU;
+                dp.BOOKING = item.BOOKING;
                 lstDP.Add(dp);
             }
             return lstDP;
@@ -86,6 +115,48 @@ namespace BusinessLayer
         public List<OBJ_DATPHONG> GetAllCheckOut(string macty, string madvi)
         {
             var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT < DateTime.Now && x.NGAYTRA <DateTime.Now&&x.STATUS==false).ToList();
+            List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
+            OBJ_DATPHONG dp;
+            foreach (var item in listDP)
+            {
+                dp = new OBJ_DATPHONG();
+                dp.IDDP = item.IDDP;
+                dp.IDKH = item.IDKH;
+                var kh = db.tb_KhachHang.FirstOrDefault(x => x.IDKH == item.IDKH);
+                dp.HOTEN = kh.HOTEN;
+                dp.NGAYDAT = item.NGAYDAT;
+                dp.NGAYTRA = item.NGAYTRA;
+                dp.UID = item.UID;
+                dp.MACTY = item.MACTY;
+                dp.MADVI = item.MADVI;
+                dp.SOTIEN = item.SOTIEN;
+                dp.SONGUOIO = item.SONGUOIO;
+                dp.STATUS = item.STATUS;
+                dp.THEODOAN = item.THEODOAN;
+                dp.DISABLED = item.DISABLED;
+                dp.GHICHU = item.GHICHU;
+                lstDP.Add(dp);
+            }
+            return lstDP;
+        }
+        public bool CheckIn(string macty, string madvi)
+        {
+            var listDP = db.tb_DatPhong.Where(x =>x.NGAYDAT >= DateTime.Now && x.NGAYTRA > DateTime.Now && x.STATUS == false && x.BOOKING == true).ToList();           
+            if (listDP.Count<1)
+            {
+                return false;
+            }
+            return true; 
+        }
+        public List<OBJ_DATPHONG>GetAllCheckIn(string macty,string madvi)
+        {
+            DateTime s = DateTime.Now;
+            s = Convert.ToDateTime(s.ToString("dd - MM - yyyy"));
+            var listDP = db.tb_DatPhong.Where(x =>x.NGAYDAT>=s && x.NGAYTRA >s && x.STATUS == false&&x.BOOKING==true).ToList();
+            if(listDP==null)
+            {
+                return null;
+            }    
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
             OBJ_DATPHONG dp;
             foreach (var item in listDP)

@@ -31,5 +31,6 @@ namespace DataLayer
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public Nullable<System.DateTime> UPDATE_DATE { get; set; }
         public Nullable<int> UPDATE_BY { get; set; }
+        public Nullable<bool> NHAN { get; set; }
     }
 }

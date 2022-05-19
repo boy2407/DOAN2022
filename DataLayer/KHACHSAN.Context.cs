@@ -28,12 +28,12 @@ namespace DataLayer
         }
     
         public virtual DbSet<tb_CongTy> tb_CongTy { get; set; }
-        public virtual DbSet<tb_DatPhong> tb_DatPhong { get; set; }
-        public virtual DbSet<tb_DatPhong_CT> tb_DatPhong_CT { get; set; }
         public virtual DbSet<tb_DatPhong_SP> tb_DatPhong_SP { get; set; }
         public virtual DbSet<tb_DonVi> tb_DonVi { get; set; }
+        public virtual DbSet<tb_KhachHang> tb_KhachHang { get; set; }
         public virtual DbSet<tb_LoaiPhong> tb_LoaiPhong { get; set; }
         public virtual DbSet<tb_Param> tb_Param { get; set; }
+        public virtual DbSet<tb_Phat> tb_Phat { get; set; }
         public virtual DbSet<tb_Phong> tb_Phong { get; set; }
         public virtual DbSet<tb_Phong_ThietBi> tb_Phong_ThietBi { get; set; }
         public virtual DbSet<tb_SanPham> tb_SanPham { get; set; }
@@ -51,9 +51,9 @@ namespace DataLayer
         public virtual DbSet<V_REP_SYS_RIGHT_REP> V_REP_SYS_RIGHT_REP { get; set; }
         public virtual DbSet<V_USER_INGROUP> V_USER_INGROUP { get; set; }
         public virtual DbSet<V_USER_NOTIN_GROUP> V_USER_NOTIN_GROUP { get; set; }
-        public virtual DbSet<tb_KhachHang> tb_KhachHang { get; set; }
-        public virtual DbSet<Appointment> Appointments { get; set; }
-        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<tb_DatPhong_CT> tb_DatPhong_CT { get; set; }
+        public virtual DbSet<tb_DatPhong_Phong_NgayO> tb_DatPhong_Phong_NgayO { get; set; }
+        public virtual DbSet<tb_DatPhong> tb_DatPhong { get; set; }
     
         public virtual int REP_DOANHTHU_CONGTY_NGAY(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, string mACTY)
         {

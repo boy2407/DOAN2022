@@ -139,22 +139,26 @@ namespace BusinessLayer
             }
             return listDPCT;
         }
-        public List<OBJ_BOOKINGLIST> getAllByDatPhong_DSPD(int _iddp)
+        public List<OBJ_DP_CT> getAllDPCT(int _iddp)
         {
             PHONG p = new PHONG();
             TANG t = new TANG();
+            LOAIPHONG lp = new LOAIPHONG();
             var listget = db.tb_DatPhong_CT.Where(x => x.IDDP == _iddp);
-            List<OBJ_BOOKINGLIST> listDPCT = new List<OBJ_BOOKINGLIST>();
-            OBJ_BOOKINGLIST DPCT;
+            //var listget = db.tb_DatPhong_CT.Select(c => new { c.IDDP, c.IDPHONG, c.SONGAYO, c.THANHTIEN, c.IDDPCT, c.DONGIA }).Where(x=>x.IDDP==_iddp).Distinct();
+            List<OBJ_DP_CT> listDPCT = new List<OBJ_DP_CT>();
+            OBJ_DP_CT DPCT;
             foreach (var item in listget)
             {
-                DPCT = new OBJ_BOOKINGLIST();
+                DPCT = new OBJ_DP_CT();
                 DPCT.IDDP = item.IDDP;
                 DPCT.IDDPCT = item.IDDPCT;
                 tb_Phong phong = p.getItem(item.IDPHONG);
                 DPCT.TENPHONG = phong.TENPHONG;
+                DPCT.IDTANG = phong.IDTANG;
                 tb_Tang tang = t.getItem(phong.IDTANG);
                 DPCT.TENTANG = tang.TENTANG;
+                DPCT.SONGUOI = (int)lp.getItem(phong.IDLOAIPHONG).SONGUOI;
                 DPCT.IDPHONG = item.IDPHONG;              
                 DPCT.THANHTIEN = item.THANHTIEN;
                 DPCT.SONGAYO = item.SONGAYO;

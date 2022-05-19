@@ -60,7 +60,7 @@
     <Compile Include="DONVI.cs" />
     <Compile Include="OBJ PHONG_THIETBI.cs" />
     <Compile Include="PHONG THIETBI.cs" />
-    <Compile Include="RESOURCES.cs" />
+    <Compile Include="SYS_DATPHONG_PHONG_NGAYO.cs" />
     <Compile Include="SYS_FUNC.cs" />
     <Compile Include="GIOITINH.cs" />
     <Compile Include="KHACHHANG.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="OBJ_DATPHONG.cs" />
     <Compile Include="OBJ_DATPHONGCHITIET.cs" />
     <Compile Include="OBJ_DPSP.cs" />
-    <Compile Include="OBJ_BOOKINGLIST.cs" />
+    <Compile Include="OBJ_DP_CT.cs" />
     <Compile Include="OBJ_PHONG.cs" />
     <Compile Include="PHONG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
