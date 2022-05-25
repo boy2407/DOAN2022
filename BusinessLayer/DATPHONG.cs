@@ -24,14 +24,10 @@ namespace BusinessLayer
         public List<tb_DatPhong> GetAllTheoDoan()
         {
             return db.tb_DatPhong.Where(x=>x.THEODOAN==true&&x.BOOKING==false).ToList();
-        }
-        public List<tb_DatPhong> GetAllBooking()
+        }      
+        public List<OBJ_DATPHONG> GetAll_RoomCheckedIn(DateTime tungay, DateTime denngay, string macty, string madvi)
         {
-            return db.tb_DatPhong.Where(x=>x.BOOKING==true).ToList();
-        }
-        public List<OBJ_DATPHONG> GetAllTheoDoan(DateTime tungay, DateTime denngay, string macty, string madvi)
-        {
-            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT >= tungay && x.NGAYTRA < denngay&&x.THEODOAN==true&&x.BOOKING!=true).ToList();
+            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT >= tungay && x.NGAYTRA < denngay&&x.NHAN==true).ToList();
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
             OBJ_DATPHONG dp;
             foreach (var item in listDP)
@@ -112,7 +108,7 @@ namespace BusinessLayer
             }
             return lstDP;
           }
-        public List<OBJ_DATPHONG> GetAllCheckOut(string macty, string madvi)
+        public List<OBJ_DATPHONG> GetAll_RoomCheckOut(string macty, string madvi)
         {
             var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT < DateTime.Now && x.NGAYTRA <DateTime.Now&&x.STATUS==false).ToList();
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
@@ -141,8 +137,8 @@ namespace BusinessLayer
         }
         public bool CheckIn(string macty, string madvi)
         {
-            var listDP = db.tb_DatPhong.Where(x =>x.NGAYDAT >= DateTime.Now && x.NGAYTRA > DateTime.Now && x.STATUS == false && x.BOOKING == true).ToList();           
-            if (listDP.Count<1)
+            var listDP = db.tb_DatPhong.Where(x => x.STATUS == false && x.BOOKING == true&&x.NHAN==false).Min(x=>x.NGAYDAT);           
+            if (listDP==null)
             {
                 return false;
             }
@@ -151,8 +147,8 @@ namespace BusinessLayer
         public List<OBJ_DATPHONG>GetAllCheckIn(string macty,string madvi)
         {
             DateTime s = DateTime.Now;
-            s = Convert.ToDateTime(s.ToString("dd - MM - yyyy"));
-            var listDP = db.tb_DatPhong.Where(x =>x.NGAYDAT>=s && x.NGAYTRA >s && x.STATUS == false&&x.BOOKING==true).ToList();
+            s = Convert.ToDateTime(s.ToString("dd-MM-yyyy"));
+            var listDP = db.tb_DatPhong.Where(x => x.STATUS == false&&x.BOOKING==true&&x.NHAN==false).ToList();
             if(listDP==null)
             {
                 return null;
@@ -161,23 +157,26 @@ namespace BusinessLayer
             OBJ_DATPHONG dp;
             foreach (var item in listDP)
             {
-                dp = new OBJ_DATPHONG();
-                dp.IDDP = item.IDDP;
-                dp.IDKH = item.IDKH;
-                var kh = db.tb_KhachHang.FirstOrDefault(x => x.IDKH == item.IDKH);
-                dp.HOTEN = kh.HOTEN;
-                dp.NGAYDAT = item.NGAYDAT;
-                dp.NGAYTRA = item.NGAYTRA;
-                dp.UID = item.UID;
-                dp.MACTY = item.MACTY;
-                dp.MADVI = item.MADVI;
-                dp.SOTIEN = item.SOTIEN;
-                dp.SONGUOIO = item.SONGUOIO;
-                dp.STATUS = item.STATUS;
-                dp.THEODOAN = item.THEODOAN;
-                dp.DISABLED = item.DISABLED;
-                dp.GHICHU = item.GHICHU;
-                lstDP.Add(dp);
+                  if(Convert.ToDateTime(item.NGAYDAT.Value.ToString("dd-MM-yyyy"))==s)
+                {
+                    dp = new OBJ_DATPHONG();
+                    dp.IDDP = item.IDDP;
+                    dp.IDKH = item.IDKH;
+                    var kh = db.tb_KhachHang.FirstOrDefault(x => x.IDKH == item.IDKH);
+                    dp.HOTEN = kh.HOTEN;
+                    dp.NGAYDAT = item.NGAYDAT;
+                    dp.NGAYTRA = item.NGAYTRA;
+                    dp.UID = item.UID;
+                    dp.MACTY = item.MACTY;
+                    dp.MADVI = item.MADVI;
+                    dp.SOTIEN = item.SOTIEN;
+                    dp.SONGUOIO = item.SONGUOIO;
+                    dp.STATUS = item.STATUS;
+                    dp.THEODOAN = item.THEODOAN;
+                    dp.DISABLED = item.DISABLED;
+                    dp.GHICHU = item.GHICHU;
+                    lstDP.Add(dp);
+                }                                  
             }
             return lstDP;
         }

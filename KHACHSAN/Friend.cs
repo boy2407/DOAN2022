@@ -45,7 +45,11 @@ namespace KHACHSAN
 
             return s; 
         }
-        
+       
+        public static int laySoNgayCuaThang(int thang, int nam)
+        {
+            return DateTime.DaysInMonth(nam, thang);
+        }
         public static DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));

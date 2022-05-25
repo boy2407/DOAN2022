@@ -62,6 +62,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDPHONG" Type="int" Nullable="false" />
           <Property Name="IDDP" Type="int" Nullable="false" />
+          <Property Name="MAKY" Type="int" />
           <Property Name="NGAYO" Type="datetime" />
         </EntityType>
         <EntityType Name="tb_DatPhong_SP">
@@ -103,6 +104,61 @@
           <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="500" />
           <Property Name="DISABLED" Type="bit" />
+        </EntityType>
+        <EntityType Name="tb_KyPhong">
+          <Key>
+            <PropertyRef Name="MAKY" />
+          </Key>
+          <Property Name="MAKY" Type="int" Nullable="false" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" />
+          <Property Name="MADV" Type="nvarchar" MaxLength="10" />
+          <Property Name="SONGAY" Type="int" />
+          <Property Name="NGAY" Type="date" />
+          <Property Name="NAM" Type="int" />
+          <Property Name="THANG" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_KyPhong_CT">
+          <Key>
+            <PropertyRef Name="IDPHONG" />
+            <PropertyRef Name="IDDPCT" />
+          </Key>
+          <Property Name="IDPHONG" Type="int" Nullable="false" />
+          <Property Name="IDDPCT" Type="int" Nullable="false" />
+          <Property Name="TENPHONG" Type="nvarchar" MaxLength="50" />
+          <Property Name="MAKY" Type="int" />
+          <Property Name="MADV" Type="nvarchar" MaxLength="10" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" />
+          <Property Name="D1" Type="nvarchar" MaxLength="10" />
+          <Property Name="D2" Type="nvarchar" MaxLength="10" />
+          <Property Name="D3" Type="nvarchar" MaxLength="10" />
+          <Property Name="D4" Type="nvarchar" MaxLength="10" />
+          <Property Name="D5" Type="nvarchar" MaxLength="10" />
+          <Property Name="D6" Type="nvarchar" MaxLength="10" />
+          <Property Name="D7" Type="nvarchar" MaxLength="10" />
+          <Property Name="D8" Type="nvarchar" MaxLength="10" />
+          <Property Name="D9" Type="nvarchar" MaxLength="10" />
+          <Property Name="D10" Type="nvarchar" MaxLength="10" />
+          <Property Name="D11" Type="nvarchar" MaxLength="10" />
+          <Property Name="D12" Type="nvarchar" MaxLength="10" />
+          <Property Name="D13" Type="nvarchar" MaxLength="10" />
+          <Property Name="D14" Type="nvarchar" MaxLength="10" />
+          <Property Name="D15" Type="nvarchar" MaxLength="10" />
+          <Property Name="D16" Type="nvarchar" MaxLength="10" />
+          <Property Name="D17" Type="nvarchar" MaxLength="10" />
+          <Property Name="D18" Type="nvarchar" MaxLength="10" />
+          <Property Name="D19" Type="nvarchar" MaxLength="10" />
+          <Property Name="D20" Type="nvarchar" MaxLength="10" />
+          <Property Name="D21" Type="nvarchar" MaxLength="10" />
+          <Property Name="D22" Type="nvarchar" MaxLength="10" />
+          <Property Name="D23" Type="nvarchar" MaxLength="10" />
+          <Property Name="D24" Type="nvarchar" MaxLength="10" />
+          <Property Name="D25" Type="nvarchar" MaxLength="10" />
+          <Property Name="D26" Type="nvarchar" MaxLength="10" />
+          <Property Name="D27" Type="nvarchar" MaxLength="10" />
+          <Property Name="D28" Type="nvarchar" MaxLength="10" />
+          <Property Name="D29" Type="nvarchar" MaxLength="10" />
+          <Property Name="D30" Type="nvarchar" MaxLength="10" />
+          <Property Name="D31" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_LoaiPhong">
           <Key>
@@ -437,6 +493,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySet Name="tb_DatPhong_SP" EntityType="Self.tb_DatPhong_SP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DonVi" EntityType="Self.tb_DonVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_KhachHang" EntityType="Self.tb_KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_KyPhong" EntityType="Self.tb_KyPhong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_KyPhong_CT" EntityType="Self.tb_KyPhong_CT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_LoaiPhong" EntityType="Self.tb_LoaiPhong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Param" EntityType="Self.tb_Param" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Phat" EntityType="Self.tb_Phat" Schema="dbo" store:Type="Tables" />
@@ -612,6 +670,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySet Name="tb_DatPhong_CT" EntityType="KHACHSAN.tb_DatPhong_CT" />
           <EntitySet Name="tb_DatPhong_Phong_NgayO" EntityType="KHACHSAN.tb_DatPhong_Phong_NgayO" />
           <EntitySet Name="tb_DatPhong" EntityType="KHACHSAN.tb_DatPhong" />
+          <EntitySet Name="tb_KyPhong" EntityType="KHACHSAN.tb_KyPhong" />
+          <EntitySet Name="tb_KyPhong_CT" EntityType="KHACHSAN.tb_KyPhong_CT" />
           </EntityContainer>
         <EntityType Name="tb_CongTy">
           <Key>
@@ -1013,6 +1073,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDPHONG" Type="Int32" Nullable="false" />
           <Property Name="IDDP" Type="Int32" Nullable="false" />
           <Property Name="NGAYO" Type="DateTime" Precision="3" />
+          <Property Name="MAKY" Type="Int32" />
         </EntityType>
         <EntityType Name="tb_DatPhong">
           <Key>
@@ -1036,6 +1097,61 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
           <Property Name="UPDATE_BY" Type="Int32" />
           <Property Name="NHAN" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tb_KyPhong">
+          <Key>
+            <PropertyRef Name="MAKY" />
+          </Key>
+          <Property Name="MAKY" Type="Int32" Nullable="false" />
+          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SONGAY" Type="Int32" />
+          <Property Name="NGAY" Type="DateTime" Precision="0" />
+          <Property Name="NAM" Type="Int32" />
+          <Property Name="THANG" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_KyPhong_CT">
+          <Key>
+            <PropertyRef Name="IDPHONG" />
+            <PropertyRef Name="IDDPCT" />
+          </Key>
+          <Property Name="IDPHONG" Type="Int32" Nullable="false" />
+          <Property Name="IDDPCT" Type="Int32" Nullable="false" />
+          <Property Name="TENPHONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MAKY" Type="Int32" />
+          <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D4" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D14" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D15" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D21" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D22" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D23" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D24" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D25" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D26" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D27" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D28" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D29" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D30" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D31" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1351,6 +1467,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_DatPhong_Phong_NgayO">
             <EntityTypeMapping TypeName="KHACHSAN.tb_DatPhong_Phong_NgayO">
               <MappingFragment StoreEntitySet="tb_DatPhong_Phong_NgayO">
+                <ScalarProperty Name="MAKY" ColumnName="MAKY" />
                 <ScalarProperty Name="NGAYO" ColumnName="NGAYO" />
                 <ScalarProperty Name="IDDP" ColumnName="IDDP" />
                 <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
@@ -1379,6 +1496,62 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
                 <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
                 <ScalarProperty Name="IDKH" ColumnName="IDKH" />
                 <ScalarProperty Name="IDDP" ColumnName="IDDP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_KyPhong">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_KyPhong">
+              <MappingFragment StoreEntitySet="tb_KyPhong">
+                <ScalarProperty Name="THANG" ColumnName="THANG" />
+                <ScalarProperty Name="NAM" ColumnName="NAM" />
+                <ScalarProperty Name="NGAY" ColumnName="NGAY" />
+                <ScalarProperty Name="SONGAY" ColumnName="SONGAY" />
+                <ScalarProperty Name="MADV" ColumnName="MADV" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="MAKY" ColumnName="MAKY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_KyPhong_CT">
+            <EntityTypeMapping TypeName="KHACHSAN.tb_KyPhong_CT">
+              <MappingFragment StoreEntitySet="tb_KyPhong_CT">
+                <ScalarProperty Name="D31" ColumnName="D31" />
+                <ScalarProperty Name="D30" ColumnName="D30" />
+                <ScalarProperty Name="D29" ColumnName="D29" />
+                <ScalarProperty Name="D28" ColumnName="D28" />
+                <ScalarProperty Name="D27" ColumnName="D27" />
+                <ScalarProperty Name="D26" ColumnName="D26" />
+                <ScalarProperty Name="D25" ColumnName="D25" />
+                <ScalarProperty Name="D24" ColumnName="D24" />
+                <ScalarProperty Name="D23" ColumnName="D23" />
+                <ScalarProperty Name="D22" ColumnName="D22" />
+                <ScalarProperty Name="D21" ColumnName="D21" />
+                <ScalarProperty Name="D20" ColumnName="D20" />
+                <ScalarProperty Name="D19" ColumnName="D19" />
+                <ScalarProperty Name="D18" ColumnName="D18" />
+                <ScalarProperty Name="D17" ColumnName="D17" />
+                <ScalarProperty Name="D16" ColumnName="D16" />
+                <ScalarProperty Name="D15" ColumnName="D15" />
+                <ScalarProperty Name="D14" ColumnName="D14" />
+                <ScalarProperty Name="D13" ColumnName="D13" />
+                <ScalarProperty Name="D12" ColumnName="D12" />
+                <ScalarProperty Name="D11" ColumnName="D11" />
+                <ScalarProperty Name="D10" ColumnName="D10" />
+                <ScalarProperty Name="D9" ColumnName="D9" />
+                <ScalarProperty Name="D8" ColumnName="D8" />
+                <ScalarProperty Name="D7" ColumnName="D7" />
+                <ScalarProperty Name="D6" ColumnName="D6" />
+                <ScalarProperty Name="D5" ColumnName="D5" />
+                <ScalarProperty Name="D4" ColumnName="D4" />
+                <ScalarProperty Name="D3" ColumnName="D3" />
+                <ScalarProperty Name="D2" ColumnName="D2" />
+                <ScalarProperty Name="D1" ColumnName="D1" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="MADV" ColumnName="MADV" />
+                <ScalarProperty Name="MAKY" ColumnName="MAKY" />
+                <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
+                <ScalarProperty Name="IDDPCT" ColumnName="IDDPCT" />
+                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

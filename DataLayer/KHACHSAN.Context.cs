@@ -54,6 +54,8 @@ namespace DataLayer
         public virtual DbSet<tb_DatPhong_CT> tb_DatPhong_CT { get; set; }
         public virtual DbSet<tb_DatPhong_Phong_NgayO> tb_DatPhong_Phong_NgayO { get; set; }
         public virtual DbSet<tb_DatPhong> tb_DatPhong { get; set; }
+        public virtual DbSet<tb_KyPhong> tb_KyPhong { get; set; }
+        public virtual DbSet<tb_KyPhong_CT> tb_KyPhong_CT { get; set; }
     
         public virtual int REP_DOANHTHU_CONGTY_NGAY(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, string mACTY)
         {

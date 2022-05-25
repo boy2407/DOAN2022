@@ -45,6 +45,7 @@ namespace KHACHSAN
         //SYS_PARAM _param;
         string _madvi;
         string _macty;
+        frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
 
         private void frmBooking_Load(object sender, EventArgs e)
         {
@@ -273,7 +274,7 @@ namespace KHACHSAN
                 dp.NGAYDAT = dtNgayDat.Value;
                 dp.NGAYTRA = dtNgayTra.Value;
                 dp.SONGUOIO = int.Parse(spSoNguoi.EditValue.ToString());
-                dp.STATUS = bool.Parse(cboTrangThai.SelectedValue.ToString());
+                dp.STATUS = false;
                 dp.IDKH = int.Parse(cboKhachHang.SelectedValue.ToString());
                 dp.SOTIEN = double.Parse(txtThanhTien.Text);
                 dp.GHICHU = txtGhiChu.Text;
@@ -582,6 +583,26 @@ namespace KHACHSAN
             spSoNguoi.Text = dp.SONGUOIO.ToString();
             txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
             xtraTabControl1.SelectedTabPage = pagechitiet;
+        }
+
+        private void btnNhanPhong_Click(object sender, EventArgs e)
+        {
+            if (_idDP == 0)
+            {
+
+                MessageBox.Show("Vui lòng chọn đã đặt trước phòng ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
+            if (MessageBox.Show("Xác nhận khách hành đã nhận phòng", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                tb_DatPhong temp = _datphong.GetItem(_idDP);
+                temp.NHAN = true;
+                _datphong.update(temp);             
+                _phong.updateStatusBy_IDDP(_idDP,true);
+                objMain.gControl.Gallery.Groups.Clear();
+                objMain.showRoom();
+                loadDanhSach();
+            }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

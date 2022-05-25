@@ -19,7 +19,9 @@ namespace KHACHSAN
             InitializeComponent();
         }
         frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
-        public int _idPhong;
+        public int _iddp, _iddp_ct, _idPhong;        
+        public DateTime ngaydat,ngaytra;
+        
         PHONG _phong;
         DATPHONG_CT _datphong_ct;
         DATPHONG_SP _datphong_sp;
@@ -36,7 +38,9 @@ namespace KHACHSAN
         }
         void loadPhongTrong()
         {
-            searchPhong.Properties.DataSource = _phong.getPhongTrong();
+           //searchPhong.Properties.DataSource = _phong.getPhongTrong();
+            searchPhong.Properties.DataSource = _phong.PhongHienTai(ngaydat, ngaytra);
+
             searchPhong.Properties.ValueMember = "IDPHONG";
             searchPhong.Properties.DisplayMember = "TENPHONG";
         }
@@ -49,12 +53,11 @@ namespace KHACHSAN
                   "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            double tongtien = 0;
-            
+            double tongtien = 0;            
             var phonghientai = _datphong_ct.getIDDPByPhong(_idPhong);
             var phongchuyenden = _phong.getItemFull(int.Parse(searchPhong.EditValue.ToString()));
 
-            List<tb_DatPhong_SP> lstDPSP = _datphong_sp.getAllByPhong(phonghientai.IDDP, phonghientai.IDDPCT);
+            List<tb_DatPhong_SP> lstDPSP = _datphong_sp.getAllByPhong(_iddp, _iddp_ct);
              foreach(var item in lstDPSP)
             {
                 item.IDPHONG = int.Parse(searchPhong.EditValue.ToString());
@@ -71,7 +74,7 @@ namespace KHACHSAN
             _phong.updateStatus(_idPhong, false);
             _phong.updateStatus(phongchuyenden.IDPHONG, true);
             var dp = _datphong.GetItem(phonghientai.IDDP);
-            dp.SOTIEN = tongtien;
+            dp.SOTIEN = _datphong_ct.SumByIddp(_iddp) + _datphong_sp.SumByIddp_Iddp_ct(_iddp, _iddp_ct);
             _datphong.update(dp);
             objMain.gControl.Gallery.Groups.Clear();
             objMain.showRoom();

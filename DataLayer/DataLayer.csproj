@@ -95,6 +95,12 @@
     <Compile Include="tb_KhachHang.cs">
       <DependentUpon>KHACHSAN.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_KyPhong.cs">
+      <DependentUpon>KHACHSAN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_KyPhong_CT.cs">
+      <DependentUpon>KHACHSAN.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_LoaiPhong.cs">
       <DependentUpon>KHACHSAN.tt</DependentUpon>
     </Compile>

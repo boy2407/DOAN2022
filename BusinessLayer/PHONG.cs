@@ -59,7 +59,7 @@ namespace BusinessLayer
         {
             DATPHONG dp = new DATPHONG();
             //lấy phòng thuộc đơn vị
-            var lstdp = dp.GetAllCheckOut(macty, madvi);
+            var lstdp = dp.GetAll_RoomCheckOut(macty, madvi);
             List<tb_DatPhong_CT> lstdpct = new List<tb_DatPhong_CT>();
             // đưa về list phòng chi tiết
             foreach (var item in lstdp)

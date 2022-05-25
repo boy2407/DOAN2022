@@ -149,6 +149,12 @@
     <Compile Include="frmKhachHang.Designer.cs">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmKyPhongCT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKyPhongCT.Designer.cs">
+      <DependentUpon>frmKyPhongCT.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLoaiPhong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,12 @@
     </Compile>
     <Compile Include="frmPhong.Designer.cs">
       <DependentUpon>frmPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKyPhong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKyPhong.Designer.cs">
+      <DependentUpon>frmKyPhong.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSanPham.cs">
       <SubType>Form</SubType>
@@ -256,6 +268,9 @@
     <EmbeddedResource Include="frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmKyPhongCT.resx">
+      <DependentUpon>frmKyPhongCT.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLoaiPhong.resx">
       <DependentUpon>frmLoaiPhong.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhong.resx">
       <DependentUpon>frmPhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKyPhong.resx">
+      <DependentUpon>frmKyPhong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSanPham.resx">
       <DependentUpon>frmSanPham.cs</DependentUpon>

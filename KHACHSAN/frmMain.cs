@@ -49,9 +49,9 @@ namespace KHACHSAN
             showRoom();
          
             this.navMain.Size = new System.Drawing.Size(321, 500);
-            timer1.Enabled = true;
+            timer1.Enabled = false;
             _itemBK = GetNavItem();
-            timerCheckIn.Enabled = true;
+            timerCheckIn.Enabled = false;
            
             gControl.Gallery.Appearance.ItemCaptionAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 10.25F);
             gControl.Gallery.Appearance.ItemCaptionAppearance.Hovered.Font = new System.Drawing.Font("Tahoma", 12, System.Drawing.FontStyle.Bold);
@@ -124,7 +124,7 @@ namespace KHACHSAN
             var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
             if (lst != null)
             {
-                MessageBox.Show(lst.Count.ToString());
+                
                 foreach (NavBarGroup navGroup in navMain.Groups)
                 {
                     if (navGroup.Name == "DANHMUC")
@@ -317,9 +317,9 @@ namespace KHACHSAN
                             frm.ShowDialog();
                             break;
                         }
-                    case "PHONGTRONGTUAN":
+                    case "KYPHONG":
                         {
-                            test frm = new test();
+                            frmKyPhong frm = new frmKyPhong();
                             frm.ShowDialog();
                             break;
                         }
@@ -377,8 +377,16 @@ namespace KHACHSAN
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            _v = new VIEW_DATPHONG_DATPHONG_CT_PHONG();
+            v_DATPHONG_DATPHONG_CT_PHONG v = _v.getItemByIdPhong_Iddp(int.Parse(item.Value.ToString()));
+
             frmChuyenPhong frm = new frmChuyenPhong();
-            frm._idPhong = int.Parse(item.Value.ToString());            
+            frm._idPhong = int.Parse(item.Value.ToString());
+            frm._iddp_ct = v.IDDPCT;
+            frm._iddp = v.IDDP;
+            var t = _datphong.GetItem(v.IDDP);
+            frm.ngaydat = t.NGAYDAT.Value;
+            frm.ngaytra = t.NGAYTRA.Value;
             frm.ShowDialog();
         }
         private void btnSPDV_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

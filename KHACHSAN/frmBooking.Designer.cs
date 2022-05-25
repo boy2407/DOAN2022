@@ -29,6 +29,7 @@ namespace KHACHSAN
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBooking));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnThem = new System.Windows.Forms.ToolStripButton();
             this.btnSua = new System.Windows.Forms.ToolStripButton();
@@ -36,6 +37,7 @@ namespace KHACHSAN
             this.btnLuu = new System.Windows.Forms.ToolStripButton();
             this.btnBoQua = new System.Windows.Forms.ToolStripButton();
             this.btnThoat = new System.Windows.Forms.ToolStripButton();
+            this.btnNhanPhong = new System.Windows.Forms.ToolStripButton();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.pageDanhSach = new DevExpress.XtraTab.XtraTabPage();
@@ -137,7 +139,8 @@ namespace KHACHSAN
             this.btnXoa,
             this.btnLuu,
             this.btnBoQua,
-            this.btnThoat});
+            this.btnThoat,
+            this.btnNhanPhong});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1129, 41);
@@ -203,6 +206,16 @@ namespace KHACHSAN
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
+            // btnNhanPhong
+            // 
+            this.btnNhanPhong.Image = ((System.Drawing.Image)(resources.GetObject("btnNhanPhong.Image")));
+            this.btnNhanPhong.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNhanPhong.Name = "btnNhanPhong";
+            this.btnNhanPhong.Size = new System.Drawing.Size(91, 38);
+            this.btnNhanPhong.Text = "Nhận Phòng";
+            this.btnNhanPhong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNhanPhong.Click += new System.EventHandler(this.btnNhanPhong_Click);
             // 
             // gridView2
             // 
@@ -763,7 +776,6 @@ namespace KHACHSAN
             this.dtNgayTra.Size = new System.Drawing.Size(186, 21);
             this.dtNgayTra.TabIndex = 35;
             this.dtNgayTra.ValueChanged += new System.EventHandler(this.dtNgayTra_ValueChanged);
-            
             // 
             // label5
             // 
@@ -1034,5 +1046,6 @@ namespace KHACHSAN
         private System.Windows.Forms.TextBox txtThanhTien;
         private System.Windows.Forms.Label label8;
         private DevExpress.XtraGrid.Columns.GridColumn dpSONGUOI;
+        private System.Windows.Forms.ToolStripButton btnNhanPhong;
     }
 }

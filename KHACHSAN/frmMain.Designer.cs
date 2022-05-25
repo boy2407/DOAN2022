@@ -295,17 +295,17 @@ namespace KHACHSAN
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
-            this.timer2.Interval = 1000;
+            this.timer2.Interval = 3000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timerCheckIn
             // 
-            this.timerCheckIn.Interval = 10;
+            this.timerCheckIn.Interval = 5000;
             this.timerCheckIn.Tick += new System.EventHandler(this.timerCheckIn_Tick);
             // 
             // frmMain

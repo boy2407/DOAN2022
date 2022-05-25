@@ -36,7 +36,14 @@ namespace BusinessLayer
             }
             return lstDPSP;  
         }
-  
+        public tb_DatPhong_SP getItem(int iddpsp)
+        {
+            return db.tb_DatPhong_SP.FirstOrDefault(x => x.IDDPSP == iddpsp);
+        }
+        public tb_DatPhong_SP getItem(int iddp,int idpphong)
+        {
+            return db.tb_DatPhong_SP.FirstOrDefault(x => x.IDDP == iddp && x.IDPHONG==idpphong);
+        }
         public double SumByIddp_Iddp_ct(int iddp,int iddp_ct)
         {
             List<tb_DatPhong_SP> lst = db.tb_DatPhong_SP.Where(x => x.IDDP == iddp&&x.IDDPCT==iddp_ct).ToList();

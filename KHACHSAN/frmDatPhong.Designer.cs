@@ -31,6 +31,12 @@ namespace KHACHSAN
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDatPhong));
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            this.STATUS = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.THEODOAN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnThem = new System.Windows.Forms.ToolStripButton();
             this.btnSua = new System.Windows.Forms.ToolStripButton();
@@ -56,8 +62,6 @@ namespace KHACHSAN
             this.SONGUOIO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.MACTY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.MADVI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.STATUS = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.THEODOAN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IDKH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.HOTEN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GHICHU = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -111,7 +115,11 @@ namespace KHACHSAN
             this.spTHANHTIEN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.gcDatPhong = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip_DSDatPhong = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chuyểnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gvDatPhong = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dpIDDPSP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dpIDPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dpTENPHONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dpDONGIA = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -151,9 +159,39 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDatPhong)).BeginInit();
+            this.contextMenuStrip_DSDatPhong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDatPhong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // STATUS
+            // 
+            this.STATUS.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.STATUS.AppearanceHeader.Options.UseFont = true;
+            this.STATUS.AppearanceHeader.Options.UseTextOptions = true;
+            this.STATUS.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.STATUS.Caption = "TRẠNG THÁI";
+            this.STATUS.FieldName = "STATUS";
+            this.STATUS.MaxWidth = 80;
+            this.STATUS.Name = "STATUS";
+            this.STATUS.Visible = true;
+            this.STATUS.VisibleIndex = 8;
+            this.STATUS.Width = 80;
+            // 
+            // THEODOAN
+            // 
+            this.THEODOAN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.THEODOAN.AppearanceHeader.Options.UseFont = true;
+            this.THEODOAN.AppearanceHeader.Options.UseTextOptions = true;
+            this.THEODOAN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.THEODOAN.Caption = "THEO ĐOÀN";
+            this.THEODOAN.FieldName = "THEODOAN";
+            this.THEODOAN.MaxWidth = 90;
+            this.THEODOAN.MinWidth = 50;
+            this.THEODOAN.Name = "THEODOAN";
+            this.THEODOAN.Visible = true;
+            this.THEODOAN.VisibleIndex = 3;
+            this.THEODOAN.Width = 90;
             // 
             // toolStrip1
             // 
@@ -168,7 +206,7 @@ namespace KHACHSAN
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1128, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(1288, 41);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -191,7 +229,6 @@ namespace KHACHSAN
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            this.btnSua.DoubleClick += new System.EventHandler(this.btnSua_DoubleClick);
             // 
             // btnXoa
             // 
@@ -251,7 +288,7 @@ namespace KHACHSAN
             this.TabControl.Location = new System.Drawing.Point(0, 41);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedTabPage = this.PageDanhSach;
-            this.TabControl.Size = new System.Drawing.Size(1128, 861);
+            this.TabControl.Size = new System.Drawing.Size(1288, 861);
             this.TabControl.TabIndex = 2;
             this.TabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.PageDanhSach,
@@ -261,7 +298,7 @@ namespace KHACHSAN
             // 
             this.PageDanhSach.Controls.Add(this.splitContainerControl1);
             this.PageDanhSach.Name = "PageDanhSach";
-            this.PageDanhSach.Size = new System.Drawing.Size(1126, 836);
+            this.PageDanhSach.Size = new System.Drawing.Size(1286, 836);
             this.PageDanhSach.Text = "Danh Sách";
             // 
             // splitContainerControl1
@@ -277,7 +314,7 @@ namespace KHACHSAN
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gcDanhSach);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1126, 836);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1286, 836);
             this.splitContainerControl1.SplitterPosition = 59;
             this.splitContainerControl1.TabIndex = 0;
             // 
@@ -305,7 +342,7 @@ namespace KHACHSAN
             // 
             this.dtTuNgay.CustomFormat = "dd/MM/yyyy";
             this.dtTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtTuNgay.Location = new System.Drawing.Point(177, 11);
+            this.dtTuNgay.Location = new System.Drawing.Point(242, 11);
             this.dtTuNgay.Name = "dtTuNgay";
             this.dtTuNgay.Size = new System.Drawing.Size(200, 21);
             this.dtTuNgay.TabIndex = 1;
@@ -315,7 +352,7 @@ namespace KHACHSAN
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(129, 15);
+            this.label1.Location = new System.Drawing.Point(194, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 0;
@@ -327,7 +364,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 0);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(1126, 767);
+            this.gcDanhSach.Size = new System.Drawing.Size(1286, 767);
             this.gcDanhSach.TabIndex = 0;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
@@ -349,8 +386,23 @@ namespace KHACHSAN
             this.IDKH,
             this.HOTEN,
             this.GHICHU});
+            gridFormatRule1.Column = this.STATUS;
+            gridFormatRule1.ColumnApplyTo = this.STATUS;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Expression = "Iif([STATUS] = True, \'Hoàn Thành\', \'Chưa Hoàn Thành\')";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule1.StopIfTrue = true;
+            gridFormatRule2.Column = this.THEODOAN;
+            gridFormatRule2.ColumnApplyTo = this.THEODOAN;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleValue1.Expression = "Iif([STATUS] = True, \'Hoàn Thành\', \'Chưa Hoàn Thành\')";
+            formatConditionRuleValue1.Value1 = "<Null>";
+            gridFormatRule2.Rule = formatConditionRuleValue1;
+            this.gvDanhSach.FormatRules.Add(gridFormatRule1);
+            this.gvDanhSach.FormatRules.Add(gridFormatRule2);
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
+            this.gvDanhSach.OptionsView.ShowGroupPanel = false;
             this.gvDanhSach.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvDanhSach_CustomDrawRowIndicator);
             this.gvDanhSach.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gvDanhSach_CustomDrawCell);
             this.gvDanhSach.Click += new System.EventHandler(this.gvDanhSach_Click);
@@ -363,71 +415,81 @@ namespace KHACHSAN
             this.DISABLED.FieldName = "DISABLED";
             this.DISABLED.MaxWidth = 50;
             this.DISABLED.Name = "DISABLED";
-            this.DISABLED.Visible = true;
-            this.DISABLED.VisibleIndex = 0;
             this.DISABLED.Width = 50;
             // 
             // IDDP
             // 
             this.IDDP.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.IDDP.AppearanceHeader.Options.UseFont = true;
+            this.IDDP.AppearanceHeader.Options.UseTextOptions = true;
+            this.IDDP.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.IDDP.Caption = "SỐ HĐ";
             this.IDDP.FieldName = "IDDP";
-            this.IDDP.MaxWidth = 70;
+            this.IDDP.MaxWidth = 60;
             this.IDDP.Name = "IDDP";
             this.IDDP.Visible = true;
-            this.IDDP.VisibleIndex = 1;
-            this.IDDP.Width = 70;
+            this.IDDP.VisibleIndex = 0;
+            this.IDDP.Width = 60;
             // 
             // NGAYDAT
             // 
             this.NGAYDAT.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.NGAYDAT.AppearanceHeader.Options.UseFont = true;
+            this.NGAYDAT.AppearanceHeader.Options.UseTextOptions = true;
+            this.NGAYDAT.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.NGAYDAT.Caption = "NGÀY ĐẶT PHÒNG";
             this.NGAYDAT.FieldName = "NGAYDAT";
             this.NGAYDAT.MaxWidth = 120;
             this.NGAYDAT.MinWidth = 50;
             this.NGAYDAT.Name = "NGAYDAT";
             this.NGAYDAT.Visible = true;
-            this.NGAYDAT.VisibleIndex = 2;
+            this.NGAYDAT.VisibleIndex = 1;
+            this.NGAYDAT.Width = 120;
             // 
             // NGAYTRA
             // 
             this.NGAYTRA.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.NGAYTRA.AppearanceHeader.Options.UseFont = true;
+            this.NGAYTRA.AppearanceHeader.Options.UseTextOptions = true;
+            this.NGAYTRA.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.NGAYTRA.Caption = "NGÀY TRẢ PHÒNG";
             this.NGAYTRA.FieldName = "NGAYTRA";
             this.NGAYTRA.MaxWidth = 120;
             this.NGAYTRA.MinWidth = 50;
             this.NGAYTRA.Name = "NGAYTRA";
             this.NGAYTRA.Visible = true;
-            this.NGAYTRA.VisibleIndex = 3;
+            this.NGAYTRA.VisibleIndex = 2;
+            this.NGAYTRA.Width = 120;
             // 
             // SOTIEN
             // 
             this.SOTIEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.SOTIEN.AppearanceHeader.Options.UseFont = true;
+            this.SOTIEN.AppearanceHeader.Options.UseTextOptions = true;
+            this.SOTIEN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.SOTIEN.Caption = "SỐ TIỀN";
             this.SOTIEN.DisplayFormat.FormatString = "{0:#,#}";
             this.SOTIEN.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.SOTIEN.FieldName = "SOTIEN";
-            this.SOTIEN.MaxWidth = 100;
+            this.SOTIEN.MaxWidth = 200;
             this.SOTIEN.MinWidth = 80;
             this.SOTIEN.Name = "SOTIEN";
             this.SOTIEN.Visible = true;
-            this.SOTIEN.VisibleIndex = 4;
-            this.SOTIEN.Width = 80;
+            this.SOTIEN.VisibleIndex = 7;
+            this.SOTIEN.Width = 200;
             // 
             // SONGUOIO
             // 
             this.SONGUOIO.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.SONGUOIO.AppearanceHeader.Options.UseFont = true;
+            this.SONGUOIO.AppearanceHeader.Options.UseTextOptions = true;
+            this.SONGUOIO.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.SONGUOIO.Caption = "SỐ NGƯỜI";
             this.SONGUOIO.FieldName = "SONGUOIO";
             this.SONGUOIO.MaxWidth = 70;
             this.SONGUOIO.Name = "SONGUOIO";
             this.SONGUOIO.Visible = true;
-            this.SONGUOIO.VisibleIndex = 5;
+            this.SONGUOIO.VisibleIndex = 4;
             this.SONGUOIO.Width = 70;
             // 
             // MACTY
@@ -440,31 +502,6 @@ namespace KHACHSAN
             this.MADVI.FieldName = "MADVI";
             this.MADVI.Name = "MADVI";
             // 
-            // STATUS
-            // 
-            this.STATUS.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.STATUS.AppearanceHeader.Options.UseFont = true;
-            this.STATUS.Caption = "TRẠNG THÁI";
-            this.STATUS.FieldName = "STATUS";
-            this.STATUS.MaxWidth = 120;
-            this.STATUS.Name = "STATUS";
-            this.STATUS.Visible = true;
-            this.STATUS.VisibleIndex = 6;
-            this.STATUS.Width = 50;
-            // 
-            // THEODOAN
-            // 
-            this.THEODOAN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.THEODOAN.AppearanceHeader.Options.UseFont = true;
-            this.THEODOAN.Caption = "THEO ĐOÀN";
-            this.THEODOAN.FieldName = "THEODOAN";
-            this.THEODOAN.MaxWidth = 90;
-            this.THEODOAN.MinWidth = 50;
-            this.THEODOAN.Name = "THEODOAN";
-            this.THEODOAN.Visible = true;
-            this.THEODOAN.VisibleIndex = 7;
-            this.THEODOAN.Width = 50;
-            // 
             // IDKH
             // 
             this.IDKH.Caption = "IDKH";
@@ -475,33 +512,37 @@ namespace KHACHSAN
             // 
             this.HOTEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.HOTEN.AppearanceHeader.Options.UseFont = true;
+            this.HOTEN.AppearanceHeader.Options.UseTextOptions = true;
+            this.HOTEN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.HOTEN.Caption = "KHÁCH HÀNG";
             this.HOTEN.FieldName = "HOTEN";
-            this.HOTEN.MaxWidth = 200;
-            this.HOTEN.MinWidth = 80;
+            this.HOTEN.MaxWidth = 220;
+            this.HOTEN.MinWidth = 120;
             this.HOTEN.Name = "HOTEN";
             this.HOTEN.Visible = true;
-            this.HOTEN.VisibleIndex = 8;
-            this.HOTEN.Width = 80;
+            this.HOTEN.VisibleIndex = 5;
+            this.HOTEN.Width = 220;
             // 
             // GHICHU
             // 
             this.GHICHU.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.GHICHU.AppearanceHeader.Options.UseFont = true;
+            this.GHICHU.AppearanceHeader.Options.UseTextOptions = true;
+            this.GHICHU.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.GHICHU.Caption = "GHI CHÚ";
             this.GHICHU.FieldName = "GHICHU";
-            this.GHICHU.MaxWidth = 200;
-            this.GHICHU.MinWidth = 80;
+            this.GHICHU.MaxWidth = 220;
+            this.GHICHU.MinWidth = 120;
             this.GHICHU.Name = "GHICHU";
             this.GHICHU.Visible = true;
-            this.GHICHU.VisibleIndex = 9;
-            this.GHICHU.Width = 80;
+            this.GHICHU.VisibleIndex = 6;
+            this.GHICHU.Width = 220;
             // 
             // PageChiTiet
             // 
             this.PageChiTiet.Controls.Add(this.tableLayoutPanel1);
             this.PageChiTiet.Name = "PageChiTiet";
-            this.PageChiTiet.Size = new System.Drawing.Size(1126, 836);
+            this.PageChiTiet.Size = new System.Drawing.Size(1286, 836);
             this.PageChiTiet.Text = "Chi Tiết";
             // 
             // tableLayoutPanel1
@@ -518,7 +559,7 @@ namespace KHACHSAN
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 836);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1286, 836);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -529,7 +570,7 @@ namespace KHACHSAN
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(275, 830);
+            this.groupControl1.Size = new System.Drawing.Size(315, 830);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "Danh Sách phòng trống";
             // 
@@ -540,7 +581,7 @@ namespace KHACHSAN
             this.gcPhong.Location = new System.Drawing.Point(2, 23);
             this.gcPhong.MainView = this.gvPhong;
             this.gcPhong.Name = "gcPhong";
-            this.gcPhong.Size = new System.Drawing.Size(271, 805);
+            this.gcPhong.Size = new System.Drawing.Size(311, 805);
             this.gcPhong.TabIndex = 0;
             this.gcPhong.UseDisabledStatePainter = false;
             this.gcPhong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -634,9 +675,9 @@ namespace KHACHSAN
             this.groupControl2.AppearanceCaption.Options.UseForeColor = true;
             this.groupControl2.Controls.Add(this.gcSanPham);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(847, 3);
+            this.groupControl2.Location = new System.Drawing.Point(967, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(276, 830);
+            this.groupControl2.Size = new System.Drawing.Size(316, 830);
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "Sản phẩm - Dịch vụ";
             // 
@@ -646,7 +687,7 @@ namespace KHACHSAN
             this.gcSanPham.Location = new System.Drawing.Point(2, 23);
             this.gcSanPham.MainView = this.gvSanPham;
             this.gcSanPham.Name = "gcSanPham";
-            this.gcSanPham.Size = new System.Drawing.Size(272, 805);
+            this.gcSanPham.Size = new System.Drawing.Size(312, 805);
             this.gcSanPham.TabIndex = 0;
             this.gcSanPham.UseDisabledStatePainter = false;
             this.gcSanPham.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -702,7 +743,7 @@ namespace KHACHSAN
             // 
             this.scc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scc.Horizontal = false;
-            this.scc.Location = new System.Drawing.Point(284, 3);
+            this.scc.Location = new System.Drawing.Point(324, 3);
             this.scc.Name = "scc";
             this.scc.Panel1.Controls.Add(this.label9);
             this.scc.Panel1.Controls.Add(this.spSoNguoi);
@@ -724,7 +765,7 @@ namespace KHACHSAN
             this.scc.Panel2.Controls.Add(this.groupControl4);
             this.scc.Panel2.Controls.Add(this.groupControl3);
             this.scc.Panel2.Text = "Panel2";
-            this.scc.Size = new System.Drawing.Size(557, 830);
+            this.scc.Size = new System.Drawing.Size(637, 830);
             this.scc.SplitterPosition = 136;
             this.scc.TabIndex = 3;
             // 
@@ -879,7 +920,7 @@ namespace KHACHSAN
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl5.Location = new System.Drawing.Point(0, 591);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(557, 93);
+            this.groupControl5.Size = new System.Drawing.Size(637, 93);
             this.groupControl5.TabIndex = 2;
             this.groupControl5.Text = "TỔNG THANH TOÁN";
             // 
@@ -909,7 +950,7 @@ namespace KHACHSAN
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl4.Location = new System.Drawing.Point(0, 287);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(557, 304);
+            this.groupControl4.Size = new System.Drawing.Size(637, 304);
             this.groupControl4.TabIndex = 1;
             this.groupControl4.Text = "Danh sách sản phẩm - Dịch vụ";
             // 
@@ -920,7 +961,7 @@ namespace KHACHSAN
             this.gcSPDV.Location = new System.Drawing.Point(2, 23);
             this.gcSPDV.MainView = this.gvSPDV;
             this.gcSPDV.Name = "gcSPDV";
-            this.gcSPDV.Size = new System.Drawing.Size(553, 279);
+            this.gcSPDV.Size = new System.Drawing.Size(633, 279);
             this.gcSPDV.TabIndex = 1;
             this.gcSPDV.UseDisabledStatePainter = false;
             this.gcSPDV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1048,18 +1089,19 @@ namespace KHACHSAN
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(557, 287);
+            this.groupControl3.Size = new System.Drawing.Size(637, 287);
             this.groupControl3.TabIndex = 0;
             this.groupControl3.Text = "Danh sách đặt phòng";
             // 
             // gcDatPhong
             // 
             this.gcDatPhong.AllowDrop = true;
+            this.gcDatPhong.ContextMenuStrip = this.contextMenuStrip_DSDatPhong;
             this.gcDatPhong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcDatPhong.Location = new System.Drawing.Point(2, 23);
             this.gcDatPhong.MainView = this.gvDatPhong;
             this.gcDatPhong.Name = "gcDatPhong";
-            this.gcDatPhong.Size = new System.Drawing.Size(553, 262);
+            this.gcDatPhong.Size = new System.Drawing.Size(633, 262);
             this.gcDatPhong.TabIndex = 0;
             this.gcDatPhong.UseDisabledStatePainter = false;
             this.gcDatPhong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1069,9 +1111,32 @@ namespace KHACHSAN
             this.gcDatPhong.DragDrop += new System.Windows.Forms.DragEventHandler(this.gcDatPhong_DragDrop);
             this.gcDatPhong.DragOver += new System.Windows.Forms.DragEventHandler(this.gcDatPhong_DragOver);
             // 
+            // contextMenuStrip_DSDatPhong
+            // 
+            this.contextMenuStrip_DSDatPhong.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xóaToolStripMenuItem,
+            this.chuyểnToolStripMenuItem});
+            this.contextMenuStrip_DSDatPhong.Name = "contextMenuStrip_DSDatPhong";
+            this.contextMenuStrip_DSDatPhong.Size = new System.Drawing.Size(116, 48);
+            // 
+            // xóaToolStripMenuItem
+            // 
+            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
+            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.xóaToolStripMenuItem.Text = "Xóa";
+            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
+            // 
+            // chuyểnToolStripMenuItem
+            // 
+            this.chuyểnToolStripMenuItem.Name = "chuyểnToolStripMenuItem";
+            this.chuyểnToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.chuyểnToolStripMenuItem.Text = "Chuyển";
+            this.chuyểnToolStripMenuItem.Click += new System.EventHandler(this.chuyểnToolStripMenuItem_Click);
+            // 
             // gvDatPhong
             // 
             this.gvDatPhong.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.dpIDDPSP,
             this.dpIDPHONG,
             this.dpTENPHONG,
             this.dpDONGIA,
@@ -1090,6 +1155,11 @@ namespace KHACHSAN
             this.gvDatPhong.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gvDatPhong_MouseMove);
             this.gvDatPhong.Click += new System.EventHandler(this.gvDatPhong_Click);
             this.gvDatPhong.RowCountChanged += new System.EventHandler(this.gvDatPhong_RowCountChanged);
+            // 
+            // dpIDDPSP
+            // 
+            this.dpIDDPSP.FieldName = "IDDPSP";
+            this.dpIDDPSP.Name = "dpIDDPSP";
             // 
             // dpIDPHONG
             // 
@@ -1177,7 +1247,7 @@ namespace KHACHSAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1128, 902);
+            this.ClientSize = new System.Drawing.Size(1288, 902);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmDatPhong";
@@ -1217,6 +1287,7 @@ namespace KHACHSAN
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcDatPhong)).EndInit();
+            this.contextMenuStrip_DSDatPhong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvDatPhong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
@@ -1315,5 +1386,9 @@ namespace KHACHSAN
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnXoa;
         private DevExpress.XtraGrid.Columns.GridColumn SONGUOI;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DSDatPhong;
+        private System.Windows.Forms.ToolStripMenuItem xóaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chuyểnToolStripMenuItem;
+        private DevExpress.XtraGrid.Columns.GridColumn dpIDDPSP;
     }
 }
