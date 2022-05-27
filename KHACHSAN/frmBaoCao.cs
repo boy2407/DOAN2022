@@ -53,7 +53,7 @@ namespace KHACHSAN
         {
             loadUserControls();
         }
-        //Lấy giùm tui tài khoản có quyền thao tác
+        
         void loadUserControls()
         {
             tb_SYS_REPORT rep = _sysReport.getItem(int.Parse(lstDanhSach.SelectedValue.ToString()));
@@ -81,8 +81,7 @@ namespace KHACHSAN
             }
             if (rep.MADVI == true)
             {
-                _uDonvi = new uDonVi();
-                
+                _uDonvi = new uDonVi();                
                 _uDonvi.Dock = DockStyle.Top;
                 _ctr.Add(_uDonvi);
             }
@@ -131,7 +130,6 @@ namespace KHACHSAN
             frm.Controls.Add(Crv);
             Crv.Refresh();
             frm.Text = rp.DESCRIPTION;
-           
             frm.WindowState = FormWindowState.Maximized;
             frm.ShowDialog();
          

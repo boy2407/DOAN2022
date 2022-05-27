@@ -17,7 +17,9 @@ namespace DataLayer
         public int ID { get; set; }
         public int IDPHONG { get; set; }
         public int IDDP { get; set; }
-        public Nullable<System.DateTime> NGAYO { get; set; }
         public Nullable<int> MAKY { get; set; }
+        public Nullable<System.DateTime> NGAYO { get; set; }
+        public string MACTY { get; set; }
+        public string MADV { get; set; }
     }
 }

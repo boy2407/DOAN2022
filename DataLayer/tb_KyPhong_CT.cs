@@ -15,9 +15,8 @@ namespace DataLayer
     public partial class tb_KyPhong_CT
     {
         public int IDPHONG { get; set; }
-        public int IDDPCT { get; set; }
+        public int MAKY { get; set; }
         public string TENPHONG { get; set; }
-        public Nullable<int> MAKY { get; set; }
         public string MADV { get; set; }
         public string MACTY { get; set; }
         public string D1 { get; set; }
@@ -51,5 +50,7 @@ namespace DataLayer
         public string D29 { get; set; }
         public string D30 { get; set; }
         public string D31 { get; set; }
+        public Nullable<int> NAM { get; set; }
+        public Nullable<int> THANG { get; set; }
     }
 }

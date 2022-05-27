@@ -267,7 +267,7 @@ namespace KHACHSAN
             else if (_them == false)
             {
 
-                tb_DatPhong dp = _datphong.GetItem(_idDP);
+                tb_DatPhong dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                 tb_DatPhong_CT dpct;
                 
 
@@ -457,10 +457,10 @@ namespace KHACHSAN
                 return;
             }
 
-            if (_idDP != 0 && _datphong.GetItem(_idDP).STATUS.Equals(true))
+            if (_idDP != 0 && _datphong.GetItem(_idDP, Friend._macty, Friend._madvi).STATUS.Equals(true))
             {
                 _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
-                var dp = _datphong.GetItem(_idDP);
+                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                 cboKhachHang.SelectedValue = dp.IDKH;
                 dtNgayDat.Value = dp.NGAYDAT.Value;
                 dtNgayTra.Value = dp.NGAYTRA.Value;
@@ -476,7 +476,7 @@ namespace KHACHSAN
                 showHideControl(false);
               
                 // loadphongByNgayDat(DateTime.Now);
-                if (DateTime.Now > _datphong.GetItem(_idDP).NGAYTRA)
+                if (DateTime.Now > _datphong.GetItem(_idDP, Friend._macty, Friend._madvi).NGAYTRA)
                 {
                     MessageBox.Show("Không được thêm xóa phòng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //gcDatPhong.Enabled = false;
@@ -559,7 +559,7 @@ namespace KHACHSAN
         private void gvDanhSach_Click(object sender, EventArgs e)
         {
             _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());           
-            var dp = _datphong.GetItem(_idDP);
+            var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
             cboKhachHang.SelectedValue = dp.IDKH;
             dtNgayDat.Value = dp.NGAYDAT.Value;
             dtNgayTra.Value = dp.NGAYTRA.Value;
@@ -574,7 +574,7 @@ namespace KHACHSAN
         {
             _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
             loadDPCT_id();
-            var dp = _datphong.GetItem(_idDP);
+            var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
             cboKhachHang.SelectedValue = dp.IDKH;
             dtNgayDat.Value = dp.NGAYDAT.Value;
             dtNgayTra.Value = dp.NGAYTRA.Value;
@@ -595,7 +595,7 @@ namespace KHACHSAN
             }
             if (MessageBox.Show("Xác nhận khách hành đã nhận phòng", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                tb_DatPhong temp = _datphong.GetItem(_idDP);
+                tb_DatPhong temp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                 temp.NHAN = true;
                 _datphong.update(temp);             
                 _phong.updateStatusBy_IDDP(_idDP,true);

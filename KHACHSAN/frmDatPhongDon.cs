@@ -68,7 +68,7 @@ namespace KHACHSAN
             _tongtien = (double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + 
                 (_phong.getItemFull(_idPhong).DONGIA * s.Days));
 
-            var dp = _datphong.GetItem(_idDP);
+            var dp = _datphong.GetItem(_idDP,Friend._macty,Friend._madvi);
             dp.SOTIEN = _tongtien;
             _datphong.update(dp);
             objMain.gControl.Gallery.Groups.Clear();
@@ -83,7 +83,7 @@ namespace KHACHSAN
         {
             if(!_them)
             {
-                if (DateTime.Now > _datphong.GetItem(_idDP).NGAYTRA)
+                if (DateTime.Now > _datphong.GetItem(_idDP, Friend._macty, Friend._madvi).NGAYTRA)
                 {
                     if (MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn hoặc bằng ngày hiện tại. Bạn có muốn tiếp tục", "Cảnh Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
@@ -96,7 +96,7 @@ namespace KHACHSAN
                         objMain.showRoom();
                     }
                 }
-              else  if (DateTime.Now < _datphong.GetItem(_idDP).NGAYTRA)
+              else  if (DateTime.Now < _datphong.GetItem(_idDP, Friend._macty, Friend._madvi).NGAYTRA)
                 {
                     if (MessageBox.Show("Hóa đơn có ngày trả lớn hơn ngày hiện tại. Bạn có muốn tiếp tục", "Cảnh Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
@@ -198,7 +198,7 @@ namespace KHACHSAN
              
                 
              
-                    tb_DatPhong dp = _datphong.GetItem(_idDP);
+                    tb_DatPhong dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                     tb_DatPhong_CT dpct;
                     tb_DatPhong_SP dpsp;
 
@@ -282,7 +282,7 @@ namespace KHACHSAN
             if(!_them &&dpct!=null)
             {
                 _idDP = (int)dpct.IDDP;
-                var dp = _datphong.GetItem(_idDP);
+                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                 searchKH.EditValue = dp.IDKH;
                 dtNgayDat.Value = dp.NGAYDAT.Value;
                 dtNgayTra.Value = dp.NGAYTRA.Value;

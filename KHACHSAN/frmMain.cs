@@ -384,7 +384,7 @@ namespace KHACHSAN
             frm._idPhong = int.Parse(item.Value.ToString());
             frm._iddp_ct = v.IDDPCT;
             frm._iddp = v.IDDP;
-            var t = _datphong.GetItem(v.IDDP);
+            var t = _datphong.GetItem(v.IDDP, Friend._macty, Friend._madvi);
             frm.ngaydat = t.NGAYDAT.Value;
             frm.ngaytra = t.NGAYTRA.Value;
             frm.ShowDialog();

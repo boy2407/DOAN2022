@@ -17,7 +17,7 @@ namespace BusinessLayer
         {
             return db.tb_DatPhong.Where(x=>x.STATUS==false).ToList();
         }    
-        public tb_DatPhong GetItem(int iddp)
+        public tb_DatPhong GetItem(int iddp,string macty,string madv)
         {
             return db.tb_DatPhong.OrderByDescending(x=>x.UPDATE_BY).FirstOrDefault(x => x.IDDP == iddp);
         }

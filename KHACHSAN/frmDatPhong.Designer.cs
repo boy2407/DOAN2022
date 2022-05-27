@@ -166,21 +166,29 @@ namespace KHACHSAN
             // 
             // STATUS
             // 
-            this.STATUS.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.STATUS.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.STATUS.AppearanceCell.Options.UseFont = true;
+            this.STATUS.AppearanceCell.Options.UseTextOptions = true;
+            this.STATUS.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.STATUS.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.STATUS.AppearanceHeader.Options.UseFont = true;
             this.STATUS.AppearanceHeader.Options.UseTextOptions = true;
             this.STATUS.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.STATUS.Caption = "TRẠNG THÁI";
             this.STATUS.FieldName = "STATUS";
-            this.STATUS.MaxWidth = 80;
+            this.STATUS.MaxWidth = 150;
             this.STATUS.Name = "STATUS";
             this.STATUS.Visible = true;
-            this.STATUS.VisibleIndex = 8;
+            this.STATUS.VisibleIndex = 7;
             this.STATUS.Width = 80;
             // 
             // THEODOAN
             // 
-            this.THEODOAN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.THEODOAN.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.THEODOAN.AppearanceCell.Options.UseFont = true;
+            this.THEODOAN.AppearanceCell.Options.UseTextOptions = true;
+            this.THEODOAN.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.THEODOAN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.THEODOAN.AppearanceHeader.Options.UseFont = true;
             this.THEODOAN.AppearanceHeader.Options.UseTextOptions = true;
             this.THEODOAN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -372,6 +380,7 @@ namespace KHACHSAN
             // 
             // gvDanhSach
             // 
+            this.gvDanhSach.ColumnPanelRowHeight = 30;
             this.gvDanhSach.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.DISABLED,
             this.IDDP,
@@ -402,14 +411,30 @@ namespace KHACHSAN
             this.gvDanhSach.FormatRules.Add(gridFormatRule2);
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
+            this.gvDanhSach.OptionsView.AllowGlyphSkinning = true;
+            this.gvDanhSach.OptionsView.AllowHtmlDrawHeaders = true;
+            this.gvDanhSach.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateAllContent;
+            this.gvDanhSach.OptionsView.AutoCalcPreviewLineCount = true;
+            this.gvDanhSach.OptionsView.BestFitMode = DevExpress.XtraGrid.Views.Grid.GridBestFitMode.Fast;
+            this.gvDanhSach.OptionsView.BestFitUseErrorInfo = DevExpress.Utils.DefaultBoolean.True;
+            this.gvDanhSach.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvDanhSach.OptionsView.GroupDrawMode = DevExpress.XtraGrid.Views.Grid.GroupDrawMode.Office;
             this.gvDanhSach.OptionsView.ShowGroupPanel = false;
+            this.gvDanhSach.OptionsView.WaitAnimationOptions = DevExpress.XtraEditors.WaitAnimationOptions.Indicator;
+            this.gvDanhSach.PaintStyleName = "MixedXP";
+            this.gvDanhSach.PreviewIndent = 20;
+            this.gvDanhSach.PreviewLineCount = 20;
+            this.gvDanhSach.RowHeight = 40;
+            this.gvDanhSach.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvDanhSach.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvDanhSach_CustomDrawRowIndicator);
             this.gvDanhSach.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gvDanhSach_CustomDrawCell);
             this.gvDanhSach.Click += new System.EventHandler(this.gvDanhSach_Click);
             // 
             // DISABLED
             // 
-            this.DISABLED.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.DISABLED.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.DISABLED.AppearanceCell.Options.UseFont = true;
+            this.DISABLED.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DISABLED.AppearanceHeader.Options.UseFont = true;
             this.DISABLED.Caption = "DEL";
             this.DISABLED.FieldName = "DISABLED";
@@ -419,7 +444,11 @@ namespace KHACHSAN
             // 
             // IDDP
             // 
-            this.IDDP.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.IDDP.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.IDDP.AppearanceCell.Options.UseFont = true;
+            this.IDDP.AppearanceCell.Options.UseTextOptions = true;
+            this.IDDP.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.IDDP.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IDDP.AppearanceHeader.Options.UseFont = true;
             this.IDDP.AppearanceHeader.Options.UseTextOptions = true;
             this.IDDP.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -433,14 +462,18 @@ namespace KHACHSAN
             // 
             // NGAYDAT
             // 
-            this.NGAYDAT.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.NGAYDAT.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.NGAYDAT.AppearanceCell.Options.UseFont = true;
+            this.NGAYDAT.AppearanceCell.Options.UseTextOptions = true;
+            this.NGAYDAT.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.NGAYDAT.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NGAYDAT.AppearanceHeader.Options.UseFont = true;
             this.NGAYDAT.AppearanceHeader.Options.UseTextOptions = true;
             this.NGAYDAT.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.NGAYDAT.Caption = "NGÀY ĐẶT PHÒNG";
             this.NGAYDAT.FieldName = "NGAYDAT";
-            this.NGAYDAT.MaxWidth = 120;
-            this.NGAYDAT.MinWidth = 50;
+            this.NGAYDAT.MaxWidth = 200;
+            this.NGAYDAT.MinWidth = 100;
             this.NGAYDAT.Name = "NGAYDAT";
             this.NGAYDAT.Visible = true;
             this.NGAYDAT.VisibleIndex = 1;
@@ -448,14 +481,18 @@ namespace KHACHSAN
             // 
             // NGAYTRA
             // 
-            this.NGAYTRA.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.NGAYTRA.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.NGAYTRA.AppearanceCell.Options.UseFont = true;
+            this.NGAYTRA.AppearanceCell.Options.UseTextOptions = true;
+            this.NGAYTRA.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.NGAYTRA.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NGAYTRA.AppearanceHeader.Options.UseFont = true;
             this.NGAYTRA.AppearanceHeader.Options.UseTextOptions = true;
             this.NGAYTRA.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.NGAYTRA.Caption = "NGÀY TRẢ PHÒNG";
             this.NGAYTRA.FieldName = "NGAYTRA";
-            this.NGAYTRA.MaxWidth = 120;
-            this.NGAYTRA.MinWidth = 50;
+            this.NGAYTRA.MaxWidth = 200;
+            this.NGAYTRA.MinWidth = 100;
             this.NGAYTRA.Name = "NGAYTRA";
             this.NGAYTRA.Visible = true;
             this.NGAYTRA.VisibleIndex = 2;
@@ -463,7 +500,11 @@ namespace KHACHSAN
             // 
             // SOTIEN
             // 
-            this.SOTIEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.SOTIEN.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.SOTIEN.AppearanceCell.Options.UseFont = true;
+            this.SOTIEN.AppearanceCell.Options.UseTextOptions = true;
+            this.SOTIEN.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.SOTIEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SOTIEN.AppearanceHeader.Options.UseFont = true;
             this.SOTIEN.AppearanceHeader.Options.UseTextOptions = true;
             this.SOTIEN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -475,12 +516,16 @@ namespace KHACHSAN
             this.SOTIEN.MinWidth = 80;
             this.SOTIEN.Name = "SOTIEN";
             this.SOTIEN.Visible = true;
-            this.SOTIEN.VisibleIndex = 7;
+            this.SOTIEN.VisibleIndex = 6;
             this.SOTIEN.Width = 200;
             // 
             // SONGUOIO
             // 
-            this.SONGUOIO.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.SONGUOIO.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.SONGUOIO.AppearanceCell.Options.UseFont = true;
+            this.SONGUOIO.AppearanceCell.Options.UseTextOptions = true;
+            this.SONGUOIO.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.SONGUOIO.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SONGUOIO.AppearanceHeader.Options.UseFont = true;
             this.SONGUOIO.AppearanceHeader.Options.UseTextOptions = true;
             this.SONGUOIO.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -494,23 +539,39 @@ namespace KHACHSAN
             // 
             // MACTY
             // 
+            this.MACTY.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.MACTY.AppearanceCell.Options.UseFont = true;
+            this.MACTY.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MACTY.AppearanceHeader.Options.UseFont = true;
             this.MACTY.FieldName = "MACTY";
             this.MACTY.Name = "MACTY";
             // 
             // MADVI
             // 
+            this.MADVI.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.MADVI.AppearanceCell.Options.UseFont = true;
+            this.MADVI.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MADVI.AppearanceHeader.Options.UseFont = true;
             this.MADVI.FieldName = "MADVI";
             this.MADVI.Name = "MADVI";
             // 
             // IDKH
             // 
+            this.IDKH.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.IDKH.AppearanceCell.Options.UseFont = true;
+            this.IDKH.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IDKH.AppearanceHeader.Options.UseFont = true;
             this.IDKH.Caption = "IDKH";
             this.IDKH.FieldName = "IDKH";
             this.IDKH.Name = "IDKH";
             // 
             // HOTEN
             // 
-            this.HOTEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.HOTEN.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.HOTEN.AppearanceCell.Options.UseFont = true;
+            this.HOTEN.AppearanceCell.Options.UseTextOptions = true;
+            this.HOTEN.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.HOTEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HOTEN.AppearanceHeader.Options.UseFont = true;
             this.HOTEN.AppearanceHeader.Options.UseTextOptions = true;
             this.HOTEN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -525,17 +586,20 @@ namespace KHACHSAN
             // 
             // GHICHU
             // 
-            this.GHICHU.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.GHICHU.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.GHICHU.AppearanceCell.Options.UseFont = true;
+            this.GHICHU.AppearanceCell.Options.UseTextOptions = true;
+            this.GHICHU.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.GHICHU.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GHICHU.AppearanceHeader.Options.UseFont = true;
             this.GHICHU.AppearanceHeader.Options.UseTextOptions = true;
             this.GHICHU.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.GHICHU.Caption = "GHI CHÚ";
             this.GHICHU.FieldName = "GHICHU";
-            this.GHICHU.MaxWidth = 220;
-            this.GHICHU.MinWidth = 120;
+            this.GHICHU.MinWidth = 150;
             this.GHICHU.Name = "GHICHU";
             this.GHICHU.Visible = true;
-            this.GHICHU.VisibleIndex = 6;
+            this.GHICHU.VisibleIndex = 8;
             this.GHICHU.Width = 220;
             // 
             // PageChiTiet

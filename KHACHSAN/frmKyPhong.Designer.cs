@@ -217,8 +217,11 @@ namespace KHACHSAN
             this.THANG});
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
-            this.gvDanhSach.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvDanhSach.OptionsView.BestFitMode = DevExpress.XtraGrid.Views.Grid.GridBestFitMode.Fast;
+            this.gvDanhSach.OptionsView.BestFitUseErrorInfo = DevExpress.Utils.DefaultBoolean.True;
+            this.gvDanhSach.OptionsView.EnableAppearanceOddRow = true;
             this.gvDanhSach.OptionsView.ShowGroupPanel = false;
+            this.gvDanhSach.PaintStyleName = "WindowsXP";
             // 
             // MAKY
             // 
@@ -299,6 +302,7 @@ namespace KHACHSAN
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmKyPhong";
             this.Text = "Kỳ Phòng";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPhongTrongTuan_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

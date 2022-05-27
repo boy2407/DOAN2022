@@ -54,7 +54,12 @@ namespace KHACHSAN
 				"2027",
 				"2028",
 				"2029",
-				"2030"
+				"2030",
+				"2031",
+				"2032",
+				"2033",
+				"2034",
+				"2035",
 			};
 
 			cboNam.Text = DateTime.Now.Year.ToString();

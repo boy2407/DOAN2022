@@ -73,7 +73,7 @@ namespace KHACHSAN
 
             _phong.updateStatus(_idPhong, false);
             _phong.updateStatus(phongchuyenden.IDPHONG, true);
-            var dp = _datphong.GetItem(phonghientai.IDDP);
+            var dp = _datphong.GetItem(phonghientai.IDDP, Friend._macty, Friend._madvi);
             dp.SOTIEN = _datphong_ct.SumByIddp(_iddp) + _datphong_sp.SumByIddp_Iddp_ct(_iddp, _iddp_ct);
             _datphong.update(dp);
             objMain.gControl.Gallery.Groups.Clear();
