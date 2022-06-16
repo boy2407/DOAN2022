@@ -40,19 +40,16 @@ namespace KHACHSAN
             this.label1 = new System.Windows.Forms.Label();
             this.gcDanhSach = new DevExpress.XtraGrid.GridControl();
             this.gvDanhSach = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.DISABLED = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IDDP = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.NGAYDAT = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.NGAYTRA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SOTIEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SONGUOIO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MACTY = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MADVI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.STATUS = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.THEODOAN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IDKH = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.HOTEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GHICHU = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.name = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.email = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.phone = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.address = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.room_type = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.check_in_date = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.check_in_time = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.check_out_date = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Occupancy = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSach)).BeginInit();
@@ -68,7 +65,7 @@ namespace KHACHSAN
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1056, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(1347, 41);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -108,7 +105,7 @@ namespace KHACHSAN
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1056, 92);
+            this.groupBox1.Size = new System.Drawing.Size(1347, 92);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập Ngày";
@@ -155,183 +152,141 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 133);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(1056, 516);
+            this.gcDanhSach.Size = new System.Drawing.Size(1347, 516);
             this.gcDanhSach.TabIndex = 14;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
+            this.gcDanhSach.Click += new System.EventHandler(this.gcDanhSach_Click);
             // 
             // gvDanhSach
             // 
             this.gvDanhSach.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.DISABLED,
-            this.IDDP,
-            this.NGAYDAT,
-            this.NGAYTRA,
-            this.SOTIEN,
-            this.SONGUOIO,
-            this.MACTY,
-            this.MADVI,
-            this.STATUS,
-            this.THEODOAN,
-            this.IDKH,
-            this.HOTEN,
-            this.GHICHU});
+            this.id,
+            this.name,
+            this.email,
+            this.phone,
+            this.address,
+            this.room_type,
+            this.check_in_date,
+            this.check_in_time,
+            this.check_out_date,
+            this.Occupancy});
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
             this.gvDanhSach.OptionsView.ShowGroupPanel = false;
             // 
-            // DISABLED
+            // id
             // 
-            this.DISABLED.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.DISABLED.AppearanceHeader.Options.UseFont = true;
-            this.DISABLED.Caption = "DEL";
-            this.DISABLED.FieldName = "DISABLED";
-            this.DISABLED.MaxWidth = 50;
-            this.DISABLED.Name = "DISABLED";
-            this.DISABLED.Visible = true;
-            this.DISABLED.VisibleIndex = 0;
-            this.DISABLED.Width = 50;
+            this.id.Caption = "id";
+            this.id.FieldName = "id";
+            this.id.Name = "id";
             // 
-            // IDDP
+            // name
             // 
-            this.IDDP.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.IDDP.AppearanceHeader.Options.UseFont = true;
-            this.IDDP.Caption = "SỐ HĐ";
-            this.IDDP.FieldName = "IDDP";
-            this.IDDP.MaxWidth = 70;
-            this.IDDP.Name = "IDDP";
-            this.IDDP.Visible = true;
-            this.IDDP.VisibleIndex = 1;
-            this.IDDP.Width = 70;
+            this.name.Caption = "TÊN KHÁCH HÀNG";
+            this.name.FieldName = "name";
+            this.name.MaxWidth = 120;
+            this.name.MinWidth = 80;
+            this.name.Name = "name";
+            this.name.Visible = true;
+            this.name.VisibleIndex = 0;
+            this.name.Width = 80;
             // 
-            // NGAYDAT
+            // email
             // 
-            this.NGAYDAT.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.NGAYDAT.AppearanceHeader.Options.UseFont = true;
-            this.NGAYDAT.Caption = "NGÀY ĐẶT PHÒNG";
-            this.NGAYDAT.FieldName = "NGAYDAT";
-            this.NGAYDAT.MaxWidth = 120;
-            this.NGAYDAT.MinWidth = 50;
-            this.NGAYDAT.Name = "NGAYDAT";
-            this.NGAYDAT.Visible = true;
-            this.NGAYDAT.VisibleIndex = 2;
+            this.email.Caption = "EMAIL";
+            this.email.FieldName = "email";
+            this.email.MaxWidth = 120;
+            this.email.MinWidth = 80;
+            this.email.Name = "email";
+            this.email.Visible = true;
+            this.email.VisibleIndex = 1;
+            this.email.Width = 80;
             // 
-            // NGAYTRA
+            // phone
             // 
-            this.NGAYTRA.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.NGAYTRA.AppearanceHeader.Options.UseFont = true;
-            this.NGAYTRA.Caption = "NGÀY TRẢ PHÒNG";
-            this.NGAYTRA.FieldName = "NGAYTRA";
-            this.NGAYTRA.MaxWidth = 120;
-            this.NGAYTRA.MinWidth = 50;
-            this.NGAYTRA.Name = "NGAYTRA";
-            this.NGAYTRA.Visible = true;
-            this.NGAYTRA.VisibleIndex = 3;
+            this.phone.Caption = "SỐ ĐIỆN THOẠI";
+            this.phone.FieldName = "phone";
+            this.phone.MaxWidth = 120;
+            this.phone.MinWidth = 80;
+            this.phone.Name = "phone";
+            this.phone.Visible = true;
+            this.phone.VisibleIndex = 2;
+            this.phone.Width = 80;
             // 
-            // SOTIEN
+            // address
             // 
-            this.SOTIEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.SOTIEN.AppearanceHeader.Options.UseFont = true;
-            this.SOTIEN.Caption = "SỐ TIỀN";
-            this.SOTIEN.DisplayFormat.FormatString = "{0:#,#}";
-            this.SOTIEN.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.SOTIEN.FieldName = "SOTIEN";
-            this.SOTIEN.MaxWidth = 100;
-            this.SOTIEN.MinWidth = 80;
-            this.SOTIEN.Name = "SOTIEN";
-            this.SOTIEN.Visible = true;
-            this.SOTIEN.VisibleIndex = 4;
-            this.SOTIEN.Width = 80;
+            this.address.Caption = "ĐỊA CHỈ";
+            this.address.FieldName = "address";
+            this.address.MinWidth = 150;
+            this.address.Name = "address";
+            this.address.Visible = true;
+            this.address.VisibleIndex = 8;
+            this.address.Width = 150;
             // 
-            // SONGUOIO
+            // room_type
             // 
-            this.SONGUOIO.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.SONGUOIO.AppearanceHeader.Options.UseFont = true;
-            this.SONGUOIO.Caption = "SỐ NGƯỜI";
-            this.SONGUOIO.FieldName = "SONGUOIO";
-            this.SONGUOIO.MaxWidth = 70;
-            this.SONGUOIO.Name = "SONGUOIO";
-            this.SONGUOIO.Visible = true;
-            this.SONGUOIO.VisibleIndex = 5;
-            this.SONGUOIO.Width = 70;
+            this.room_type.Caption = "LOẠI PHÒNG";
+            this.room_type.FieldName = "room_type";
+            this.room_type.MaxWidth = 120;
+            this.room_type.MinWidth = 80;
+            this.room_type.Name = "room_type";
+            this.room_type.Visible = true;
+            this.room_type.VisibleIndex = 3;
+            this.room_type.Width = 80;
             // 
-            // MACTY
+            // check_in_date
             // 
-            this.MACTY.FieldName = "MACTY";
-            this.MACTY.Name = "MACTY";
+            this.check_in_date.Caption = "NGÀY ";
+            this.check_in_date.FieldName = "check_in_date";
+            this.check_in_date.MaxWidth = 100;
+            this.check_in_date.MinWidth = 50;
+            this.check_in_date.Name = "check_in_date";
+            this.check_in_date.Visible = true;
+            this.check_in_date.VisibleIndex = 5;
             // 
-            // MADVI
+            // check_in_time
             // 
-            this.MADVI.FieldName = "MADVI";
-            this.MADVI.Name = "MADVI";
+            this.check_in_time.Caption = "NGÀY ĐẶT";
+            this.check_in_time.FieldName = "check_in_time";
+            this.check_in_time.MaxWidth = 100;
+            this.check_in_time.MinWidth = 50;
+            this.check_in_time.Name = "check_in_time";
+            this.check_in_time.Visible = true;
+            this.check_in_time.VisibleIndex = 6;
+            this.check_in_time.Width = 100;
             // 
-            // STATUS
+            // check_out_date
             // 
-            this.STATUS.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.STATUS.AppearanceHeader.Options.UseFont = true;
-            this.STATUS.Caption = "TRẠNG THÁI";
-            this.STATUS.FieldName = "STATUS";
-            this.STATUS.MaxWidth = 120;
-            this.STATUS.Name = "STATUS";
-            this.STATUS.Visible = true;
-            this.STATUS.VisibleIndex = 6;
-            this.STATUS.Width = 50;
+            this.check_out_date.Caption = "NGÀY TRẢ";
+            this.check_out_date.FieldName = "check_out_date";
+            this.check_out_date.MaxWidth = 150;
+            this.check_out_date.MinWidth = 100;
+            this.check_out_date.Name = "check_out_date";
+            this.check_out_date.Visible = true;
+            this.check_out_date.VisibleIndex = 7;
+            this.check_out_date.Width = 150;
             // 
-            // THEODOAN
+            // Occupancy
             // 
-            this.THEODOAN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.THEODOAN.AppearanceHeader.Options.UseFont = true;
-            this.THEODOAN.Caption = "THEO ĐOÀN";
-            this.THEODOAN.FieldName = "THEODOAN";
-            this.THEODOAN.MaxWidth = 90;
-            this.THEODOAN.MinWidth = 50;
-            this.THEODOAN.Name = "THEODOAN";
-            this.THEODOAN.Visible = true;
-            this.THEODOAN.VisibleIndex = 7;
-            this.THEODOAN.Width = 50;
-            // 
-            // IDKH
-            // 
-            this.IDKH.Caption = "IDKH";
-            this.IDKH.FieldName = "IDKH";
-            this.IDKH.Name = "IDKH";
-            // 
-            // HOTEN
-            // 
-            this.HOTEN.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.HOTEN.AppearanceHeader.Options.UseFont = true;
-            this.HOTEN.Caption = "KHÁCH HÀNG";
-            this.HOTEN.FieldName = "HOTEN";
-            this.HOTEN.MaxWidth = 200;
-            this.HOTEN.MinWidth = 80;
-            this.HOTEN.Name = "HOTEN";
-            this.HOTEN.Visible = true;
-            this.HOTEN.VisibleIndex = 8;
-            this.HOTEN.Width = 80;
-            // 
-            // GHICHU
-            // 
-            this.GHICHU.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.GHICHU.AppearanceHeader.Options.UseFont = true;
-            this.GHICHU.Caption = "GHI CHÚ";
-            this.GHICHU.FieldName = "GHICHU";
-            this.GHICHU.MaxWidth = 200;
-            this.GHICHU.MinWidth = 80;
-            this.GHICHU.Name = "GHICHU";
-            this.GHICHU.Visible = true;
-            this.GHICHU.VisibleIndex = 9;
-            this.GHICHU.Width = 80;
+            this.Occupancy.Caption = "SỐ NGƯỜI";
+            this.Occupancy.FieldName = "Occupancy";
+            this.Occupancy.MaxWidth = 80;
+            this.Occupancy.MinWidth = 60;
+            this.Occupancy.Name = "Occupancy";
+            this.Occupancy.Visible = true;
+            this.Occupancy.VisibleIndex = 4;
             // 
             // frmBooking_Web
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 649);
+            this.ClientSize = new System.Drawing.Size(1347, 649);
             this.Controls.Add(this.gcDanhSach);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmBooking_Web";
-            this.Text = "frmBooking_Web";
+            this.Text = "Booking Online";
             this.Load += new System.EventHandler(this.frmBooking_Web_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -353,22 +308,19 @@ namespace KHACHSAN
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraGrid.GridControl gcDanhSach;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDanhSach;
-        private DevExpress.XtraGrid.Columns.GridColumn DISABLED;
-        private DevExpress.XtraGrid.Columns.GridColumn IDDP;
-        private DevExpress.XtraGrid.Columns.GridColumn NGAYDAT;
-        private DevExpress.XtraGrid.Columns.GridColumn NGAYTRA;
-        private DevExpress.XtraGrid.Columns.GridColumn SOTIEN;
-        private DevExpress.XtraGrid.Columns.GridColumn SONGUOIO;
-        private DevExpress.XtraGrid.Columns.GridColumn MACTY;
-        private DevExpress.XtraGrid.Columns.GridColumn MADVI;
-        private DevExpress.XtraGrid.Columns.GridColumn STATUS;
-        private DevExpress.XtraGrid.Columns.GridColumn THEODOAN;
-        private DevExpress.XtraGrid.Columns.GridColumn IDKH;
-        private DevExpress.XtraGrid.Columns.GridColumn HOTEN;
-        private DevExpress.XtraGrid.Columns.GridColumn GHICHU;
         private System.Windows.Forms.DateTimePicker dtDenNgay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtTuNgay;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraGrid.Columns.GridColumn id;
+        private DevExpress.XtraGrid.Columns.GridColumn name;
+        private DevExpress.XtraGrid.Columns.GridColumn email;
+        private DevExpress.XtraGrid.Columns.GridColumn phone;
+        private DevExpress.XtraGrid.Columns.GridColumn address;
+        private DevExpress.XtraGrid.Columns.GridColumn room_type;
+        private DevExpress.XtraGrid.Columns.GridColumn check_in_date;
+        private DevExpress.XtraGrid.Columns.GridColumn check_in_time;
+        private DevExpress.XtraGrid.Columns.GridColumn check_out_date;
+        private DevExpress.XtraGrid.Columns.GridColumn Occupancy;
     }
 }

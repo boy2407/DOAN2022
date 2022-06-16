@@ -80,7 +80,7 @@
     <Compile Include="KYPHONG_CT.cs" />
     <Compile Include="OBJ PHONG_THIETBI.cs" />
     <Compile Include="PHONG THIETBI.cs" />
-    <Compile Include="Room_booking_details.cs" />
+    <Compile Include="ROOM_BOOKING_DETAILS.cs" />
     <Compile Include="SYS_DATPHONG_PHONG_NGAYO.cs" />
     <Compile Include="SYS_FUNC.cs" />
     <Compile Include="GIOITINH.cs" />

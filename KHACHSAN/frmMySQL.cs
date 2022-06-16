@@ -23,13 +23,10 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
-
         private void frmMySQL_Load(object sender, EventArgs e)
         {
           
-        }
-
-   
+        }  
         private MySqlConnection GetCon(string server, string username, string pass, string database)
         {
             return new MySqlConnection("Data Source=" + server + "; Initial Catalog=" + database + "; User ID=" + username + "; Password=" + pass + ";");
@@ -40,16 +37,7 @@ namespace KHACHSAN
             string enCryptServ = Encryptor.Encrypt(txtServer.Text, "nghiadeptraiqua@", true);
             string enCryptPass = Encryptor.Encrypt(txtPassword.Text, "nghiadeptraiqua@", true);
             string enCryptData = Encryptor.Encrypt(cboDatabase.Text, "nghiadeptraiqua@", true);
-            string enCryptUser = Encryptor.Encrypt(txtUsername.Text, "nghiadeptraiqua@", true);
-            //SaveFileDialog sf = new SaveFileDialog();
-            //sf.Title = "Chọn nơi lưu trữ";
-            //sf.Filter = "Text Filse (*.dba)|*.dba|AllFiles(*.*)|*.*";
-            //if(sf.ShowDialog()==DialogResult.OK)
-            //{
-            //    connect cn = new connect(enCryptServ, enCryptUser, enCryptPass, enCryptData);
-            //    cn.SaveFile(sf.FileName);
-            //    MessageBox.Show("Lưu file thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            string enCryptUser = Encryptor.Encrypt(txtUsername.Text, "nghiadeptraiqua@", true);  
             connect cn = new connect(enCryptServ, enCryptUser, enCryptPass, enCryptData);
             cn.SaveFileMySql();
             MessageBox.Show("Lưu file thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
