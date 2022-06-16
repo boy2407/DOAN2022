@@ -527,8 +527,8 @@ namespace KHACHSAN
                 dp.UID = 1;
                 dp.DISABLED = false;
                 dp.CREATED_DATE = DateTime.Now;
-                dp.MACTY = _macty;
-                dp.MADVI = _madvi;
+                dp.MACTY = Friend._madvi;
+                dp.MADVI = Friend._madvi;
                 dp.BOOKING = false;
                 dp.NHAN = true;
                 var _dp = _datphong.add(dp);
