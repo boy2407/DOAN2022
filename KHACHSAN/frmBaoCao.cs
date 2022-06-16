@@ -56,44 +56,47 @@ namespace KHACHSAN
         
         void loadUserControls()
         {
-            tb_SYS_REPORT rep = _sysReport.getItem(int.Parse(lstDanhSach.SelectedValue.ToString()));
-            if(_panel!=null)
-            {
-                _panel.Dispose();
-            }
-            _panel = new Panel();
-            _panel.Dock = DockStyle.Top;
-            _panel.MinimumSize = new Size(_panel.Width, 500);
+            
+                tb_SYS_REPORT rep = _sysReport.getItem(int.Parse(lstDanhSach.SelectedValue.ToString()));
+                if (_panel != null)
+                {
+                    _panel.Dispose();
+                }
+                _panel = new Panel();
+                _panel.Dock = DockStyle.Top;
+                _panel.MinimumSize = new Size(_panel.Width, 500);
 
-            List<Control> _ctr = new List<Control>();
-            if (rep.TUNGAY==true)
-            {
-                _uTuNgay = new uTuNgay();
-                _uTuNgay.Dock = DockStyle.Top;
-                _ctr.Add(_uTuNgay);
-            }
-            if (rep.MACTY == true)
-            {
-                _uCongTy = new uCongTy();
-                _uCongTy.Dock = DockStyle.Top;
-                _uCongTy.Width = splBaoCao.Width-20;
-                _ctr.Add(_uCongTy);
-            }
-            if (rep.MADVI == true)
-            {
-                _uDonvi = new uDonVi();                
-                _uDonvi.Dock = DockStyle.Top;
-                _ctr.Add(_uDonvi);
-            }
-            _ctr.Reverse();
-            _panel.Controls.AddRange(_ctr.ToArray());
-            this.splBaoCao.Panel2.Controls.Add(_panel);
+                List<Control> _ctr = new List<Control>();
+                if (rep.TUNGAY == true)
+                {
+                    _uTuNgay = new uTuNgay();
+                    _uTuNgay.Dock = DockStyle.Top;
+                    _ctr.Add(_uTuNgay);
+                }
+                if (rep.MACTY == true)
+                {
+                    _uCongTy = new uCongTy();
+                    _uCongTy.Dock = DockStyle.Top;
+                    _uCongTy.Width = splBaoCao.Width - 20;
+                    _ctr.Add(_uCongTy);
+                }
+                if (rep.MADVI == true)
+                {
+                    _uDonvi = new uDonVi();
+                    _uDonvi.Dock = DockStyle.Top;
+                    _ctr.Add(_uDonvi);
+                }
+                _ctr.Reverse();
+                _panel.Controls.AddRange(_ctr.ToArray());
+                this.splBaoCao.Panel2.Controls.Add(_panel);
+            
+          
         }
 
         private void btnThucHien_Click(object sender, EventArgs e)
         {
+            
             tb_SYS_REPORT rp = _sysReport.getItem(int.Parse(lstDanhSach.SelectedValue.ToString()));
-
             Form frm = new Form();
             CrystalReportViewer Crv = new CrystalReportViewer();
             Crv.ShowGroupTreeButton = false;
@@ -117,13 +120,16 @@ namespace KHACHSAN
             {
                 doc.SetParameterValue("@MACTY", _uCongTy.cboCongTy.SelectedValue.ToString());                
             }
-            if (rp.MADVI == true)
+            if (rp.MADVI == true&&rp.MACTY==true)
             {
                 doc.SetParameterValue("@MACTY", _uCongTy.cboCongTy.SelectedValue.ToString());
                 doc.SetParameterValue("@MADVI", _uDonvi.cboDonVi.SelectedValue.ToString());
             }
-
-
+            else if(rp.MADVI==true&&rp.MACTY==false)
+            {
+                doc.SetParameterValue("@MACTY", Friend._macty);
+                doc.SetParameterValue("@MADVI", _uDonvi.cboDonVi.SelectedValue.ToString());
+            }    
 
             Crv.Dock = DockStyle.Fill;
             Crv.ReportSource = doc;

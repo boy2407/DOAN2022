@@ -39,7 +39,7 @@ namespace KHACHSAN
         void loadPhongTrong()
         {
            //searchPhong.Properties.DataSource = _phong.getPhongTrong();
-            searchPhong.Properties.DataSource = _phong.PhongHienTai(ngaydat, ngaytra);
+            searchPhong.Properties.DataSource = _phong.PhongHienTai(ngaydat, ngaytra,Friend._macty,Friend._madvi);
 
             searchPhong.Properties.ValueMember = "IDPHONG";
             searchPhong.Properties.DisplayMember = "TENPHONG";

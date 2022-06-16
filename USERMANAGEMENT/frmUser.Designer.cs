@@ -51,6 +51,7 @@ namespace USERMANAGEMENT
             this.FULLNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
+            this.btnXoaUser = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -65,7 +66,7 @@ namespace USERMANAGEMENT
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(493, 265);
+            this.xtraTabControl1.Size = new System.Drawing.Size(530, 265);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -84,7 +85,7 @@ namespace USERMANAGEMENT
             this.xtraTabPage1.Controls.Add(this.txtUsernam);
             this.xtraTabPage1.Controls.Add(this.label1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(491, 240);
+            this.xtraTabPage1.Size = new System.Drawing.Size(528, 240);
             this.xtraTabPage1.Text = "Thông tin";
             // 
             // chkVoHieuHoa
@@ -105,6 +106,7 @@ namespace USERMANAGEMENT
             this.txtRepass.Name = "txtRepass";
             this.txtRepass.Size = new System.Drawing.Size(215, 24);
             this.txtRepass.TabIndex = 11;
+            this.txtRepass.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -124,6 +126,7 @@ namespace USERMANAGEMENT
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(215, 24);
             this.txtPass.TabIndex = 9;
+            this.txtPass.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -253,7 +256,7 @@ namespace USERMANAGEMENT
             this.btnDong.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnDong.Appearance.Options.UseFont = true;
             this.btnDong.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.ImageOptions.Image")));
-            this.btnDong.Location = new System.Drawing.Point(356, 271);
+            this.btnDong.Location = new System.Drawing.Point(356, 288);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(125, 38);
             this.btnDong.TabIndex = 4;
@@ -265,18 +268,31 @@ namespace USERMANAGEMENT
             this.btnLuu.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnLuu.Appearance.Options.UseFont = true;
             this.btnLuu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLuu.ImageOptions.Image")));
-            this.btnLuu.Location = new System.Drawing.Point(203, 271);
+            this.btnLuu.Location = new System.Drawing.Point(62, 288);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(125, 38);
             this.btnLuu.TabIndex = 3;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
+            // btnXoaUser
+            // 
+            this.btnXoaUser.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btnXoaUser.Appearance.Options.UseFont = true;
+            this.btnXoaUser.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnXoaUser.Location = new System.Drawing.Point(211, 288);
+            this.btnXoaUser.Name = "btnXoaUser";
+            this.btnXoaUser.Size = new System.Drawing.Size(125, 38);
+            this.btnXoaUser.TabIndex = 5;
+            this.btnXoaUser.Text = "Xóa";
+            this.btnXoaUser.Click += new System.EventHandler(this.btnXoaUser_Click);
+            // 
             // frmUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 338);
+            this.ClientSize = new System.Drawing.Size(530, 338);
+            this.Controls.Add(this.btnXoaUser);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.xtraTabControl1);
@@ -319,5 +335,6 @@ namespace USERMANAGEMENT
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkVoHieuHoa;
+        private DevExpress.XtraEditors.SimpleButton btnXoaUser;
     }
 }

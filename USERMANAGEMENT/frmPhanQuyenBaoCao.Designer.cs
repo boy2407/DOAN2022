@@ -60,7 +60,7 @@ namespace USERMANAGEMENT
             this.gcChucNang.Location = new System.Drawing.Point(296, 0);
             this.gcChucNang.MainView = this.gvChucNang;
             this.gcChucNang.Name = "gcChucNang";
-            this.gcChucNang.Size = new System.Drawing.Size(530, 655);
+            this.gcChucNang.Size = new System.Drawing.Size(724, 755);
             this.gcChucNang.TabIndex = 3;
             this.gcChucNang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChucNang});
@@ -140,7 +140,7 @@ namespace USERMANAGEMENT
             this.gcUser.Location = new System.Drawing.Point(0, 0);
             this.gcUser.MainView = this.gvUser;
             this.gcUser.Name = "gcUser";
-            this.gcUser.Size = new System.Drawing.Size(296, 655);
+            this.gcUser.Size = new System.Drawing.Size(296, 755);
             this.gcUser.TabIndex = 2;
             this.gcUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvUser});
@@ -201,9 +201,11 @@ namespace USERMANAGEMENT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 655);
+            this.ClientSize = new System.Drawing.Size(1020, 755);
             this.Controls.Add(this.gcChucNang);
             this.Controls.Add(this.gcUser);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPhanQuyenBaoCao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phân quyền báo cáo";

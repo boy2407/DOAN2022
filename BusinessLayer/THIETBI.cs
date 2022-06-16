@@ -13,9 +13,9 @@ namespace BusinessLayer
         {
             db = Entities.CreateEntities();
         }
-        public List<tb_ThietBi>getALL()
+        public List<tb_ThietBi>getALL(string macty, string madvi)
         {
-            return db.tb_ThietBi.ToList();
+            return db.tb_ThietBi.Where(x=>x.MADVI==madvi&&x.MACTY==macty).ToList();
         }
         /// <summary>
         /// true IN

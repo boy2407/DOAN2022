@@ -17,6 +17,9 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid;
 
 using System.Reflection;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using MySql.Data.MySqlClient;
 
 namespace KHACHSAN
 {
@@ -27,6 +30,14 @@ namespace KHACHSAN
             InitializeComponent();
       
         }
+        public frmBooking(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         bool _them, _GiamSoPhong;
         public bool _thanhtoan;
         DATPHONG _datphong;
@@ -50,6 +61,7 @@ namespace KHACHSAN
         private void frmBooking_Load(object sender, EventArgs e)
         {
             
+
             lstDP_CT = new List<OBJ_DP_CT>();
             _datphong = new DATPHONG();
             _datphong_ct = new DATPHONG_CT();
@@ -70,7 +82,13 @@ namespace KHACHSAN
             _enabled(false);
         }
 
-      
+        int int_Days()
+        {
+            int temp = 0;
+            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+            temp = (int)Math.Round(s.TotalDays);
+            return temp;
+        }
 
         void _reset()
         {
@@ -83,7 +101,16 @@ namespace KHACHSAN
             spSoNguoi.Text = "1";
  
         }
-     
+        void update_songayo()
+        {
+            foreach (var item in lstDP_CT)
+            {
+                int t = int_Days();
+                item.SONGAYO = t;
+                item.THANHTIEN = item.DONGIA * item.SONGAYO;
+            }
+            loadDPCT();
+        }
         void showHideControl(bool t)
         {
             btnThem.Visible = t;
@@ -114,7 +141,7 @@ namespace KHACHSAN
             _phong = new PHONG();
             lstDP_CT = new List<OBJ_DP_CT>();           
             DataTable table = new DataTable();
-            table = Friend.ConvertToDataTable(_phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value));
+            table = Friend.ConvertToDataTable(_phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value,Friend._macty,Friend._madvi));
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone();
             gvPhong.ExpandAllGroups();
@@ -123,8 +150,8 @@ namespace KHACHSAN
         void loadDPCT_id()
         {
             _datphong_ct = new DATPHONG_CT();
-            gcDatPhong.DataSource = Friend.ConvertToDataTable(_datphong_ct.getAllDPCT(_idDP));
-            lstDP_CT = _datphong_ct.getAllDPCT(_idDP);
+            gcDatPhong.DataSource = Friend.ConvertToDataTable(_datphong_ct.getAllDPCT(_idDP,Friend._macty,Friend._madvi));
+            lstDP_CT = _datphong_ct.getAllDPCT(_idDP, Friend._macty, Friend._madvi);
             gvPhong.ExpandAllGroups();
         }
         void add_LSTDP_CT()
@@ -139,8 +166,7 @@ namespace KHACHSAN
                     }
                 }
             }
-            OBJ_DP_CT p = new OBJ_DP_CT();
-            //p.IDPHONG = int.Parse(gvPhong.GetFocusedRowCellValue("IDPHONG").ToString());
+            OBJ_DP_CT p = new OBJ_DP_CT();            
             tb_Phong phong = _phong.getItem(_idPhong);
             p.IDPHONG = _idPhong;
             p.TENPHONG = phong.TENPHONG;
@@ -151,8 +177,8 @@ namespace KHACHSAN
             p.DONGIA = donggia.DONGIA;
             p.SONGUOI = (int)donggia.SONGUOI;
             p.NGAY = DateTime.Now;
-            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-            p.SONGAYO = s.Days;           
+            int t = int_Days();
+            p.SONGAYO = t;
             p.THANHTIEN = p.DONGIA * p.SONGAYO;
             lstDP_CT.Add(p);
             loadDPCT();
@@ -164,32 +190,15 @@ namespace KHACHSAN
             {
                 if (i.IDPHONG == idphong)
                 {
-                    lstDP_CT.Remove(i);
-                 
-                    //_phong.updateStatus(idphong, false);
-                    // _datphong_ct.delete(_idDP, idphong);
+                    lstDP_CT.Remove(i);                    
                     loadDPCT();
-                    update_txtThanhTien();                   
+                    update_txtThanhTien();
                     return;
                 }
 
             }
         }
-        void update_songayo()
-        {
-            foreach (var item in lstDP_CT)
-            {
-                TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-                item.SONGAYO = s.Days;
-                if (s.Days < 1)
-                {
-                    MessageBox.Show("Thông báo", "Ngày trả Không hợp lợi vui lòng nhập lại ngày ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    dtNgayTra.Value = dtNgayDat.Value.AddDays(1);
-                }
-                item.THANHTIEN = item.DONGIA * item.SONGAYO;
-            }
-            loadDPCT();
-        }
+   
         void loadDPCT()
         {
             List<OBJ_DP_CT> lst = new List<OBJ_DP_CT>();
@@ -214,7 +223,7 @@ namespace KHACHSAN
         void loadDanhSach()
         {
             _datphong = new DATPHONG();
-            gcDanhSach.DataSource = _datphong.GetAllBooking(dtTuNgay.Value, dtDenNgay.Value.AddDays(1),true, _macty, _madvi);
+            gcDanhSach.DataSource = _datphong.GetAll_Booking(dtTuNgay.Value, dtDenNgay.Value.AddDays(1), _macty, _madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
            
         }
@@ -261,6 +270,8 @@ namespace KHACHSAN
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i, "DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
+                    dpct.MACTY = Friend._macty;
+                    dpct.MADVI = Friend._madvi;
                     _datphong_ct.add(dpct);
                 }
             }
@@ -296,7 +307,9 @@ namespace KHACHSAN
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i, "DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
-                     _datphong_ct.add(dpct);                                     
+                    dpct.MACTY = Friend._macty;
+                    dpct.MADVI = Friend._madvi;
+                    _datphong_ct.add(dpct);                                     
                 }
 
             }
@@ -439,6 +452,11 @@ namespace KHACHSAN
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = true;
             _idDP = 0;
             _reset();
@@ -450,6 +468,11 @@ namespace KHACHSAN
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_idDP == 0)
             {
 
@@ -489,6 +512,11 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_idDP == 0)
             {
 
@@ -504,6 +532,11 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
             if (spSoNguoi.Value < 0)
             {
                 MessageBox.Show("quá nhỏ");
@@ -558,6 +591,7 @@ namespace KHACHSAN
 
         private void gvDanhSach_Click(object sender, EventArgs e)
         {
+            if (gvDanhSach.RowCount <= 0) return;
             _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());           
             var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
             cboKhachHang.SelectedValue = dp.IDKH;
@@ -587,6 +621,11 @@ namespace KHACHSAN
 
         private void btnNhanPhong_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
             if (_idDP == 0)
             {
 
@@ -603,6 +642,46 @@ namespace KHACHSAN
                 objMain.showRoom();
                 loadDanhSach();
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("connectdb_mysql.dba"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();  // tạo đối tượng chuyển đổi file
+                FileStream fs = File.Open("connectdb.dba", FileMode.Open, FileAccess.Read);
+                connect cp = (connect)bf.Deserialize(fs);    // đọc kết quả file thu được từ quá trình serialize bên connect.cs                             
+                string servername = Encryptor.Decrypt(cp.servername, "nghiadeptraiqua@", true);
+                string username = Encryptor.Decrypt(cp.username, "nghiadeptraiqua@", true);
+                string pass = Encryptor.Decrypt(cp.passwd, "nghiadeptraiqua@", true);
+                string database = Encryptor.Decrypt(cp.database, "nghiadeptraiqua@", true);
+                string conStr = "";
+                conStr += "Data Source=" + servername + "; Initial Catalog=" + database + "; User ID=" + username + "; Password=" + pass + ";";                
+                Friend._srv = servername;
+                Friend._us = username;
+                Friend._pw = pass;
+                Friend._db = database;
+                MySqlConnection con = new MySqlConnection(conStr);
+                try
+                {
+                    con.Open();
+                    //fs.Close();
+                    //Application.Run(new frmMain());
+                }
+                catch
+                {
+                    MessageBox.Show("không thể kết nối  CSDL", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    fs.Close();
+                }
+                con.Close();
+                fs.Close();
+            }
+            else
+            {
+                frmMySQL frm = new frmMySQL();
+                frm.Show();
+            }    
+            
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

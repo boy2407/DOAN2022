@@ -25,6 +25,8 @@ namespace DataLayer
         public Nullable<double> DONGIA { get; set; }
         public Nullable<int> SONGUOI { get; set; }
         public Nullable<int> SOGIUONG { get; set; }
+        public string MACTY { get; set; }
+        public string MADVI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Phong> tb_Phong { get; set; }

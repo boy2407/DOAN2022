@@ -289,6 +289,7 @@ namespace KHACHSAN
 			_maky = _nam * 100 + _thang;
 			gcDanhSach.DataSource = _kpct.GetList(_nam * 100 + _thang, Friend._macty, Friend._madvi);			
 			CustomView(_thang, _nam);
+			bandedgvDanhSach.OptionsBehavior.Editable = false;
 		}
     }
 }

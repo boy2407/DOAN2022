@@ -34,8 +34,8 @@ namespace KHACHSAN
             this.cboCongty = new System.Windows.Forms.ComboBox();
             this.cboDonvi = new System.Windows.Forms.ComboBox();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.btnXacNhan = new DevExpress.XtraEditors.SimpleButton();
             this.btnThoat = new DevExpress.XtraEditors.SimpleButton();
+            this.btnXacNhan = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -55,6 +55,7 @@ namespace KHACHSAN
             this.cboCongty.Name = "cboCongty";
             this.cboCongty.Size = new System.Drawing.Size(315, 21);
             this.cboCongty.TabIndex = 1;
+            this.cboCongty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboCongty_KeyPress);
             // 
             // cboDonvi
             // 
@@ -63,6 +64,7 @@ namespace KHACHSAN
             this.cboDonvi.Name = "cboDonvi";
             this.cboDonvi.Size = new System.Drawing.Size(315, 21);
             this.cboDonvi.TabIndex = 3;
+            this.cboDonvi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboCongty_KeyPress);
             // 
             // labelControl2
             // 
@@ -74,31 +76,31 @@ namespace KHACHSAN
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "Đơn vị trực thuộc";
             // 
-            // btnXacNhan
-            // 
-            this.btnXacNhan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXacNhan.ImageOptions.Image")));
-            this.btnXacNhan.Location = new System.Drawing.Point(76, 181);
-            this.btnXacNhan.Name = "btnXacNhan";
-            this.btnXacNhan.Size = new System.Drawing.Size(120, 34);
-            this.btnXacNhan.TabIndex = 4;
-            this.btnXacNhan.Text = "Xác nhận";
-            this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
-            // 
             // btnThoat
             // 
             this.btnThoat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.ImageOptions.Image")));
-            this.btnThoat.Location = new System.Drawing.Point(261, 181);
+            this.btnThoat.Location = new System.Drawing.Point(256, 195);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(120, 34);
             this.btnThoat.TabIndex = 5;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
+            // btnXacNhan
+            // 
+            this.btnXacNhan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXacNhan.ImageOptions.Image")));
+            this.btnXacNhan.Location = new System.Drawing.Point(71, 195);
+            this.btnXacNhan.Name = "btnXacNhan";
+            this.btnXacNhan.Size = new System.Drawing.Size(120, 34);
+            this.btnXacNhan.TabIndex = 4;
+            this.btnXacNhan.Text = "Xác nhận";
+            this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
+            // 
             // frmSetParam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 255);
+            this.ClientSize = new System.Drawing.Size(479, 255);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnXacNhan);
             this.Controls.Add(this.cboDonvi);
@@ -108,6 +110,7 @@ namespace KHACHSAN
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSetParam";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Xác nhận đơn vị";
             this.Load += new System.EventHandler(this.frmSetParam_Load);
             this.ResumeLayout(false);

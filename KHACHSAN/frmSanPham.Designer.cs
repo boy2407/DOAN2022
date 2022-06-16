@@ -158,8 +158,6 @@ namespace KHACHSAN
             this.IDSP.FieldName = "IDSP";
             this.IDSP.MaxWidth = 50;
             this.IDSP.Name = "IDSP";
-            this.IDSP.Visible = true;
-            this.IDSP.VisibleIndex = 0;
             this.IDSP.Width = 50;
             // 
             // TENSP
@@ -170,7 +168,7 @@ namespace KHACHSAN
             this.TENSP.MinWidth = 60;
             this.TENSP.Name = "TENSP";
             this.TENSP.Visible = true;
-            this.TENSP.VisibleIndex = 1;
+            this.TENSP.VisibleIndex = 0;
             this.TENSP.Width = 80;
             // 
             // DONGIA
@@ -184,7 +182,7 @@ namespace KHACHSAN
             this.DONGIA.Name = "DONGIA";
             this.DONGIA.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.DONGIA.Visible = true;
-            this.DONGIA.VisibleIndex = 2;
+            this.DONGIA.VisibleIndex = 1;
             this.DONGIA.Width = 120;
             // 
             // groupControl1

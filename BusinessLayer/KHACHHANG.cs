@@ -28,6 +28,16 @@ namespace BusinessLayer
             }
             return false;
         }
+        public bool checkSTD(string dt)
+        {
+            var lst = db.tb_KhachHang.ToList();
+            foreach (var i in lst)
+            {
+                if (i.DIENTHOAI == dt)
+                    return true;
+            }
+            return false;
+        }
         public List<tb_KhachHang> getAll(bool dis)
         {
             return db.tb_KhachHang.Where(x=>x.DISABLED==dis).ToList();

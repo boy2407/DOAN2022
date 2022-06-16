@@ -19,6 +19,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmSanPham(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         bool _them;
         SANPHAM _sanpham;
         string _idsp;
@@ -54,11 +62,16 @@ namespace KHACHSAN
         }
         void LoadData()
         {
-            gcDanhSach.DataSource = _sanpham.getAll();
+            gcDanhSach.DataSource = _sanpham.getAll(Friend._macty, Friend._madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _enabled(true);
             _them = true;
             _reset();
@@ -67,6 +80,11 @@ namespace KHACHSAN
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = false;
           
             _enabled(true);
@@ -75,6 +93,11 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 _sanpham.delete(int.Parse(_idsp));
@@ -85,11 +108,18 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
             if (_them == true)
             {
                 tb_SanPham sp = new tb_SanPham();
                 sp.TENSP = txtTen.Text;
                 sp.DONGIA = double.Parse(txtDonGia.Text);
+                sp.MACTY = Friend._macty;
+                sp.MADVI = Friend._madvi;
                 _sanpham.add(sp);
             }
             else

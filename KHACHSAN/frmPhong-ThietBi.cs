@@ -19,6 +19,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmPhong_ThietBi(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         PHONG _phong;
         THIETBI _thietbi;
         PHONG_THIETBI _phong_thietbi;
@@ -40,7 +48,7 @@ namespace KHACHSAN
             loadDanhSach();
             cboThietBi.SelectedIndex = 0;
             _idTB = int.Parse(cboThietBi.SelectedValue.ToString());
-          
+
         }
 
         private void SpSoLuong_EditValueChanged(object sender, EventArgs e)
@@ -67,16 +75,16 @@ namespace KHACHSAN
         {          
             if(_them==true)
             {
-                _idTB = (int)cboThietBi.SelectedValue;              
+                
+                _idTB = (int)cboThietBi.SelectedValue;
+                MessageBox.Show(_idTB.ToString());
             }                  
         }
 
         private void SearchPhong_TextChanged(object sender, EventArgs e)
         {
             _idPhong = int.Parse(searchPhong.EditValue.ToString());
-            loadDanhSach();
-            
-
+            loadDanhSach();          
         }
 
         void savedata()
@@ -109,8 +117,7 @@ namespace KHACHSAN
             {
 
                 int temp;
-                tb_ThietBi tb = _thietbi.getItem(_idTB);
-               
+                tb_ThietBi tb = _thietbi.getItem(_idTB);             
                 tb_Phong_ThietBi ptb = new tb_Phong_ThietBi();
                 ptb = _phong_thietbi.getItem(_idPhong, _idTB);
                 if (ptb.SOLUONG< (int)spSoLuong.Value)
@@ -139,14 +146,14 @@ namespace KHACHSAN
         void loadthietbi()
         {
             _thietbi = new THIETBI();
-            cboThietBi.DataSource = _thietbi.getALL();
+            cboThietBi.DataSource = _thietbi.getALL(Friend._macty,Friend._madvi);
             cboThietBi.DisplayMember = "TENTB";
             cboThietBi.ValueMember = "IDTB";
         }
         void loadphong()
         {
             _phong = new PHONG();
-           searchPhong.Properties.DataSource = _phong.getAll();
+           searchPhong.Properties.DataSource = _phong.getAll(Friend._macty,Friend._madvi);
            searchPhong.Properties.DisplayMember = "TENPHONG";
            searchPhong.Properties.ValueMember = "IDPHONG";
         }
@@ -168,6 +175,11 @@ namespace KHACHSAN
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (searchPhong.EditValue == null || searchPhong.EditValue.ToString() == "")
             {
                 MessageBox.Show("Vui Lòng phòng", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -180,7 +192,12 @@ namespace KHACHSAN
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if(_idTB==0)
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (_idTB==0)
             {
                 MessageBox.Show("Vui lòng chọn thiết bị đã có trong phòng");
                 return;
@@ -192,7 +209,16 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                _phong_thietbi.delete(_idPhong,_idTB);
+                loadDanhSach();
+            }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)

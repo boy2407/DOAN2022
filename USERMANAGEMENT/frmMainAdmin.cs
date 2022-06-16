@@ -9,15 +9,22 @@ using System.Windows.Forms;
 using DataLayer;
 using BusinessLayer;
 using USERMANAGEMENT.MyComponents;
-
+using System.Threading.Tasks;
+using System.Threading;
 namespace USERMANAGEMENT
 {
-    public partial class frmMain : DevExpress.XtraEditors.XtraForm
+    public partial class frmMainAdmin : DevExpress.XtraEditors.XtraForm
     {
-        public frmMain()
+        public frmMainAdmin()
         {
             InitializeComponent();
         }
+        public frmMainAdmin(tb_Admin admin)
+        {
+            InitializeComponent();
+            this._admin = admin;
+        }
+        tb_Admin _admin;
         MyTreeViewComBo _treeView;
         CONGTY _congty;
         DONVI _donvi;
@@ -30,11 +37,11 @@ namespace USERMANAGEMENT
             _sysUser = new SYS_USER();
             _congty = new CONGTY();
             _donvi = new DONVI();
-            _isRoot = true;
+            //_isRoot = true;
             loadTreeView();
-            loadUser("CTYME","~");
+            loadUser("CTYME", "~");
         }
-         public void loadUser(string macty,string madvi)
+        public void loadUser(string macty,string madvi)
         {
             _sysUser = new SYS_USER();
             gcUser.DataSource = _sysUser.getUserByDVI(macty,madvi);
@@ -59,8 +66,7 @@ namespace USERMANAGEMENT
                     TreeNode childNode = new TreeNode();
                     childNode.Text = dv.MADVI + " - " + dv.TENDVI;
                     childNode.Tag = dv.MACTY+"."+dv.MADVI;
-                    childNode.Name = dv.MACTY + "." + dv.MADVI;
-                   
+                    childNode.Name = dv.MACTY + "." + dv.MADVI;                  
                     _treeView.TreeView.Nodes[parentNode.Name].Nodes.Add(childNode);
                 } 
                     
@@ -102,6 +108,7 @@ namespace USERMANAGEMENT
         }
          private  void addGroup()
         {
+          
             if (_treeView.Text == "")
             {
                 MessageBox.Show("Vui lòng chọn đơn vị.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -116,23 +123,33 @@ namespace USERMANAGEMENT
         }
         private void addUser()
         {
+            
             if (_treeView.Text == "")
             {
                 MessageBox.Show("Vui lòng chọn đơn vị.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 return;
             }
-            frmUser frm = new frmUser();
-            frm._them = true;
-            frm._macty = _macty;
-            frm._madvi = _madvi;
 
 
-
-            frm.ShowDialog();
+            using (frmUser frm = new frmUser())
+            {
+                frm._them = true;
+                frm._macty = _macty;
+                frm._madvi = _madvi;
+                frm.ShowDialog();
+            }
+           
+        }
+        void user()
+        {
+           
+                   
         }
         private void updateInfor()
         {
+
+            
             if (gvUser.RowCount > 0 && gvUser.GetFocusedRowCellValue("ISGROUP").Equals(true))
             {
                 if (gvUser.GetFocusedRowCellValue("DISABLED").Equals(true))
@@ -182,6 +199,7 @@ namespace USERMANAGEMENT
         }
         private void chucnang()
         {
+             
             if (gvUser.RowCount > 0)
             {
                 tb_SYS_USER i = _sysUser.getItem(int.Parse(gvUser.GetFocusedRowCellValue("IDUSER").ToString()));
@@ -203,6 +221,7 @@ namespace USERMANAGEMENT
         }
         private void baocao()
         {
+            
             if (gvUser.RowCount > 0)
             {
                 tb_SYS_USER i = _sysUser.getItem(int.Parse(gvUser.GetFocusedRowCellValue("IDUSER").ToString()));
@@ -226,27 +245,32 @@ namespace USERMANAGEMENT
         }
         private void btnNhomNguoiDung_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            
             addGroup();
         }
 
         private void btnNguoiDung_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+           
             addUser();
         }
 
         private void btnCapNhatThongTin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            
             updateInfor();
         }
 
         private void btnPQChucNang_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+           
             chucnang();
 
         }
 
         private void btnPQBaoCao_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+          
             baocao();
         }
 
@@ -282,9 +306,7 @@ namespace USERMANAGEMENT
                 frm.ShowDialog();
             }    
         }
-
-       
-
+      
         private void thêmNhómToolStripMenuItem_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < gvUser.RowCount; i++)
@@ -345,6 +367,11 @@ namespace USERMANAGEMENT
                 }
 
             }
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

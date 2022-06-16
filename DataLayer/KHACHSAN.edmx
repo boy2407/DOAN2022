@@ -5,13 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HOTELSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Admin">
+          <Key>
+            <PropertyRef Name="USERNAM" />
+            <PropertyRef Name="MACTY" />
+            <PropertyRef Name="MADVI" />
+          </Key>
+          <Property Name="USERNAM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PASS" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_CaiDat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MO" Type="bit" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tb_CongTy">
           <Key>
             <PropertyRef Name="MACTY" />
-            <PropertyRef Name="id" />
           </Key>
           <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TENCTY" Type="nvarchar" MaxLength="200" />
           <Property Name="DIENTHOAI" Type="nvarchar" MaxLength="20" />
           <Property Name="FAX" Type="nvarchar" MaxLength="20" />
@@ -54,6 +71,8 @@
           <Property Name="NGAY" Type="datetime" />
           <Property Name="DONGIA" Type="float" />
           <Property Name="NGAYO" Type="datetime" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_DatPhong_Phong_NgayO">
           <Key>
@@ -81,6 +100,8 @@
           <Property Name="SOLUONG" Type="int" />
           <Property Name="DONGIA" Type="float" />
           <Property Name="THANHTIEN" Type="float" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_DonVi">
           <Key>
@@ -111,10 +132,12 @@
         <EntityType Name="tb_KyPhong">
           <Key>
             <PropertyRef Name="MAKY" />
+            <PropertyRef Name="MACTY" />
+            <PropertyRef Name="MADV" />
           </Key>
           <Property Name="MAKY" Type="int" Nullable="false" />
-          <Property Name="MACTY" Type="nvarchar" MaxLength="10" />
-          <Property Name="MADV" Type="nvarchar" MaxLength="10" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADV" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SONGAY" Type="int" />
           <Property Name="NGAY" Type="date" />
           <Property Name="NAM" Type="int" />
@@ -173,13 +196,15 @@
           <Property Name="DONGIA" Type="float" />
           <Property Name="SONGUOI" Type="int" />
           <Property Name="SOGIUONG" Type="int" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Param">
           <Key>
             <PropertyRef Name="MACTY" />
             <PropertyRef Name="MADVI" />
           </Key>
-          <Property Name="MACTY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TENCTY" Type="nvarchar" MaxLength="50" />
           <Property Name="TENDVI" Type="nvarchar" MaxLength="50" />
@@ -202,6 +227,8 @@
           <Property Name="TRANGTHAI" Type="bit" />
           <Property Name="IDTANG" Type="int" Nullable="false" />
           <Property Name="IDLOAIPHONG" Type="int" Nullable="false" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Phong_ThietBi">
           <Key>
@@ -211,6 +238,8 @@
           <Property Name="IDPHONG" Type="int" Nullable="false" />
           <Property Name="IDTB" Type="int" Nullable="false" />
           <Property Name="SOLUONG" Type="int" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_SanPham">
           <Key>
@@ -219,6 +248,8 @@
           <Property Name="IDSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TENSP" Type="nvarchar" MaxLength="50" />
           <Property Name="DONGIA" Type="float" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_SYS_Func">
           <Key>
@@ -291,6 +322,8 @@
           </Key>
           <Property Name="IDTANG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TENTANG" Type="nvarchar" MaxLength="50" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_ThietBi">
           <Key>
@@ -301,6 +334,9 @@
           <Property Name="DONGIA" Type="float" />
           <Property Name="TONGSLN" Type="int" />
           <Property Name="TONGSLX" Type="int" />
+          <Property Name="MACTY" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MADVI" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DONVITINH" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HOTELS.dbo.v_DATPHONG_DATPHONG_CT_PHONG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -419,20 +455,6 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_htk_Phong">
-          <End Role="tb_Phong" Type="Self.tb_Phong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_Phong_ThietBi" Type="Self.tb_Phong_ThietBi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Phong">
-              <PropertyRef Name="IDPHONG" />
-            </Principal>
-            <Dependent Role="tb_Phong_ThietBi">
-              <PropertyRef Name="IDPHONG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_htk_rep_code">
           <End Role="tb_SYS_REPORT" Type="Self.tb_SYS_REPORT" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -447,24 +469,298 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_htk_ThietBi">
-          <End Role="tb_ThietBi" Type="Self.tb_ThietBi" Multiplicity="1">
+        <Association Name="fk_sys_group_user">
+          <End Role="tb_SYS_USER" Type="Self.tb_SYS_USER" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tb_Phong_ThietBi" Type="Self.tb_Phong_ThietBi" Multiplicity="*" />
+          <End Role="tb_SYS_GROUP" Type="Self.tb_SYS_GROUP" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_ThietBi">
-              <PropertyRef Name="IDTB" />
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
             </Principal>
-            <Dependent Role="tb_Phong_ThietBi">
-              <PropertyRef Name="IDTB" />
+            <Dependent Role="tb_SYS_GROUP">
+              <PropertyRef Name="MENBER" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_LoaiPhong">
-          <End Role="tb_LoaiPhong" Type="Self.tb_LoaiPhong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_tb_admin_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_Admin" Type="Self.tb_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_Admin">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_admin_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_Admin" Type="Self.tb_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_Admin">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_CT_tb_DatPhong">
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="1" />
+          <End Role="tb_DatPhong_CT" Type="Self.tb_DatPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_CT">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_CT_tb_Phong">
+          <End Role="tb_Phong" Type="Self.tb_Phong" Multiplicity="1" />
+          <End Role="tb_DatPhong_CT" Type="Self.tb_DatPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Phong">
+              <PropertyRef Name="IDPHONG" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_CT">
+              <PropertyRef Name="IDPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="0..1" />
+          <End Role="tb_DatPhong_Phong_NgayO" Type="Self.tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_DatPhong">
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="1" />
+          <End Role="tb_DatPhong_Phong_NgayO" Type="Self.tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1" />
+          <End Role="tb_DatPhong_Phong_NgayO" Type="Self.tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_SP_tb_DatPhong">
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="1" />
+          <End Role="tb_DatPhong_SP" Type="Self.tb_DatPhong_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_SP">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_SP_tb_SanPham">
+          <End Role="tb_SanPham" Type="Self.tb_SanPham" Multiplicity="1" />
+          <End Role="tb_DatPhong_SP" Type="Self.tb_DatPhong_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SanPham">
+              <PropertyRef Name="IDSP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_SP">
+              <PropertyRef Name="IDSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="0..1" />
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1" />
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_KhachHang">
+          <End Role="tb_KhachHang" Type="Self.tb_KhachHang" Multiplicity="1" />
+          <End Role="tb_DatPhong" Type="Self.tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_KhachHang">
+              <PropertyRef Name="IDKH" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="IDKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="0..1" />
+          <End Role="tb_KyPhong_CT" Type="Self.tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_CongTy1">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="0..1" />
+          <End Role="tb_KyPhong_CT" Type="Self.tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1" />
+          <End Role="tb_KyPhong_CT" Type="Self.tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi1">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1" />
+          <End Role="tb_KyPhong_CT" Type="Self.tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi2">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1" />
+          <End Role="tb_KyPhong_CT" Type="Self.tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_KyPhong" Type="Self.tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_CongTy1">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_KyPhong" Type="Self.tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_KyPhong" Type="Self.tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_DonVi1">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_KyPhong" Type="Self.tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Param_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_Param" Type="Self.tb_Param" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_Param">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Param_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_Param" Type="Self.tb_Param" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_Param">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Phong_tb_LoaiPhong">
+          <End Role="tb_LoaiPhong" Type="Self.tb_LoaiPhong" Multiplicity="1" />
           <End Role="tb_Phong" Type="Self.tb_Phong" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_LoaiPhong">
@@ -475,10 +771,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_Tang">
-          <End Role="tb_Tang" Type="Self.tb_Tang" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_tb_Phong_tb_Tang">
+          <End Role="tb_Tang" Type="Self.tb_Tang" Multiplicity="1" />
           <End Role="tb_Phong" Type="Self.tb_Phong" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_Tang">
@@ -489,7 +783,109 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_Phong_ThietBi_tb_Phong">
+          <End Role="tb_Phong" Type="Self.tb_Phong" Multiplicity="1" />
+          <End Role="tb_Phong_ThietBi" Type="Self.tb_Phong_ThietBi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Phong">
+              <PropertyRef Name="IDPHONG" />
+            </Principal>
+            <Dependent Role="tb_Phong_ThietBi">
+              <PropertyRef Name="IDPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Phong_ThietBi_tb_ThietBi">
+          <End Role="tb_ThietBi" Type="Self.tb_ThietBi" Multiplicity="1" />
+          <End Role="tb_Phong_ThietBi" Type="Self.tb_Phong_ThietBi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ThietBi">
+              <PropertyRef Name="IDTB" />
+            </Principal>
+            <Dependent Role="tb_Phong_ThietBi">
+              <PropertyRef Name="IDTB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SanPham_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_SanPham" Type="Self.tb_SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_SanPham">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SanPham_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_SanPham" Type="Self.tb_SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_SanPham">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_RIGHT_REP_tb_SYS_USER">
+          <End Role="tb_SYS_USER" Type="Self.tb_SYS_USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tb_SYS_RIGHT_REP" Type="Self.tb_SYS_RIGHT_REP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT_REP">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_RIGHT_tb_SYS_USER">
+          <End Role="tb_SYS_USER" Type="Self.tb_SYS_USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tb_SYS_RIGHT" Type="Self.tb_SYS_RIGHT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_USER_tb_CongTy">
+          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+          <End Role="tb_SYS_USER" Type="Self.tb_SYS_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_SYS_USER">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_USER_tb_DonVi">
+          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+          <End Role="tb_SYS_USER" Type="Self.tb_SYS_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_SYS_USER">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HOTELSModelStoreContainer">
+          <EntitySet Name="tb_Admin" EntityType="Self.tb_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_CaiDat" EntityType="Self.tb_CaiDat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DatPhong" EntityType="Self.tb_DatPhong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DatPhong_CT" EntityType="Self.tb_DatPhong_CT" Schema="dbo" store:Type="Tables" />
@@ -592,25 +988,145 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             <End Role="tb_SYS_Func" EntitySet="tb_SYS_Func" />
             <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
           </AssociationSet>
-          <AssociationSet Name="fk_htk_Phong" Association="Self.fk_htk_Phong">
-            <End Role="tb_Phong" EntitySet="tb_Phong" />
-            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
-          </AssociationSet>
           <AssociationSet Name="fk_htk_rep_code" Association="Self.fk_htk_rep_code">
             <End Role="tb_SYS_REPORT" EntitySet="tb_SYS_REPORT" />
             <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
           </AssociationSet>
-          <AssociationSet Name="fk_htk_ThietBi" Association="Self.fk_htk_ThietBi">
-            <End Role="tb_ThietBi" EntitySet="tb_ThietBi" />
-            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
+          <AssociationSet Name="fk_sys_group_user" Association="Self.fk_sys_group_user">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_GROUP" EntitySet="tb_SYS_GROUP" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_LoaiPhong" Association="Self.fk_tb_LoaiPhong">
+          <AssociationSet Name="FK_tb_admin_tb_CongTy" Association="Self.FK_tb_admin_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_Admin" EntitySet="tb_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_admin_tb_DonVi" Association="Self.FK_tb_admin_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_Admin" EntitySet="tb_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_CT_tb_DatPhong" Association="Self.FK_tb_DatPhong_CT_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_CT" EntitySet="tb_DatPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_CT_tb_Phong" Association="Self.FK_tb_DatPhong_CT_tb_Phong">
+            <End Role="tb_Phong" EntitySet="tb_Phong" />
+            <End Role="tb_DatPhong_CT" EntitySet="tb_DatPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_CongTy" Association="Self.FK_tb_DatPhong_Phong_NgayO_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_DatPhong" Association="Self.FK_tb_DatPhong_Phong_NgayO_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_DonVi" Association="Self.FK_tb_DatPhong_Phong_NgayO_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_SP_tb_DatPhong" Association="Self.FK_tb_DatPhong_SP_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_SP" EntitySet="tb_DatPhong_SP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_SP_tb_SanPham" Association="Self.FK_tb_DatPhong_SP_tb_SanPham">
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+            <End Role="tb_DatPhong_SP" EntitySet="tb_DatPhong_SP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_CongTy" Association="Self.FK_tb_DatPhong_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_DonVi" Association="Self.FK_tb_DatPhong_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_KhachHang" Association="Self.FK_tb_DatPhong_tb_KhachHang">
+            <End Role="tb_KhachHang" EntitySet="tb_KhachHang" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_CongTy" Association="Self.FK_tb_KyPhong_CT_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_CongTy1" Association="Self.FK_tb_KyPhong_CT_tb_CongTy1">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi" Association="Self.FK_tb_KyPhong_CT_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi1" Association="Self.FK_tb_KyPhong_CT_tb_DonVi1">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi2" Association="Self.FK_tb_KyPhong_CT_tb_DonVi2">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_CongTy" Association="Self.FK_tb_KyPhong_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_CongTy1" Association="Self.FK_tb_KyPhong_tb_CongTy1">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_DonVi" Association="Self.FK_tb_KyPhong_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_DonVi1" Association="Self.FK_tb_KyPhong_tb_DonVi1">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Param_tb_CongTy" Association="Self.FK_tb_Param_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_Param" EntitySet="tb_Param" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Param_tb_DonVi" Association="Self.FK_tb_Param_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_Param" EntitySet="tb_Param" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Phong_tb_LoaiPhong" Association="Self.FK_tb_Phong_tb_LoaiPhong">
             <End Role="tb_LoaiPhong" EntitySet="tb_LoaiPhong" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_Tang" Association="Self.fk_tb_Tang">
+          <AssociationSet Name="FK_tb_Phong_tb_Tang" Association="Self.FK_tb_Phong_tb_Tang">
             <End Role="tb_Tang" EntitySet="tb_Tang" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Phong_ThietBi_tb_Phong" Association="Self.FK_tb_Phong_ThietBi_tb_Phong">
+            <End Role="tb_Phong" EntitySet="tb_Phong" />
+            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Phong_ThietBi_tb_ThietBi" Association="Self.FK_tb_Phong_ThietBi_tb_ThietBi">
+            <End Role="tb_ThietBi" EntitySet="tb_ThietBi" />
+            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SanPham_tb_CongTy" Association="Self.FK_tb_SanPham_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SanPham_tb_DonVi" Association="Self.FK_tb_SanPham_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_RIGHT_REP_tb_SYS_USER" Association="Self.FK_tb_SYS_RIGHT_REP_tb_SYS_USER">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_RIGHT_tb_SYS_USER" Association="Self.FK_tb_SYS_RIGHT_tb_SYS_USER">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_USER_tb_CongTy" Association="Self.FK_tb_SYS_USER_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_USER_tb_DonVi" Association="Self.FK_tb_SYS_USER_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -618,6 +1134,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
     <edmx:ConceptualModels>
       <Schema Namespace="HOTELSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Admin" EntityType="HOTELSModel.tb_Admin" />
+          <EntitySet Name="tb_CaiDat" EntityType="HOTELSModel.tb_CaiDat" />
           <EntitySet Name="tb_CongTy" EntityType="HOTELSModel.tb_CongTy" />
           <EntitySet Name="tb_DatPhong" EntityType="HOTELSModel.tb_DatPhong" />
           <EntitySet Name="tb_DatPhong_CT" EntityType="HOTELSModel.tb_DatPhong_CT" />
@@ -626,6 +1144,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySet Name="tb_DonVi" EntityType="HOTELSModel.tb_DonVi" />
           <EntitySet Name="tb_KhachHang" EntityType="HOTELSModel.tb_KhachHang" />
           <EntitySet Name="tb_KyPhong" EntityType="HOTELSModel.tb_KyPhong" />
+          <EntitySet Name="tb_KyPhong_CT" EntityType="HOTELSModel.tb_KyPhong_CT" />
           <EntitySet Name="tb_LoaiPhong" EntityType="HOTELSModel.tb_LoaiPhong" />
           <EntitySet Name="tb_Param" EntityType="HOTELSModel.tb_Param" />
           <EntitySet Name="tb_Phat" EntityType="HOTELSModel.tb_Phat" />
@@ -646,19 +1165,127 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySet Name="V_REP_SYS_RIGHT_REP" EntityType="HOTELSModel.V_REP_SYS_RIGHT_REP" />
           <EntitySet Name="V_USER_INGROUP" EntityType="HOTELSModel.V_USER_INGROUP" />
           <EntitySet Name="V_USER_NOTIN_GROUP" EntityType="HOTELSModel.V_USER_NOTIN_GROUP" />
-          <AssociationSet Name="fk_tb_LoaiPhong" Association="HOTELSModel.fk_tb_LoaiPhong">
+          <AssociationSet Name="FK_tb_admin_tb_CongTy" Association="HOTELSModel.FK_tb_admin_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_Admin" EntitySet="tb_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_admin_tb_DonVi" Association="HOTELSModel.FK_tb_admin_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_Admin" EntitySet="tb_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_CongTy" Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_CongTy" Association="HOTELSModel.FK_tb_DatPhong_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_CongTy" Association="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_CongTy1" Association="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy1">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_CongTy" Association="HOTELSModel.FK_tb_KyPhong_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_CongTy1" Association="HOTELSModel.FK_tb_KyPhong_tb_CongTy1">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Param_tb_CongTy" Association="HOTELSModel.FK_tb_Param_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_Param" EntitySet="tb_Param" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SanPham_tb_CongTy" Association="HOTELSModel.FK_tb_SanPham_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_USER_tb_CongTy" Association="HOTELSModel.FK_tb_SYS_USER_tb_CongTy">
+            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_CT_tb_DatPhong" Association="HOTELSModel.FK_tb_DatPhong_CT_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_CT" EntitySet="tb_DatPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_DatPhong" Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_SP_tb_DatPhong" Association="HOTELSModel.FK_tb_DatPhong_SP_tb_DatPhong">
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+            <End Role="tb_DatPhong_SP" EntitySet="tb_DatPhong_SP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_DonVi" Association="HOTELSModel.FK_tb_DatPhong_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_tb_KhachHang" Association="HOTELSModel.FK_tb_DatPhong_tb_KhachHang">
+            <End Role="tb_KhachHang" EntitySet="tb_KhachHang" />
+            <End Role="tb_DatPhong" EntitySet="tb_DatPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_CT_tb_Phong" Association="HOTELSModel.FK_tb_DatPhong_CT_tb_Phong">
+            <End Role="tb_Phong" EntitySet="tb_Phong" />
+            <End Role="tb_DatPhong_CT" EntitySet="tb_DatPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_Phong_NgayO_tb_DonVi" Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_DatPhong_Phong_NgayO" EntitySet="tb_DatPhong_Phong_NgayO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DatPhong_SP_tb_SanPham" Association="HOTELSModel.FK_tb_DatPhong_SP_tb_SanPham">
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+            <End Role="tb_DatPhong_SP" EntitySet="tb_DatPhong_SP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi" Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi1" Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi1">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_CT_tb_DonVi2" Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi2">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong_CT" EntitySet="tb_KyPhong_CT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_DonVi" Association="HOTELSModel.FK_tb_KyPhong_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_KyPhong_tb_DonVi1" Association="HOTELSModel.FK_tb_KyPhong_tb_DonVi1">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_KyPhong" EntitySet="tb_KyPhong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Param_tb_DonVi" Association="HOTELSModel.FK_tb_Param_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_Param" EntitySet="tb_Param" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SanPham_tb_DonVi" Association="HOTELSModel.FK_tb_SanPham_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_SanPham" EntitySet="tb_SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_USER_tb_DonVi" Association="HOTELSModel.FK_tb_SYS_USER_tb_DonVi">
+            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Phong_tb_LoaiPhong" Association="HOTELSModel.FK_tb_Phong_tb_LoaiPhong">
             <End Role="tb_LoaiPhong" EntitySet="tb_LoaiPhong" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
           </AssociationSet>
-          <AssociationSet Name="fk_htk_Phong" Association="HOTELSModel.fk_htk_Phong">
-            <End Role="tb_Phong" EntitySet="tb_Phong" />
-            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_Tang" Association="HOTELSModel.fk_tb_Tang">
+          <AssociationSet Name="FK_tb_Phong_tb_Tang" Association="HOTELSModel.FK_tb_Phong_tb_Tang">
             <End Role="tb_Tang" EntitySet="tb_Tang" />
             <End Role="tb_Phong" EntitySet="tb_Phong" />
           </AssociationSet>
-          <AssociationSet Name="fk_htk_ThietBi" Association="HOTELSModel.fk_htk_ThietBi">
+          <AssociationSet Name="FK_tb_Phong_ThietBi_tb_Phong" Association="HOTELSModel.FK_tb_Phong_ThietBi_tb_Phong">
+            <End Role="tb_Phong" EntitySet="tb_Phong" />
+            <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Phong_ThietBi_tb_ThietBi" Association="HOTELSModel.FK_tb_Phong_ThietBi_tb_ThietBi">
             <End Role="tb_ThietBi" EntitySet="tb_ThietBi" />
             <End Role="tb_Phong_ThietBi" EntitySet="tb_Phong_ThietBi" />
           </AssociationSet>
@@ -666,25 +1293,65 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             <End Role="tb_SYS_Func" EntitySet="tb_SYS_Func" />
             <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
           </AssociationSet>
+          <AssociationSet Name="fk_sys_group_user" Association="HOTELSModel.fk_sys_group_user">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_GROUP" EntitySet="tb_SYS_GROUP" />
+          </AssociationSet>
           <AssociationSet Name="fk_htk_rep_code" Association="HOTELSModel.fk_htk_rep_code">
             <End Role="tb_SYS_REPORT" EntitySet="tb_SYS_REPORT" />
             <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
           </AssociationSet>
-          <EntitySet Name="tb_KyPhong_CT" EntityType="HOTELSModel.tb_KyPhong_CT" />
+          <AssociationSet Name="FK_tb_SYS_RIGHT_tb_SYS_USER" Association="HOTELSModel.FK_tb_SYS_RIGHT_tb_SYS_USER">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_RIGHT" EntitySet="tb_SYS_RIGHT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_SYS_RIGHT_REP_tb_SYS_USER" Association="HOTELSModel.FK_tb_SYS_RIGHT_REP_tb_SYS_USER">
+            <End Role="tb_SYS_USER" EntitySet="tb_SYS_USER" />
+            <End Role="tb_SYS_RIGHT_REP" EntitySet="tb_SYS_RIGHT_REP" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tb_Admin">
+          <Key>
+            <PropertyRef Name="USERNAM" />
+            <PropertyRef Name="MACTY" />
+            <PropertyRef Name="MADVI" />
+          </Key>
+          <Property Name="USERNAM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_admin_tb_CongTy" FromRole="tb_Admin" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_admin_tb_DonVi" FromRole="tb_Admin" ToRole="tb_DonVi" />
+        </EntityType>
+        <EntityType Name="tb_CaiDat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MO" Type="Boolean" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="tb_CongTy">
           <Key>
             <PropertyRef Name="MACTY" />
-            <PropertyRef Name="id" />
           </Key>
           <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENCTY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DIENTHOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
+          <NavigationProperty Name="tb_Admin" Relationship="HOTELSModel.FK_tb_admin_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_Admin" />
+          <NavigationProperty Name="tb_DatPhong_Phong_NgayO" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_DatPhong_Phong_NgayO" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_DatPhong" />
+          <NavigationProperty Name="tb_KyPhong_CT" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_KyPhong_CT" />
+          <NavigationProperty Name="tb_KyPhong_CT1" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy1" FromRole="tb_CongTy" ToRole="tb_KyPhong_CT" />
+          <NavigationProperty Name="tb_KyPhong" Relationship="HOTELSModel.FK_tb_KyPhong_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_KyPhong" />
+          <NavigationProperty Name="tb_KyPhong1" Relationship="HOTELSModel.FK_tb_KyPhong_tb_CongTy1" FromRole="tb_CongTy" ToRole="tb_KyPhong" />
+          <NavigationProperty Name="tb_Param" Relationship="HOTELSModel.FK_tb_Param_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_Param" />
+          <NavigationProperty Name="tb_SanPham" Relationship="HOTELSModel.FK_tb_SanPham_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_SanPham" />
+          <NavigationProperty Name="tb_SYS_USER" Relationship="HOTELSModel.FK_tb_SYS_USER_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_SYS_USER" />
         </EntityType>
         <EntityType Name="tb_DatPhong">
           <Key>
@@ -708,6 +1375,12 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
           <Property Name="UPDATE_BY" Type="Int32" />
           <Property Name="NHAN" Type="Boolean" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_DatPhong_tb_CongTy" FromRole="tb_DatPhong" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DatPhong_CT" Relationship="HOTELSModel.FK_tb_DatPhong_CT_tb_DatPhong" FromRole="tb_DatPhong" ToRole="tb_DatPhong_CT" />
+          <NavigationProperty Name="tb_DatPhong_Phong_NgayO" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DatPhong" FromRole="tb_DatPhong" ToRole="tb_DatPhong_Phong_NgayO" />
+          <NavigationProperty Name="tb_DatPhong_SP" Relationship="HOTELSModel.FK_tb_DatPhong_SP_tb_DatPhong" FromRole="tb_DatPhong" ToRole="tb_DatPhong_SP" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_DatPhong_tb_DonVi" FromRole="tb_DatPhong" ToRole="tb_DonVi" />
+          <NavigationProperty Name="tb_KhachHang" Relationship="HOTELSModel.FK_tb_DatPhong_tb_KhachHang" FromRole="tb_DatPhong" ToRole="tb_KhachHang" />
         </EntityType>
         <EntityType Name="tb_DatPhong_CT">
           <Key>
@@ -721,6 +1394,10 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="NGAY" Type="DateTime" Precision="3" />
           <Property Name="DONGIA" Type="Double" />
           <Property Name="NGAYO" Type="DateTime" Precision="3" />
+          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_CT_tb_DatPhong" FromRole="tb_DatPhong_CT" ToRole="tb_DatPhong" />
+          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.FK_tb_DatPhong_CT_tb_Phong" FromRole="tb_DatPhong_CT" ToRole="tb_Phong" />
         </EntityType>
         <EntityType Name="tb_DatPhong_Phong_NgayO">
           <Key>
@@ -734,6 +1411,9 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="NGAYO" Type="DateTime" Precision="3" />
           <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_CongTy" FromRole="tb_DatPhong_Phong_NgayO" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DatPhong" FromRole="tb_DatPhong_Phong_NgayO" ToRole="tb_DatPhong" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DonVi" FromRole="tb_DatPhong_Phong_NgayO" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_DatPhong_SP">
           <Key>
@@ -748,6 +1428,10 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="SOLUONG" Type="Int32" />
           <Property Name="DONGIA" Type="Double" />
           <Property Name="THANHTIEN" Type="Double" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_SP_tb_DatPhong" FromRole="tb_DatPhong_SP" ToRole="tb_DatPhong" />
+          <NavigationProperty Name="tb_SanPham" Relationship="HOTELSModel.FK_tb_DatPhong_SP_tb_SanPham" FromRole="tb_DatPhong_SP" ToRole="tb_SanPham" />
         </EntityType>
         <EntityType Name="tb_DonVi">
           <Key>
@@ -761,6 +1445,17 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
+          <NavigationProperty Name="tb_Admin" Relationship="HOTELSModel.FK_tb_admin_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_Admin" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_DatPhong" />
+          <NavigationProperty Name="tb_DatPhong_Phong_NgayO" Relationship="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_DatPhong_Phong_NgayO" />
+          <NavigationProperty Name="tb_KyPhong_CT" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_KyPhong_CT" />
+          <NavigationProperty Name="tb_KyPhong_CT1" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi1" FromRole="tb_DonVi" ToRole="tb_KyPhong_CT" />
+          <NavigationProperty Name="tb_KyPhong_CT2" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi2" FromRole="tb_DonVi" ToRole="tb_KyPhong_CT" />
+          <NavigationProperty Name="tb_KyPhong" Relationship="HOTELSModel.FK_tb_KyPhong_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_KyPhong" />
+          <NavigationProperty Name="tb_KyPhong1" Relationship="HOTELSModel.FK_tb_KyPhong_tb_DonVi1" FromRole="tb_DonVi" ToRole="tb_KyPhong" />
+          <NavigationProperty Name="tb_Param" Relationship="HOTELSModel.FK_tb_Param_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_Param" />
+          <NavigationProperty Name="tb_SanPham" Relationship="HOTELSModel.FK_tb_SanPham_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_SanPham" />
+          <NavigationProperty Name="tb_SYS_USER" Relationship="HOTELSModel.FK_tb_SYS_USER_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_SYS_USER" />
         </EntityType>
         <EntityType Name="tb_KhachHang">
           <Key>
@@ -774,18 +1469,74 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DIACHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DISABLED" Type="Boolean" />
+          <NavigationProperty Name="tb_DatPhong" Relationship="HOTELSModel.FK_tb_DatPhong_tb_KhachHang" FromRole="tb_KhachHang" ToRole="tb_DatPhong" />
         </EntityType>
         <EntityType Name="tb_KyPhong">
           <Key>
             <PropertyRef Name="MAKY" />
+            <PropertyRef Name="MACTY" />
+            <PropertyRef Name="MADV" />
           </Key>
           <Property Name="MAKY" Type="Int32" Nullable="false" />
-          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SONGAY" Type="Int32" />
           <Property Name="NGAY" Type="DateTime" Precision="0" />
           <Property Name="NAM" Type="Int32" />
           <Property Name="THANG" Type="Int32" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_KyPhong_tb_CongTy" FromRole="tb_KyPhong" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_CongTy1" Relationship="HOTELSModel.FK_tb_KyPhong_tb_CongTy1" FromRole="tb_KyPhong" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_KyPhong_tb_DonVi" FromRole="tb_KyPhong" ToRole="tb_DonVi" />
+          <NavigationProperty Name="tb_DonVi1" Relationship="HOTELSModel.FK_tb_KyPhong_tb_DonVi1" FromRole="tb_KyPhong" ToRole="tb_DonVi" />
+        </EntityType>
+        <EntityType Name="tb_KyPhong_CT">
+          <Key>
+            <PropertyRef Name="IDPHONG" />
+            <PropertyRef Name="MAKY" />
+          </Key>
+          <Property Name="IDPHONG" Type="Int32" Nullable="false" />
+          <Property Name="MAKY" Type="Int32" Nullable="false" />
+          <Property Name="TENPHONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D4" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D14" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D15" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D21" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D22" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D23" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D24" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D25" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D26" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D27" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D28" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D29" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D30" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="D31" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NAM" Type="Int32" />
+          <Property Name="THANG" Type="Int32" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy" FromRole="tb_KyPhong_CT" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_CongTy1" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy1" FromRole="tb_KyPhong_CT" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi" FromRole="tb_KyPhong_CT" ToRole="tb_DonVi" />
+          <NavigationProperty Name="tb_DonVi1" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi1" FromRole="tb_KyPhong_CT" ToRole="tb_DonVi" />
+          <NavigationProperty Name="tb_DonVi2" Relationship="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi2" FromRole="tb_KyPhong_CT" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_LoaiPhong">
           <Key>
@@ -796,17 +1547,21 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="DONGIA" Type="Double" />
           <Property Name="SONGUOI" Type="Int32" />
           <Property Name="SOGIUONG" Type="Int32" />
-          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.fk_tb_LoaiPhong" FromRole="tb_LoaiPhong" ToRole="tb_Phong" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.FK_tb_Phong_tb_LoaiPhong" FromRole="tb_LoaiPhong" ToRole="tb_Phong" />
         </EntityType>
         <EntityType Name="tb_Param">
           <Key>
             <PropertyRef Name="MACTY" />
             <PropertyRef Name="MADVI" />
           </Key>
-          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="TENCTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TENDVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_Param_tb_CongTy" FromRole="tb_Param" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_Param_tb_DonVi" FromRole="tb_Param" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_Phat">
           <Key>
@@ -826,9 +1581,12 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="TRANGTHAI" Type="Boolean" />
           <Property Name="IDTANG" Type="Int32" Nullable="false" />
           <Property Name="IDLOAIPHONG" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_LoaiPhong" Relationship="HOTELSModel.fk_tb_LoaiPhong" FromRole="tb_Phong" ToRole="tb_LoaiPhong" />
-          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="HOTELSModel.fk_htk_Phong" FromRole="tb_Phong" ToRole="tb_Phong_ThietBi" />
-          <NavigationProperty Name="tb_Tang" Relationship="HOTELSModel.fk_tb_Tang" FromRole="tb_Phong" ToRole="tb_Tang" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_DatPhong_CT" Relationship="HOTELSModel.FK_tb_DatPhong_CT_tb_Phong" FromRole="tb_Phong" ToRole="tb_DatPhong_CT" />
+          <NavigationProperty Name="tb_LoaiPhong" Relationship="HOTELSModel.FK_tb_Phong_tb_LoaiPhong" FromRole="tb_Phong" ToRole="tb_LoaiPhong" />
+          <NavigationProperty Name="tb_Tang" Relationship="HOTELSModel.FK_tb_Phong_tb_Tang" FromRole="tb_Phong" ToRole="tb_Tang" />
+          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="HOTELSModel.FK_tb_Phong_ThietBi_tb_Phong" FromRole="tb_Phong" ToRole="tb_Phong_ThietBi" />
         </EntityType>
         <EntityType Name="tb_Phong_ThietBi">
           <Key>
@@ -838,8 +1596,10 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDPHONG" Type="Int32" Nullable="false" />
           <Property Name="IDTB" Type="Int32" Nullable="false" />
           <Property Name="SOLUONG" Type="Int32" />
-          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.fk_htk_Phong" FromRole="tb_Phong_ThietBi" ToRole="tb_Phong" />
-          <NavigationProperty Name="tb_ThietBi" Relationship="HOTELSModel.fk_htk_ThietBi" FromRole="tb_Phong_ThietBi" ToRole="tb_ThietBi" />
+          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.FK_tb_Phong_ThietBi_tb_Phong" FromRole="tb_Phong_ThietBi" ToRole="tb_Phong" />
+          <NavigationProperty Name="tb_ThietBi" Relationship="HOTELSModel.FK_tb_Phong_ThietBi_tb_ThietBi" FromRole="tb_Phong_ThietBi" ToRole="tb_ThietBi" />
         </EntityType>
         <EntityType Name="tb_SanPham">
           <Key>
@@ -848,6 +1608,11 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DONGIA" Type="Double" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_SanPham_tb_CongTy" FromRole="tb_SanPham" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DatPhong_SP" Relationship="HOTELSModel.FK_tb_DatPhong_SP_tb_SanPham" FromRole="tb_SanPham" ToRole="tb_DatPhong_SP" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_SanPham_tb_DonVi" FromRole="tb_SanPham" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_SYS_Func">
           <Key>
@@ -869,6 +1634,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           </Key>
           <Property Name="GROUP" Type="Int32" Nullable="false" />
           <Property Name="MENBER" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_SYS_USER" Relationship="HOTELSModel.fk_sys_group_user" FromRole="tb_SYS_GROUP" ToRole="tb_SYS_USER" />
         </EntityType>
         <EntityType Name="tb_SYS_REPORT">
           <Key>
@@ -893,6 +1659,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDUSER" Type="Int32" Nullable="false" />
           <Property Name="USER_RIGHT" Type="Int32" />
           <NavigationProperty Name="tb_SYS_Func" Relationship="HOTELSModel.fk_htk_func_code" FromRole="tb_SYS_RIGHT" ToRole="tb_SYS_Func" />
+          <NavigationProperty Name="tb_SYS_USER" Relationship="HOTELSModel.FK_tb_SYS_RIGHT_tb_SYS_USER" FromRole="tb_SYS_RIGHT" ToRole="tb_SYS_USER" />
         </EntityType>
         <EntityType Name="tb_SYS_RIGHT_REP">
           <Key>
@@ -903,6 +1670,7 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="IDUSER" Type="Int32" Nullable="false" />
           <Property Name="USER_RIGHT" Type="Boolean" />
           <NavigationProperty Name="tb_SYS_REPORT" Relationship="HOTELSModel.fk_htk_rep_code" FromRole="tb_SYS_RIGHT_REP" ToRole="tb_SYS_REPORT" />
+          <NavigationProperty Name="tb_SYS_USER" Relationship="HOTELSModel.FK_tb_SYS_RIGHT_REP_tb_SYS_USER" FromRole="tb_SYS_RIGHT_REP" ToRole="tb_SYS_USER" />
         </EntityType>
         <EntityType Name="tb_SYS_USER">
           <Key>
@@ -917,6 +1685,11 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="LAST_PWD_CHANGED" Type="DateTime" Precision="3" />
           <Property Name="ISGROUP" Type="Boolean" />
           <Property Name="DISABLED" Type="Boolean" />
+          <NavigationProperty Name="tb_CongTy" Relationship="HOTELSModel.FK_tb_SYS_USER_tb_CongTy" FromRole="tb_SYS_USER" ToRole="tb_CongTy" />
+          <NavigationProperty Name="tb_DonVi" Relationship="HOTELSModel.FK_tb_SYS_USER_tb_DonVi" FromRole="tb_SYS_USER" ToRole="tb_DonVi" />
+          <NavigationProperty Name="tb_SYS_GROUP" Relationship="HOTELSModel.fk_sys_group_user" FromRole="tb_SYS_USER" ToRole="tb_SYS_GROUP" />
+          <NavigationProperty Name="tb_SYS_RIGHT" Relationship="HOTELSModel.FK_tb_SYS_RIGHT_tb_SYS_USER" FromRole="tb_SYS_USER" ToRole="tb_SYS_RIGHT" />
+          <NavigationProperty Name="tb_SYS_RIGHT_REP" Relationship="HOTELSModel.FK_tb_SYS_RIGHT_REP_tb_SYS_USER" FromRole="tb_SYS_USER" ToRole="tb_SYS_RIGHT_REP" />
         </EntityType>
         <EntityType Name="tb_Tang">
           <Key>
@@ -924,7 +1697,9 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           </Key>
           <Property Name="IDTANG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENTANG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.fk_tb_Tang" FromRole="tb_Tang" ToRole="tb_Phong" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Phong" Relationship="HOTELSModel.FK_tb_Phong_tb_Tang" FromRole="tb_Tang" ToRole="tb_Phong" />
         </EntityType>
         <EntityType Name="tb_ThietBi">
           <Key>
@@ -935,7 +1710,10 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="DONGIA" Type="Double" />
           <Property Name="TONGSLN" Type="Int32" />
           <Property Name="TONGSLX" Type="Int32" />
-          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="HOTELSModel.fk_htk_ThietBi" FromRole="tb_ThietBi" ToRole="tb_Phong_ThietBi" />
+          <Property Name="MACTY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MADVI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DONVITINH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Phong_ThietBi" Relationship="HOTELSModel.FK_tb_Phong_ThietBi_tb_ThietBi" FromRole="tb_ThietBi" ToRole="tb_Phong_ThietBi" />
         </EntityType>
         <EntityType Name="v_DATPHONG_DATPHONG_CT_PHONG">
           <Key>
@@ -1028,10 +1806,332 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <Property Name="ISGROUP" Type="Boolean" />
           <Property Name="DISABLED" Type="Boolean" />
         </EntityType>
-        <Association Name="fk_tb_LoaiPhong">
-          <End Type="HOTELSModel.tb_LoaiPhong" Role="tb_LoaiPhong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_tb_admin_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_Admin" Role="tb_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_Admin">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_admin_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_Admin" Role="tb_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_Admin">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_DatPhong_Phong_NgayO" Role="tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_KyPhong_CT" Role="tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_CongTy1">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_KyPhong_CT" Role="tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_KyPhong" Role="tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_CongTy1">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_KyPhong" Role="tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Param_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_Param" Role="tb_Param" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_Param">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SanPham_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_SanPham" Role="tb_SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_SanPham">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_USER_tb_CongTy">
+          <End Type="HOTELSModel.tb_CongTy" Role="tb_CongTy" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_SYS_USER" Role="tb_SYS_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_CongTy">
+              <PropertyRef Name="MACTY" />
+            </Principal>
+            <Dependent Role="tb_SYS_USER">
+              <PropertyRef Name="MACTY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_CT_tb_DatPhong">
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong_CT" Role="tb_DatPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_CT">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_DatPhong">
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong_Phong_NgayO" Role="tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_SP_tb_DatPhong">
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong_SP" Role="tb_DatPhong_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DatPhong">
+              <PropertyRef Name="IDDP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_SP">
+              <PropertyRef Name="IDDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_tb_KhachHang">
+          <End Type="HOTELSModel.tb_KhachHang" Role="tb_KhachHang" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong" Role="tb_DatPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_KhachHang">
+              <PropertyRef Name="IDKH" />
+            </Principal>
+            <Dependent Role="tb_DatPhong">
+              <PropertyRef Name="IDKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_CT_tb_Phong">
+          <End Type="HOTELSModel.tb_Phong" Role="tb_Phong" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong_CT" Role="tb_DatPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Phong">
+              <PropertyRef Name="IDPHONG" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_CT">
+              <PropertyRef Name="IDPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_Phong_NgayO_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_DatPhong_Phong_NgayO" Role="tb_DatPhong_Phong_NgayO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_Phong_NgayO">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DatPhong_SP_tb_SanPham">
+          <End Type="HOTELSModel.tb_SanPham" Role="tb_SanPham" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_DatPhong_SP" Role="tb_DatPhong_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SanPham">
+              <PropertyRef Name="IDSP" />
+            </Principal>
+            <Dependent Role="tb_DatPhong_SP">
+              <PropertyRef Name="IDSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_KyPhong_CT" Role="tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi1">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_KyPhong_CT" Role="tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_CT_tb_DonVi2">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="0..1" />
+          <End Type="HOTELSModel.tb_KyPhong_CT" Role="tb_KyPhong_CT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong_CT">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_KyPhong" Role="tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_KyPhong_tb_DonVi1">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_KyPhong" Role="tb_KyPhong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_KyPhong">
+              <PropertyRef Name="MADV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Param_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_Param" Role="tb_Param" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_Param">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SanPham_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_SanPham" Role="tb_SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_SanPham">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_USER_tb_DonVi">
+          <End Type="HOTELSModel.tb_DonVi" Role="tb_DonVi" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_SYS_USER" Role="tb_SYS_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_DonVi">
+              <PropertyRef Name="MADVI" />
+            </Principal>
+            <Dependent Role="tb_SYS_USER">
+              <PropertyRef Name="MADVI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Phong_tb_LoaiPhong">
+          <End Type="HOTELSModel.tb_LoaiPhong" Role="tb_LoaiPhong" Multiplicity="1" />
           <End Type="HOTELSModel.tb_Phong" Role="tb_Phong" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_LoaiPhong">
@@ -1042,24 +2142,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_htk_Phong">
-          <End Type="HOTELSModel.tb_Phong" Role="tb_Phong" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HOTELSModel.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Phong">
-              <PropertyRef Name="IDPHONG" />
-            </Principal>
-            <Dependent Role="tb_Phong_ThietBi">
-              <PropertyRef Name="IDPHONG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_Tang">
-          <End Type="HOTELSModel.tb_Tang" Role="tb_Tang" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_tb_Phong_tb_Tang">
+          <End Type="HOTELSModel.tb_Tang" Role="tb_Tang" Multiplicity="1" />
           <End Type="HOTELSModel.tb_Phong" Role="tb_Phong" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_Tang">
@@ -1070,10 +2154,20 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_htk_ThietBi">
-          <End Type="HOTELSModel.tb_ThietBi" Role="tb_ThietBi" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_tb_Phong_ThietBi_tb_Phong">
+          <End Type="HOTELSModel.tb_Phong" Role="tb_Phong" Multiplicity="1" />
+          <End Type="HOTELSModel.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Phong">
+              <PropertyRef Name="IDPHONG" />
+            </Principal>
+            <Dependent Role="tb_Phong_ThietBi">
+              <PropertyRef Name="IDPHONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Phong_ThietBi_tb_ThietBi">
+          <End Type="HOTELSModel.tb_ThietBi" Role="tb_ThietBi" Multiplicity="1" />
           <End Type="HOTELSModel.tb_Phong_ThietBi" Role="tb_Phong_ThietBi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_ThietBi">
@@ -1098,6 +2192,20 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_sys_group_user">
+          <End Type="HOTELSModel.tb_SYS_USER" Role="tb_SYS_USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HOTELSModel.tb_SYS_GROUP" Role="tb_SYS_GROUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="tb_SYS_GROUP">
+              <PropertyRef Name="MENBER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_htk_rep_code">
           <End Type="HOTELSModel.tb_SYS_REPORT" Role="tb_SYS_REPORT" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1112,56 +2220,59 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_KyPhong_CT">
-          <Key>
-            <PropertyRef Name="IDPHONG" />
-            <PropertyRef Name="MAKY" />
-          </Key>
-          <Property Name="IDPHONG" Type="Int32" Nullable="false" />
-          <Property Name="MAKY" Type="Int32" Nullable="false" />
-          <Property Name="TENPHONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MADV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MACTY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D4" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D14" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D15" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D21" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D22" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D23" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D24" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D25" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D26" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D27" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D28" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D29" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D30" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="D31" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="NAM" Type="Int32" />
-          <Property Name="THANG" Type="Int32" />
-        </EntityType>
-      </Schema>
+        <Association Name="FK_tb_SYS_RIGHT_tb_SYS_USER">
+          <End Type="HOTELSModel.tb_SYS_USER" Role="tb_SYS_USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HOTELSModel.tb_SYS_RIGHT" Role="tb_SYS_RIGHT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_SYS_RIGHT_REP_tb_SYS_USER">
+          <End Type="HOTELSModel.tb_SYS_USER" Role="tb_SYS_USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HOTELSModel.tb_SYS_RIGHT_REP" Role="tb_SYS_RIGHT_REP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SYS_USER">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="tb_SYS_RIGHT_REP">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HOTELSModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="tb_Admin">
+            <EntityTypeMapping TypeName="HOTELSModel.tb_Admin">
+              <MappingFragment StoreEntitySet="tb_Admin">
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="USERNAM" ColumnName="USERNAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_CaiDat">
+            <EntityTypeMapping TypeName="HOTELSModel.tb_CaiDat">
+              <MappingFragment StoreEntitySet="tb_CaiDat">
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="MO" ColumnName="MO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_CongTy">
             <EntityTypeMapping TypeName="HOTELSModel.tb_CongTy">
               <MappingFragment StoreEntitySet="tb_CongTy">
@@ -1171,7 +2282,6 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
                 <ScalarProperty Name="FAX" ColumnName="FAX" />
                 <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
                 <ScalarProperty Name="TENCTY" ColumnName="TENCTY" />
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MACTY" ColumnName="MACTY" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1203,6 +2313,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_DatPhong_CT">
             <EntityTypeMapping TypeName="HOTELSModel.tb_DatPhong_CT">
               <MappingFragment StoreEntitySet="tb_DatPhong_CT">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="NGAYO" ColumnName="NGAYO" />
                 <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
                 <ScalarProperty Name="NGAY" ColumnName="NGAY" />
@@ -1230,6 +2342,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_DatPhong_SP">
             <EntityTypeMapping TypeName="HOTELSModel.tb_DatPhong_SP">
               <MappingFragment StoreEntitySet="tb_DatPhong_SP">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="THANHTIEN" ColumnName="THANHTIEN" />
                 <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
                 <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
@@ -1283,9 +2397,55 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_KyPhong_CT">
+            <EntityTypeMapping TypeName="HOTELSModel.tb_KyPhong_CT">
+              <MappingFragment StoreEntitySet="tb_KyPhong_CT">
+                <ScalarProperty Name="THANG" ColumnName="THANG" />
+                <ScalarProperty Name="NAM" ColumnName="NAM" />
+                <ScalarProperty Name="D31" ColumnName="D31" />
+                <ScalarProperty Name="D30" ColumnName="D30" />
+                <ScalarProperty Name="D29" ColumnName="D29" />
+                <ScalarProperty Name="D28" ColumnName="D28" />
+                <ScalarProperty Name="D27" ColumnName="D27" />
+                <ScalarProperty Name="D26" ColumnName="D26" />
+                <ScalarProperty Name="D25" ColumnName="D25" />
+                <ScalarProperty Name="D24" ColumnName="D24" />
+                <ScalarProperty Name="D23" ColumnName="D23" />
+                <ScalarProperty Name="D22" ColumnName="D22" />
+                <ScalarProperty Name="D21" ColumnName="D21" />
+                <ScalarProperty Name="D20" ColumnName="D20" />
+                <ScalarProperty Name="D19" ColumnName="D19" />
+                <ScalarProperty Name="D18" ColumnName="D18" />
+                <ScalarProperty Name="D17" ColumnName="D17" />
+                <ScalarProperty Name="D16" ColumnName="D16" />
+                <ScalarProperty Name="D15" ColumnName="D15" />
+                <ScalarProperty Name="D14" ColumnName="D14" />
+                <ScalarProperty Name="D13" ColumnName="D13" />
+                <ScalarProperty Name="D12" ColumnName="D12" />
+                <ScalarProperty Name="D11" ColumnName="D11" />
+                <ScalarProperty Name="D10" ColumnName="D10" />
+                <ScalarProperty Name="D9" ColumnName="D9" />
+                <ScalarProperty Name="D8" ColumnName="D8" />
+                <ScalarProperty Name="D7" ColumnName="D7" />
+                <ScalarProperty Name="D6" ColumnName="D6" />
+                <ScalarProperty Name="D5" ColumnName="D5" />
+                <ScalarProperty Name="D4" ColumnName="D4" />
+                <ScalarProperty Name="D3" ColumnName="D3" />
+                <ScalarProperty Name="D2" ColumnName="D2" />
+                <ScalarProperty Name="D1" ColumnName="D1" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
+                <ScalarProperty Name="MADV" ColumnName="MADV" />
+                <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
+                <ScalarProperty Name="MAKY" ColumnName="MAKY" />
+                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_LoaiPhong">
             <EntityTypeMapping TypeName="HOTELSModel.tb_LoaiPhong">
               <MappingFragment StoreEntitySet="tb_LoaiPhong">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="SOGIUONG" ColumnName="SOGIUONG" />
                 <ScalarProperty Name="SONGUOI" ColumnName="SONGUOI" />
                 <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
@@ -1317,6 +2477,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_Phong">
             <EntityTypeMapping TypeName="HOTELSModel.tb_Phong">
               <MappingFragment StoreEntitySet="tb_Phong">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="IDLOAIPHONG" ColumnName="IDLOAIPHONG" />
                 <ScalarProperty Name="IDTANG" ColumnName="IDTANG" />
                 <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
@@ -1328,6 +2490,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_Phong_ThietBi">
             <EntityTypeMapping TypeName="HOTELSModel.tb_Phong_ThietBi">
               <MappingFragment StoreEntitySet="tb_Phong_ThietBi">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
                 <ScalarProperty Name="IDTB" ColumnName="IDTB" />
                 <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
@@ -1337,6 +2501,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_SanPham">
             <EntityTypeMapping TypeName="HOTELSModel.tb_SanPham">
               <MappingFragment StoreEntitySet="tb_SanPham">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
                 <ScalarProperty Name="TENSP" ColumnName="TENSP" />
                 <ScalarProperty Name="IDSP" ColumnName="IDSP" />
@@ -1414,6 +2580,8 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_Tang">
             <EntityTypeMapping TypeName="HOTELSModel.tb_Tang">
               <MappingFragment StoreEntitySet="tb_Tang">
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="TENTANG" ColumnName="TENTANG" />
                 <ScalarProperty Name="IDTANG" ColumnName="IDTANG" />
               </MappingFragment>
@@ -1422,6 +2590,9 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
           <EntitySetMapping Name="tb_ThietBi">
             <EntityTypeMapping TypeName="HOTELSModel.tb_ThietBi">
               <MappingFragment StoreEntitySet="tb_ThietBi">
+                <ScalarProperty Name="DONVITINH" ColumnName="DONVITINH" />
+                <ScalarProperty Name="MADVI" ColumnName="MADVI" />
+                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
                 <ScalarProperty Name="TONGSLX" ColumnName="TONGSLX" />
                 <ScalarProperty Name="TONGSLN" ColumnName="TONGSLN" />
                 <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
@@ -1514,50 +2685,6 @@ warning 6002: The table/view 'HOTELS.dbo.V_USER_NOTIN_GROUP' does not have a pri
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
                 <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
                 <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_KyPhong_CT">
-            <EntityTypeMapping TypeName="HOTELSModel.tb_KyPhong_CT">
-              <MappingFragment StoreEntitySet="tb_KyPhong_CT">
-                <ScalarProperty Name="THANG" ColumnName="THANG" />
-                <ScalarProperty Name="NAM" ColumnName="NAM" />
-                <ScalarProperty Name="D31" ColumnName="D31" />
-                <ScalarProperty Name="D30" ColumnName="D30" />
-                <ScalarProperty Name="D29" ColumnName="D29" />
-                <ScalarProperty Name="D28" ColumnName="D28" />
-                <ScalarProperty Name="D27" ColumnName="D27" />
-                <ScalarProperty Name="D26" ColumnName="D26" />
-                <ScalarProperty Name="D25" ColumnName="D25" />
-                <ScalarProperty Name="D24" ColumnName="D24" />
-                <ScalarProperty Name="D23" ColumnName="D23" />
-                <ScalarProperty Name="D22" ColumnName="D22" />
-                <ScalarProperty Name="D21" ColumnName="D21" />
-                <ScalarProperty Name="D20" ColumnName="D20" />
-                <ScalarProperty Name="D19" ColumnName="D19" />
-                <ScalarProperty Name="D18" ColumnName="D18" />
-                <ScalarProperty Name="D17" ColumnName="D17" />
-                <ScalarProperty Name="D16" ColumnName="D16" />
-                <ScalarProperty Name="D15" ColumnName="D15" />
-                <ScalarProperty Name="D14" ColumnName="D14" />
-                <ScalarProperty Name="D13" ColumnName="D13" />
-                <ScalarProperty Name="D12" ColumnName="D12" />
-                <ScalarProperty Name="D11" ColumnName="D11" />
-                <ScalarProperty Name="D10" ColumnName="D10" />
-                <ScalarProperty Name="D9" ColumnName="D9" />
-                <ScalarProperty Name="D8" ColumnName="D8" />
-                <ScalarProperty Name="D7" ColumnName="D7" />
-                <ScalarProperty Name="D6" ColumnName="D6" />
-                <ScalarProperty Name="D5" ColumnName="D5" />
-                <ScalarProperty Name="D4" ColumnName="D4" />
-                <ScalarProperty Name="D3" ColumnName="D3" />
-                <ScalarProperty Name="D2" ColumnName="D2" />
-                <ScalarProperty Name="D1" ColumnName="D1" />
-                <ScalarProperty Name="MACTY" ColumnName="MACTY" />
-                <ScalarProperty Name="MADV" ColumnName="MADV" />
-                <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
-                <ScalarProperty Name="MAKY" ColumnName="MAKY" />
-                <ScalarProperty Name="IDPHONG" ColumnName="IDPHONG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -38,6 +38,7 @@ namespace KHACHSAN
             this.btnBoQua = new System.Windows.Forms.ToolStripButton();
             this.btnThoat = new System.Windows.Forms.ToolStripButton();
             this.btnNhanPhong = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.pageDanhSach = new DevExpress.XtraTab.XtraTabPage();
@@ -139,11 +140,12 @@ namespace KHACHSAN
             this.btnXoa,
             this.btnLuu,
             this.btnBoQua,
-            this.btnThoat,
-            this.btnNhanPhong});
+            this.btnNhanPhong,
+            this.toolStripButton1,
+            this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1129, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(1094, 41);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -217,6 +219,15 @@ namespace KHACHSAN
             this.btnNhanPhong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNhanPhong.Click += new System.EventHandler(this.btnNhanPhong_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(105, 38);
+            this.toolStripButton1.Text = "Lấy Dữ Liệu";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // gridView2
             // 
             this.gridView2.Name = "gridView2";
@@ -227,7 +238,7 @@ namespace KHACHSAN
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 41);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.pageDanhSach;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1129, 617);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1094, 667);
             this.xtraTabControl1.TabIndex = 3;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.pageDanhSach,
@@ -237,7 +248,7 @@ namespace KHACHSAN
             // 
             this.pageDanhSach.Controls.Add(this.splitContainerControl1);
             this.pageDanhSach.Name = "pageDanhSach";
-            this.pageDanhSach.Size = new System.Drawing.Size(1127, 592);
+            this.pageDanhSach.Size = new System.Drawing.Size(1092, 642);
             this.pageDanhSach.Text = "Danh sách";
             // 
             // splitContainerControl1
@@ -253,7 +264,7 @@ namespace KHACHSAN
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gcDanhSach);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1127, 592);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1092, 642);
             this.splitContainerControl1.SplitterPosition = 52;
             this.splitContainerControl1.TabIndex = 0;
             // 
@@ -299,7 +310,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 0);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(1127, 530);
+            this.gcDanhSach.Size = new System.Drawing.Size(1092, 580);
             this.gcDanhSach.TabIndex = 1;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
@@ -323,6 +334,7 @@ namespace KHACHSAN
             this.GHICHU});
             this.gvDanhSach.GridControl = this.gcDanhSach;
             this.gvDanhSach.Name = "gvDanhSach";
+            this.gvDanhSach.OptionsView.ShowGroupPanel = false;
             this.gvDanhSach.Click += new System.EventHandler(this.gvDanhSach_Click);
             // 
             // DISABLED
@@ -471,7 +483,7 @@ namespace KHACHSAN
             // 
             this.pagechitiet.Controls.Add(this.splitContainerControl2);
             this.pagechitiet.Name = "pagechitiet";
-            this.pagechitiet.Size = new System.Drawing.Size(1127, 592);
+            this.pagechitiet.Size = new System.Drawing.Size(1092, 642);
             this.pagechitiet.Text = "Chi Tiết";
             // 
             // splitContainerControl2
@@ -485,7 +497,7 @@ namespace KHACHSAN
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.groupControl1);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(1127, 592);
+            this.splitContainerControl2.Size = new System.Drawing.Size(1092, 642);
             this.splitContainerControl2.SplitterPosition = 668;
             this.splitContainerControl2.TabIndex = 36;
             // 
@@ -829,7 +841,7 @@ namespace KHACHSAN
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(449, 592);
+            this.groupControl1.Size = new System.Drawing.Size(414, 642);
             this.groupControl1.TabIndex = 34;
             this.groupControl1.Text = "Danh Sách phòng trống";
             // 
@@ -840,7 +852,7 @@ namespace KHACHSAN
             this.gcPhong.Location = new System.Drawing.Point(2, 23);
             this.gcPhong.MainView = this.gvPhong;
             this.gcPhong.Name = "gcPhong";
-            this.gcPhong.Size = new System.Drawing.Size(445, 567);
+            this.gcPhong.Size = new System.Drawing.Size(410, 617);
             this.gcPhong.TabIndex = 0;
             this.gcPhong.UseDisabledStatePainter = false;
             this.gcPhong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -930,7 +942,7 @@ namespace KHACHSAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 658);
+            this.ClientSize = new System.Drawing.Size(1094, 708);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.toolStrip1);
             this.MaximizeBox = false;
@@ -1047,5 +1059,6 @@ namespace KHACHSAN
         private System.Windows.Forms.Label label8;
         private DevExpress.XtraGrid.Columns.GridColumn dpSONGUOI;
         private System.Windows.Forms.ToolStripButton btnNhanPhong;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

@@ -14,9 +14,9 @@ namespace BusinessLayer
             db = Entities.CreateEntities();
 
         }
-        public List<tb_SanPham>getAll()
+        public List<tb_SanPham>getAll(string macty,string madvi)
         {
-            return db.tb_SanPham.ToList();
+            return db.tb_SanPham.Where(x=>x.MACTY==macty&&x.MADVI==madvi).ToList();
         }
         public tb_SanPham getItem(int idsp )
         {

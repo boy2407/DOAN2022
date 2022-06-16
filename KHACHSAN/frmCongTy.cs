@@ -83,7 +83,7 @@ namespace KHACHSAN
 
             if(_right==1)
             {
-                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -100,7 +100,7 @@ namespace KHACHSAN
         {
             if (_right == 1)
             {
-                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             txtMa.Enabled = false;
@@ -113,12 +113,15 @@ namespace KHACHSAN
         {
             if (_right == 1)
             {
-                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (MessageBox.Show("Bạn có chắc chắn xóa không?","Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
             {
-                _congty.delete(_macty);
+                var ct = _congty.getItem(_macty);
+                ct.DISABLED = true;
+                _congty.update(ct);
+             //   _congty.delete(_macty);
             }
             LoadData();
         }
@@ -217,6 +220,7 @@ namespace KHACHSAN
 
         private void gvDanhSach_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
+            if (gvDanhSach.RowCount > 0) return;
             if(e.Column.Name=="DISABLED"&&bool.Parse(e.CellValue.ToString())==true)
             {
                 Image img = Properties.Resources.delete_icon;

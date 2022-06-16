@@ -54,10 +54,10 @@ namespace KHACHSAN
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream fs = File.Open(op.FileName, FileMode.Open, FileAccess.Read);
                 connect con = (connect)bf.Deserialize(fs); ;
-                string srv = Encryptor.Decrypt(con.servername, "fsfuoufsd8935@", true);
-                string us = Encryptor.Decrypt(con.username, "fsfuoufsd8935@", true);
-                string pa = Encryptor.Decrypt(con.passwd, "fsfuoufsd8935@", true);
-                string db = Encryptor.Decrypt(con.database, "fsfuoufsd8935@", true);
+                string srv = Encryptor.Decrypt(con.servername, "qwertyuiop@", true);
+                string us = Encryptor.Decrypt(con.username, "qwertyuiop@", true);
+                string pa = Encryptor.Decrypt(con.passwd, "qwertyuiop@", true);
+                string db = Encryptor.Decrypt(con.database, "qwertyuiop@", true);
                 txtServer.Text = srv;
                 txtUsername.Text = us;
                 txtPassword.Text = pa;
@@ -67,10 +67,10 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            string enCryptServ = Encryptor.Encrypt(txtServer.Text, "qwertyuiop", true);
-            string enCryptPass = Encryptor.Encrypt(txtPassword.Text, "qwertyuiop", true);
-            string enCryptData = Encryptor.Encrypt(cboDatabase.Text, "qwertyuiop", true);
-            string enCryptUser = Encryptor.Encrypt(txtUsername.Text, "qwertyuiop", true);
+            string enCryptServ = Encryptor.Encrypt(txtServer.Text, "qwertyuiop@", true);
+            string enCryptPass = Encryptor.Encrypt(txtPassword.Text, "qwertyuiop@", true);
+            string enCryptData = Encryptor.Encrypt(cboDatabase.Text, "qwertyuiop@", true);
+            string enCryptUser = Encryptor.Encrypt(txtUsername.Text, "qwertyuiop@", true);
             //SaveFileDialog sf = new SaveFileDialog();
             //sf.Title = "Chọn nơi lưu trữ";
             //sf.Filter = "Text Filse (*.dba)|*.dba|AllFiles(*.*)|*.*";
@@ -83,6 +83,7 @@ namespace KHACHSAN
             connect cn = new connect(enCryptServ, enCryptUser, enCryptPass, enCryptData);
             cn.SaveFile();
             MessageBox.Show("Lưu file thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
         }
 

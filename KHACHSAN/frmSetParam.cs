@@ -12,7 +12,6 @@ using DataLayer;
 using BusinessLayer;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-
 namespace KHACHSAN
 {
     public partial class frmSetParam : DevExpress.XtraEditors.XtraForm
@@ -21,14 +20,28 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmSetParam(frmLogin frmlogin)
+        {          
+            this._frmlogin = frmlogin;
+            InitializeComponent();
+        }
+
+        frmSetParam objSetParam = (frmSetParam)Application.OpenForms["frmSetParam"];
+        tb_SYS_USER _user;
+        int _right;
         CONGTY _congty;
         DONVI _donvi;
+        frmMain _frmmain;
+        frmLogin _frmlogin;
         private void frmSetParam_Load(object sender, EventArgs e)
         {
+            if(objSetParam!=null)
+            {
+                objSetParam.Hide();
+            }    
             _donvi = new DONVI();
             _congty = new CONGTY();
-            loadCongty();
-            
+            loadCongty();           
             cboCongty.SelectedIndexChanged += CboCongty_SelectedIndexChanged;
             loadDonvi();
         }
@@ -57,11 +70,17 @@ namespace KHACHSAN
             string madvi = (cboDonvi.Text.Trim() == "") ? "~" : cboDonvi.SelectedValue.ToString();
             SYS_PARAM _sysparam = new SYS_PARAM(macty,madvi);
             _sysparam.SaveFile();
-            MessageBox.Show("Xác nhận đơn vị sử dụng thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+           
+            MessageBox.Show("Xác nhận đơn vị sử dụng thành công", "Thông Báo");
             BinaryFormatter bf = new BinaryFormatter();
 
-            MessageBox.Show(_sysparam.macty + _sysparam.madvi);        
+            using (frmLogin frmlogin = new frmLogin(this))
+            {
+                this.Visible = false;
+                frmlogin.ShowDialog();
+            }    
+
+                                  
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -69,6 +88,9 @@ namespace KHACHSAN
             this.Close();
         }
 
-       
+        private void cboCongty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

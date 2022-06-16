@@ -372,7 +372,7 @@ namespace KHACHSAN
             this.txtDienThoai.Name = "txtDienThoai";
             this.txtDienThoai.Size = new System.Drawing.Size(170, 22);
             this.txtDienThoai.TabIndex = 6;
-            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
+            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFax_KeyPress);
             // 
             // label3
             // 
@@ -390,6 +390,7 @@ namespace KHACHSAN
             this.txtFax.Name = "txtFax";
             this.txtFax.Size = new System.Drawing.Size(174, 21);
             this.txtFax.TabIndex = 8;
+            this.txtFax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFax_KeyPress);
             // 
             // label2
             // 

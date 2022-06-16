@@ -19,7 +19,7 @@ namespace BusinessLayer
         }
         public List<tb_CongTy>getAll()
         {
-            return db.tb_CongTy.ToList();
+            return db.tb_CongTy.Where(x=>x.MACTY!="~").ToList();
         }
         public void add(tb_CongTy cty)
         {

@@ -233,6 +233,8 @@ namespace USERMANAGEMENT
             this.ClientSize = new System.Drawing.Size(759, 595);
             this.Controls.Add(this.gcChucNang);
             this.Controls.Add(this.gcUser);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPhanQuyeneChucNang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phân quyền chức năng";

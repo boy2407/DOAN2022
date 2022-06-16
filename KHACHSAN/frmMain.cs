@@ -13,33 +13,46 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using USERMANAGEMENT;
 
+using System.Threading;
 namespace KHACHSAN
 {
     public partial class frmMain : DevExpress.XtraEditors.XtraForm
     {
+        public frmMain()
+        {
+            InitializeComponent();
+        }
         public frmMain(tb_SYS_USER user)
         {
             InitializeComponent();
             this._user = user;
-            this.Text = "PHẦN MỀN QUẢN LÝ KHÁCH SẢN - " + _user.FULLNAME + " - "+ _user.USERNAME+" - " + Friend._macty+" - "+Friend._madvi ;
+            this.Text = "PHẦN MỀN QUẢN LÝ KHÁCH SẢN - " + _user.FULLNAME + " - " + _user.USERNAME + " - " + Friend._macty + " - " + Friend._madvi;
         }
-        tb_SYS_USER _user;
+        public tb_SYS_USER _user { get; set; }
         TANG _tang;
         PHONG _phong;
         SYS_FUNC _func;
         SYS_GROUP _sysgroup;
         SYS_RIGHT _sysRight;
+        SYS_RIGHT_REP _sysRightRep;
+        int _right;
         VIEW_DATPHONG_DATPHONG_CT_PHONG _v;
         GalleryItem item = null;
         DATPHONG _datphong;
         NavBarItem _itemBK;
+        public List<OBJ_PHONG> _lstphong;
+        public frmSetParam _frmsetparam { get; set; }
+        public frmLogin _frmlogin { get; set; }
         bool them;
         //[Obsolete]
-        private void frmMain_Load(object sender, EventArgs e)
+        Label lbl;
+        frmLogin objLogin = (frmLogin)Application.OpenForms["frmLogin"];
+
+        public void frmMain_Load(object sender, EventArgs e)
         {
-            _sysRight = new SYS_RIGHT();
+            _sysRightRep = new SYS_RIGHT_REP();
+              _sysRight = new SYS_RIGHT();
             _sysgroup = new SYS_GROUP();
             _tang = new TANG();
             _func = new SYS_FUNC();
@@ -47,38 +60,70 @@ namespace KHACHSAN
             _datphong = new DATPHONG();
             leftMenu();
             showRoom();
-         
+            _lstphong = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
             this.navMain.Size = new System.Drawing.Size(321, 500);
-            timer1.Enabled = false;
+            timer_GetPhongCheckOut.Enabled = true;
+            timer1.Enabled = true;
+            timerCheckIn.Enabled = true;
+
             _itemBK = GetNavItem();
-            timerCheckIn.Enabled = false;
-           
+            //var tes = _datphong.GetAll_RoomCheckOut(Friend._macty, Friend._madvi);
+            //MessageBox.Show(tes.Count.ToString());
+            //foreach (var i in tes )
+            //{
+            //    MessageBox.Show(i.IDDP.ToString());
+            //}    
             gControl.Gallery.Appearance.ItemCaptionAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 10.25F);
             gControl.Gallery.Appearance.ItemCaptionAppearance.Hovered.Font = new System.Drawing.Font("Tahoma", 12, System.Drawing.FontStyle.Bold);
-           
+            if (objLogin != null)
+            {
+                objLogin.Hide();
+            }
+          
+            lblThongBooking.Text = "Thông báo có lịch booking";
+            lblThongBooking.Location = new Point(toolStrip1.Location.X+btnThoat.Width+btnBaoCao.Height+btnHeThong.Width+btnCaiDat.Width,toolStrip1.Location.Y+5);
+            lblThongBooking.Size = new System.Drawing.Size(300, 200);
+            lblThongBooking.Font= new System.Drawing.Font("Tahoma", 12, System.Drawing.FontStyle.Bold);
+            lblThongBooking.ForeColor = Color.Red;
+            lblThongBooking.Visible = false;
         }
+    
         //add group vào navbar, add items vào group
-       
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timelblbooking_Tick(object sender, EventArgs e)
         {
-            checkout1();
-            timer1.Enabled = false;
-            timer2.Enabled = true;
-           
+            if(lblThongBooking.Location.X>toolStrip1.Width)
+            {
+                lblThongBooking.Location = new Point(toolStrip1.Location.X + btnThoat.Width + btnBaoCao.Height + btnHeThong.Width + btnCaiDat.Width, toolStrip1.Location.Y+5);
+            }
+
+            lblThongBooking.Location = new Point(lblThongBooking.Location.X+10, toolStrip1.Location.Y+5);
+            lblThongBooking.Visible = true;
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {          
+                checkout1();
+                timer1.Enabled = false;
+                timer2.Enabled = true;             
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
+           
+
             checkout2();
-            timer2.Enabled = false;
-            timer1.Enabled = true;
-              
+                timer2.Enabled = false;
+                timer1.Enabled = true;
+        
+        }
+        private void timer_GetPhongCheckOut_Tick(object sender, EventArgs e)
+        {
+            _lstphong = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
+         
         }
         public void checkout1()
-        {          
-            var lst = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
+        {        
+            var lst = _lstphong;
             foreach(var i in lst)
-            {
-               
+            {               
                 foreach (GalleryItemGroup gc in gControl.Gallery.Groups)
                 {
                     if(gc.Caption.ToString()==i.TENTANG.ToString())
@@ -99,7 +144,7 @@ namespace KHACHSAN
         }
         public void checkout2()
         {
-            var lst = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
+            var lst = _lstphong;
             foreach (var i in lst)
             {
                 foreach (GalleryItemGroup gc in gControl.Gallery.Groups)
@@ -119,7 +164,7 @@ namespace KHACHSAN
             }
 
         }
-      public NavBarItem GetNavItem()
+         public NavBarItem GetNavItem()
         {           
             var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
             if (lst != null)
@@ -143,14 +188,20 @@ namespace KHACHSAN
         }
         private void timerCheckIn_Tick(object sender, EventArgs e)
         {
-            _datphong = new DATPHONG();           
-            var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
-            if (lst.Count<1)
-            {                       
-                _itemBK.Appearance.ForeColor = Color.Black;
-                return;
-            }
-            _itemBK.Appearance.ForeColor = Color.Red;
+                       
+                _datphong = new DATPHONG();
+                var lst = _datphong.GetAllCheckIn(Friend._macty, Friend._madvi);
+                if (lst.Count < 1)
+                {
+                    _itemBK.Appearance.ForeColor = Color.Black;
+                      lblThongBooking.Visible = false;
+                    lblThongBooking.Location = new Point(toolStrip1.Location.X + btnThoat.Width + btnBaoCao.Height + btnHeThong.Width + btnCaiDat.Width, toolStrip1.Location.Y + 5);
+                    timelblbooking.Stop();
+                    return;
+                }
+                _itemBK.Appearance.ForeColor = Color.Red;
+
+            timelblbooking.Start();
             
         }
 
@@ -175,6 +226,7 @@ namespace KHACHSAN
                         navItem.Name = _ch.FUNC_CODE;
                         navItem.Appearance.FontSizeDelta = 100;
                         navItem.ImageOptions.SmallImageIndex = 0;
+                        navItem.Appearance.ForeColor = Color.Black;
                         navGroup.ItemLinks.Add(navItem);
                     }
                     navMain.Groups[navGroup.Name].Expanded = true;
@@ -188,7 +240,7 @@ namespace KHACHSAN
         {
             _tang = new TANG();
             _phong = new PHONG();
-            var lsTang = _tang.getALL();
+            var lsTang = _tang.getALL(Friend._macty,Friend._madvi);
             gControl.Gallery.ItemImageLayout = ImageLayoutMode.ZoomInside;
             gControl.Gallery.ImageSize = new Size(72,72);
             gControl.Gallery.ShowItemText = true;
@@ -205,7 +257,7 @@ namespace KHACHSAN
                 foreach(var p in lsPhong)
                 {
                     var gc_item = new GalleryItem();
-                    gc_item.Caption = p.TENPHONG;
+                    gc_item.Caption ="Phòng "+ p.TENPHONG;
                    
                     if (p.TRANGTHAI==false)
                         gc_item.ImageOptions.Image = imageList3.Images[2];
@@ -218,7 +270,7 @@ namespace KHACHSAN
                 }
                 gControl.Gallery.Groups.Add(galleryItem);
             }
-           
+            gControl.Controls.Add(lbl);
         }
         //Hiện frm phụ
         private void navMain_LinkClicked(object sender, NavBarLinkEventArgs e)
@@ -227,7 +279,7 @@ namespace KHACHSAN
 
             var _gr = _sysgroup.GetGroupByMenBer(_user.IDUSER);
             var _uRight = _sysRight.getRight(_user.IDUSER, func_code);
-
+            _right = _uRight.USER_RIGHT.Value;
             if(_gr!=null)
             {
                 var _groupRight = _sysRight.getRight(_gr.GROUP, func_code);
@@ -252,78 +304,93 @@ namespace KHACHSAN
                         }
                     case "DONVI":
                         {
-                            frmDonVi frm = new frmDonVi();
+                            frmDonVi frm = new frmDonVi(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "SANPHAM":
                         {
-                            frmSanPham frm = new frmSanPham();
+                            frmSanPham frm = new frmSanPham(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "PHONG":
                         {
-                            frmPhong frm = new frmPhong();
+                            frmPhong frm = new frmPhong(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             //showRoom();
                             break;
                         }
                     case "THIETBI":
                         {
-                            frmThietBi frm = new frmThietBi();
+                            frmThietBi frm = new frmThietBi(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "PHONG_THIETBI":
                         {
-                            frmPhong_ThietBi frm = new frmPhong_ThietBi();
+                            frmPhong_ThietBi frm = new frmPhong_ThietBi(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "TANG":
                         {
-                            frmTang frm = new frmTang();
+                            frmTang frm = new frmTang(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "KHACHHANG":
                         {
-                            frmKhachHang frm = new frmKhachHang();
+                            frmKhachHang frm = new frmKhachHang(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "DATPHONG":
                         {
-                            frmDatPhong frm = new frmDatPhong();
+                            //ThreadStart ts = new ThreadStart(() =>
+                            //{
+                            //    frmDatPhong frm = new frmDatPhong(_user, _uRight.USER_RIGHT.Value);
+                            //    frm.ShowDialog();
+                            //});
+
+                            //Thread t = new Thread(ts);
+                            //t.Name = "frmDatPhong";
+                            //t.ApartmentState = ApartmentState.STA;
+                            //t.Start();
+
+                            frmDatPhong frm = new frmDatPhong(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "LOAIPHONG":
                         {
-                            frmLoaiPhong frm = new frmLoaiPhong();
+                            frmLoaiPhong frm = new frmLoaiPhong(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "BOOKING":
                         {
-                            frmBooking frm = new frmBooking();
+                            frmBooking frm = new frmBooking(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
                     case "QUANTRI":
                         {
-                            USERMANAGEMENT.frmMain frm = new USERMANAGEMENT.frmMain();
-                            frm.ShowDialog();
+                          
                             break;
                         }
                     case "KYPHONG":
                         {
-                            frmKyPhong frm = new frmKyPhong();
+                            frmKyPhong frm = new frmKyPhong(_user, _uRight.USER_RIGHT.Value);
                             frm.ShowDialog();
                             break;
                         }
-
+                    case "DOIMK":
+                        {
+                            frmDoiMK frm = new frmDoiMK(_user);
+                            frm.ShowDialog();
+                            break;
+                        }
 
                 }
 
@@ -337,13 +404,21 @@ namespace KHACHSAN
 
         private void btnBaoCao_Click(object sender, EventArgs e)
         {
-            frmBaoCao frm = new frmBaoCao(_user);
-            frm.ShowDialog();
+            if(_sysRightRep.check(_user))
+            {
+                frmBaoCao frm = new frmBaoCao(_user);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Bạn Không có quyền thao tác", "Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            timerClose.Start();
         }
 
         private void popupMenu1_Popup(object sender, EventArgs e)
@@ -402,7 +477,7 @@ namespace KHACHSAN
 
             if (v != null)
             {
-                frmDatPhong frmdp = new frmDatPhong();
+                frmDatPhong frmdp = new frmDatPhong(_user, _right);
                 frmdp._idDP = v.IDDP;
                 frmdp._thanhtoan = true;
                 frmdp.Show();
@@ -445,6 +520,25 @@ namespace KHACHSAN
            
         }
 
-       
+        private void btnCaiDat_Click(object sender, EventArgs e)
+        {
+            frmCaiDat frm = new frmCaiDat();
+            frm.ShowDialog();
+        }
+
+        private void timerClose_Tick(object sender, EventArgs e)
+        {
+            if (this.Opacity > 0.0)
+            {
+                this.Opacity -= 0.0525;
+            }
+            else
+            {
+                timerClose.Stop();
+                Application.Exit();
+            }
+        }
+
+      
     }
 }

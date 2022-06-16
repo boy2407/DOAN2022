@@ -20,6 +20,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmDonVi(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         DONVI _donvi;
         CONGTY _congty;
         bool _them;
@@ -111,7 +119,11 @@ namespace KHACHSAN
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-          
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             showHideControl(false);
             _them = true;
             _enabled(true);
@@ -121,6 +133,11 @@ namespace KHACHSAN
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _enabled(true);
             _them = false;
             showHideControl(false);
@@ -129,15 +146,23 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                _donvi.delete(_madvi);
+                var dv = _donvi.getItem(_madvi);
+                dv.DISABLED = true;
+                _donvi.update(dv);    
+                //_donvi.delete(_madvi);
             }
             loadData();
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
             if (!IsValidEmail(txtEmail.Text))
             {
                 MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -150,9 +175,13 @@ namespace KHACHSAN
                 MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            savedata();
+        }
+        void savedata()
+        {
             if (_them == true)
             {
-                
+
 
                 tb_DonVi dvi = new tb_DonVi();
                 dvi.MADVI = txtMa.Text;
@@ -183,7 +212,6 @@ namespace KHACHSAN
             txtMa.Enabled = false;
             showHideControl(true);
         }
-
         private void btnBoQua_Click(object sender, EventArgs e)
         {
             _them = false;
@@ -240,6 +268,27 @@ namespace KHACHSAN
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
+            }
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                savedata();
+            }
+        }
+
+        private void txtFax_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                savedata();
             }
         }
     }

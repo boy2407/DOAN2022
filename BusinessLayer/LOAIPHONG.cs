@@ -14,9 +14,9 @@ namespace BusinessLayer
             db = Entities.CreateEntities();
 
         }
-        public List<tb_LoaiPhong> getAll()
+        public List<tb_LoaiPhong> getAll(string macty, string madvi)
         {
-            return db.tb_LoaiPhong.ToList();
+            return db.tb_LoaiPhong.Where(x=>x.MACTY==macty&&x.MADVI==madvi).ToList();
         }
        public tb_LoaiPhong getItem(int idlp)
         {

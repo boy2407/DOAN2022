@@ -14,6 +14,7 @@ namespace DataLayer
     [Serializable]
     public partial class Entities
     {
+
         private Entities(DbConnection connectionString, bool contextOwnsConnection = true)
             : base(connectionString, contextOwnsConnection) { }
         public static Entities CreateEntities(bool contextOwnsConnection = true)
@@ -24,10 +25,10 @@ namespace DataLayer
             connect cp = (connect)bf.Deserialize(fs);
 
             //Decrypt noi dung
-            string servername = Encryptor.Decrypt(cp.servername, "qwertyuiop", true);
-            string username = Encryptor.Decrypt(cp.username, "qwertyuiop", true);
-            string pass = Encryptor.Decrypt(cp.passwd, "qwertyuiop", true);
-            string database = Encryptor.Decrypt(cp.database, "qwertyuiop", true);
+            string servername = Encryptor.Decrypt(cp.servername, "qwertyuiop@", true);
+            string username = Encryptor.Decrypt(cp.username, "qwertyuiop@", true);
+            string pass = Encryptor.Decrypt(cp.passwd, "qwertyuiop@", true);
+            string database = Encryptor.Decrypt(cp.database, "qwertyuiop@", true);
 
 
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();

@@ -19,7 +19,7 @@ namespace KHACHSAN
             InitializeComponent();
         }
         frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
-      public  bool _them;
+        public  bool _them;
         public int _idPhong;
         int _idDP=0;
         string _madvi;
@@ -31,9 +31,9 @@ namespace KHACHSAN
         PHONG _phong;
         KHACHHANG _khachhang;
         SANPHAM _sanpham;
+        SYS_DATPHONG_PHONG_NGAYO _dcn;
         List<OBJ_DPSP> lstDPSP;
-        
-        double _tongtien = 0;
+        int _tong=0;       
         private void XoaSPDVBy_Idsp(int idsp)
         {
 
@@ -49,7 +49,14 @@ namespace KHACHSAN
             }
 
         }
-         double checkforRoombyday(DateTime checkin, DateTime checkout)
+        int int_Days()
+        {
+            int temp = 0;
+            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
+            temp = (int)Math.Round(s.TotalDays);
+            return temp;
+        }
+        double checkforRoombyday(DateTime checkin, DateTime checkout)
         {
 
             return checkout.Subtract(checkin).Days / (365.25 / 12) ;
@@ -62,23 +69,20 @@ namespace KHACHSAN
                 return;
             }
             saveData();
-            //_tongtien = (double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + 
-            //    _phong.getItemFull(_idPhong).DONGIA*(dtNgayTra.Value.Day- dtNgayDat.Value.Day));
-            TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-            _tongtien = (double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + 
-                (_phong.getItemFull(_idPhong).DONGIA * s.Days));
+        
+         
 
             var dp = _datphong.GetItem(_idDP,Friend._macty,Friend._madvi);
-            dp.SOTIEN = _tongtien;
+            dp.SOTIEN = _tong;
             _datphong.update(dp);
             objMain.gControl.Gallery.Groups.Clear();
             objMain.showRoom();
-            txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
+            txtThanhTien.Text = _tong.ToString("N0");
             btnSua.Visible = true;
             btnLuu.Visible = false;
             _enabled(false);
+            
         }
-
         private void btnIn_Click(object sender, EventArgs e)
         {
             if(!_them)
@@ -118,15 +122,30 @@ namespace KHACHSAN
                     objMain.gControl.Gallery.Groups.Clear();
                     objMain.showRoom();
                 }
-
+                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
+                var ct = _datphong_ct.getAllByDatPhong(_idDP);
+                TimeSpan t = dp.NGAYTRA.Value - dp.NGAYDAT.Value;
+                tb_DatPhong_Phong_NgayO dcn;
+                foreach (var i in ct)
+                {
+                    for (int k = 1; k < t.Days + 2; ++k)
+                    {
+                        dcn = new tb_DatPhong_Phong_NgayO();
+                        dcn.IDDP = dp.IDDP;
+                        dcn.MAKY = int.Parse(dp.NGAYDAT.Value.Year.ToString()) * 100 + int.Parse(dp.NGAYDAT.Value.Month.ToString());
+                        dcn.IDPHONG = i.IDPHONG;
+                        dcn.NGAYO = dtNgayDat.Value.AddDays(k);
+                        dcn.MACTY = Friend._macty;
+                        dcn.MADV = Friend._madvi;
+                        _dcn.add(dcn);
+                    }
+                }
                 _enabled(false);
                 btnSua.Visible = false;
                 btnLuu.Visible = false;
-
             }    
-          
+          objMain._lstphong= _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
         }
-
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -159,13 +178,15 @@ namespace KHACHSAN
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = _idPhong;
-                //dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
-                TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-                dpct.SONGAYO = s.Days;
+                //dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;               
+                  dpct.SONGAYO = int_Days();
                     dpct.DONGIA = _phonghientai.DONGIA;
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
+                    _tong = (int)dpct.THANHTIEN+ _tong;
                     dpct.NGAY = DateTime.Now;
-                    var _dpct = _datphong_ct.add(dpct);
+                dpct.MACTY = _macty;
+                dpct.MADVI = _madvi;
+                var _dpct = _datphong_ct.add(dpct);
                     _phong.updateStatus(int.Parse(_dpct.IDPHONG.ToString()), true);
 
                     if (gvSPDV.RowCount > 0)
@@ -186,6 +207,9 @@ namespace KHACHSAN
                                 dpsp.SOLUONG = int.Parse(gvSPDV.GetRowCellValue(j, "SOLUONG").ToString());
                                 dpsp.DONGIA = Double.Parse(gvSPDV.GetRowCellValue(j, "DONGIA").ToString());
                                 dpsp.THANHTIEN = Double.Parse((dpsp.SOLUONG * dpsp.DONGIA).ToString());
+                            dpsp.MACTY = _macty;
+                            dpsp.MADVI = _madvi;
+                            _tong = (int)(dpsp.THANHTIEN + _tong);
                                 _datphong_sp.add(dpsp);
 
                             }
@@ -220,13 +244,13 @@ namespace KHACHSAN
                     dpct = new tb_DatPhong_CT();
                     dpct.IDDP = _dp.IDDP;
                     dpct.IDPHONG = _idPhong;
-                  TimeSpan s = dtNgayTra.Value - dtNgayDat.Value;
-                //dpct.SONGAYO = dtNgayTra.Value.Day - dtNgayDat.Value.Day;
-                dpct.SONGAYO = s.Days;
+                
+                     dpct.SONGAYO = int_Days();
                      dpct.DONGIA = _phonghientai.DONGIA;
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
-                    var _dpct = _datphong_ct.add(dpct);
+                    _tong = (int)dpct.THANHTIEN + _tong;
+                     var _dpct = _datphong_ct.add(dpct);
                     _phong.updateStatus(int.Parse(_dpct.IDPHONG.ToString()), true);
                     if (gvSPDV.RowCount > 0)
                     {
@@ -243,7 +267,10 @@ namespace KHACHSAN
                                 dpsp.SOLUONG = int.Parse(gvSPDV.GetRowCellValue(j, "SOLUONG").ToString());
                                 dpsp.DONGIA = Double.Parse(gvSPDV.GetRowCellValue(j, "DONGIA").ToString());
                                 dpsp.THANHTIEN = Double.Parse((dpsp.SOLUONG * dpsp.DONGIA).ToString());
-                                _datphong_sp.add(dpsp);
+                            dpsp.MACTY = Friend._macty;
+                            dpsp.MADVI = Friend._madvi;
+                            _tong = (int)(dpsp.THANHTIEN + _tong);
+                            _datphong_sp.add(dpsp);
                             }
                         }
                     }
@@ -259,6 +286,7 @@ namespace KHACHSAN
             _phong = new PHONG();
             lstDPSP = new List<OBJ_DPSP>();
             _sanpham = new SANPHAM();
+            _dcn = new SYS_DATPHONG_PHONG_NGAYO();
             btnSua.Visible = false;
             _phonghientai = _phong.getItemFull(_idPhong);
             string dongia = _phonghientai.DONGIA.Value.ToString("N0");
@@ -266,7 +294,7 @@ namespace KHACHSAN
 
             _macty = Friend._macty;
             _madvi = Friend._madvi;
-            dtNgayDat.Enabled = false;
+            dtNgayDat.Enabled = true;
             dtNgayDat.Value = DateTime.Now;
             dtNgayTra.Value = DateTime.Now.AddDays(1);
             txtThanhTien.Enabled = false;
@@ -305,18 +333,17 @@ namespace KHACHSAN
         }
         void loadSP()
         {
-             gcSanPham.DataSource = _sanpham.getAll();
+             gcSanPham.DataSource = _sanpham.getAll(Friend._macty,Friend._madvi);
               gvSanPham.OptionsBehavior.Editable = false;
          
         }
-      public  void loadKH()
+        public  void loadKH()
         {
             _khachhang = new KHACHHANG();
             searchKH.Properties.DataSource = _khachhang.getAll();
             searchKH.Properties.ValueMember = "IDKH";
             searchKH.Properties.DisplayMember = "HOTEN";
         }
-      
         public void setKH(int idkh)
         {
            
@@ -370,7 +397,7 @@ namespace KHACHSAN
                         item.SOLUONG = item.SOLUONG + 1;
                         item.THANHTIEN = item.SOLUONG * item.DONGIA;
                         loadDPSP();
-                        txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*s.Days)).ToString("N0");
+                        txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*int_Days())).ToString("N0");
                         return;
                     }
                 }
@@ -378,9 +405,8 @@ namespace KHACHSAN
             }
             loadDPSP();
 
-            txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA*s.Days)).ToString("N0");
+            txtThanhTien.Text = ((double)(double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString()) + _phonghientai.DONGIA* int_Days())).ToString("N0");
         }
-
         private  void XoaSPDV(int idsp)
         {
             if(!_them)
@@ -443,7 +469,6 @@ namespace KHACHSAN
         {
             gvSPDV.UpdateCurrentRow();
         }
-
         private void btnSua_Click(object sender, EventArgs e)
         {
             btnLuu.Visible = true;
@@ -462,9 +487,7 @@ namespace KHACHSAN
             txtGhiChu.Enabled = t;           
             gcSPDV.Enabled = t;
             gcSanPham.Enabled = t;
-        }
-
-        
+        }        
     }
 
 

@@ -288,7 +288,7 @@ namespace KHACHSAN
             // chkGioiTinh
             // 
             this.chkGioiTinh.AutoSize = true;
-            this.chkGioiTinh.Location = new System.Drawing.Point(795, 43);
+            this.chkGioiTinh.Location = new System.Drawing.Point(778, 40);
             this.chkGioiTinh.Name = "chkGioiTinh";
             this.chkGioiTinh.Size = new System.Drawing.Size(47, 17);
             this.chkGioiTinh.TabIndex = 3;
@@ -302,7 +302,7 @@ namespace KHACHSAN
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(243, 22);
             this.txtCCCD.TabIndex = 1;
-            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // label2
             // 
@@ -359,7 +359,7 @@ namespace KHACHSAN
             this.txtDienThoai.Name = "txtDienThoai";
             this.txtDienThoai.Size = new System.Drawing.Size(243, 22);
             this.txtDienThoai.TabIndex = 4;
-            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
+            this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             // 
             // label3
             // 

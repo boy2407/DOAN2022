@@ -69,17 +69,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmChon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChon.Designer.cs">
+      <DependentUpon>frmChon.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGroup.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGroup.Designer.cs">
       <DependentUpon>frmGroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmKetNoi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmKetNoi.Designer.cs">
+      <DependentUpon>frmKetNoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin_admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin_admin.Designer.cs">
+      <DependentUpon>frmLogin_admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainAdmin.Designer.cs">
+      <DependentUpon>frmMainAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPhanQuyenBaoCao.cs">
       <SubType>Form</SubType>
@@ -92,6 +110,12 @@
     </Compile>
     <Compile Include="frmPhanQuyeneChucNang.Designer.cs">
       <DependentUpon>frmPhanQuyeneChucNang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetParam_admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetParam_admin.Designer.cs">
+      <DependentUpon>frmSetParam_admin.cs</DependentUpon>
     </Compile>
     <Compile Include="frmShowGroup.cs">
       <SubType>Form</SubType>
@@ -119,17 +143,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmChon.resx">
+      <DependentUpon>frmChon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGroup.resx">
       <DependentUpon>frmGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmKetNoi.resx">
+      <DependentUpon>frmKetNoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin_admin.resx">
+      <DependentUpon>frmLogin_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainAdmin.resx">
+      <DependentUpon>frmMainAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhanQuyenBaoCao.resx">
       <DependentUpon>frmPhanQuyenBaoCao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhanQuyeneChucNang.resx">
       <DependentUpon>frmPhanQuyeneChucNang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetParam_admin.resx">
+      <DependentUpon>frmSetParam_admin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmShowGroup.resx">
       <DependentUpon>frmShowGroup.cs</DependentUpon>
@@ -172,6 +208,10 @@
       <Project>{a91d66c2-cb24-4437-87c5-04d0ae0ffbc4}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KHACHSAN\KHACHSAN.csproj">
+      <Project>{21713144-1bb8-4871-bb8b-d3b3f8e7245f}</Project>
+      <Name>KHACHSAN</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_icon.png" />
@@ -184,6 +224,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\User-Group-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

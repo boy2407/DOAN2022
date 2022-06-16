@@ -23,5 +23,10 @@ namespace DataLayer
         public Nullable<int> SOLUONG { get; set; }
         public Nullable<double> DONGIA { get; set; }
         public Nullable<double> THANHTIEN { get; set; }
+        public string MACTY { get; set; }
+        public string MADVI { get; set; }
+    
+        public virtual tb_DatPhong tb_DatPhong { get; set; }
+        public virtual tb_SanPham tb_SanPham { get; set; }
     }
 }

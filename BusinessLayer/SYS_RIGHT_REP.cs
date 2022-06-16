@@ -41,5 +41,17 @@ namespace BusinessLayer
                 throw new Exception("lỗi" + ex.Message);
             }
         }
+        public bool check(tb_SYS_USER us)
+        {
+            var rep = db.tb_SYS_RIGHT_REP.Where(x => x.IDUSER == us.IDUSER);
+            foreach (var i in rep)
+            {
+                if (i.USER_RIGHT == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -16,9 +16,10 @@ namespace BusinessLayer
         {
             db = Entities.CreateEntities();
         }
-        public List<tb_Tang> getALL()
+ 
+        public List<tb_Tang> getALL(string macty,string madvi)
         {
-            return db.tb_Tang.ToList();
+            return db.tb_Tang.Where(x=>x.MACTY==macty&&madvi==x.MADVI).ToList();
         }
         public tb_Tang getItem(int idtang)
         {

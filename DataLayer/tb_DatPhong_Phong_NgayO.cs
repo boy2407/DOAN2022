@@ -21,5 +21,9 @@ namespace DataLayer
         public Nullable<System.DateTime> NGAYO { get; set; }
         public string MACTY { get; set; }
         public string MADV { get; set; }
+    
+        public virtual tb_CongTy tb_CongTy { get; set; }
+        public virtual tb_DatPhong tb_DatPhong { get; set; }
+        public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

@@ -168,7 +168,7 @@ namespace KHACHSAN
             this.TENTANG.FieldName = "TENTANG";
             this.TENTANG.Name = "TENTANG";
             this.TENTANG.Visible = true;
-            this.TENTANG.VisibleIndex = 2;
+            this.TENTANG.VisibleIndex = 1;
             // 
             // TENLOAIPHONG
             // 
@@ -176,7 +176,7 @@ namespace KHACHSAN
             this.TENLOAIPHONG.FieldName = "TENLOAIPHONG";
             this.TENLOAIPHONG.Name = "TENLOAIPHONG";
             this.TENLOAIPHONG.Visible = true;
-            this.TENLOAIPHONG.VisibleIndex = 3;
+            this.TENLOAIPHONG.VisibleIndex = 2;
             // 
             // TRANGTHAI
             // 
@@ -195,7 +195,7 @@ namespace KHACHSAN
             this.TENPHONG.FieldName = "TENPHONG";
             this.TENPHONG.Name = "TENPHONG";
             this.TENPHONG.Visible = true;
-            this.TENPHONG.VisibleIndex = 1;
+            this.TENPHONG.VisibleIndex = 0;
             // 
             // IDPHONG
             // 
@@ -246,6 +246,7 @@ namespace KHACHSAN
             this.cboTang.Name = "cboTang";
             this.cboTang.Size = new System.Drawing.Size(186, 21);
             this.cboTang.TabIndex = 2;
+            this.cboTang.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboTang_KeyPress);
             // 
             // cboLoaiPhong
             // 
@@ -254,6 +255,7 @@ namespace KHACHSAN
             this.cboLoaiPhong.Name = "cboLoaiPhong";
             this.cboLoaiPhong.Size = new System.Drawing.Size(186, 21);
             this.cboLoaiPhong.TabIndex = 15;
+            this.cboLoaiPhong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboTang_KeyPress);
             // 
             // label7
             // 

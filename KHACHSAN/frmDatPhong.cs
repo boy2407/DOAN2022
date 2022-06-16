@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
@@ -24,10 +25,19 @@ namespace KHACHSAN
         public frmDatPhong()
         {
             InitializeComponent();
-
-            loadPhong();                  
+            CheckForIllegalCrossThreadCalls = false;
+            
         }
-       
+        public frmDatPhong(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+            CheckForIllegalCrossThreadCalls = false;
+        }
+        tb_SYS_USER _user;
+        int _right;
+
         frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
         bool _them,_GiamSoPhong;
         public bool _thanhtoan ;
@@ -41,9 +51,10 @@ namespace KHACHSAN
         LOAIPHONG _loaiphong;
         GridHitInfo downhitInfo = null;
         SYS_DATPHONG_PHONG_NGAYO _dcn;
+        SYS_RIGHT _sysRight;
         int _idPhong=0;
         string _tenPhong;
-         public int _idDP = 0;
+        public int _idDP = 0;
         int _rowDatPhong = 0;
         List<OBJ_DPSP> lstDPSP;
         List<OBJ_DP_CT> lstDP_CT;
@@ -51,8 +62,8 @@ namespace KHACHSAN
         //SYS_PARAM _param;
         string _madvi;
         string _macty;
-        Double _tongtien = 0;
-      
+        private Thread demoThread = null;
+
         int count = 0;
         private void frmDatPhong_Load(object sender,EventArgs e)
         {           
@@ -67,6 +78,7 @@ namespace KHACHSAN
             _dcn = new SYS_DATPHONG_PHONG_NGAYO();
             lstDPSP = new List<OBJ_DPSP>();
             lstDP_CT = new List<OBJ_DP_CT>();
+            _sysRight = new SYS_RIGHT();
             dtTuNgay.Value = Friend.GetFirstDayInMont(DateTime.Now.Year, DateTime.Now.Month);
             dtDenNgay.Value = Friend.GetLastDayInMont(DateTime.Now.Year, DateTime.Now.Month);            
             cboTrangThai.DataSource = TRANGTHAI.getList();
@@ -76,18 +88,21 @@ namespace KHACHSAN
             cboTrangThai.DisplayMember = "_display";
             dtNgayDat.Value = DateTime.Now;
             dtNgayTra.Value = DateTime.Now.AddDays(1);
-            dtNgayDat.Enabled = true;
+            dtNgayDat.Enabled = false;
+
             _macty = Friend._macty;
             _madvi = Friend._madvi;            
             gvPhong.ExpandAllGroups();////sổ hết các phòng trong tầng trên gridview gvphong
             loadKH();
             loadSP();
+            loadPhong();
             loadDanhSach();
             _enabled(false);
             txtThanhTien.Enabled = false;
             _datphong = new DATPHONG();
             showHideControl(true);          
             TabControl.SelectedTabPage = PageDanhSach;
+
             if(!_them)
             {
                 gcPhong.Enabled = false;
@@ -112,8 +127,6 @@ namespace KHACHSAN
             }
         }
 
-
-
         //load lại list phòng theo _iddp
         void loadDP()
         {
@@ -124,8 +137,8 @@ namespace KHACHSAN
         }
         void loadDPCT_id()
         {
-            gcDatPhong.DataSource = Friend.ConvertToDataTable(_datphong_ct.getAllDPCT(_idDP));
-            lstDP_CT = _datphong_ct.getAllDPCT(_idDP);            
+            gcDatPhong.DataSource = Friend.ConvertToDataTable(_datphong_ct.getAllDPCT(_idDP, Friend._macty, Friend._madvi));
+            lstDP_CT = _datphong_ct.getAllDPCT(_idDP, Friend._macty, Friend._madvi);            
             gvPhong.ExpandAllGroups();
         }
         void add_LSTDP_CT()
@@ -199,11 +212,15 @@ namespace KHACHSAN
                 item.SONGAYO = t;     
                 item.THANHTIEN = item.DONGIA * item.SONGAYO;
             }
+            loadDPCT_id();
+            loadSPDV();
             loadDPCT();
+            loadDPSP();
             
         }
         void loadDPCT()
         {
+           
             List<OBJ_DP_CT> lst = new List<OBJ_DP_CT>();
             foreach(var item in lstDP_CT)
             {
@@ -214,6 +231,7 @@ namespace KHACHSAN
         }
         void loadDPSP()
         {
+            
             List<OBJ_DPSP> lsDP = new List<OBJ_DPSP>();
             foreach (var item in lstDPSP)
             {
@@ -227,7 +245,6 @@ namespace KHACHSAN
             gcSPDV.DataSource = _datphong_sp.getAllByDatPhong(_idDP);
             lstDPSP = _datphong_sp.getAllByDatPhong(_idDP);
         }
-
         public void loadKH()
         {
             _khachhang = new KHACHHANG();
@@ -237,7 +254,7 @@ namespace KHACHSAN
         }
         void loadSP()
         {
-            gcSanPham.DataSource = _sanpham.getAll();
+            gcSanPham.DataSource = _sanpham.getAll(Friend._macty, Friend._madvi);
             gvSanPham.OptionsBehavior.Editable = false;
         }
         
@@ -250,7 +267,7 @@ namespace KHACHSAN
             _phong = new PHONG();
             lstDP_CT = new List<OBJ_DP_CT>();
             DataTable table = new DataTable();
-            table = Friend.ConvertToDataTable(_phong.PhongHienTai(dtNgayDat.Value, dtNgayTra.Value));
+            table = Friend.ConvertToDataTable(_phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value,Friend._macty,Friend._madvi));
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone();
             gvPhong.ExpandAllGroups();
@@ -298,7 +315,8 @@ namespace KHACHSAN
         }
         void AddReset()
         {
-            DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");
+            //DataTable table = Friend.laydulieu("SELECT A.IDPHONG, A.TENPHONG, A.IDTANG, B.TENTANG, C.DONGIA FROM tb_PHONG A, tb_Tang B, tb_LOAIPHONG C WHERE A.IDTANG = B.IDTANG AND A.TRANGTHAI=0 AND A.IDLOAIPHONG = C.IDLOAIPHONG");
+            DataTable table = Friend.ConvertToDataTable(_phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value, Friend._macty, Friend._madvi));
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone(); //nhân bảng      
             gvPhong.ExpandAllGroups();
@@ -313,30 +331,54 @@ namespace KHACHSAN
             gvDanhSach.OptionsBehavior.Editable = false;
         }
         void loadDanhSach()
-        {               
-            gcDanhSach.DataSource = _datphong.GetAll_RoomCheckedIn(dtTuNgay.Value, dtDenNgay.Value.AddDays(1), _macty, _madvi);
-            gvDanhSach.OptionsBehavior.Editable = false;
+        {
             _datphong = new DATPHONG();
+            gcDanhSach.DataSource = _datphong.GetAll_DanhSach( _macty, _madvi);
+            gvDanhSach.OptionsBehavior.Editable = false;
+            loadLichSu();
+        }
+        void loadLichSu()
+        {
+            _datphong = new DATPHONG();
+            gcLichSu.DataSource = _datphong.GetAll_LichSu(dtTuNgay.Value, dtDenNgay.Value.AddDays(1), _macty, _madvi);
+            gvLichSu.OptionsBehavior.Editable = false;
+
+        }
+
+        private void test()
+        {
+            PageDanhSach.PageEnabled = false;
+        }
+        private void test1()
+        {
+            PageDanhSach.PageEnabled = true;
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-
+          
             _them = true;
             _idDP = 0;
             lstDPSP = new List<OBJ_DPSP>();
             lstDP_CT = new List<OBJ_DP_CT>();
             _reset();
-            AddReset();   
+            AddReset();
             _enabled(true);
             showHideControl(false);
             loadPhong();
             //loadphongByNgayDat(DateTime.Now);
             TabControl.SelectedTabPage = PageChiTiet;
-            
+                      
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+           
+
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_idDP == 0)
             {
                 
@@ -345,10 +387,18 @@ namespace KHACHSAN
             }
             else
             {
+            
+                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
+                if(dp.STATUS==true)
+                {
+
+                    MessageBox.Show("Hóa đơn đã thanh toán không được sửa", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+               
                 _enabled(true);
                 _them = false;
                 showHideControl(false);
-                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
                 cboKhachHang.SelectedValue = dp.IDKH;
                 dtNgayDat.Value = dp.NGAYDAT.Value;
                 dtNgayTra.Value = dp.NGAYTRA.Value;
@@ -358,46 +408,19 @@ namespace KHACHSAN
                 txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
                 loadDPCT_id();
                 loadSPDV();
-                TabControl.SelectedTabPage = PageChiTiet;
+                TabControl.SelectedTabPage = PageChiTiet;             
             }
 
-            //if (_datphong.GetItem(_idDP).STATUS.Equals(false))
-            //{
-            //    _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
-            //    MessageBox.Show(_idDP.ToString());
-            //    loadDPCT_id();
-            //    loadSPDV();               
-            //    var dp = _datphong.GetItem(_idDP);
-            //    cboKhachHang.SelectedValue = dp.IDKH;
-            //    dtNgayDat.Value = dp.NGAYDAT.Value;
-            //    dtNgayTra.Value = dp.NGAYTRA.Value;
-            //    txtGhiChu.Text = dp.GHICHU.ToString();
-            //    cboTrangThai.SelectedValue = dp.STATUS;
-            //    spSoNguoi.Text = dp.SONGUOIO.ToString();
-            //    txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-            //    TabControl.SelectedTabPage = PageChiTiet;
-            //}   
-            //else
-            //{
-            //    _enabled(true);
-            //    _them = false;
-            //    showHideControl(false);
-            //    loadPhong();
-            //    // loadphongByNgayDat(DateTime.Now);
-            //    if (DateTime.Now > _datphong.GetItem(_idDP).NGAYTRA)
-            //    {
-            //        MessageBox.Show("Không được thêm xóa phòng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        //gcDatPhong.Enabled = false;
-            //        gcPhong.Enabled = false;
-
-            //    }
-            //    TabControl.SelectedTabPage = PageChiTiet;
-            //}    
-           
+        
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_idDP == 0)
             {
                 
@@ -423,6 +446,11 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (gvDatPhong.RowCount < 0 )
+            {
+                MessageBox.Show("Vui lòng chọn phòng");
+                return;
+            }    
             if (spSoNguoi.Value < 0)
             {
                 MessageBox.Show("quá nhỏ");
@@ -440,9 +468,7 @@ namespace KHACHSAN
             update_txtThanhTien();
             _them = false;
             _enabled(false);           
-            showHideControl(true);
-            objMain.gControl.Gallery.Groups.Clear();
-            objMain.showRoom();            
+            showHideControl(true);                   
             loadDPCT_id();
             loadSPDV();
            // _tongtien = double.Parse(gvSPDV.Columns["THANHTIEN"].SummaryItem.SummaryValue.ToString())+
@@ -451,29 +477,9 @@ namespace KHACHSAN
             dp_.SOTIEN = double.Parse(txtThanhTien.Text);
             loadDanhSach();
             _idDP = dp_.IDDP;
-            //TabControl.SelectedTabPage = Page;
-            //_datphong.update(dp_);
-            //objMain.gControl.Gallery.Groups.Clear();
-            //objMain.showRoom();
-            //LoadData();
-            //loadDanhSach();
-            //// loadphongByNgayDat(DateTime.Now);
-            //loadPhong();
-            //_them = false;
-            //_enabled(false);           
-            //showHideControl(true);
-            ////tabcontrol.selectedtabpage = pagedanhsach;           
-            //var dp = _datphong.GetItem(_idDP);
-            //cboKhachHang.SelectedValue = dp.IDKH;
-            //dtNgayDat.Value = dp.NGAYDAT.Value;
-            //dtNgayTra.Value = dp.NGAYTRA.Value;
-            //txtGhiChu.Text = dp.GHICHU.ToString();
-            //cboTrangThai.SelectedValue = dp.STATUS;
-            //spSoNguoi.Text = dp.SONGUOIO.ToString();
-            //txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
-            //loadDPCT_id();
-            //loadSPDV();
-            //TabControl.SelectedTabPage = PageChiTiet;
+            objMain.gControl.Gallery.Groups.Clear();
+            objMain.showRoom();
+                     
         }
         //Phòng trống trong tầng
         private void gvPhong_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
@@ -537,7 +543,9 @@ namespace KHACHSAN
                     dpct.SONGAYO = t;
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i,"DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
-                    dpct.NGAY = DateTime.Now;                  
+                    dpct.NGAY = DateTime.Now;
+                    dpct.MACTY = Friend._macty;
+                    dpct.MADVI = Friend._madvi;
                   var _dpct =  _datphong_ct.add(dpct);      
                     //for(int k =1; k<t+1;++k)
                     //{
@@ -564,6 +572,8 @@ namespace KHACHSAN
                                 dpsp.SOLUONG = int.Parse(gvSPDV.GetRowCellValue(j, "SOLUONG").ToString());
                                 dpsp.DONGIA = Double.Parse(gvSPDV.GetRowCellValue(j, "DONGIA").ToString());
                                 dpsp.THANHTIEN = Double.Parse((dpsp.SOLUONG * dpsp.DONGIA).ToString());
+                                dpsp.MACTY = Friend._macty;
+                                dpsp.MADVI = Friend._madvi;
                                 _datphong_sp.add(dpsp);
                             }                         
                         }
@@ -607,8 +617,9 @@ namespace KHACHSAN
                     dpct.DONGIA = double.Parse(gvDatPhong.GetRowCellValue(i, "DONGIA").ToString());
                     dpct.THANHTIEN = dpct.SONGAYO * dpct.DONGIA;
                     dpct.NGAY = DateTime.Now;
-                    
-                   var _dpct = _datphong_ct.add(dpct);
+                    dpct.MACTY = Friend._macty;
+                    dpct.MADVI = Friend._madvi;
+                    var _dpct = _datphong_ct.add(dpct);
                     
                     _phong.updateStatus(dpct.IDPHONG,true);
 
@@ -626,6 +637,8 @@ namespace KHACHSAN
                                 dpsp.IDPHONG = int.Parse(gvSPDV.GetRowCellValue(j, "IDPHONG").ToString());
                                 dpsp.SOLUONG = int.Parse(gvSPDV.GetRowCellValue(j, "SOLUONG").ToString());
                                 dpsp.DONGIA = Double.Parse(gvSPDV.GetRowCellValue(j, "DONGIA").ToString());
+                                dpsp.MACTY = Friend._macty;
+                                dpsp.MADVI = Friend._madvi;
                                 dpsp.THANHTIEN = Double.Parse((dpsp.SOLUONG * dpsp.DONGIA).ToString());
                                 _datphong_sp.add(dpsp);
                             }   
@@ -640,17 +653,19 @@ namespace KHACHSAN
 
         private void btnBoQua_Click(object sender, EventArgs e)
         {
+           
             _them = false;
             lstDP_CT = lstDP_CT_temp;
             _GiamSoPhong = false;
             showHideControl(true);
-            _enabled(false);
-            TabControl.SelectedTabPage = PageDanhSach;         
+            _enabled(false);            
             _idDP = 0;
             lstDP_CT = new List<OBJ_DP_CT>();
             lstDPSP = new List<OBJ_DPSP>();
             loadPhong();
-            AddReset();        
+            AddReset();
+            //PageDanhSach.PageEnabled = true;
+            TabControl.SelectedTabPage = PageDanhSach;
         }
          
         private void btnThoat_Click(object sender, EventArgs e)
@@ -1099,7 +1114,6 @@ namespace KHACHSAN
             //        loadDPCT_id();
             //    }
 
-
             //}
             //else if (_them == true && _GiamSoPhong == true)//xóa lúc mới thêm dữ liễu chưa lưu
             //{
@@ -1141,12 +1155,17 @@ namespace KHACHSAN
             //    txtThanhTien.Text = (_datphong_ct.SumByIddp(_idDP) + t).ToString("N0");
             //}
 
-
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            frmKhachHang frm = new frmKhachHang();
+            var _uRight = _sysRight.getRight(_user.IDUSER, "KHACHHANG");
+            if(_uRight.USER_RIGHT.Value==0)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác", "Thông báo");
+                return;
+            }    
+            frmKhachHang frm = new frmKhachHang(_user, _uRight.USER_RIGHT.Value);
             frm.ShowDialog();
 
         }
@@ -1218,7 +1237,7 @@ namespace KHACHSAN
                 return;
             }
             else
-              loadDanhSach();
+              loadLichSu();
         }
 
         private void dtDenNgay_Leave(object sender, EventArgs e)
@@ -1230,7 +1249,7 @@ namespace KHACHSAN
                 return;
             }
             else
-                loadDanhSach();
+                loadLichSu();
         }
 
         private void dtDenNgay_ValueChanged(object sender, EventArgs e)
@@ -1249,11 +1268,11 @@ namespace KHACHSAN
         {
            
             if (gvDanhSach.RowCount > 0)
-            {
-                loadDPCT_id();
-                loadSPDV();
+            {               
                 _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
                 var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
+                loadDPCT_id();
+                loadSPDV();
                 cboKhachHang.SelectedValue = dp.IDKH;
                 dtNgayDat.Value = dp.NGAYDAT.Value;               
                 dtNgayTra.Value = dp.NGAYTRA.Value;
@@ -1298,7 +1317,13 @@ namespace KHACHSAN
         }
 
         private void btnIn_Click(object sender, EventArgs e)
-        {   if(_idDP==0)
+        {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
+            if (_idDP==0)
             {                
                 MessageBox.Show("Vui long chọn Hóa Đơn", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return;
@@ -1310,6 +1335,11 @@ namespace KHACHSAN
             }    
             if(!_them)
             {  
+                if(_datphong.GetItem(_idDP, Friend._macty, Friend._madvi).STATUS == true)
+                {
+                    Friend.XuatReport("@IDDP", _idDP.ToString(), "PHIEU_DATPHONG", "Phiếu đặt phòng chi tiết");
+                    return;
+                }
                 if(DateTime.Now>_datphong.GetItem(_idDP, Friend._macty, Friend._madvi).NGAYTRA)
                 {
                     if(MessageBox.Show("Hóa đơn có ngày trả nhỏ hơn hoặc bằng ngày hiện tại. Bạn có muốn tiếp tục","Cảnh Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
@@ -1356,7 +1386,7 @@ namespace KHACHSAN
                     {
                         dcn = new tb_DatPhong_Phong_NgayO();
                         dcn.IDDP = dp.IDDP;
-                        dcn.MAKY = int.Parse(DateTime.Now.Year.ToString()) * 100 + int.Parse(DateTime.Now.Month.ToString());
+                        dcn.MAKY = int.Parse(dp.NGAYDAT.Value.Year.ToString()) * 100 + int.Parse(dp.NGAYDAT.Value.Month.ToString());
                         dcn.IDPHONG = i.IDPHONG;                        
                         dcn.NGAYO = dtNgayDat.Value.AddDays(k);
                         dcn.MACTY = Friend._macty;
@@ -1367,7 +1397,7 @@ namespace KHACHSAN
                 loadDanhSach();
                
             }    
-           
+           objMain._lstphong=_phong.getPhongCheckOut(Friend._macty, Friend._madvi);
         }
 
         private void dtNgayDat_ValueChanged(object sender, EventArgs e)
@@ -1388,6 +1418,8 @@ namespace KHACHSAN
             if(_them)
             {
                 loadPhong();
+
+                txtThanhTien.Text = "0";
             }    
             update_songayo();
             
@@ -1439,6 +1471,45 @@ namespace KHACHSAN
                 }    
             }    
            
+        }
+
+        private void gcDanhSach_Click(object sender, EventArgs e)
+        {
+            if (gvDanhSach.RowCount > 0)
+            {
+ 
+                    _idDP = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDDP").ToString());
+                    var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
+                    loadDPCT_id();
+                    loadSPDV();
+                    cboKhachHang.SelectedValue = dp.IDKH;
+                    dtNgayDat.Value = dp.NGAYDAT.Value;
+                    dtNgayTra.Value = dp.NGAYTRA.Value;
+                    txtGhiChu.Text = dp.GHICHU.ToString();
+                    cboTrangThai.SelectedValue = dp.STATUS;
+                    spSoNguoi.Text = dp.SONGUOIO.ToString();
+                    txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
+                
+            }                              
+        }
+
+
+        private void gvLichSu_Click(object sender, EventArgs e)
+        {
+            if (gvLichSu.RowCount > 0)
+            {
+                _idDP = int.Parse(gvLichSu.GetFocusedRowCellValue("IDDP").ToString());
+                var dp = _datphong.GetItem(_idDP, Friend._macty, Friend._madvi);
+                loadDPCT_id();
+                loadSPDV();
+                cboKhachHang.SelectedValue = dp.IDKH;
+                dtNgayDat.Value = dp.NGAYDAT.Value;
+                dtNgayTra.Value = dp.NGAYTRA.Value;
+                txtGhiChu.Text = dp.GHICHU.ToString();
+                cboTrangThai.SelectedValue = dp.STATUS;
+                spSoNguoi.Text = dp.SONGUOIO.ToString();
+                txtThanhTien.Text = dp.SOTIEN.Value.ToString("N0");
+            }
         }
 
         private void gvDanhSach_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)

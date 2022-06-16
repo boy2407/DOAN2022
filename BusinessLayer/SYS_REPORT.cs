@@ -28,5 +28,6 @@ namespace BusinessLayer
             List<int> rep = lst.Select(ls => ls.REP_CODE).ToList();
             return db.tb_SYS_REPORT.Where(x => rep.Contains(x.REP_CODE)).OrderBy(x=>x.REP_CODE).ToList();
         }
+      
     }
 }

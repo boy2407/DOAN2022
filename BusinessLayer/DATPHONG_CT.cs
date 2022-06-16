@@ -139,12 +139,12 @@ namespace BusinessLayer
             }
             return listDPCT;
         }
-        public List<OBJ_DP_CT> getAllDPCT(int _iddp)
+        public List<OBJ_DP_CT> getAllDPCT(int _iddp,string macty,string madvi)
         {
             PHONG p = new PHONG();
             TANG t = new TANG();
             LOAIPHONG lp = new LOAIPHONG();
-            var listget = db.tb_DatPhong_CT.Where(x => x.IDDP == _iddp);
+            var listget = db.tb_DatPhong_CT.Where(x => x.IDDP == _iddp&&x.MACTY==macty&&x.MADVI==madvi);
             //var listget = db.tb_DatPhong_CT.Select(c => new { c.IDDP, c.IDPHONG, c.SONGAYO, c.THANHTIEN, c.IDDPCT, c.DONGIA }).Where(x=>x.IDDP==_iddp).Distinct();
             List<OBJ_DP_CT> listDPCT = new List<OBJ_DP_CT>();
             OBJ_DP_CT DPCT;

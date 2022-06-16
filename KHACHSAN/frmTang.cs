@@ -18,6 +18,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmTang(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         TANG _tang;
         PHONG _phong;
         bool _them;
@@ -48,11 +56,16 @@ namespace KHACHSAN
         }
         void LoadData()
         {
-            gcDanhSach.DataSource = _tang.getALL();
+            gcDanhSach.DataSource = _tang.getALL(Friend._macty, Friend._madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = true;
             showHideControl(false);
             txtTen.Text = "";
@@ -62,6 +75,11 @@ namespace KHACHSAN
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = false;
             showHideControl(false);
             _enabled(true);
@@ -69,7 +87,12 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Bạn có chắc chắn xóa không?","Thông Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (MessageBox.Show("Bạn có chắc chắn xóa không?","Thông Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
             {
                 var lsp = _phong.getByTang(int.Parse(_idtang));
                 foreach(var item in lsp)
@@ -89,10 +112,17 @@ namespace KHACHSAN
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if(_them)
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+            }
+            if (_them)
             {
                 tb_Tang t = new tb_Tang();
                 t.TENTANG = txtTen.Text;
+                t.MACTY = Friend._macty;
+                t.MADVI = Friend._madvi;
                 _tang.add(t);
             }   
             else

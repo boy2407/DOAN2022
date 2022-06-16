@@ -20,7 +20,7 @@ namespace BusinessLayer
         }
         public List<tb_DonVi>getAll()
         {
-            return db.tb_DonVi.ToList();
+            return db.tb_DonVi.Where(x=>x.MADVI!="~").ToList();
         }
         public List<tb_DonVi>getAll(string macty)
         {

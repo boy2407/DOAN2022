@@ -43,8 +43,6 @@ namespace KHACHSAN
             this.SOGIUONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SONGUOI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DONGIA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txtMa = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtDonGia = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSoNguoi = new System.Windows.Forms.TextBox();
@@ -213,27 +211,10 @@ namespace KHACHSAN
             this.DONGIA.VisibleIndex = 4;
             this.DONGIA.Width = 60;
             // 
-            // txtMa
-            // 
-            this.txtMa.Location = new System.Drawing.Point(108, 267);
-            this.txtMa.Name = "txtMa";
-            this.txtMa.Size = new System.Drawing.Size(242, 21);
-            this.txtMa.TabIndex = 1;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 270);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 14);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "ID Loại Phòng";
-            // 
             // txtDonGia
             // 
             this.txtDonGia.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDonGia.Location = new System.Drawing.Point(106, 383);
+            this.txtDonGia.Location = new System.Drawing.Point(103, 363);
             this.txtDonGia.Name = "txtDonGia";
             this.txtDonGia.Size = new System.Drawing.Size(244, 22);
             this.txtDonGia.TabIndex = 5;
@@ -243,7 +224,7 @@ namespace KHACHSAN
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 298);
+            this.label1.Location = new System.Drawing.Point(9, 278);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 14);
             this.label1.TabIndex = 12;
@@ -251,7 +232,7 @@ namespace KHACHSAN
             // 
             // txtSoNguoi
             // 
-            this.txtSoNguoi.Location = new System.Drawing.Point(108, 356);
+            this.txtSoNguoi.Location = new System.Drawing.Point(105, 336);
             this.txtSoNguoi.Name = "txtSoNguoi";
             this.txtSoNguoi.Size = new System.Drawing.Size(242, 21);
             this.txtSoNguoi.TabIndex = 4;
@@ -261,7 +242,7 @@ namespace KHACHSAN
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 358);
+            this.label2.Location = new System.Drawing.Point(36, 338);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 14);
             this.label2.TabIndex = 19;
@@ -270,7 +251,7 @@ namespace KHACHSAN
             // txtTen
             // 
             this.txtTen.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTen.Location = new System.Drawing.Point(109, 295);
+            this.txtTen.Location = new System.Drawing.Point(106, 275);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(241, 22);
             this.txtTen.TabIndex = 2;
@@ -279,7 +260,7 @@ namespace KHACHSAN
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(38, 326);
+            this.label3.Location = new System.Drawing.Point(35, 306);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 16;
@@ -288,7 +269,7 @@ namespace KHACHSAN
             // txtSoGiuong
             // 
             this.txtSoGiuong.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoGiuong.Location = new System.Drawing.Point(108, 323);
+            this.txtSoGiuong.Location = new System.Drawing.Point(105, 303);
             this.txtSoGiuong.Name = "txtSoGiuong";
             this.txtSoGiuong.Size = new System.Drawing.Size(242, 22);
             this.txtSoGiuong.TabIndex = 3;
@@ -298,7 +279,7 @@ namespace KHACHSAN
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(46, 386);
+            this.label4.Location = new System.Drawing.Point(43, 366);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 14);
             this.label4.TabIndex = 20;
@@ -315,8 +296,6 @@ namespace KHACHSAN
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTen);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtMa);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDonGia);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gcDanhSach);
@@ -346,8 +325,6 @@ namespace KHACHSAN
         private DevExpress.XtraGrid.Views.Grid.GridView gvDanhSach;
         private DevExpress.XtraGrid.Columns.GridColumn IDLOAIPHONG;
         private DevExpress.XtraGrid.Columns.GridColumn TENLOAIPHONG;
-        private System.Windows.Forms.TextBox txtMa;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtDonGia;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSoNguoi;

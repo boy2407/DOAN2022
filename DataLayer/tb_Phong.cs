@@ -17,6 +17,7 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_Phong()
         {
+            this.tb_DatPhong_CT = new HashSet<tb_DatPhong_CT>();
             this.tb_Phong_ThietBi = new HashSet<tb_Phong_ThietBi>();
         }
     
@@ -25,10 +26,14 @@ namespace DataLayer
         public Nullable<bool> TRANGTHAI { get; set; }
         public int IDTANG { get; set; }
         public int IDLOAIPHONG { get; set; }
+        public string MACTY { get; set; }
+        public string MADVI { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_DatPhong_CT> tb_DatPhong_CT { get; set; }
         public virtual tb_LoaiPhong tb_LoaiPhong { get; set; }
+        public virtual tb_Tang tb_Tang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Phong_ThietBi> tb_Phong_ThietBi { get; set; }
-        public virtual tb_Tang tb_Tang { get; set; }
     }
 }

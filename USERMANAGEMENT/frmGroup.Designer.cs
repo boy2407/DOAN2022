@@ -46,6 +46,7 @@ namespace USERMANAGEMENT
             this.FULLNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
+            this.btnXoaUser = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tadGroup)).BeginInit();
             this.tadGroup.SuspendLayout();
             this.pageNhom.SuspendLayout();
@@ -60,7 +61,7 @@ namespace USERMANAGEMENT
             this.tadGroup.Location = new System.Drawing.Point(0, 0);
             this.tadGroup.Name = "tadGroup";
             this.tadGroup.SelectedTabPage = this.pageNhom;
-            this.tadGroup.Size = new System.Drawing.Size(461, 291);
+            this.tadGroup.Size = new System.Drawing.Size(461, 312);
             this.tadGroup.TabIndex = 0;
             this.tadGroup.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.pageNhom,
@@ -73,7 +74,7 @@ namespace USERMANAGEMENT
             this.pageNhom.Controls.Add(this.txtTenNhom);
             this.pageNhom.Controls.Add(this.label1);
             this.pageNhom.Name = "pageNhom";
-            this.pageNhom.Size = new System.Drawing.Size(459, 266);
+            this.pageNhom.Size = new System.Drawing.Size(459, 287);
             this.pageNhom.Text = "Thông tin nhóm";
             // 
             // txtMoTa
@@ -119,7 +120,7 @@ namespace USERMANAGEMENT
             this.paneThanhVien.Controls.Add(this.btnThem);
             this.paneThanhVien.Controls.Add(this.gcThanhVien);
             this.paneThanhVien.Name = "paneThanhVien";
-            this.paneThanhVien.Size = new System.Drawing.Size(459, 266);
+            this.paneThanhVien.Size = new System.Drawing.Size(459, 287);
             this.paneThanhVien.Text = "Thành viên";
             // 
             // btnBo
@@ -194,7 +195,7 @@ namespace USERMANAGEMENT
             this.btnLuu.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnLuu.Appearance.Options.UseFont = true;
             this.btnLuu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLuu.ImageOptions.Image")));
-            this.btnLuu.Location = new System.Drawing.Point(171, 314);
+            this.btnLuu.Location = new System.Drawing.Point(53, 318);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(125, 38);
             this.btnLuu.TabIndex = 1;
@@ -206,18 +207,31 @@ namespace USERMANAGEMENT
             this.btnDong.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnDong.Appearance.Options.UseFont = true;
             this.btnDong.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.ImageOptions.Image")));
-            this.btnDong.Location = new System.Drawing.Point(324, 314);
+            this.btnDong.Location = new System.Drawing.Point(315, 318);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(125, 38);
             this.btnDong.TabIndex = 2;
             this.btnDong.Text = "Đóng";
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
+            // btnXoaUser
+            // 
+            this.btnXoaUser.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btnXoaUser.Appearance.Options.UseFont = true;
+            this.btnXoaUser.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXoaUser.ImageOptions.Image")));
+            this.btnXoaUser.Location = new System.Drawing.Point(184, 317);
+            this.btnXoaUser.Name = "btnXoaUser";
+            this.btnXoaUser.Size = new System.Drawing.Size(125, 38);
+            this.btnXoaUser.TabIndex = 6;
+            this.btnXoaUser.Text = "Xóa";
+            this.btnXoaUser.Click += new System.EventHandler(this.btnXoaUser_Click);
+            // 
             // frmGroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 382);
+            this.Controls.Add(this.btnXoaUser);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.tadGroup);
@@ -256,5 +270,6 @@ namespace USERMANAGEMENT
         private DevExpress.XtraGrid.Columns.GridColumn FULLNAME;
         private DevExpress.XtraEditors.SimpleButton btnLuu;
         private DevExpress.XtraEditors.SimpleButton btnDong;
+        private DevExpress.XtraEditors.SimpleButton btnXoaUser;
     }
 }

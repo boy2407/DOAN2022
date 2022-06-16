@@ -14,8 +14,21 @@ namespace DataLayer
     
     public partial class tb_SanPham
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_SanPham()
+        {
+            this.tb_DatPhong_SP = new HashSet<tb_DatPhong_SP>();
+        }
+    
         public int IDSP { get; set; }
         public string TENSP { get; set; }
         public Nullable<double> DONGIA { get; set; }
+        public string MACTY { get; set; }
+        public string MADVI { get; set; }
+    
+        public virtual tb_CongTy tb_CongTy { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_DatPhong_SP> tb_DatPhong_SP { get; set; }
+        public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

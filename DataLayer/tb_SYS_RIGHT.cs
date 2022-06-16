@@ -19,5 +19,6 @@ namespace DataLayer
         public Nullable<int> USER_RIGHT { get; set; }
     
         public virtual tb_SYS_Func tb_SYS_Func { get; set; }
+        public virtual tb_SYS_USER tb_SYS_USER { get; set; }
     }
 }

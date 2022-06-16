@@ -33,6 +33,22 @@ namespace BusinessLayer
             }   
             
         }
+        public void delete(int idGroup)
+        {
+            var gr = db.tb_SYS_GROUP.Where(x => x.GROUP==idGroup).ToList();
+            if (gr != null)
+            {
+                try
+                {
+                    db.tb_SYS_GROUP.RemoveRange(gr);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Có lỗi xảy ra trong quá trình xử lý" + ex.Message);
+                }
+            }
+        }
         public void delGroup(int idUser,int idGroup)
         {
             var gr = db.tb_SYS_GROUP.FirstOrDefault(x => x.MENBER == idUser && x.GROUP == idGroup);

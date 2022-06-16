@@ -60,5 +60,14 @@ namespace DataLayer
             bf.Serialize(fs, this);
             fs.Close();
         }
+        public void SaveFileMySql()
+        {
+            if (File.Exists("connectdb_mysql.dba"))
+                File.Delete("connectdb_mysql.dba");
+            FileStream fs = File.Open("connectdb_mysql.dba", FileMode.OpenOrCreate, FileAccess.Write);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, this);
+            fs.Close();
+        }
     }
 }

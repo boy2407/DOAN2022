@@ -1,7 +1,7 @@
 ﻿
 namespace USERMANAGEMENT
 {
-    partial class frmMain
+    partial class frmMainAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace USERMANAGEMENT
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainAdmin));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnNhomNguoiDung = new DevExpress.XtraBars.BarButtonItem();
             this.btnNguoiDung = new DevExpress.XtraBars.BarButtonItem();
@@ -155,6 +155,7 @@ namespace USERMANAGEMENT
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -397,7 +398,7 @@ namespace USERMANAGEMENT
             this.imageList1.Images.SetKeyName(0, "user.png");
             this.imageList1.Images.SetKeyName(1, "users.png");
             // 
-            // frmMain
+            // frmMainAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -406,7 +407,7 @@ namespace USERMANAGEMENT
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ribbonControl1);
             this.IconOptions.Image = global::USERMANAGEMENT.Properties.Resources.User_Group_icon;
-            this.Name = "frmMain";
+            this.Name = "frmMainAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý người dùng";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -439,7 +440,6 @@ namespace USERMANAGEMENT
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnNhom;
-        private DevExpress.XtraGrid.GridControl gcUser;
         private DevExpress.XtraGrid.Views.Grid.GridView gvUser;
         private DevExpress.XtraGrid.Columns.GridColumn DISABLED;
         private DevExpress.XtraGrid.Columns.GridColumn IDUSER;
@@ -459,6 +459,7 @@ namespace USERMANAGEMENT
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnCapNhat;
+        public DevExpress.XtraGrid.GridControl gcUser;
     }
 }
 

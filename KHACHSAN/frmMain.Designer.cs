@@ -36,6 +36,7 @@ namespace KHACHSAN
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnBaoCao = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCaiDat = new System.Windows.Forms.ToolStripButton();
             this.btnThoat = new System.Windows.Forms.ToolStripButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.navMain = new DevExpress.XtraNavBar.NavBarControl();
@@ -57,6 +58,10 @@ namespace KHACHSAN
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timerCheckIn = new System.Windows.Forms.Timer(this.components);
+            this.timer_GetPhongCheckOut = new System.Windows.Forms.Timer(this.components);
+            this.timerClose = new System.Windows.Forms.Timer(this.components);
+            this.timelblbooking = new System.Windows.Forms.Timer(this.components);
+            this.lblThongBooking = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -76,16 +81,17 @@ namespace KHACHSAN
             this.toolStripSeparator1,
             this.btnBaoCao,
             this.toolStripSeparator2,
+            this.btnCaiDat,
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1123, 53);
+            this.toolStrip1.Size = new System.Drawing.Size(1332, 53);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnHeThong
             // 
-            this.btnHeThong.Image = global::KHACHSAN.Properties.Resources.system_icon;
+            this.btnHeThong.Image = ((System.Drawing.Image)(resources.GetObject("btnHeThong.Image")));
             this.btnHeThong.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHeThong.Name = "btnHeThong";
             this.btnHeThong.Size = new System.Drawing.Size(66, 50);
@@ -113,6 +119,16 @@ namespace KHACHSAN
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 53);
             // 
+            // btnCaiDat
+            // 
+            this.btnCaiDat.Image = global::KHACHSAN.Properties.Resources.system_icon;
+            this.btnCaiDat.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCaiDat.Name = "btnCaiDat";
+            this.btnCaiDat.Size = new System.Drawing.Size(49, 50);
+            this.btnCaiDat.Text = "Cài Đặt";
+            this.btnCaiDat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCaiDat.Click += new System.EventHandler(this.btnCaiDat_Click);
+            // 
             // btnThoat
             // 
             this.btnThoat.Image = global::KHACHSAN.Properties.Resources.system_shutdown_icon;
@@ -133,8 +149,8 @@ namespace KHACHSAN
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gControl);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1123, 597);
-            this.splitContainerControl1.SplitterPosition = 321;
+            this.splitContainerControl1.Size = new System.Drawing.Size(1332, 740);
+            this.splitContainerControl1.SplitterPosition = 264;
             this.splitContainerControl1.TabIndex = 1;
             // 
             // navMain
@@ -155,8 +171,8 @@ namespace KHACHSAN
             this.navMain.Location = new System.Drawing.Point(0, 0);
             this.navMain.Margin = new System.Windows.Forms.Padding(4);
             this.navMain.Name = "navMain";
-            this.navMain.OptionsNavPane.ExpandedWidth = 321;
-            this.navMain.Size = new System.Drawing.Size(321, 597);
+            this.navMain.OptionsNavPane.ExpandedWidth = 264;
+            this.navMain.Size = new System.Drawing.Size(264, 740);
             this.navMain.SmallImages = this.imageList2;
             this.navMain.TabIndex = 0;
             this.navMain.Text = "navBarControl1";
@@ -182,7 +198,7 @@ namespace KHACHSAN
             this.gControl.Location = new System.Drawing.Point(0, 0);
             this.gControl.Name = "gControl";
             this.barManager1.SetPopupContextMenu(this.gControl, this.popupMenu1);
-            this.gControl.Size = new System.Drawing.Size(792, 597);
+            this.gControl.Size = new System.Drawing.Size(1058, 740);
             this.gControl.TabIndex = 0;
             this.gControl.Text = "galleryControl1";
             // 
@@ -190,7 +206,7 @@ namespace KHACHSAN
             // 
             this.galleryControlClient1.GalleryControl = this.gControl;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 2);
-            this.galleryControlClient1.Size = new System.Drawing.Size(771, 593);
+            this.galleryControlClient1.Size = new System.Drawing.Size(1037, 736);
             // 
             // imageList3
             // 
@@ -267,15 +283,15 @@ namespace KHACHSAN
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1123, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1332, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 650);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 793);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1123, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1332, 0);
             // 
             // barDockControlLeft
             // 
@@ -283,37 +299,60 @@ namespace KHACHSAN
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 650);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 793);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1123, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1332, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 650);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 793);
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
-            this.timer2.Interval = 3000;
+            this.timer2.Interval = 800;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timerCheckIn
             // 
-            this.timerCheckIn.Interval = 5000;
+            this.timerCheckIn.Interval = 3000;
             this.timerCheckIn.Tick += new System.EventHandler(this.timerCheckIn_Tick);
+            // 
+            // timer_GetPhongCheckOut
+            // 
+            this.timer_GetPhongCheckOut.Interval = 3600000;
+            this.timer_GetPhongCheckOut.Tick += new System.EventHandler(this.timer_GetPhongCheckOut_Tick);
+            // 
+            // timerClose
+            // 
+            this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
+            // 
+            // timelblbooking
+            // 
+            this.timelblbooking.Tick += new System.EventHandler(this.timelblbooking_Tick);
+            // 
+            // lblThongBooking
+            // 
+            this.lblThongBooking.AutoSize = true;
+            this.lblThongBooking.Location = new System.Drawing.Point(428, 13);
+            this.lblThongBooking.Name = "lblThongBooking";
+            this.lblThongBooking.Size = new System.Drawing.Size(59, 19);
+            this.lblThongBooking.TabIndex = 6;
+            this.lblThongBooking.Text = "label1";
             // 
             // frmMain
             // 
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 650);
+            this.ClientSize = new System.Drawing.Size(1332, 793);
+            this.Controls.Add(this.lblThongBooking);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.barDockControlLeft);
@@ -369,6 +408,11 @@ namespace KHACHSAN
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timerCheckIn;
+        private System.Windows.Forms.Timer timer_GetPhongCheckOut;
+        private System.Windows.Forms.ToolStripButton btnCaiDat;
+        private System.Windows.Forms.Timer timerClose;
+        private System.Windows.Forms.Timer timelblbooking;
+        private System.Windows.Forms.Label lblThongBooking;
     }
 }
 

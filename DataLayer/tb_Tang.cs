@@ -22,6 +22,8 @@ namespace DataLayer
     
         public int IDTANG { get; set; }
         public string TENTANG { get; set; }
+        public string MACTY { get; set; }
+        public string MADVI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Phong> tb_Phong { get; set; }

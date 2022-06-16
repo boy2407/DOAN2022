@@ -22,6 +22,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+		public frmKyPhong(tb_SYS_USER user, int right)
+		{
+			InitializeComponent();
+			this._user = user;
+			this._right = right;
+		}
+		tb_SYS_USER _user;
+		int _right;
 		public KYPHONG_CT _kpct;
 
 		bool _them;
@@ -107,6 +115,8 @@ namespace KHACHSAN
 				ky.THANG = int.Parse(cboThang.Text);
 				ky.NAM = int.Parse(cboNam.Text);
 				ky.SONGAY = Friend.laySoNgayCuaThang(int.Parse(cboThang.Text), int.Parse(cboThang.Text));
+				ky.MACTY = Friend._macty;
+				ky.MADV = Friend._madvi;
 				_kyphong.add(ky);
 			}
 			else
@@ -288,6 +298,11 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+			if (_right == 1)
+			{
+				MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
 			if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				if(!_kyphong.checkUserExist(_maky,Friend._macty,Friend._madvi))
@@ -302,13 +317,22 @@ namespace KHACHSAN
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-			
+			if (_right == 1)
+			{
+				MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
 			_them = false;
 			showHideControl(false);
 			loadData();
 		}
         private void btnThem_Click(object sender, EventArgs e)
-        {			
+        {
+			if (_right == 1)
+			{
+				MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
 			showHideControl(false);
 			_enabled(true);
 			_them = true;

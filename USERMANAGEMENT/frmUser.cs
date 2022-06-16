@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer;
 using BusinessLayer;
+using KHACHSAN;
 namespace USERMANAGEMENT
 {
     public partial class frmUser : DevExpress.XtraEditors.XtraForm
@@ -20,6 +21,7 @@ namespace USERMANAGEMENT
         {
             InitializeComponent();
         }
+        USERMANAGEMENT.frmMainAdmin objMain = (USERMANAGEMENT.frmMainAdmin)Application.OpenForms["frmMainAdmin"];
         public string _macty;
         public string _madvi;
         public bool _them;
@@ -30,14 +32,12 @@ namespace USERMANAGEMENT
         SYS_GROUP _sysGroup;
         tb_SYS_USER _user;
         VIEW_USER_IN_GROUP _vUserInGroup;
-        frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
-       
-
+        SYS_RIGHT _sysright;
         private void frmUser_Load(object sender, EventArgs e)
         {
             _sysGroup = new SYS_GROUP();
             _sysUser = new SYS_USER();
-
+            _sysright = new SYS_RIGHT();
             if (!_them)
             {
                 var user = _sysUser.getItem(_idUser);
@@ -73,6 +73,8 @@ namespace USERMANAGEMENT
         }
         void saveData()
         {
+          
+  
             if (ContainsUnicodeCharacter(txtUsernam.Text))
             {
                 MessageBox.Show("Tên người dùng không được có dấu vui lòng nhập lại", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -99,7 +101,6 @@ namespace USERMANAGEMENT
                 _user.MADVI = _madvi;
                 _user.PASSWD = Encryptor.Encrypt(txtPass.Text.Trim(),"qwert@123!poiuy",true);
                 _sysUser.add(_user);
-
             }
             else
             {
@@ -113,7 +114,8 @@ namespace USERMANAGEMENT
                 _sysUser.update(_user);
 
             }
-            objMain.loadUser(_macty, _madvi);
+
+            objMain.loadUser(_macty, _madvi);       
         }
         public void loadGroupByUser(int idUser)
         {
@@ -179,6 +181,17 @@ namespace USERMANAGEMENT
         private void xtraTabControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnXoaUser_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {              
+                _sysUser.delete(_idUser);
+                objMain.loadUser(Friend._macty,Friend._madvi);
+                this.Close();
+            }
+            objMain.loadUser(_macty, _madvi);
         }
     }
 }

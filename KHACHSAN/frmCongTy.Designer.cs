@@ -318,7 +318,6 @@ namespace KHACHSAN
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(661, 22);
             this.txtDiaChi.TabIndex = 4;
-            this.txtDiaChi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             // 
             // label5
             // 
@@ -337,7 +336,6 @@ namespace KHACHSAN
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(324, 22);
             this.txtEmail.TabIndex = 6;
-            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
             // 
             // label4
@@ -394,7 +392,6 @@ namespace KHACHSAN
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(284, 22);
             this.txtTen.TabIndex = 3;
-            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             // 
             // label1
             // 

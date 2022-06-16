@@ -64,7 +64,7 @@ namespace KHACHSAN
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(308, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(319, 41);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -134,7 +134,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 41);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(308, 209);
+            this.gcDanhSach.Size = new System.Drawing.Size(319, 209);
             this.gcDanhSach.TabIndex = 3;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSach});
@@ -180,7 +180,7 @@ namespace KHACHSAN
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 250);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(308, 119);
+            this.groupControl1.Size = new System.Drawing.Size(319, 119);
             this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "Thông Tin";
             // 
@@ -223,7 +223,7 @@ namespace KHACHSAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(308, 369);
+            this.ClientSize = new System.Drawing.Size(319, 369);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gcDanhSach);
             this.Controls.Add(this.toolStrip1);

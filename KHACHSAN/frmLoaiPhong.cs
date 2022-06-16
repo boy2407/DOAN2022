@@ -18,6 +18,14 @@ namespace KHACHSAN
         {
             InitializeComponent();
         }
+        public frmLoaiPhong(tb_SYS_USER user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
+        }
+        tb_SYS_USER _user;
+        int _right;
         bool _them;
         frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
         int _idlp = 0;
@@ -27,7 +35,7 @@ namespace KHACHSAN
         {
             _phong = new PHONG();
             _loaiphong = new LOAIPHONG();
-            txtMa.Enabled = false;
+            
             loadLoaiPhong();
             showHideControl(true);
             _enabled(false);
@@ -51,25 +59,35 @@ namespace KHACHSAN
         }
         void loadLoaiPhong()
         {
-            gcDanhSach.DataSource = _loaiphong.getAll();
+            gcDanhSach.DataSource = _loaiphong.getAll(Friend._macty, Friend._madvi);
             gvDanhSach.OptionsBehavior.Editable = false;
 
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = true;
             showHideControl(false);
-            txtTen.Text = "";
-            txtMa.Text = (_loaiphong.getId() + 1).ToString();
+            txtTen.Text = "";          
             txtSoNguoi.Text = "";
             txtSoGiuong.Text = "";
-            txtDonGia.Text = "";
-               
+            txtDonGia.Text = "";             
             _enabled(true);
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _them = false;
             showHideControl(false);
             _enabled(true);
@@ -77,6 +95,12 @@ namespace KHACHSAN
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+
+            if (_right == 1)
+            {
+                MessageBox.Show("Bạn không có quyền thao tác?", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {           
                 if(_phong.checkloaiphong(_idlp))
@@ -96,17 +120,20 @@ namespace KHACHSAN
                 t.SOGIUONG = int.Parse(txtSoGiuong.Text);
                 t.DONGIA = double.Parse(txtDonGia.Text);
                 t.SONGUOI = int.Parse(txtSoNguoi.Text);
-                t.TENLOAIPHONG = txtTen.Text;                   
+                t.TENLOAIPHONG = txtTen.Text;
+                t.MACTY = Friend._macty;
+                t.MADVI = Friend._madvi;
                 _loaiphong.add(t);
             }
             else
             {
                 tb_LoaiPhong t = new tb_LoaiPhong();
+                t = _loaiphong.getItem(_idlp);
                 t.SOGIUONG = int.Parse(txtSoGiuong.Text);
                 t.DONGIA = double.Parse(txtDonGia.Text);
                 t.SONGUOI = int.Parse(txtSoNguoi.Text);
                 t.TENLOAIPHONG = txtTen.Text;
-                t.IDLOAIPHONG = int.Parse(txtMa.Text);
+                
                 _loaiphong.update(t); ;
             }
             loadLoaiPhong();
@@ -151,7 +178,7 @@ namespace KHACHSAN
             if (gvDanhSach.RowCount > 0)
             {
                 _idlp = int.Parse(gvDanhSach.GetFocusedRowCellValue("IDLOAIPHONG").ToString());
-                txtMa.Text = gvDanhSach.GetFocusedRowCellValue("IDLOAIPHONG").ToString();
+               
                 txtTen.Text = gvDanhSach.GetFocusedRowCellValue("TENLOAIPHONG").ToString();
                 txtDonGia.Text = gvDanhSach.GetFocusedRowCellValue("DONGIA").ToString();
                 txtSoNguoi.Text= gvDanhSach.GetFocusedRowCellValue("SONGUOI").ToString();

@@ -14,17 +14,17 @@ namespace BusinessLayer
             db = Entities.CreateEntities();
 
         }
-        public List<tb_Phong>getAll()
+        public List<tb_Phong>getAll(string macty,string madvi)
         {
-            return db.tb_Phong.ToList();
+            return db.tb_Phong.Where(x=>x.MACTY==macty&&x.MADVI==madvi).ToList();
         }
 
-        public List<tb_Phong> getAll(int idtang)
+        public List<tb_Phong> getAll_tang(int idtang,string macty,string madvi)
         {
-            return db.tb_Phong.Where(x=>x.IDTANG== idtang).ToList();
+            return db.tb_Phong.Where(x=>x.IDTANG== idtang&&x.MACTY==macty&&x.MADVI==madvi).ToList();
 
         }
-        public List<tb_Phong> getAll(int idloaiphong,int t)
+        public List<tb_Phong> getAll_loaiphong(int idloaiphong, string macty, string madvi)
         {
             return db.tb_Phong.Where(x => x.IDLOAIPHONG == idloaiphong).ToList();
         }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             {
                 var i = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
                 lstdpct.AddRange(i);
-            }        
+            }
             List<tb_Phong> lstphong = new List<tb_Phong>();
             // đưa về list phòng
-            foreach(var item in lstdpct)
+            foreach (var item in lstdpct)
             {
-                var i = db.tb_Phong.FirstOrDefault(x => x.TRANGTHAI == true&&x.IDPHONG==item.IDPHONG);
+                var i = db.tb_Phong.FirstOrDefault(x => x.TRANGTHAI == true && x.IDPHONG == item.IDPHONG);
                 lstphong.Add(i);
-            }    
+            }
             List<OBJ_PHONG> listpt = new List<OBJ_PHONG>();
             OBJ_PHONG pt;
             foreach (var item in lstphong)
@@ -85,9 +85,9 @@ namespace BusinessLayer
                 pt.IDLOAIPHONG = item.IDLOAIPHONG;
                 pt.IDPHONG = item.IDPHONG;
                 pt.IDTANG = item.IDTANG;
-                var t = db.tb_Tang.FirstOrDefault(x => x.IDTANG==item.IDTANG);
+                var t = db.tb_Tang.FirstOrDefault(x => x.IDTANG == item.IDTANG);
                 pt.TENTANG = t.TENTANG;
-                pt.TENPHONG = item.TENPHONG;              
+                pt.TENPHONG = item.TENPHONG;
                 pt.TRANGTHAI = item.TRANGTHAI;
                 listpt.Add(pt);
             }
@@ -248,10 +248,10 @@ namespace BusinessLayer
         //    }
         //    return listDPCT;
         //}
-        public List<OBJ_PHONG> getAll_Vacancies(DateTime checkin, DateTime checkout)
+        public List<OBJ_PHONG> getAll_Vacancies(DateTime checkin, DateTime checkout, string macty, string madv)
         {
           
-            List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false).ToList();
+            List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false && x.MADVI == madv && x.MACTY == macty).ToList();
             List<tb_DatPhong> lst = new List<tb_DatPhong>();
             foreach (var item in lstdatphong)
             {
@@ -296,7 +296,7 @@ namespace BusinessLayer
                 ct = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
                 lstdpct.AddRange(ct);
             }
-            var lstPhong = db.tb_Phong.ToList();
+            var lstPhong = db.tb_Phong.Where(x=>x.MADVI == madv && x.MACTY == macty).ToList();
             List<tb_Phong> temp = new List<tb_Phong>();           
             foreach (var item in lstdpct)
             {
@@ -327,9 +327,9 @@ namespace BusinessLayer
             }
             return lstVacancies;
         }
-        public List<OBJ_PHONG> PhongHienTai(DateTime checkin, DateTime checkout)
+        public List<OBJ_PHONG> PhongHienTai(DateTime checkin, DateTime checkout,string macty, string madv)
         {
-            List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false).ToList();
+            List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false&&x.MADVI==madv&&x.MACTY==macty).ToList();
             List<tb_DatPhong> lst = new List<tb_DatPhong>();
             foreach (var item in lstdatphong)
             {
@@ -351,10 +351,10 @@ namespace BusinessLayer
             foreach (var item in lst)
             {
                 List<tb_DatPhong_CT> ct = new List<tb_DatPhong_CT>();
-                ct = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP).ToList();
+                ct = db.tb_DatPhong_CT.Where(x => x.IDDP == item.IDDP && x.MADVI == madv && x.MACTY == macty).ToList();
                 lstdpct.AddRange(ct);
             }
-            var lstPhong = db.tb_Phong.ToList();
+            var lstPhong = db.tb_Phong.Where(x=>x.MADVI == madv && x.MACTY == macty).ToList();
             List<tb_Phong> temp = new List<tb_Phong>();
             foreach (var item in lstdpct)
             {

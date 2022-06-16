@@ -16,5 +16,7 @@ namespace DataLayer
     {
         public int GROUP { get; set; }
         public int MENBER { get; set; }
+    
+        public virtual tb_SYS_USER tb_SYS_USER { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using DataLayer;
 using BusinessLayer;
 using System.Text.RegularExpressions;
-
+using KHACHSAN;
 namespace USERMANAGEMENT
 {
     public partial class frmGroup : DevExpress.XtraEditors.XtraForm
@@ -29,7 +29,7 @@ namespace USERMANAGEMENT
         SYS_USER _sysUser;
         VIEW_USER_IN_GROUP _vInGroup;
         tb_SYS_USER _user;
-        frmMain objMain = (frmMain)Application.OpenForms["frmMain"];
+        frmMainAdmin objMain = (frmMainAdmin)Application.OpenForms["frmMainAdmin"];
         SYS_GROUP _sysgroup;
         private void frmGroup_Load(object sender, EventArgs e)
         {
@@ -137,6 +137,18 @@ namespace USERMANAGEMENT
                 _sysgroup.delGroup(int.Parse(gvThanhVien.GetFocusedRowCellValue("IDUSER").ToString()), _idUser);
                 loadUserInGroup(_idUser);
             }    
+        }
+
+        private void btnXoaUser_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                _sysUser.delete(_idUser);
+                _sysgroup.delGroup();
+                objMain.loadUser(Friend._macty, Friend._madvi);
+                this.Close();
+            }
+            objMain.loadUser(_macty, _madvi);
         }
     }
 }
