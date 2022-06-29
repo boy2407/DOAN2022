@@ -51,7 +51,7 @@ namespace KHACHSAN
         public bool IsVaildCCCD(string cccd)
         {
             int length = cccd.Length;
-            MessageBox.Show(length.ToString());
+            
             if (length == 9 || length == 12)
             {
                 return true;
@@ -142,7 +142,12 @@ namespace KHACHSAN
             }
             if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                tb_KhachHang kh = _khachhang.getItem(int.Parse(_idkh));
+                var kh = _khachhang.getItem(int.Parse(_idkh));
+                if(kh.DISABLED==true)
+                {
+                    MessageBox.Show("Khách hàng đã bị xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }    
                 kh.DISABLED = true;
                 _khachhang.update(kh);
             }
@@ -150,36 +155,8 @@ namespace KHACHSAN
         }
         void savedata()
         {
-            if (!IsVaildCCCD(txtCCCD.Text))
-            {
-                MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCCCD.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtDiaChi.Text))
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!IsValidEmail(txtEmail.Text))
-            {
-                MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmail.Focus();
-                return;
-            }
-            if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
-            {
-                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDienThoai.Focus();
-                return;
-            }
-            if (_khachhang.checkSTD(txtDienThoai.Text))
-            {
-                MessageBox.Show("Số điện thoại đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCCCD.Focus();
-                return;
-            }
+            
+           
             if (_them)
             {
                 if (_khachhang.checkCCCD(txtCCCD.Text))
@@ -206,10 +183,88 @@ namespace KHACHSAN
             }
             else
             {
-                if (_khachhang.checkCCCD(txtCCCD.Text))
+               
+                tb_KhachHang _kh = _khachhang.getItem(int.Parse(_idkh));
+                if (_khachhang.checkCCCD_sua(txtCCCD.Text,_kh))
                 {
                     MessageBox.Show("CCCD/CMND đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCCCD.Focus();
+                    return;
+                }
+                if (_khachhang.checkSTD_sua(txtDienThoai.Text,_kh))
+                {
+                    MessageBox.Show("Số điện thoại đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }
+                _kh.CCCD = txtCCCD.Text;
+                _kh.DIACHI = txtDiaChi.Text;
+                _kh.DIENTHOAI = txtDienThoai.Text;
+                _kh.EMAIL = txtEmail.Text;
+                _kh.HOTEN = txtTen.Text;
+                _kh.GIOITINH = chkGioiTinh.Checked;
+                _kh.DISABLED = checkDisable.Checked;
+                _khachhang.update(_kh);
+            }
+          
+        }    
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            //if (!IsVaildCCCD(txtCCCD.Text))
+            //{
+            //    MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtCCCD.Focus();
+            //    return;
+            //}
+            //if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtDiaChi.Text))
+            //{
+            //    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //if (!IsValidEmail(txtEmail.Text))
+            //{
+            //    MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtEmail.Focus();
+            //    return;
+            //}
+
+            //if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
+            //{
+            //    MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtDienThoai.Focus();
+            //    return;
+            //}
+            //if (_khachhang.checkSTD(txtDienThoai.Text))
+            //{
+            //    MessageBox.Show("Số điện thoại đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtCCCD.Focus();
+            //    return;
+            //}
+            if (_them)
+            {
+                if (!IsVaildCCCD(txtCCCD.Text))
+                {
+                    MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCCCD.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtDiaChi.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!IsValidEmail(txtEmail.Text))
+                {
+                    MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtEmail.Focus();
+                    return;
+                }
+                if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
+                {
+                    MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDienThoai.Focus();
                     return;
                 }
                 if (_khachhang.checkSTD(txtDienThoai.Text))
@@ -218,49 +273,6 @@ namespace KHACHSAN
                     txtCCCD.Focus();
                     return;
                 }
-                tb_KhachHang _kh = _khachhang.getItem(int.Parse(_idkh));
-                _kh.CCCD = txtCCCD.Text;
-                _kh.DIACHI = txtDiaChi.Text;
-                _kh.DIENTHOAI = txtDienThoai.Text;
-                _kh.EMAIL = txtEmail.Text;
-                _kh.HOTEN = txtTen.Text;
-                _kh.GIOITINH = chkGioiTinh.Checked;
-                _khachhang.update(_kh);
-            }
-          
-        }    
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-            if (!IsVaildCCCD(txtCCCD.Text))
-            {
-                MessageBox.Show("CCCD/CMND không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCCCD.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtDiaChi.Text))
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!IsValidEmail(txtEmail.Text))
-            {
-                MessageBox.Show("E-mail không đúng định dạng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmail.Focus();
-                return;
-            }
-
-            if (!IsValidVietNamPhoneNumber(txtDienThoai.Text))
-            {
-                MessageBox.Show("Số điện thoại của bạn không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDienThoai.Focus();
-                return;
-            }
-            if (_khachhang.checkSTD(txtDienThoai.Text))
-            {
-                MessageBox.Show("Số điện thoại đã bị trùng xin kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCCCD.Focus();
-                return;
             }
             savedata();
             loadData();
@@ -292,17 +304,14 @@ namespace KHACHSAN
         {
             if (gvDanhSach.RowCount > 0)
             {
-
-                _idkh = gvDanhSach.GetFocusedRowCellValue("IDKH").ToString();
-     
-             
+                _idkh = gvDanhSach.GetFocusedRowCellValue("IDKH").ToString();                 
                 txtTen.Text = gvDanhSach.GetFocusedRowCellValue("HOTEN").ToString();
                 txtDiaChi.Text = gvDanhSach.GetFocusedRowCellValue("DIACHI").ToString();
                 txtDienThoai.Text = gvDanhSach.GetFocusedRowCellValue("DIENTHOAI").ToString();
                 txtEmail.Text = gvDanhSach.GetFocusedRowCellValue("EMAIL").ToString();
                 txtCCCD.Text = gvDanhSach.GetFocusedRowCellValue("CCCD").ToString();
                 chkGioiTinh.Checked = bool.Parse(gvDanhSach.GetFocusedRowCellValue("GIOITINH").ToString());
-
+                checkDisable.Checked = bool.Parse(gvDanhSach.GetFocusedRowCellValue("DISABLED").ToString());
             }
         }
 
@@ -310,7 +319,7 @@ namespace KHACHSAN
         {
             if(gvDanhSach.GetFocusedRowCellValue("IDKH")!=null&&(objDP!=null||objDPdon!=null))
             {
-                MessageBox.Show("có vào");
+                
                 if(kh_dp== "datphongdon")
                 {
                     objDPdon.loadKH();
@@ -328,11 +337,7 @@ namespace KHACHSAN
     
 
         private void txtDiaChi_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
-          
-
-            
+        {                               
             if ((Keys)e.KeyChar==Keys.Enter)
             {
                 savedata();
@@ -377,5 +382,7 @@ namespace KHACHSAN
                 savedata();
             }
         }
+
+       
     }
 }

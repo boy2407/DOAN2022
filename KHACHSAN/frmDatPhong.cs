@@ -88,7 +88,7 @@ namespace KHACHSAN
             cboTrangThai.DisplayMember = "_display";
             dtNgayDat.Value = DateTime.Now;
             dtNgayTra.Value = DateTime.Now.AddDays(1);
-            dtNgayDat.Enabled = false;
+            dtNgayDat.Enabled = true;
 
             _macty = Friend._macty;
             _madvi = Friend._madvi;            
@@ -267,7 +267,7 @@ namespace KHACHSAN
             _phong = new PHONG();
             lstDP_CT = new List<OBJ_DP_CT>();
             DataTable table = new DataTable();
-            table = Friend.ConvertToDataTable(_phong.getAll_Vacancies(dtNgayDat.Value, dtNgayTra.Value,Friend._macty,Friend._madvi));
+            table = Friend.ConvertToDataTable(_phong.PhongHienTai(dtNgayDat.Value, dtNgayTra.Value,Friend._macty,Friend._madvi));
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone();
             gvPhong.ExpandAllGroups();
@@ -320,7 +320,8 @@ namespace KHACHSAN
             gcPhong.DataSource = table;
             gcDatPhong.DataSource = table.Clone(); //nhân bảng      
             gvPhong.ExpandAllGroups();
-           
+            loadKH();
+            spSoNguoi.Value = 0;
             gcSPDV.DataSource = _datphong_sp.getAllByDatPhong(0);
             txtThanhTien.Text = "0";
         }
@@ -527,7 +528,7 @@ namespace KHACHSAN
                 dp.UID = 1;
                 dp.DISABLED = false;
                 dp.CREATED_DATE = DateTime.Now;
-                dp.MACTY = Friend._madvi;
+                dp.MACTY = Friend._macty;
                 dp.MADVI = Friend._madvi;
                 dp.BOOKING = false;
                 dp.NHAN = true;

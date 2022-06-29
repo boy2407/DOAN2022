@@ -80,5 +80,10 @@ namespace USERMANAGEMENT
                 login();
             }
         }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

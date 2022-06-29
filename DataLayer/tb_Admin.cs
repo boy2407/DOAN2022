@@ -19,7 +19,6 @@ namespace DataLayer
         public string MADVI { get; set; }
         public string PASS { get; set; }
     
-        public virtual tb_CongTy tb_CongTy { get; set; }
         public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

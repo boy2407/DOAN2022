@@ -94,6 +94,7 @@ namespace KHACHSAN
             }
             if (MessageBox.Show("Bạn có chắc chắn xóa không?","Thông Báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning)==DialogResult.Yes)
             {
+               
                 var lsp = _phong.getByTang(int.Parse(_idtang));
                 foreach(var item in lsp)
                 {

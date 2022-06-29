@@ -47,6 +47,7 @@ namespace KHACHSAN
             this.DIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DISABLED = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.checkDisable = new System.Windows.Forms.CheckBox();
             this.chkGioiTinh = new System.Windows.Forms.CheckBox();
             this.txtCCCD = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,7 +78,7 @@ namespace KHACHSAN
             this.btnThoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1034, 41);
+            this.toolStrip1.Size = new System.Drawing.Size(1241, 41);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -147,7 +148,7 @@ namespace KHACHSAN
             this.gcDanhSach.Location = new System.Drawing.Point(0, 41);
             this.gcDanhSach.MainView = this.gvDanhSach;
             this.gcDanhSach.Name = "gcDanhSach";
-            this.gcDanhSach.Size = new System.Drawing.Size(1034, 315);
+            this.gcDanhSach.Size = new System.Drawing.Size(1241, 499);
             this.gcDanhSach.TabIndex = 2;
             this.gcDanhSach.UseDisabledStatePainter = false;
             this.gcDanhSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -267,6 +268,7 @@ namespace KHACHSAN
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.checkDisable);
             this.groupControl1.Controls.Add(this.chkGioiTinh);
             this.groupControl1.Controls.Add(this.txtCCCD);
             this.groupControl1.Controls.Add(this.label2);
@@ -279,16 +281,30 @@ namespace KHACHSAN
             this.groupControl1.Controls.Add(this.txtTen);
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 356);
+            this.groupControl1.Location = new System.Drawing.Point(0, 540);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1034, 134);
+            this.groupControl1.Size = new System.Drawing.Size(1241, 136);
             this.groupControl1.TabIndex = 3;
             this.groupControl1.Text = "Thông Tin";
             // 
+            // checkDisable
+            // 
+            this.checkDisable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkDisable.AutoSize = true;
+            this.checkDisable.Location = new System.Drawing.Point(778, 74);
+            this.checkDisable.Name = "checkDisable";
+            this.checkDisable.Size = new System.Drawing.Size(82, 17);
+            this.checkDisable.TabIndex = 14;
+            this.checkDisable.Text = "Vô hiệu hóa";
+            this.checkDisable.UseVisualStyleBackColor = true;
+            // 
             // chkGioiTinh
             // 
+            this.chkGioiTinh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.chkGioiTinh.AutoSize = true;
-            this.chkGioiTinh.Location = new System.Drawing.Point(778, 40);
+            this.chkGioiTinh.Location = new System.Drawing.Point(778, 43);
             this.chkGioiTinh.Name = "chkGioiTinh";
             this.chkGioiTinh.Size = new System.Drawing.Size(47, 17);
             this.chkGioiTinh.TabIndex = 3;
@@ -297,8 +313,10 @@ namespace KHACHSAN
             // 
             // txtCCCD
             // 
+            this.txtCCCD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCCCD.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD.Location = new System.Drawing.Point(103, 37);
+            this.txtCCCD.Location = new System.Drawing.Point(103, 40);
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(243, 22);
             this.txtCCCD.TabIndex = 1;
@@ -306,9 +324,11 @@ namespace KHACHSAN
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 40);
+            this.label2.Location = new System.Drawing.Point(12, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 14);
             this.label2.TabIndex = 13;
@@ -316,18 +336,22 @@ namespace KHACHSAN
             // 
             // txtDiaChi
             // 
+            this.txtDiaChi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDiaChi.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiaChi.Location = new System.Drawing.Point(103, 100);
+            this.txtDiaChi.Location = new System.Drawing.Point(103, 103);
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(638, 22);
+            this.txtDiaChi.Size = new System.Drawing.Size(685, 22);
             this.txtDiaChi.TabIndex = 6;
             this.txtDiaChi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiaChi_KeyPress);
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(42, 103);
+            this.label5.Location = new System.Drawing.Point(42, 106);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 14);
             this.label5.TabIndex = 8;
@@ -335,8 +359,10 @@ namespace KHACHSAN
             // 
             // txtEmail
             // 
+            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtEmail.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(498, 68);
+            this.txtEmail.Location = new System.Drawing.Point(498, 71);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(243, 22);
             this.txtEmail.TabIndex = 5;
@@ -344,9 +370,11 @@ namespace KHACHSAN
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(446, 71);
+            this.label4.Location = new System.Drawing.Point(446, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 14);
             this.label4.TabIndex = 6;
@@ -354,18 +382,22 @@ namespace KHACHSAN
             // 
             // txtDienThoai
             // 
+            this.txtDienThoai.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDienThoai.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDienThoai.Location = new System.Drawing.Point(103, 65);
+            this.txtDienThoai.Location = new System.Drawing.Point(103, 68);
             this.txtDienThoai.Name = "txtDienThoai";
-            this.txtDienThoai.Size = new System.Drawing.Size(243, 22);
+            this.txtDienThoai.Size = new System.Drawing.Size(298, 22);
             this.txtDienThoai.TabIndex = 4;
             this.txtDienThoai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDienThoai_KeyPress);
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 68);
+            this.label3.Location = new System.Drawing.Point(20, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 14);
             this.label3.TabIndex = 4;
@@ -373,8 +405,10 @@ namespace KHACHSAN
             // 
             // txtTen
             // 
+            this.txtTen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtTen.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTen.Location = new System.Drawing.Point(498, 40);
+            this.txtTen.Location = new System.Drawing.Point(498, 43);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(243, 22);
             this.txtTen.TabIndex = 2;
@@ -382,9 +416,11 @@ namespace KHACHSAN
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(380, 43);
+            this.label1.Location = new System.Drawing.Point(380, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 14);
             this.label1.TabIndex = 0;
@@ -394,7 +430,7 @@ namespace KHACHSAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 490);
+            this.ClientSize = new System.Drawing.Size(1241, 676);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gcDanhSach);
             this.Controls.Add(this.toolStrip1);
@@ -444,5 +480,6 @@ namespace KHACHSAN
         private DevExpress.XtraGrid.Columns.GridColumn GIOITINH;
         private System.Windows.Forms.CheckBox chkGioiTinh;
         private DevExpress.XtraGrid.Columns.GridColumn DISABLED;
+        private System.Windows.Forms.CheckBox checkDisable;
     }
 }

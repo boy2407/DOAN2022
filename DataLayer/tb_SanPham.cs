@@ -26,7 +26,6 @@ namespace DataLayer
         public string MACTY { get; set; }
         public string MADVI { get; set; }
     
-        public virtual tb_CongTy tb_CongTy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_DatPhong_SP> tb_DatPhong_SP { get; set; }
         public virtual tb_DonVi tb_DonVi { get; set; }

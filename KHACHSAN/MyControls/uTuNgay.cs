@@ -41,7 +41,7 @@ namespace KHACHSAN.MyControls
             {
                 MessageBox.Show("Ngày không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtTuNgay.Select();
-                dtTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                dtTuNgay.Value = dtDenNgay.Value.AddDays(1);
                 dtDenNgay.Value = DateTime.Now;
                 return;
             }
@@ -53,7 +53,7 @@ namespace KHACHSAN.MyControls
             {
                 MessageBox.Show("Ngày không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtTuNgay.Select();
-                dtTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                dtTuNgay.Value = dtDenNgay.Value.AddDays(1);
                 dtDenNgay.Value = DateTime.Now;
                 return;
             }
@@ -65,7 +65,7 @@ namespace KHACHSAN.MyControls
             {
                 MessageBox.Show("Ngày không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtTuNgay.Select();
-                dtTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                dtTuNgay.Value = dtDenNgay.Value.AddDays(1);
                 dtDenNgay.Value = DateTime.Now; 
                 return;
             }

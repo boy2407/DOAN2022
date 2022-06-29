@@ -144,7 +144,7 @@ namespace USERMANAGEMENT
             if (MessageBox.Show("Bạn có chắc chắn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 _sysUser.delete(_idUser);
-               // _sysgroup.delGroup();
+                _sysgroup.delete(_idUser);
                 objMain.loadUser(Friend._macty, Friend._madvi);
                 this.Close();
             }

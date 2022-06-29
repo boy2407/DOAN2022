@@ -79,7 +79,6 @@ namespace BusinessLayer
             foreach (var item in lstphong)
             {
                 pt = new OBJ_PHONG();
-
                 var dongia = db.tb_LoaiPhong.FirstOrDefault(x => x.IDLOAIPHONG == item.IDLOAIPHONG);
                 pt.DONGIA = dongia.DONGIA;
                 pt.IDLOAIPHONG = item.IDLOAIPHONG;
@@ -332,9 +331,8 @@ namespace BusinessLayer
             List<tb_DatPhong> lstdatphong = db.tb_DatPhong.Where(x => x.STATUS == false&&x.MADVI==madv&&x.MACTY==macty).ToList();
             List<tb_DatPhong> lst = new List<tb_DatPhong>();
             foreach (var item in lstdatphong)
-            {
-               
-                if (checkin < item.NGAYDAT && checkout > item.NGAYDAT||checkin>=item.NGAYTRA&&checkout>item.NGAYTRA)
+            {                             
+                if ( checkin< item.NGAYDAT && checkout > item.NGAYDAT||checkin>=item.NGAYTRA&&checkout>item.NGAYTRA)
                 {
                     lst.Add(item);
                 }
@@ -345,7 +343,11 @@ namespace BusinessLayer
                 else if (item.NGAYTRA >= checkin && item.NGAYTRA <= checkout)
                 {
                     lst.Add(item);
-                }
+                }          
+                else if(item.NGAYTRA==checkout&&item.NGAYDAT==checkin)
+                {
+                    lst.Add(item);
+                }    
             }
             List<tb_DatPhong_CT> lstdpct = new List<tb_DatPhong_CT>();
             foreach (var item in lst)
@@ -385,6 +387,5 @@ namespace BusinessLayer
             }
             return lstVacancies;
         }
-
     }
 }

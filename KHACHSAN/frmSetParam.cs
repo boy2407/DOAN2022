@@ -67,7 +67,13 @@ namespace KHACHSAN
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
             string macty = cboCongty.SelectedValue.ToString();
-            string madvi = (cboDonvi.Text.Trim() == "") ? "~" : cboDonvi.SelectedValue.ToString();
+            if(cboDonvi.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng chọn đơn vị trực thuộc", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //string madvi = (cboDonvi.Text.Trim() == "") ? "~" : cboDonvi.SelectedValue.ToString();
+            string madvi =cboDonvi.SelectedValue.ToString();
             SYS_PARAM _sysparam = new SYS_PARAM(macty,madvi);
             _sysparam.SaveFile();
            

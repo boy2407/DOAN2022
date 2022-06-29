@@ -110,7 +110,7 @@ namespace BusinessLayer
           }
         public List<OBJ_DATPHONG> GetAll_DanhSach( string macty, string madvi)
         {
-            var listDP = db.tb_DatPhong.Where(x=>x.MACTY == macty && x.MADVI == madvi&&x.STATUS==false).ToList();
+            var listDP = db.tb_DatPhong.Where(x => x.MACTY == macty && x.MADVI == madvi && x.STATUS == false && x.NHAN == true).ToList();
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
             OBJ_DATPHONG dp;
             foreach (var item in listDP)
@@ -138,8 +138,7 @@ namespace BusinessLayer
         public List<OBJ_DATPHONG> GetAll_RoomCheckOut(string macty, string madvi)
         {
            /// var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT < DateTime.Today && x.NGAYTRA.Value.Day <= DateTime.Today.Day &&x.NGAYTRA.Value.Month <= DateTime.Today.Month && x.NGAYTRA.Value.Year <DateTime.Today.Year&&x.STATUS==false&&x.MACTY==macty&&x.MADVI==madvi).ToList();
-            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT < DateTime.Today &&x.NGAYTRA<DateTime.Now && x.STATUS == false &&x.NHAN==true&& x.MACTY == macty && x.MADVI == madvi).ToList();
-
+            var listDP = db.tb_DatPhong.Where(x => x.NGAYDAT < DateTime.Now && x.NGAYTRA<DateTime.Now && x.STATUS == false &&x.NHAN==true&& x.MACTY == macty && x.MADVI == madvi).ToList();
             List<OBJ_DATPHONG> lstDP = new List<OBJ_DATPHONG>();
             OBJ_DATPHONG dp;
             foreach (var item in listDP)
@@ -176,7 +175,6 @@ namespace BusinessLayer
         public List<OBJ_DATPHONG>GetAllCheckIn(string macty,string madvi)
         {
             DateTime s;
-
             //s = Convert.ToDateTime(s.ToString("dd-MM-yyyy"));
             var listDP = db.tb_DatPhong.Where(x => x.STATUS == false&&x.BOOKING==true&&x.NHAN==false&&x.MACTY==macty&&x.MADVI==madvi).ToList();
             if(listDP==null)
@@ -210,7 +208,7 @@ namespace BusinessLayer
             }
             return lstDP;
         }
-        public tb_DatPhong  add(tb_DatPhong _db)
+        public tb_DatPhong add(tb_DatPhong _db)
         {
             try
             {

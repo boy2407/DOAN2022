@@ -107,7 +107,7 @@ namespace USERMANAGEMENT
             this.Controls.Add(this.labelControl1);
             this.Name = "frmSetParam_admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmSetParam";
+            this.Text = "Chọn Đơn vị";
             this.Load += new System.EventHandler(this.frmSetParam_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

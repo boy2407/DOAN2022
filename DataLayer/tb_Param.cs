@@ -20,6 +20,5 @@ namespace DataLayer
         public string TENDVI { get; set; }
     
         public virtual tb_CongTy tb_CongTy { get; set; }
-        public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

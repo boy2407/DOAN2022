@@ -85,8 +85,6 @@ namespace KHACHSAN
             this.txtGhiChu = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkTheoDoan = new System.Windows.Forms.CheckBox();
-            this.cboTrangThai = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.dtNgayTra = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.dtNgayDat = new System.Windows.Forms.DateTimePicker();
@@ -644,7 +642,7 @@ namespace KHACHSAN
             this.dpSONGUOI.FieldName = "SONGUOI";
             this.dpSONGUOI.Name = "dpSONGUOI";
             this.dpSONGUOI.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SONGUOI", "SUM={0:0.##}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SONGUOI", "{0:0.##}")});
             this.dpSONGUOI.Visible = true;
             this.dpSONGUOI.VisibleIndex = 1;
             // 
@@ -668,8 +666,6 @@ namespace KHACHSAN
             this.groupControl2.Controls.Add(this.txtGhiChu);
             this.groupControl2.Controls.Add(this.label7);
             this.groupControl2.Controls.Add(this.chkTheoDoan);
-            this.groupControl2.Controls.Add(this.cboTrangThai);
-            this.groupControl2.Controls.Add(this.label6);
             this.groupControl2.Controls.Add(this.dtNgayTra);
             this.groupControl2.Controls.Add(this.label5);
             this.groupControl2.Controls.Add(this.dtNgayDat);
@@ -710,7 +706,7 @@ namespace KHACHSAN
             this.lblHuy.AutoSize = true;
             this.lblHuy.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.lblHuy.ForeColor = System.Drawing.Color.Red;
-            this.lblHuy.Location = new System.Drawing.Point(463, 42);
+            this.lblHuy.Location = new System.Drawing.Point(446, 41);
             this.lblHuy.Name = "lblHuy";
             this.lblHuy.Size = new System.Drawing.Size(17, 17);
             this.lblHuy.TabIndex = 42;
@@ -724,6 +720,7 @@ namespace KHACHSAN
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(21, 21);
             this.btnAddNew.TabIndex = 41;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // txtGhiChu
             // 
@@ -744,29 +741,12 @@ namespace KHACHSAN
             // chkTheoDoan
             // 
             this.chkTheoDoan.AutoSize = true;
-            this.chkTheoDoan.Location = new System.Drawing.Point(445, 124);
+            this.chkTheoDoan.Location = new System.Drawing.Point(466, 122);
             this.chkTheoDoan.Name = "chkTheoDoan";
             this.chkTheoDoan.Size = new System.Drawing.Size(79, 17);
             this.chkTheoDoan.TabIndex = 38;
             this.chkTheoDoan.Text = "Theo Đoàn";
             this.chkTheoDoan.UseVisualStyleBackColor = true;
-            // 
-            // cboTrangThai
-            // 
-            this.cboTrangThai.FormattingEnabled = true;
-            this.cboTrangThai.Location = new System.Drawing.Point(338, 95);
-            this.cboTrangThai.Name = "cboTrangThai";
-            this.cboTrangThai.Size = new System.Drawing.Size(186, 21);
-            this.cboTrangThai.TabIndex = 37;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(275, 98);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Trạng Thái";
             // 
             // dtNgayTra
             // 
@@ -1004,8 +984,6 @@ namespace KHACHSAN
         private System.Windows.Forms.TextBox txtGhiChu;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chkTheoDoan;
-        private System.Windows.Forms.ComboBox cboTrangThai;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtNgayTra;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtNgayDat;

@@ -17,15 +17,11 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_CongTy()
         {
-            this.tb_Admin = new HashSet<tb_Admin>();
             this.tb_DatPhong_Phong_NgayO = new HashSet<tb_DatPhong_Phong_NgayO>();
             this.tb_DatPhong = new HashSet<tb_DatPhong>();
-            this.tb_KyPhong_CT = new HashSet<tb_KyPhong_CT>();
-            this.tb_KyPhong_CT1 = new HashSet<tb_KyPhong_CT>();
+            this.tb_DonVi = new HashSet<tb_DonVi>();
             this.tb_KyPhong = new HashSet<tb_KyPhong>();
-            this.tb_KyPhong1 = new HashSet<tb_KyPhong>();
             this.tb_Param = new HashSet<tb_Param>();
-            this.tb_SanPham = new HashSet<tb_SanPham>();
             this.tb_SYS_USER = new HashSet<tb_SYS_USER>();
         }
     
@@ -38,23 +34,15 @@ namespace DataLayer
         public Nullable<bool> DISABLED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_Admin> tb_Admin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_DatPhong_Phong_NgayO> tb_DatPhong_Phong_NgayO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_DatPhong> tb_DatPhong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_KyPhong_CT> tb_KyPhong_CT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_KyPhong_CT> tb_KyPhong_CT1 { get; set; }
+        public virtual ICollection<tb_DonVi> tb_DonVi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_KyPhong> tb_KyPhong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_KyPhong> tb_KyPhong1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Param> tb_Param { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_SanPham> tb_SanPham { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_SYS_USER> tb_SYS_USER { get; set; }
     }

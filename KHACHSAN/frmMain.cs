@@ -65,7 +65,6 @@ namespace KHACHSAN
             timer_GetPhongCheckOut.Enabled = true;
             timer1.Enabled = true;
             timerCheckIn.Enabled = true;
-
             _itemBK = GetNavItem();
             //var tes = _datphong.GetAll_RoomCheckOut(Friend._macty, Friend._madvi);
             //MessageBox.Show(tes.Count.ToString());
@@ -78,8 +77,7 @@ namespace KHACHSAN
             if (objLogin != null)
             {
                 objLogin.Hide();
-            }
-          
+            }         
             lblThongBooking.Text = "Thông báo có lịch booking";
             lblThongBooking.Location = new Point(toolStrip1.Location.X+btnThoat.Width+btnBaoCao.Height+btnHeThong.Width+btnCaiDat.Width,toolStrip1.Location.Y+5);
             lblThongBooking.Size = new System.Drawing.Size(300, 200);
@@ -95,7 +93,6 @@ namespace KHACHSAN
             {
                 lblThongBooking.Location = new Point(toolStrip1.Location.X + btnThoat.Width + btnBaoCao.Height + btnHeThong.Width + btnCaiDat.Width, toolStrip1.Location.Y+5);
             }
-
             lblThongBooking.Location = new Point(lblThongBooking.Location.X+10, toolStrip1.Location.Y+5);
             lblThongBooking.Visible = true;
         }
@@ -107,17 +104,13 @@ namespace KHACHSAN
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-           
-
             checkout2();
                 timer2.Enabled = false;
-                timer1.Enabled = true;
-        
+                timer1.Enabled = true;      
         }
         private void timer_GetPhongCheckOut_Tick(object sender, EventArgs e)
         {
-            _lstphong = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);
-         
+            _lstphong = _phong.getPhongCheckOut(Friend._macty, Friend._madvi);        
         }
         public void checkout1()
         {        
@@ -200,9 +193,7 @@ namespace KHACHSAN
                     return;
                 }
                 _itemBK.Appearance.ForeColor = Color.Red;
-
-            timelblbooking.Start();
-            
+            timelblbooking.Start();           
         }
 
         void leftMenu()

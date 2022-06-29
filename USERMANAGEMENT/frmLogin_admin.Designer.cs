@@ -99,6 +99,7 @@ namespace USERMANAGEMENT
             this.simpleButton2.Size = new System.Drawing.Size(109, 37);
             this.simpleButton2.TabIndex = 19;
             this.simpleButton2.Text = "Thoát";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // btnLogin
             // 

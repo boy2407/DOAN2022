@@ -149,7 +149,7 @@ namespace KHACHSAN
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gControl);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1332, 740);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1332, 404);
             this.splitContainerControl1.SplitterPosition = 264;
             this.splitContainerControl1.TabIndex = 1;
             // 
@@ -172,7 +172,7 @@ namespace KHACHSAN
             this.navMain.Margin = new System.Windows.Forms.Padding(4);
             this.navMain.Name = "navMain";
             this.navMain.OptionsNavPane.ExpandedWidth = 264;
-            this.navMain.Size = new System.Drawing.Size(264, 740);
+            this.navMain.Size = new System.Drawing.Size(264, 404);
             this.navMain.SmallImages = this.imageList2;
             this.navMain.TabIndex = 0;
             this.navMain.Text = "navBarControl1";
@@ -198,7 +198,7 @@ namespace KHACHSAN
             this.gControl.Location = new System.Drawing.Point(0, 0);
             this.gControl.Name = "gControl";
             this.barManager1.SetPopupContextMenu(this.gControl, this.popupMenu1);
-            this.gControl.Size = new System.Drawing.Size(1058, 740);
+            this.gControl.Size = new System.Drawing.Size(1058, 404);
             this.gControl.TabIndex = 0;
             this.gControl.Text = "galleryControl1";
             // 
@@ -206,7 +206,7 @@ namespace KHACHSAN
             // 
             this.galleryControlClient1.GalleryControl = this.gControl;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 2);
-            this.galleryControlClient1.Size = new System.Drawing.Size(1037, 736);
+            this.galleryControlClient1.Size = new System.Drawing.Size(1037, 400);
             // 
             // imageList3
             // 
@@ -289,7 +289,7 @@ namespace KHACHSAN
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 793);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 457);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Size = new System.Drawing.Size(1332, 0);
             // 
@@ -299,7 +299,7 @@ namespace KHACHSAN
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 793);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 457);
             // 
             // barDockControlRight
             // 
@@ -307,7 +307,7 @@ namespace KHACHSAN
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1332, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 793);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 457);
             // 
             // timer1
             // 
@@ -326,7 +326,7 @@ namespace KHACHSAN
             // 
             // timer_GetPhongCheckOut
             // 
-            this.timer_GetPhongCheckOut.Interval = 3600000;
+            this.timer_GetPhongCheckOut.Interval = 10000;
             this.timer_GetPhongCheckOut.Tick += new System.EventHandler(this.timer_GetPhongCheckOut_Tick);
             // 
             // timerClose
@@ -351,7 +351,7 @@ namespace KHACHSAN
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1332, 793);
+            this.ClientSize = new System.Drawing.Size(1332, 457);
             this.Controls.Add(this.lblThongBooking);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.toolStrip1);

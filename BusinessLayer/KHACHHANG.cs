@@ -18,6 +18,15 @@ namespace BusinessLayer
         {
             return db.tb_KhachHang.ToList();
         }
+        ///không bị disabled
+        public List<tb_KhachHang> getkhachhang()
+        {
+            return db.tb_KhachHang.Where(x=>x.DISABLED==false).ToList();
+        }
+        //public List<tb_KhachHang> getAll()
+        //{
+        //    return db.tb_KhachHang.ToList();
+        //}
         public bool checkCCCD(string cccd)
         {
             var lst = db.tb_KhachHang.ToList();
@@ -28,12 +37,32 @@ namespace BusinessLayer
             }
             return false;
         }
+        public bool checkCCCD_sua(string cccd, tb_KhachHang kh)
+        {
+            var lst = db.tb_KhachHang.ToList();
+            foreach (var i in lst)
+            {
+                if (i.CCCD == cccd&& kh!=i)
+                    return true;
+            }
+            return false;
+        }
         public bool checkSTD(string dt)
         {
             var lst = db.tb_KhachHang.ToList();
             foreach (var i in lst)
             {
                 if (i.DIENTHOAI == dt)
+                    return true;
+            }
+            return false;
+        }
+        public bool checkSTD_sua(string dt, tb_KhachHang kh)
+        {
+            var lst = db.tb_KhachHang.ToList();
+            foreach (var i in lst)
+            {
+                if (i.DIENTHOAI == dt&&i !=kh)
                     return true;
             }
             return false;

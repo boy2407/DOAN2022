@@ -4,75 +4,68 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d204448d33c4f0e9b4342093d47124e" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="HOTELSModel.tb_Admin" Width="1.5" PointX="6" PointY="18.875" />
+      <Diagram DiagramId="2d204448d33c4f0e9b4342093d47124e" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="HOTELSModel.tb_CaiDat" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="HOTELSModel.tb_CongTy" Width="1.5" PointX="0.75" PointY="15.875" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong" Width="1.5" PointX="3" PointY="21.25" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_CT" Width="1.5" PointX="11.25" PointY="22.375" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_Phong_NgayO" Width="1.5" PointX="11.25" PointY="18.5" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_SP" Width="1.5" PointX="5.25" PointY="30" />
         <EntityTypeShape EntityType="HOTELSModel.tb_DonVi" Width="1.5" PointX="0.75" PointY="21.625" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_KhachHang" Width="1.5" PointX="0.75" PointY="27.625" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_KyPhong" Width="1.5" PointX="6" PointY="22.5" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_KyPhong_CT" Width="1.5" PointX="9" PointY="19.375" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_LoaiPhong" Width="1.5" PointX="6.75" PointY="37.125" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_Param" Width="1.5" PointX="6" PointY="26.875" />
         <EntityTypeShape EntityType="HOTELSModel.tb_Phat" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_Phong" Width="1.5" PointX="9" PointY="35.5" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_Phong_ThietBi" Width="1.5" PointX="11.25" PointY="35.875" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SanPham" Width="1.5" PointX="3" PointY="27.75" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_Func" Width="1.5" PointX="3" PointY="12.75" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_GROUP" Width="1.5" PointX="5.25" PointY="16" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_REPORT" Width="1.5" PointX="6" PointY="8.625" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_RIGHT" Width="1.5" PointX="5.25" PointY="13" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_RIGHT_REP" Width="1.5" PointX="8.25" PointY="16" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_USER" Width="1.5" PointX="3" PointY="16.125" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_Tang" Width="1.5" PointX="6.75" PointY="34.375" />
-        <EntityTypeShape EntityType="HOTELSModel.tb_ThietBi" Width="1.5" PointX="9" PointY="31.625" />
         <EntityTypeShape EntityType="HOTELSModel.v_DATPHONG_DATPHONG_CT_PHONG" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="HOTELSModel.V_FUNC_SYS_RIGHT" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="HOTELSModel.V_PHONGBYNGAY" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="HOTELSModel.V_REP_SYS_RIGHT_REP" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="HOTELSModel.V_USER_INGROUP" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="HOTELSModel.V_USER_NOTIN_GROUP" Width="1.5" PointX="6.75" PointY="4.75" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_admin_tb_CongTy" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_Admin" Width="1.5" PointX="3" PointY="24" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong" Width="1.5" PointX="6" PointY="18.125" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_CT" Width="1.5" PointX="11.25" PointY="19.25" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_Phong_NgayO" Width="1.5" PointX="3" PointY="16.375" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_DatPhong_SP" Width="1.5" PointX="8.25" PointY="22.125" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_KhachHang" Width="1.5" PointX="3.75" PointY="36.5" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_KyPhong" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_KyPhong_CT" Width="1.5" PointX="3" PointY="26.75" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_LoaiPhong" Width="1.5" PointX="6.75" PointY="30" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_Param" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_Phong_ThietBi" Width="1.5" PointX="11.25" PointY="28.75" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SanPham" Width="1.5" PointX="3" PointY="20.875" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_Func" Width="1.5" PointX="6" PointY="9.625" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_GROUP" Width="1.5" PointX="8.25" PointY="19.5" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_REPORT" Width="1.5" PointX="6" PointY="33.5" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_RIGHT" Width="1.5" PointX="8.25" PointY="10.875" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_RIGHT_REP" Width="1.5" PointX="8.25" PointY="13.875" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_SYS_USER" Width="1.5" PointX="6" PointY="13" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_ThietBi" Width="1.5" PointX="9" PointY="32.5" />
         <AssociationConnector Association="HOTELSModel.FK_tb_admin_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_CongTy" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_tb_CongTy" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_CT_tb_CongTy1" />
+        <AssociationConnector Association="HOTELSModel.FK_tb_DonVi_tb_CongTy" />
         <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_tb_CongTy" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_tb_CongTy1" />
         <AssociationConnector Association="HOTELSModel.FK_tb_Param_tb_CongTy" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_SanPham_tb_CongTy" />
         <AssociationConnector Association="HOTELSModel.FK_tb_SYS_USER_tb_CongTy" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_CT_tb_DatPhong" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DatPhong" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_SP_tb_DatPhong" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_tb_KhachHang" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_CT_tb_Phong" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_Phong_NgayO_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_SP_tb_SanPham" />
         <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi1" />
         <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_CT_tb_DonVi2" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_tb_DonVi" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_KyPhong_tb_DonVi1" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_Param_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_SanPham_tb_DonVi" />
         <AssociationConnector Association="HOTELSModel.FK_tb_SYS_USER_tb_DonVi" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_Phong_tb_LoaiPhong" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_Phong_tb_Tang" />
-        <AssociationConnector Association="HOTELSModel.FK_tb_Phong_ThietBi_tb_Phong" />
         <AssociationConnector Association="HOTELSModel.FK_tb_Phong_ThietBi_tb_ThietBi" />
         <AssociationConnector Association="HOTELSModel.fk_htk_func_code" />
         <AssociationConnector Association="HOTELSModel.fk_sys_group_user" />
         <AssociationConnector Association="HOTELSModel.fk_htk_rep_code" />
         <AssociationConnector Association="HOTELSModel.FK_tb_SYS_RIGHT_tb_SYS_USER" />
         <AssociationConnector Association="HOTELSModel.FK_tb_SYS_RIGHT_REP_tb_SYS_USER" />
-      </Diagram>
+        <EntityTypeShape EntityType="HOTELSModel.tb_Phong" Width="1.5" PointX="9" PointY="26.625" />
+        <EntityTypeShape EntityType="HOTELSModel.tb_Tang" Width="1.5" PointX="6.75" PointY="27.25" />
+        <AssociationConnector Association="HOTELSModel.FK_tb_DatPhong_CT_tb_Phong" />
+        <AssociationConnector Association="HOTELSModel.FK_tb_Phong_tb_LoaiPhong" />
+        <AssociationConnector Association="HOTELSModel.fk_htk_idtang" />
+        <AssociationConnector Association="HOTELSModel.FK_tb_Phong_ThietBi_tb_Phong" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

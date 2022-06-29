@@ -77,7 +77,7 @@ namespace KHACHSAN
             {
                 
                 _idTB = (int)cboThietBi.SelectedValue;
-                MessageBox.Show(_idTB.ToString());
+                
             }                  
         }
 

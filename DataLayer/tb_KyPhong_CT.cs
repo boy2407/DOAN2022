@@ -53,8 +53,6 @@ namespace DataLayer
         public Nullable<int> NAM { get; set; }
         public Nullable<int> THANG { get; set; }
     
-        public virtual tb_CongTy tb_CongTy { get; set; }
-        public virtual tb_CongTy tb_CongTy1 { get; set; }
         public virtual tb_DonVi tb_DonVi { get; set; }
         public virtual tb_DonVi tb_DonVi1 { get; set; }
         public virtual tb_DonVi tb_DonVi2 { get; set; }

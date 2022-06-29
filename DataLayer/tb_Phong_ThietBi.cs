@@ -20,7 +20,7 @@ namespace DataLayer
         public string MACTY { get; set; }
         public string MADVI { get; set; }
     
-        public virtual tb_Phong tb_Phong { get; set; }
         public virtual tb_ThietBi tb_ThietBi { get; set; }
+        public virtual tb_Phong tb_Phong { get; set; }
     }
 }
