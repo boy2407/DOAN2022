@@ -1,10 +1,6 @@
 # Hotel_Manage Application
 Ứng Dụng quản lý khách sạn
-## 1. Thành Viên thực hiện
-| STT |  Họ và tên                                                 
-| --- | ------------------------------------------------------------------ | 
-| 0   |  [Nguyễn Trọng Nghĩa ]([https://github.com/lehuutrung1412](https://github.com/boy2407)    
-## 2. Mục đích xây dựng
+## 1. Mục đích xây dựng
 
 <details>
   <summary>Mục đích xây dựng ứng dụng</summary>
@@ -31,7 +27,7 @@
    - Quản lý phòng
 </details>
 
-## 3. Công nghệ sự dụng
+## 2. Công nghệ sự dụng
 
 <details>
   <summary>Các công nghệ sử dụng</summary>
@@ -41,7 +37,7 @@
 - Hệ quản trị cơ sở dữ liệu: SQL Server
 - IDE: Microsoft Visual Studio 2019
 </details>
-## 4. Hướng dẫn cài đặt
+## 3. Hướng dẫn cài đặt
 
 
 
